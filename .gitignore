@@ -1,0 +1,6 @@
+.idea
+.vscode
+.objs
+cub3d
+libft/libft.a
+libft/.objs
