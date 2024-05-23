@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/23 14:17:52 by mpitot           ###   ########.fr        #
+#    Updated: 2024/05/23 16:08:52 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,8 @@ ${NAME}	:	${OBJ_D} ${OBJS} libft/libft.a
 ${OBJ_D}:
 	@mkdir -p ${OBJ_D}
 	@mkdir -p ${OBJ_D}main
+	@mkdir -p ${OBJ_D}parsing
+	@mkdir -p ${OBJ_D}exit-management
 
 libft	:
 	@make --no-print-directory -C ./libft
@@ -76,9 +78,10 @@ sanitize	: fclean mlx libft .internal_separate2 ${OBJ_D} ${OBJS} libft/libft.a
 	@$(call erase)
 	@$(call done_and_dusted,$(NAME))
 
+ARGS =
+
 leak: all .internal_separate3
 	@echo "$(MAGENTA)Valgrind $(WHITE)~ $(YELLOW)Flags:$(DEFAULT)"
-	@echo "   $(YELLOW)-$(DEFAULT)Suppressed Readline Lib"
 	@echo "   $(YELLOW)-$(DEFAULT)Show Leak Kinds"
 	@echo "   $(YELLOW)-$(DEFAULT)Track FDs"
 	@echo "   $(YELLOW)-$(DEFAULT)Show Mismatched Frees"
@@ -86,14 +89,13 @@ leak: all .internal_separate3
 	@echo "   $(YELLOW)-$(DEFAULT)Leak check"
 	@echo "   $(YELLOW)-$(DEFAULT)Trace children"
 	@$(call separator)
-	@valgrind	--suppressions=.config/valgrind_ignore_rl.txt \
-				--show-leak-kinds=all \
+	@valgrind	--show-leak-kinds=all \
 				--track-fds=yes \
 				--show-mismatched-frees=yes \
 				--read-var-info=yes \
 				--leak-check=full \
 				--trace-children=yes \
-				./$(NAME)
+				./$(NAME) $(ARGS)
 
 re		:	fclean .internal_separate1 all
 

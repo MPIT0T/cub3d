@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 14:07:17 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/23 14:20:01 by mpitot           ###   ########.fr       */
+/*   Created: 2024/05/23 15:29:15 by mpitot            #+#    #+#             */
+/*   Updated: 2024/05/23 15:31:12 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int ac, char **av)
+void	exit_error(t_data *data)
 {
-	(void)ac;
-	(void)av;
-	parsing_map(NULL, av[1]);
+	free_data(data);
+	exit(1);
 }
