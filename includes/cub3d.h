@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/23 15:40:46 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/23 17:57:36 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,31 @@
 /*                              DEFINES                                       */
 /* ************************************************************************** */
 
-# define DEF_NO ""
-# define DEF_SO ""
-# define DEF_WE ""
-# define DEF_EA ""
-# define DEF_C ""	//voir si une struct est mieux qu'un char *
-# define DEF_N ""
+# define DEFAULT_NORTH ""
+# define DEFAULT_SOUTH ""
+# define DEFAULT_WEST ""
+# define DEFAULT_EAST ""
+# define DEFAULT_FLOOR ""
+# define DEFAULT_CEILING ""
+
+# define ID_NORTH "NO"
+# define ID_SOUTH "SO"
+# define ID_WEST "WE"
+# define ID_EAST "EA"
+# define ID_FLOOR "N"
+# define ID_CEILING "C"
 
 /* ************************************************************************** */
-/*                              STRUCTS                                       */
+/*                                 ENUM                                       */
+/* ************************************************************************** */
+
+
+
+
+
+
+/* ************************************************************************** */
+/*                                STRUCTS                                     */
 /* ************************************************************************** */
 
 typedef struct s_color
@@ -70,11 +86,13 @@ typedef struct s_data
 
 /*   PARSING   */
 //parsing.c
-int	parsing_map(t_data *data, const char *path_to_map);
+int		parsing_map(t_data *data, const char *path_to_map);
+//read_map_file.c
+char	*read_map_file(t_data *data, const char *path_to_map);
 
 /*   EXIT   */
 //exit.c
-void	exit_error(t_data *data);
+void	exit_error(t_data *data, int put_error);
 //free.c
 void	free_data(t_data *data);
 

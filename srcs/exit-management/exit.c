@@ -12,8 +12,10 @@
 
 #include "cub3d.h"
 
-void	exit_error(t_data *data)
+void	exit_error(t_data *data, int put_error)
 {
+	if (perror)
+		perror("cub3d");
 	free_data(data);
 	exit(1);
 }
