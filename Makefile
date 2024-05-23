@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/23 13:58:44 by mpitot           ###   ########.fr        #
+#    Updated: 2024/05/23 14:17:52 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,22 +21,22 @@ OBJ_D	=	.objs/
 
 HEAD	=	includes/
 
-NAME	=	minishell
+NAME	=	cub3d
 
 CC		=	cc
 
 FLAGS	=	-Wall -Wextra -Werror #-g3
 
-all		:	libft .internal_separate2 ${NAME}
+all		:	mlx libft .internal_separate2 ${NAME}
 
-${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/cub3d.h
+${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/cub3d.h mlx_linux/mlx.h mlx_linux/mlx_int.h
 	@$(call print_progress,$<)
-	@${CC} ${FLAGS} -I${HEAD} -c $< -o $@
+	@${CC} ${FLAGS} -I/usr/include -Imlx_linux -I${HEAD} -c $< -o $@
 	@$(call update_progress,$<)
 
 ${NAME}	:	${OBJ_D} ${OBJS} libft/libft.a
 	@$(call print_progress,$(NAME))
-	@${CC} ${FLAGS} ${OBJS} -L./libft -lft -I${HEAD} -o ${NAME}
+	@${CC} ${FLAGS} ${OBJS} -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -L./libft -lft -Imlx_linux -I${HEAD} -o ${NAME}
 	@$(eval CHANGED=1)
 	@$(call erase)
 	@$(call done_and_dusted,$(NAME))
@@ -47,6 +47,9 @@ ${OBJ_D}:
 
 libft	:
 	@make --no-print-directory -C ./libft
+
+mlx		:
+	@make --no-print-directory -C ./mlx_linux
 
 clean	:
 	@echo "Cleaning $(WHITE)[$(RED)libft$(WHITE)]...$(DEFAULT)"
@@ -66,9 +69,9 @@ fclean	:
 	@rm -f ${NAME}
 	@echo "$(WHITE)[$(RED)$(NAME)$(WHITE)] $(RED)deleted.$(DEFAULT)"
 
-sanitize	: fclean libft .internal_separate2 ${OBJ_D} ${OBJS} libft/libft.a
+sanitize	: fclean mlx libft .internal_separate2 ${OBJ_D} ${OBJS} libft/libft.a
 	@$(call print_progress,$(NAME))
-	@${CC} ${FLAGS} ${OBJS} -L./libft -lft -I${HEAD} -o ${NAME} -fsanitize=address -g3
+	@${CC} ${FLAGS} ${OBJS} -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -L./libft -lft -I${HEAD} -o ${NAME} -fsanitize=address -g3
 	@$(eval CHANGED=1)
 	@$(call erase)
 	@$(call done_and_dusted,$(NAME))
