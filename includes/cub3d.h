@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:03:07 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/24 09:59:23 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/24 11:33:24 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@
 # include <../mlx_linux/mlx.h>
 # include <../libft/incs/libft.h>
 # include <math.h>
+# include <stdio.h>
 
 # define MAP_WIDTH 24
 # define MAP_HEIGHT 24
 # define SCREEN_WIDTH 640
 # define SCREEN_HEIGHT 480
+
+# define EXIT_SUCCESS 0
+# define ALLOC_FAILURE 1
 
 typedef struct s_pos
 {
@@ -52,6 +56,11 @@ typedef struct s_app
 	t_img	*img;
 	int		err;
 } t_app;
+
+int	handle_err(t_app *app);
+int	construct_app(t_app *app);
+int	initiate_mlx(t_app *app);
+
 
 
 #endif

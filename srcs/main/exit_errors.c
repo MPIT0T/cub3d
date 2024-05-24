@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:27:45 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/24 10:07:13 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/24 11:30:03 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,29 @@
 
 int	print_err(int err)
 {
-	if (err == 0)
-		return (0);
-	else if (err == 1)
-		return (printf("[%d] memory allocation failure\n", err), 1);
-	return (0);
+	if (err == EXIT_SUCCESS)
+		return (EXIT_SUCCESS);
+	else if (err == ALLOC_FAILURE)
+		return (printf("[%d] memory allocation failure\n", err), ALLOC_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
-int	handle_err(t_app *app, int err)
+int	handle_err(t_app *app)
 {
-	print_err(err);
+	print_err(app->err);
 	if (app->pos)
 		free(app->pos);
 	if (app->img)
 	{
+		if (app->img->mlx && app->img->mlx_win && app->img->img)
+		{
+			mlx_destroy_image(app->img->mlx, app->img->img);
+			mlx_destroy_window(app->img->mlx, app->img->mlx_win);
+			mlx_destroy_display(app->img->mlx);
+		}
 		if (app->img->mlx)
-			
+			free(app->img->mlx);
 		free(app->img);
 	}
-	return (err);
+	return (app->err);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/23 13:58:44 by mpitot           ###   ########.fr        #
+#    Updated: 2024/05/24 11:42:18 by cesar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,22 +21,29 @@ OBJ_D	=	.objs/
 
 HEAD	=	includes/
 
-NAME	=	minishell
+NAME	=	cub3D
 
 CC		=	cc
 
 FLAGS	=	-Wall -Wextra -Werror #-g3
 
+MLX				= 	mlx_linux/libmlx_Linux.a
+MLX_DIR			=	mlx_linux/
+MLX_LINKS		=	mlx_Linux
+
+USRLIB_DIR		=	/usr/lib/
+USRLIB_LINKS	=	-lXext -lX11 -lm -lz
+
 all		:	libft .internal_separate2 ${NAME}
 
 ${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/cub3d.h
 	@$(call print_progress,$<)
-	@${CC} ${FLAGS} -I${HEAD} -c $< -o $@
+	@${CC} ${FLAGS} -I${HEAD} -I${MLX_DIR} -I${USRLIB_DIR} -c $< -o $@
 	@$(call update_progress,$<)
 
-${NAME}	:	${OBJ_D} ${OBJS} libft/libft.a
+${NAME}	:	${OBJ_D} ${OBJS} libft/libft.a mlx
 	@$(call print_progress,$(NAME))
-	@${CC} ${FLAGS} ${OBJS} -L./libft -lft -I${HEAD} -o ${NAME}
+	@${CC} ${FLAGS} ${OBJS} -L./libft -lft  -L$(MLX_DIR) -L$(USRLIB_DIR) -l$(MLX_LINKS) $(USRLIB_LINKS) -I${HEAD} -o ${NAME}
 	@$(eval CHANGED=1)
 	@$(call erase)
 	@$(call done_and_dusted,$(NAME))
@@ -45,12 +52,16 @@ ${OBJ_D}:
 	@mkdir -p ${OBJ_D}
 	@mkdir -p ${OBJ_D}main
 
+mlx		:
+	@make --no-print-directory -C $(MLX_DIR)
+
 libft	:
 	@make --no-print-directory -C ./libft
 
 clean	:
 	@echo "Cleaning $(WHITE)[$(RED)libft$(WHITE)]...$(DEFAULT)"
 	@make --no-print-directory -C ./libft clean
+	@make --no-print-directory -C ${MLX_DIR} clean
 	@$(call separator)
 	@echo "Cleaning $(WHITE)[$(RED)$(NAME)$(WHITE)]...$(DEFAULT)"
 	@rm -rf ${OBJ_D}
@@ -59,6 +70,7 @@ clean	:
 fclean	:
 	@echo "F***ing-Cleaning $(WHITE)[$(RED)libft$(WHITE)]...$(DEFAULT)"
 	@make --no-print-directory -C ./libft fclean
+	@make --no-print-directory -C ${MLX_DIR} clean
 	@$(call separator)
 	@echo "F***ing-Cleaning $(WHITE)[$(RED)$(NAME)$(WHITE)]...$(DEFAULT)"
 	@rm -rf ${OBJ_D}
@@ -94,7 +106,7 @@ leak: all .internal_separate3
 
 re		:	fclean .internal_separate1 all
 
-.PHONY	:	all clean fclean re libft leak
+.PHONY	:	all clean fclean re libft mlx leak
 
 .NOTPARALLEL all:
 	@if [ $(CHANGED) -eq 0 ]; then \

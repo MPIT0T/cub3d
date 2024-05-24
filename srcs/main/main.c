@@ -6,14 +6,15 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/24 10:06:39 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/24 11:33:14 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 int	get_map(t_pos *pos, int *err)
-{	
+{
+	(void) err;
 	int	tmp[MAP_WIDTH][MAP_HEIGHT] = {
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -55,10 +56,12 @@ int main(int argc, char **argv)
 	t_app	app;
 
 	app.err = 0;
+	(void) argc;
+	(void) argv;
 	if (construct_app(&app) == 1)
 		return (handle_err(&app));
-	if (get_map(&app.pos, &app.err) == 1)
+	if (get_map(app.pos, &app.err) == 1)
 		return (handle_err(&app));
-	if (initiate_mlx(app) == 1)
+	if (initiate_mlx(&app) == 1)
 		return (handle_err(&app));
 }
