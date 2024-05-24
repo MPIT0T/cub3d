@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:03:07 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/24 09:05:09 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/24 09:59:23 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,44 @@
 # define CUB3D_H
 
 # include <../mlx_linux/mlx.h>
-# include <../libft/includes/libft.h>
+# include <../libft/incs/libft.h>
+# include <math.h>
 
-# include <stdlib.h>
+# define MAP_WIDTH 24
+# define MAP_HEIGHT 24
+# define SCREEN_WIDTH 640
+# define SCREEN_HEIGHT 480
+
+typedef struct s_pos
+{
+	int map[MAP_WIDTH][MAP_HEIGHT];
+	double	posX;
+	double	posY;
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
+	double	time;
+	double	oldTime;
+} t_pos;
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	void	*mlx;
+	void	*mlx_win;
+} t_img;
+
+typedef struct s_app
+{
+	t_pos	*pos;
+	t_img	*img;
+	int		err;
+} t_app;
 
 
 #endif
