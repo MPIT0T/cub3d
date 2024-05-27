@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:03:07 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/24 11:33:24 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/25 08:57:49 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,25 @@ typedef struct s_pos
 	double	planeY;
 	double	time;
 	double	oldTime;
+	double	cameraX; //x-coordinate in camera space
+	double	rayDirX;
+	double	rayDirY;
+	int		mapX; //which box of the map we're in
+	int		mapY;
+	double	sideDistX; //length of ray from current position to next x or y-side
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	perpWallDist;
+	int		stepX; //what direction to step in x or y-direction (either +1 or -1)
+	int		stepY;
+	int		hit; //was there a wall hit?
+	int		side; //was a NS or a EW wall hit?
+	int		h;
+	int		lineHeight;
+	int		drawStart;
+	int		drawEnd;
+	int		color;
 } t_pos;
 
 typedef struct s_img
@@ -60,6 +79,8 @@ typedef struct s_app
 int	handle_err(t_app *app);
 int	construct_app(t_app *app);
 int	initiate_mlx(t_app *app);
+int vline(t_img *img, int x, int drawStart, int drawEnd, int color);
+
 
 
 
