@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/27 13:53:34 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:37:04 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	get_map(t_pos *pos, int *err)
 	return (0);
 }
 
-int	raycasting_loop(t_pos *pos, t_img *img)
+int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 {
 	size_t	x = 0;
 	while (x < SCREEN_WIDTH)
@@ -129,10 +129,11 @@ int	raycasting_loop(t_pos *pos, t_img *img)
 		pos->color = 0xFF0000;
 		if (pos->side == 1)
 			pos->color = 0x990000;
-		yline(img, x, pos->drawStart, pos->drawEnd, pos->color);
+		yline(app, x, 0, pos->drawStart, 0xc934eb);
+		yline(app, x, pos->drawStart, pos->drawEnd, pos->color);
+		yline(app, x, pos->drawEnd, SCREEN_HEIGHT, 0x6d6d6e);
 		x++;
     }
-
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
 		img->img, 0, 0);
 	return 0;
@@ -150,8 +151,10 @@ int main(int argc, char **argv)
 	if (get_map(app.pos, &app.err) == 1)
 		return (handle_err(&app));
 	if (initiate_mlx(&app) == 1)
-		return (handle_err(&app));
-	raycasting_loop(app.pos, app.img);
-	mlx_hook(app.img->mlx_win, 2, 1L << 0, key_events, &app);
+		return (handle_err(&app));	
+	raycasting_loop(app.pos, app.img, &app);
+	mlx_hook(app.img->mlx_win, KeyPress, KeyPressMask, change_motion_keypress, &app);
+	mlx_hook(app.img->mlx_win, KeyRelease, KeyReleaseMask, change_motion_keyrelease, &app);
+	mlx_loop_hook(app.img->mlx_win, key_inputs_loop, &app);
 	mlx_loop(app.img->mlx);
 }

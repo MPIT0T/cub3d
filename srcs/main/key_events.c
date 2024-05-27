@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:08:19 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/27 13:47:01 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:48:44 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,70 +23,49 @@ int		new_image(t_app *app)
 			&app->img->line_length, &app->img->endian);
 	if (!app->img->addr)
 		return (app->err = 1);
-	raycasting_loop(app->pos, app->img);
+	raycasting_loop(app->pos, app->img, app);
 	return (0);
 }
 
-int	escaped(int key)
+int	change_motion_keypress(int key, t_app *app)
 {
-	if (key == 65307)
-		return (1);
-	return (0);
-}
-
-int	view_changed(int key, t_app *app)
-{
-	if (key == 65362) // UP ARROW // 
-	{
-		if (app->pos->map[(int)(app->pos->posX - app->pos->dirX * app->pos->moveSpeed)][(int)app->pos->posY] == 0)
-			app->pos->posX += app->pos->dirX * app->pos->moveSpeed;
-		if (app->pos->map[(int)(app->pos->posX)][(int)(app->pos->posY + app->pos->dirY * app->pos->moveSpeed)] == 0)
-			app->pos->posY += app->pos->dirY * app->pos->moveSpeed;
-		return (1);
-	}
-	if (key == 65364) // DOWN ARROW //
-	{
-		if (app->pos->map[(int)(app->pos->posX - app->pos->dirX * app->pos->moveSpeed)][(int)app->pos->posY] == 0)
-			app->pos->posX -= app->pos->dirX * app->pos->moveSpeed;
-		if (app->pos->map[(int)app->pos->posX][(int)(app->pos->posY - app->pos->dirY * app->pos->moveSpeed)] == 0)
-			app->pos->posY -= app->pos->dirY * app->pos->moveSpeed;
-		return (1);
-	}
-	if (key == 65363) // RIGHT ARROW //
-	{
-		//both camera direction and camera plane must be rotated
-		app->pos->oldDirX = app->pos->dirX;
-		app->pos->dirX = app->pos->dirX * cos(-app->pos->rotSpeed) - app->pos->dirY * sin(-app->pos->rotSpeed);
-		app->pos->dirY = app->pos->oldDirX * sin(-app->pos->rotSpeed) + app->pos->dirY * cos(-app->pos->rotSpeed);
-		app->pos->oldPlaneX = app->pos->planeX;
-		app->pos->planeX = app->pos->planeX * cos(-app->pos->rotSpeed) - app->pos->planeY * sin(-app->pos->rotSpeed);
-		app->pos->planeY = app->pos->oldPlaneX * sin(-app->pos->rotSpeed) + app->pos->planeY * cos(-app->pos->rotSpeed);
-		return (1);
-	}
-	if (key == 65361) // LEFT ARROW //
-	{
-		//both camera direction and camera plane must be rotated
-		app->pos->oldDirX = app->pos->dirX;
-		app->pos->dirX = app->pos->dirX * cos(app->pos->rotSpeed) - app->pos->dirY * sin(app->pos->rotSpeed);
-		app->pos->dirY = app->pos->oldDirX * sin(app->pos->rotSpeed) + app->pos->dirY * cos(app->pos->rotSpeed);
-		app->pos->oldPlaneX = app->pos->planeX;
-		app->pos->planeX = app->pos->planeX * cos(app->pos->rotSpeed) - app->pos->planeY * sin(app->pos->rotSpeed);
-		app->pos->planeY = app->pos->oldPlaneX * sin(app->pos->rotSpeed) + app->pos->planeY * cos(app->pos->rotSpeed);
-		return (1);
-	}
-	return (0);
-}
-
-int	key_events(int key, t_app *app)
-{
-	if (view_changed(key, app) == 1)
-		new_image(app);
-	else if (escaped(key) == 1)
-	{
-		app->err = 3;
+	if (key == ESC)
 		handle_err(app);
-	}
-	// (void) app;
-	// printf("key is %d\n", key);
+	else if (key == UP)
+		app->pos->motion_up = true;
+	else if (key == DOWN)
+		app->pos->motion_down = true;
+	else if (key == LEFT)
+		app->pos->motion_left = true;
+	else if (key == RIGHT)
+		app->pos->motion_right = true;
 	return (0);
 }
+
+int	change_motion_keyrelease(int key, t_app *app)
+{
+	if (key == UP && app->pos->motion_up == true)
+		app->pos->motion_up = false;
+	else if (key == DOWN && app->pos->motion_down == true)
+		app->pos->motion_down = false;
+	else if (key == LEFT && app->pos->motion_left == true)
+		app->pos->motion_left = false;
+	else if (key == RIGHT && app->pos->motion_right == true)
+		app->pos->motion_right = false;
+	return (0);	
+}
+
+int	key_inputs_loop(t_app *app)
+{
+	if (app->pos->motion_up)
+		go_forward(app->pos);
+	else if (app->pos->motion_down)
+		go_backward(app->pos);
+	else if (app->pos->motion_left)
+		go_left(app->pos);
+	else if (app->pos->motion_right)
+		go_right(app->pos);
+	new_image(app);
+	return 0;
+}
+

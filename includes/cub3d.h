@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:03:07 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/27 13:37:21 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:39:31 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,23 @@
 # include <../libft/incs/libft.h>
 # include <math.h>
 # include <stdio.h>
+# include <stdbool.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
 
-# define MAP_WIDTH 24
-# define MAP_HEIGHT 24
-# define SCREEN_WIDTH 1920
-# define SCREEN_HEIGHT 1080
+# define MAP_WIDTH		24
+# define MAP_HEIGHT		24
+# define SCREEN_WIDTH	1920
+# define SCREEN_HEIGHT	1080
 
-# define EXIT_SUCCESS 0
-# define ALLOC_FAILURE 1
+# define EXIT_SUCCESS	0
+# define ALLOC_FAILURE	1
+
+# define UP		65362
+# define DOWN	65364
+# define LEFT	65361
+# define RIGHT	65363
+# define ESC	65307
 
 typedef struct s_pos
 {
@@ -60,6 +69,11 @@ typedef struct s_pos
 	double	oldPlaneX;
 	double	moveSpeed;
 	double	rotSpeed;
+	bool	has_mooved;
+	bool	motion_up;
+	bool	motion_down;
+	bool	motion_left;
+	bool	motion_right;
 } t_pos;
 
 typedef struct s_img
@@ -83,14 +97,16 @@ typedef struct s_app
 int	handle_err(t_app *app);
 int	construct_app(t_app *app);
 int	initiate_mlx(t_app *app);
-int vline(t_img *img, int x, int drawStart, int drawEnd, int color);
-int	yline(t_img *img, int x, int yStart, int yEnd, int color);
+int	yline(t_app *app, int x, int yStart, int yEnd, int color);
 int	line(t_img *img, int startX, int startY, int nextX, int nextY, int color);
-int	key_events(int key, t_app *app);
+int	change_motion_keypress(int key, t_app *app);
+int	change_motion_keyrelease(int key, t_app *app);
+int	key_inputs_loop(t_app *app);
+int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
 
-int	raycasting_loop(t_pos *pos, t_img *img);
-
-
-
+int	go_forward(t_pos *pos);
+int	go_backward(t_pos *pos);
+int	go_left(t_pos *pos);
+int	go_right(t_pos *pos);
 
 #endif

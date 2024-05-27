@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:28:11 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/27 13:36:59 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:46:41 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	px_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	yline(t_img *img, int x, int yStart, int yEnd, int color)
+int	yline(t_app *app, int x, int yStart, int yEnd, int color)
 {
 	float	delta_y;
 	float	px;
@@ -32,22 +32,11 @@ int	yline(t_img *img, int x, int yStart, int yEnd, int color)
 	delta_y /= px;
 	while ((int)(yStart - yEnd))
 	{
-		px_put(img, x, yStart, color);
+		// if (yStart >= app->pos->drawStart && yStart <= app->pos->drawEnd)
+		px_put(app->img, x, yStart, color);
 		yStart += delta_y;
 	}
 	return (0);
-}
-
-int vline(t_img *img, int x, int drawStart, int drawEnd, int color)
-{
-	int	y;
-	y = drawStart;
-    while (y <= drawEnd)
-    {
-        px_put(img, x, y, color);
-		y++;
-    }
-    return 0;
 }
 
 int	line(t_img *img, int startX, int startY, int nextX, int nextY, int color)
@@ -65,7 +54,7 @@ int	line(t_img *img, int startX, int startY, int nextX, int nextY, int color)
 	i = 0;
 	while ((int)(startX - nextX) || (int)(startY - nextY))
 	{
-		px_put(img, startX, startY,color);
+		px_put(img, startX, startY, color);
 		startX += delta_x;
 		startY += delta_y;
 		i++;
