@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_errors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:27:45 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/24 11:30:03 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/27 10:32:14 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ int	handle_err(t_app *app)
 			free(app->img->mlx);
 		free(app->img);
 	}
+	if (app->err == 3)
+		exit(EXIT_SUCCESS);
 	return (app->err);
 }

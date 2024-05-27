@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:28:11 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/25 09:05:52 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/27 13:36:59 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,21 @@ void	px_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-// int	line(t_opts *opts, t_img *img, t_pos pos, t_pos npos)
-// {
-// 	float	delta_x;
-// 	float	delta_y;
-// 	float	px;
-// 	float	i;
+int	yline(t_img *img, int x, int yStart, int yEnd, int color)
+{
+	float	delta_y;
+	float	px;
 
-// 	colors(opts, &pos);
-// 	colors(opts, &npos);
-// 	delta_x = npos.x - pos.x;
-// 	delta_y = npos.y - pos.y;
-// 	px = max(absol(delta_x), absol(delta_y));
-// 	delta_x /= px;
-// 	delta_y /= px;
-// 	i = 0;
-// 	while ((int)(pos.x - npos.x) || (int)(pos.y - npos.y))
-// 	{
-// 		// gradient(&pos, &npos, i, px);
-// 		px_put(img, pos.x, pos.y, pos.color);
-// 		pos.x += delta_x;
-// 		pos.y += delta_y;
-// 		i++;t_pos npos
-// 	}
-// 	return (0);
-// }
+	delta_y = yEnd - yStart;
+	px = fabs(delta_y);
+	delta_y /= px;
+	while ((int)(yStart - yEnd))
+	{
+		px_put(img, x, yStart, color);
+		yStart += delta_y;
+	}
+	return (0);
+}
 
 int vline(t_img *img, int x, int drawStart, int drawEnd, int color)
 {
@@ -58,4 +48,27 @@ int vline(t_img *img, int x, int drawStart, int drawEnd, int color)
 		y++;
     }
     return 0;
+}
+
+int	line(t_img *img, int startX, int startY, int nextX, int nextY, int color)
+{
+	float	delta_x;
+	float	delta_y;
+	float	px;
+	float	i;
+
+	delta_x = nextX - startX;
+	delta_y = nextY - startY;
+	px = fmax(fabs(delta_x), fabs(delta_y));
+	delta_x /= px;
+	delta_y /= px;
+	i = 0;
+	while ((int)(startX - nextX) || (int)(startY - nextY))
+	{
+		px_put(img, startX, startY,color);
+		startX += delta_x;
+		startY += delta_y;
+		i++;
+	}
+	return (0);
 }

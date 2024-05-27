@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/26 10:48:25 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/27 13:53:34 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,15 @@ int	get_map(t_pos *pos, int *err)
 
 int	raycasting_loop(t_pos *pos, t_img *img)
 {
-	printf("hey");
-
-	size_t	w = MAP_WIDTH;
 	size_t	x = 0;
-	while (x < w)
+	while (x < SCREEN_WIDTH)
 	{
-		//calculate ray position and direction
-		pos->cameraX = 2 * x / (double)(w) - 1; //x-coordinate in camera space
+		pos->cameraX = 2 * x / (double)(SCREEN_WIDTH) - 1; //x-coordinate in camera space
 		pos->rayDirX = pos->dirX + pos->planeX * pos->cameraX;
 		pos->rayDirY = pos->dirY + pos->planeY * pos->cameraX;
-		x++;
-
 		pos->mapX = (int)pos->posX;
 		pos->mapY = (int)pos->posY;
 
-		//length of ray from one x or y-side to next x or y-side
 		if (pos->rayDirX == 0)
 			pos->deltaDistX = 1e30;
 		else
@@ -100,7 +93,6 @@ int	raycasting_loop(t_pos *pos, t_img *img)
 			pos->stepY = 1;
 			pos->sideDistY = (pos->mapY + 1.0 - pos->posY) * pos->deltaDistY;
 		}
-
 		//perform DDA
 		while (pos->hit == 0)
 		{
@@ -121,31 +113,28 @@ int	raycasting_loop(t_pos *pos, t_img *img)
 			if (pos->map[pos->mapX][pos->mapY] > 0)
 				pos->hit = 1;
 		}
-		//Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
 		if (pos->side == 0)
 			pos->perpWallDist = (pos->sideDistX - pos->deltaDistX);
 		else
 			pos->perpWallDist = (pos->sideDistY - pos->deltaDistY);
 
-		//Calculate height of line to draw on screen
-		pos->lineHeight = (int)(pos->h / pos->perpWallDist);
+		pos->lineHeight = (int)(SCREEN_HEIGHT / pos->perpWallDist);
 
-		//calculate lowest and highest pixel to fill in current stripe
-		pos->drawStart = -(pos->lineHeight) / 2 + pos->h / 2;
-		if(pos->drawStart < 0)
+		pos->drawStart = (-pos->lineHeight / 2) + (SCREEN_HEIGHT / 2);
+		if (pos->drawStart < 0)
 			pos->drawStart = 0;
-		pos->drawEnd = pos->lineHeight / 2 + pos->h / 2;
-		if (pos->drawEnd >= pos->h)
-			pos->drawEnd = pos->h - 1;
-
+		pos->drawEnd = (pos->lineHeight / 2) + (SCREEN_HEIGHT / 2);
+		if (pos->drawEnd >= SCREEN_HEIGHT)
+			pos->drawEnd = SCREEN_HEIGHT - 1;
 		pos->color = 0xFF0000;
-		//give x and y sides different brightness
 		if (pos->side == 1)
-			pos->color = pos->color / 2;
-
-		//draw the pixels of the stripe as a vertical line
-		vline(img, x, pos->drawStart, pos->drawEnd, pos->color);
+			pos->color = 0x990000;
+		yline(img, x, pos->drawStart, pos->drawEnd, pos->color);
+		x++;
     }
+
+	mlx_put_image_to_window(img->mlx, img->mlx_win,
+		img->img, 0, 0);
 	return 0;
 }
 
@@ -163,6 +152,6 @@ int main(int argc, char **argv)
 	if (initiate_mlx(&app) == 1)
 		return (handle_err(&app));
 	raycasting_loop(app.pos, app.img);
+	mlx_hook(app.img->mlx_win, 2, 1L << 0, key_events, &app);
 	mlx_loop(app.img->mlx);
-
 }

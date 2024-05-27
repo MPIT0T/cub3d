@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:03:07 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/25 08:57:49 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/27 13:37:21 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 # define MAP_WIDTH 24
 # define MAP_HEIGHT 24
-# define SCREEN_WIDTH 640
-# define SCREEN_HEIGHT 480
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 
 # define EXIT_SUCCESS 0
 # define ALLOC_FAILURE 1
@@ -56,6 +56,10 @@ typedef struct s_pos
 	int		drawStart;
 	int		drawEnd;
 	int		color;
+	double	oldDirX;
+	double	oldPlaneX;
+	double	moveSpeed;
+	double	rotSpeed;
 } t_pos;
 
 typedef struct s_img
@@ -80,6 +84,11 @@ int	handle_err(t_app *app);
 int	construct_app(t_app *app);
 int	initiate_mlx(t_app *app);
 int vline(t_img *img, int x, int drawStart, int drawEnd, int color);
+int	yline(t_img *img, int x, int yStart, int yEnd, int color);
+int	line(t_img *img, int startX, int startY, int nextX, int nextY, int color);
+int	key_events(int key, t_app *app);
+
+int	raycasting_loop(t_pos *pos, t_img *img);
 
 
 
