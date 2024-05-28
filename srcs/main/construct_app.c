@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   construct_app.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:27:06 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/27 18:55:47 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/28 10:21:18 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ int	initiate_positions(t_app *app)
 	app->pos->h = 1;
 	app->pos->moveSpeed = 0.1;
 	app->pos->rotSpeed = 0.1;
-	app->pos->has_mooved = false;
+	// app->pos->has_mooved = false;
+
+	app->pos->motion_up = false;
+	app->pos->motion_down = false;
+	app->pos->motion_left = false;
+	app->pos->motion_right = false;
 	return (0);
 }
 
@@ -72,6 +77,5 @@ int	construct_app(t_app *app)
 		return (app->err);
 	if (initiate_positions(app) == ALLOC_FAILURE)
 		return (app->err);
-
 	return (0);
 }

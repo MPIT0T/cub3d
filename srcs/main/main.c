@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/27 21:53:09 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/28 11:19:38 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,32 +141,35 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 
 int	game_loop(t_app *app)
 {
-	// if (app->pos->has_mooved == false)
-	// 	return (0);
 	motion(app);
-	app->pos->has_mooved = false;
-	new_image(app);
+	// new_image(app);
+
 	raycasting_loop(app->pos, app->img, app);
-	
 	return (0);
 }
 
-int main(int argc, char **argv)
+int	init_hook(t_app *app)
+{
+	mlx_hook(app->img->mlx_win, KeyPress, KeyPressMask, change_motion_keypress, app);
+	mlx_hook(app->img->mlx_win, KeyRelease, KeyReleaseMask, change_motion_keyrelease, app);
+	mlx_loop_hook(app->img->mlx, game_loop, app);
+	return (0);
+}
+
+int main(void)
 {
 	t_app	app;
 
 	app.err = 0;
-	(void) argc;
-	(void) argv;
 	if (construct_app(&app) == 1)
 		return (handle_err(&app));
 	if (get_map(app.pos, &app.err) == 1)
 		return (handle_err(&app));
 	if (initiate_mlx(&app) == 1)
 		return (handle_err(&app));	
+	init_hook(&app);
 	raycasting_loop(app.pos, app.img, &app);
-	mlx_hook(app.img->mlx_win, KeyPress, KeyPressMask, change_motion_keypress, &app);
-	mlx_hook(app.img->mlx_win, KeyRelease, KeyReleaseMask, change_motion_keyrelease, &app);
-	mlx_loop_hook(app.img->mlx_win, game_loop, &app);
 	mlx_loop(app.img->mlx);
+
+	return (0);
 }
