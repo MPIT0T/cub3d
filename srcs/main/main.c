@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/27 16:37:04 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/27 21:53:09 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,17 +126,29 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 		pos->drawEnd = (pos->lineHeight / 2) + (SCREEN_HEIGHT / 2);
 		if (pos->drawEnd >= SCREEN_HEIGHT)
 			pos->drawEnd = SCREEN_HEIGHT - 1;
-		pos->color = 0xFF0000;
+		pos->color = 0xebab34;
 		if (pos->side == 1)
-			pos->color = 0x990000;
-		yline(app, x, 0, pos->drawStart, 0xc934eb);
+			pos->color = 0xa67924;
+		yline(app, x, 0, pos->drawStart, 0x3a8399);
 		yline(app, x, pos->drawStart, pos->drawEnd, pos->color);
-		yline(app, x, pos->drawEnd, SCREEN_HEIGHT, 0x6d6d6e);
+		yline(app, x, pos->drawEnd, SCREEN_HEIGHT, 0x7a5631);
 		x++;
     }
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
 		img->img, 0, 0);
 	return 0;
+}
+
+int	game_loop(t_app *app)
+{
+	// if (app->pos->has_mooved == false)
+	// 	return (0);
+	motion(app);
+	app->pos->has_mooved = false;
+	new_image(app);
+	raycasting_loop(app->pos, app->img, app);
+	
+	return (0);
 }
 
 int main(int argc, char **argv)
@@ -155,6 +167,6 @@ int main(int argc, char **argv)
 	raycasting_loop(app.pos, app.img, &app);
 	mlx_hook(app.img->mlx_win, KeyPress, KeyPressMask, change_motion_keypress, &app);
 	mlx_hook(app.img->mlx_win, KeyRelease, KeyReleaseMask, change_motion_keyrelease, &app);
-	mlx_loop_hook(app.img->mlx_win, key_inputs_loop, &app);
+	mlx_loop_hook(app.img->mlx_win, game_loop, &app);
 	mlx_loop(app.img->mlx);
 }

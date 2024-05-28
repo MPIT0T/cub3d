@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:03:07 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/27 16:39:31 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/27 21:51:52 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,11 @@ int	yline(t_app *app, int x, int yStart, int yEnd, int color);
 int	line(t_img *img, int startX, int startY, int nextX, int nextY, int color);
 int	change_motion_keypress(int key, t_app *app);
 int	change_motion_keyrelease(int key, t_app *app);
-int	key_inputs_loop(t_app *app);
-int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
+int	motion(t_app *app);
+int	new_image(t_app *app);
+int	game_loop(t_app *app);
 
+int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
 int	go_forward(t_pos *pos);
 int	go_backward(t_pos *pos);
 int	go_left(t_pos *pos);

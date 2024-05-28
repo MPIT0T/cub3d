@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:08:19 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/27 16:48:44 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/27 21:52:38 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,28 @@ int		new_image(t_app *app)
 			&app->img->line_length, &app->img->endian);
 	if (!app->img->addr)
 		return (app->err = 1);
-	raycasting_loop(app->pos, app->img, app);
 	return (0);
 }
 
 int	change_motion_keypress(int key, t_app *app)
 {
 	if (key == ESC)
+	{
+		app->err = 3;
 		handle_err(app);
-	else if (key == UP)
+	}
+	else 
+		app->pos->has_mooved = true;
+	
+	if (key == UP)
 		app->pos->motion_up = true;
-	else if (key == DOWN)
+	if (key == DOWN)
 		app->pos->motion_down = true;
-	else if (key == LEFT)
+	if (key == LEFT)
 		app->pos->motion_left = true;
-	else if (key == RIGHT)
+	if (key == RIGHT)
 		app->pos->motion_right = true;
+	// game_loop(app);
 	return (0);
 }
 
@@ -46,26 +52,26 @@ int	change_motion_keyrelease(int key, t_app *app)
 {
 	if (key == UP && app->pos->motion_up == true)
 		app->pos->motion_up = false;
-	else if (key == DOWN && app->pos->motion_down == true)
+	if (key == DOWN && app->pos->motion_down == true)
 		app->pos->motion_down = false;
-	else if (key == LEFT && app->pos->motion_left == true)
+	if (key == LEFT && app->pos->motion_left == true)
 		app->pos->motion_left = false;
-	else if (key == RIGHT && app->pos->motion_right == true)
+	if (key == RIGHT && app->pos->motion_right == true)
 		app->pos->motion_right = false;
+
 	return (0);	
 }
 
-int	key_inputs_loop(t_app *app)
+int	motion(t_app *app)
 {
-	if (app->pos->motion_up)
+	if (app->pos->motion_up == true)
 		go_forward(app->pos);
-	else if (app->pos->motion_down)
+	if (app->pos->motion_down == true)
 		go_backward(app->pos);
-	else if (app->pos->motion_left)
+	if (app->pos->motion_left == true)
 		go_left(app->pos);
-	else if (app->pos->motion_right)
+	if (app->pos->motion_right == true)
 		go_right(app->pos);
-	new_image(app);
 	return 0;
 }
 

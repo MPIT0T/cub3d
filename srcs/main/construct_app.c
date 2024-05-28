@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   construct_app.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:27:06 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/27 13:48:20 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/27 18:55:47 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	initiate_positions(t_app *app)
 	app->pos->h = 1;
 	app->pos->moveSpeed = 0.1;
 	app->pos->rotSpeed = 0.1;
+	app->pos->has_mooved = false;
 	return (0);
 }
 
