@@ -58,7 +58,7 @@ int	main(int ac, char **av)
 	ft_check_args(ac, av);
 	if (init_data_structs(&data))
 		return (EXIT_MALLOC);
-	parsing_map(&data, av[1]);
+	parsing(&data, av[1]);
 	free_data(&data);
 	return (EXIT_SUCCESS);
 }

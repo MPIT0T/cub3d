@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/28 13:59:02 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/28 16:34:06 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 /* ************************************************************************** */
 
 # define ERRMSG "\e[0;91mError\e[0m"
+
+# define VOID -1
+# define ROOM 0
+# define WALL 1
+# define FACING_NORTH 2
+# define FACING_SOUTH 3
+# define FACING_WEST 4
+# define FACING_EAST 5
 
 # define ID_NORTH "NO "
 # define ID_SOUTH "SO "
@@ -69,6 +77,8 @@ typedef struct s_map
 	t_color	*c;
 	t_color	*f;
 	int		**map;
+	size_t	weight;
+	size_t	height;
 }	t_map;
 
 typedef struct s_data
@@ -86,7 +96,7 @@ typedef struct s_data
 
 /*   PARSING   */
 //parsing.c
-int		parsing_map(t_data *data, const char *path_to_map);
+int		parsing(t_data *data, const char *path_to_map);
 //read_map_file.c
 char	*read_map_file(t_data *data, const char *path_to_map);
 //info_extract.c
