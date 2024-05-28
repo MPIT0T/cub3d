@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/23 16:08:52 by mpitot           ###   ########.fr        #
+#    Updated: 2024/05/28 09:57:05 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ NAME	=	cub3d
 
 CC		=	cc
 
-FLAGS	=	-Wall -Wextra -Werror #-g3
+FLAGS	=	-Wall -Wextra -Werror -g3
 
 all		:	mlx libft .internal_separate2 ${NAME}
 
@@ -78,7 +78,7 @@ sanitize	: fclean mlx libft .internal_separate2 ${OBJ_D} ${OBJS} libft/libft.a
 	@$(call erase)
 	@$(call done_and_dusted,$(NAME))
 
-ARGS =
+ARGS = "maps/map_subject.cub"
 
 leak: all .internal_separate3
 	@echo "$(MAGENTA)Valgrind $(WHITE)~ $(YELLOW)Flags:$(DEFAULT)"

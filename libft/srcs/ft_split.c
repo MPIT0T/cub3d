@@ -19,10 +19,10 @@ void	ft_free_tab(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		free(tab[i]);
+		ft_free(tab[i]);
 		i++;
 	}
-	free(tab);
+	ft_free(tab);
 }
 
 static size_t	ft_count_words(const char *str, char c)

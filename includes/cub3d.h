@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/23 17:57:36 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/28 13:40:47 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,22 @@
 /*                              DEFINES                                       */
 /* ************************************************************************** */
 
-# define DEFAULT_NORTH ""
-# define DEFAULT_SOUTH ""
-# define DEFAULT_WEST ""
-# define DEFAULT_EAST ""
-# define DEFAULT_FLOOR ""
-# define DEFAULT_CEILING ""
+# define ERRMSG "\e[0;91mError\e[0m"
 
-# define ID_NORTH "NO"
-# define ID_SOUTH "SO"
-# define ID_WEST "WE"
-# define ID_EAST "EA"
-# define ID_FLOOR "N"
-# define ID_CEILING "C"
+# define ID_NORTH "NO "
+# define ID_SOUTH "SO "
+# define ID_WEST "WE "
+# define ID_EAST "EA "
+# define ID_FLOOR "F "
+# define ID_CEILING "C "
+
+# define EXIT_SUCCESS 0
+# define EXIT_MALLOC 1
+# define EXIT_ARGS 2
+# define EXIT_READ 3
+# define EXIT_OPEN 4
+# define EXIT_PARSING 5
+
 
 /* ************************************************************************** */
 /*                                 ENUM                                       */
@@ -75,7 +78,9 @@ typedef struct s_map
 
 typedef struct s_data
 {
+	int		*err;
 	t_map	*map;
+	char	*full_file_string;
 }	t_data;
 
 /* ************************************************************************** */
@@ -89,12 +94,15 @@ typedef struct s_data
 int		parsing_map(t_data *data, const char *path_to_map);
 //read_map_file.c
 char	*read_map_file(t_data *data, const char *path_to_map);
+//info_extract.c
+t_color *get_color(t_data *data, char *str, char *id);
+char	*get_texture(t_data *data, char *str, char *id);
 
 /*   EXIT   */
 //exit.c
-void	exit_error(t_data *data, int put_error);
+void	exit_error(t_data *data, int error);
+void	exit_parsing_error(t_data *data, const char *msg);
 //free.c
 void	free_data(t_data *data);
-
 
 #endif
