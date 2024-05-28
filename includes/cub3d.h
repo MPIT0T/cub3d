@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:03:07 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/28 10:43:57 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:14:17 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,10 @@ int	change_motion_keyrelease(int key, t_app *app);
 int	motion(t_app *app);
 int	new_image(t_app *app);
 int	game_loop(t_app *app);
+// static int	line_height(t_pos *pos);
+// static int	DDA(t_pos *pos);
+// static int	get_tile_size(t_pos *pos);
+// static int	get_ray_length(t_pos *pos, int x);
 int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
-int	go_forward(t_pos *pos);
-int	go_backward(t_pos *pos);
-int	go_left(t_pos *pos);
-int	go_right(t_pos *pos);
 
 #endif

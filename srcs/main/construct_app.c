@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:27:06 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/28 10:21:18 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:18:38 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	initiate_positions(t_app *app)
 	app->pos->time = 0; //time of current frame
 	app->pos->oldTime = 0; //time of previous frame
 	app->pos->h = 1;
-	app->pos->moveSpeed = 0.1;
+	app->pos->moveSpeed = 0.2;
 	app->pos->rotSpeed = 0.1;
 	// app->pos->has_mooved = false;
 

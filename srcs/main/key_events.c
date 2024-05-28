@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:08:19 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/28 11:19:22 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:41:41 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,4 @@ int	change_motion_keyrelease(int key, t_app *app)
 	return (0);	
 }
 
-int	motion(t_app *app)
-{
-	if (app->pos->motion_up)
-		go_forward(app->pos);
-	if (app->pos->motion_down)
-		go_backward(app->pos);
-	if (app->pos->motion_left)
-		go_left(app->pos);
-	if (app->pos->motion_right)
-		go_right(app->pos);
-	return (0);
-}
 
