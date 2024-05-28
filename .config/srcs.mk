@@ -22,7 +22,8 @@ MAIN	=	$(addprefix $(DIR_MAIN), $(SRC_MAIN))
 DIR_PARS	=	parsing/
 SRC_PARS	=	parsing.c			\
 				read_map_file.c		\
-				info_extract.c
+				info_extract.c		\
+				info_verif.c
 PARSING		=	$(addprefix $(DIR_PARS), $(SRC_PARS))
 
 DIR_EXIT	=	exit-management/

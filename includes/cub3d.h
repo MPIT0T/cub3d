@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/28 13:40:47 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/28 13:59:02 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,6 @@ typedef struct s_color
 	int		b;
 }	t_color;
 
-typedef struct s_element
-{
-	char	type;
-}	t_elem;
-
 typedef struct s_map
 {
 	char	*no;
@@ -73,7 +68,7 @@ typedef struct s_map
 	char	*ea;
 	t_color	*c;
 	t_color	*f;
-	t_elem	**map;
+	int		**map;
 }	t_map;
 
 typedef struct s_data
@@ -97,6 +92,8 @@ char	*read_map_file(t_data *data, const char *path_to_map);
 //info_extract.c
 t_color *get_color(t_data *data, char *str, char *id);
 char	*get_texture(t_data *data, char *str, char *id);
+//info_verif.c
+void	verify_infos(t_data *data);
 
 /*   EXIT   */
 //exit.c
