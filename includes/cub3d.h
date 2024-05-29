@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:03:07 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/28 13:14:17 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/29 08:24:48 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ typedef struct s_pos
 	bool	motion_down;
 	bool	motion_left;
 	bool	motion_right;
+	bool	rotate_left;
+	bool	rotate_right;
 } t_pos;
 
 typedef struct s_img

@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:08:19 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/28 11:41:41 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/29 08:28:33 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ int	change_motion_keypress(int key, t_app *app)
 	if (app->pos->motion_left == false && key == XK_a)
 		app->pos->motion_left = true;
 	if (app->pos->motion_right == false && key == XK_d)
-		app->pos->motion_right = true;
+		app->pos->motion_right = true;	
+	if (app->pos->rotate_left == false && key == XK_Left)
+		app->pos->rotate_left = true;
+	if (app->pos->rotate_right == false && key == XK_Right)
+		app->pos->rotate_right = true;
 	return (0);
 }
 
@@ -59,6 +63,10 @@ int	change_motion_keyrelease(int key, t_app *app)
 		app->pos->motion_left = false;
 	if (key == XK_d && app->pos->motion_right == true)
 		app->pos->motion_right = false;
+	if (key == XK_Left && app->pos->rotate_left == true)
+		app->pos->rotate_left = false;
+	if (key == XK_Right && app->pos->rotate_right == true)
+		app->pos->rotate_right = false;
 	return (0);	
 }
 
