@@ -6,13 +6,13 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:32:10 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/28 10:51:25 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/29 14:28:34 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static char	*__read_entire_file(int fd)
+static char	*__read_entire_file(t_data *data, int fd)
 {
 	ssize_t	sz;
 	char	buff[1025];
@@ -24,11 +24,16 @@ static char	*__read_entire_file(int fd)
 	{
 		sz = read(fd, buff, 1024);
 		if (sz == -1)
-			return (ft_free(result_str), NULL);
+		{
+			ft_free(result_str);
+			exit_error(data, EXIT_READ);
+		}
+		if (sz == 0 && !result_str)
+			break ;
 		buff[sz] = '\0';
 		result_str = ft_strjoin_free(result_str, buff, 1);
 		if (!result_str)
-			return (NULL);
+			exit_error(data, EXIT_MALLOC);
 		ft_bzero(buff, 1025);
 	}
 	return (result_str);
@@ -42,7 +47,7 @@ char	*read_map_file(t_data *data, const char *path_to_map)
 	fd = open(path_to_map, O_RDONLY);
 	if (fd == -1)
 		exit_error(data, EXIT_OPEN);
-	result_str = __read_entire_file(fd);
+	result_str = __read_entire_file(data, fd);
 	close(fd);
 	if (!result_str)
 		exit_error(data, EXIT_READ);

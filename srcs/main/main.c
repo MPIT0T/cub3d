@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:07:17 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/28 12:56:48 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/29 14:48:02 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 int	init_data_structs(t_data *data)
 {
-	data->map = malloc(sizeof(t_map));
+	data->map = ft_calloc(sizeof(t_map), 1);
 	if (!data->map)
 		return (1);
-	data->err = malloc(sizeof(int));
-	if (!data->err)
-		return (free(data->map), 1);
 	data->map->no = NULL;
 	data->map->so = NULL;
 	data->map->we = NULL;
@@ -54,10 +51,12 @@ void	ft_check_args(int ac, char **av)
 int	main(int ac, char **av)
 {
 	t_data	data;
+	int		err;
 
 	ft_check_args(ac, av);
 	if (init_data_structs(&data))
 		return (EXIT_MALLOC);
+	data.err = &err;
 	parsing(&data, av[1]);
 	free_data(&data);
 	return (EXIT_SUCCESS);
