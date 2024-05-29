@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:18:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/28 13:36:14 by mpitot           ###   ########.fr        #
+#    Updated: 2024/05/29 11:51:14 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,9 @@ DIR_PARS	=	parsing/
 SRC_PARS	=	parsing.c			\
 				read_map_file.c		\
 				info_extract.c		\
-				info_verif.c
+				info_verif.c		\
+				map_parsing.c			\
+				map_verif.c
 PARSING		=	$(addprefix $(DIR_PARS), $(SRC_PARS))
 
 DIR_EXIT	=	exit-management/

@@ -32,11 +32,27 @@ static int	__verify_color(t_color *color)
 	return (0);
 }
 
+static int	__verify_path_ext(char *path)
+{
+	size_t	len;
+
+	len = ft_strlen(path);
+	if (len < 5)
+		return (1);
+	if (path[len - 1] != 'm' || path[len - 2] != 'p'
+		|| path[len - 3] != 'x' || path[len - 4] != '.')
+		return (1);
+	return (0);
+}
+
 void	verify_infos(t_data *data)
 {
 	if (__verify_path(data->map->no) || __verify_path(data->map->so)
 		|| __verify_path(data->map->we) || __verify_path(data->map->ea))
 		exit_parsing_error(data, "invalid texture path");
+	if (__verify_path_ext(data->map->no) || __verify_path_ext(data->map->so)
+		|| __verify_path_ext(data->map->we) || __verify_path_ext(data->map->ea))
+		exit_parsing_error(data, "invalid texture image format (.xpm required)");
 	if (__verify_color(data->map->c) || __verify_color(data->map->f))
 		exit_parsing_error(data, "invalid color format");
 }

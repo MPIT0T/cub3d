@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:34:59 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/28 11:40:11 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/29 11:40:53 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ void	free_data(t_data *data)
 	ft_free(data->map->c);
 	ft_free(data->full_file_string);
 	ft_free(data->err);
+	ft_free_tab(data->map->map);
 	ft_free(data->map);
 }
