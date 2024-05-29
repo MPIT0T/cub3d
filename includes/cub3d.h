@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:03:07 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/29 08:24:48 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/29 09:07:02 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@
 # define LEFT	65361
 # define RIGHT	65363
 # define ESC	65307
+
+# define BLUE			0x3a8399
+# define YELLOW			0xebab34
+# define YELLOW_SIDE	0xa67924
+# define BROWN			0x7a5631
 
 typedef struct s_pos
 {
@@ -75,6 +80,7 @@ typedef struct s_pos
 	bool	motion_right;
 	bool	rotate_left;
 	bool	rotate_right;
+	int		**px;
 } t_pos;
 
 typedef struct s_img
@@ -99,16 +105,14 @@ int	handle_err(t_app *app);
 int	construct_app(t_app *app);
 int	initiate_mlx(t_app *app);
 int	yline(t_app *app, int x, int yStart, int yEnd, int color);
+int	xline(t_app *app, int y, int xStart, int xEnd, int **px_tab);
 int	line(t_img *img, int startX, int startY, int nextX, int nextY, int color);
 int	change_motion_keypress(int key, t_app *app);
 int	change_motion_keyrelease(int key, t_app *app);
 int	motion(t_app *app);
 int	new_image(t_app *app);
 int	game_loop(t_app *app);
-// static int	line_height(t_pos *pos);
-// static int	DDA(t_pos *pos);
-// static int	get_tile_size(t_pos *pos);
-// static int	get_ray_length(t_pos *pos, int x);
+
 int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
 
 #endif

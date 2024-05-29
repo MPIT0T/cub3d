@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:27:06 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/29 08:22:30 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/29 09:13:51 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ int	malloc_app(t_app *app)
 
 int	initiate_positions(t_app *app)
 {
+	int	y;
+
+	y = -1;
 	app->pos->posX = 22;//x and y start position
 	app->pos->posY = 12;  
 	app->pos->dirX = -1;//initial direction vector
@@ -44,6 +47,16 @@ int	initiate_positions(t_app *app)
 	app->pos->motion_down = false;
 	app->pos->rotate_left = false;
 	app->pos->rotate_right = false;
+
+	app->pos->px = malloc(SCREEN_HEIGHT * sizeof(int *));
+	if (!app->pos->px)
+		return (app->err = 1);
+	while(++y < SCREEN_HEIGHT)
+	{
+		app->pos->px[y] = malloc(SCREEN_WIDTH * sizeof(int));
+		if (!app->pos->px[y])
+			return (app->err = 1);
+	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/28 13:13:35 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/29 09:14:06 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,39 @@ static int	line_height(t_pos *pos)
 	return (0);
 }
 
+int	set_pixel_color(t_pos *pos, int x)
+{
+	int	y;
+
+	y = 0;
+	while (y < pos->drawStart)
+	{
+		pos->px[y++][x] = BLUE;
+	}
+	while (y < pos->drawEnd)
+	{
+		pos->px[y++][x] = pos->color;
+	}
+	while (y < SCREEN_HEIGHT)
+	{	
+		pos->px[y++][x] = BROWN;
+	}
+	return (0);
+}
+
+int	render_screen(t_app *app, int **px)
+{
+	int y;
+
+	y = 0;
+	while (y < SCREEN_HEIGHT)
+	{
+		xline(app, y, 0, SCREEN_WIDTH, px);
+		y++;
+	}
+	return (0);
+}
+
 int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 {
 	size_t	x;
@@ -108,16 +141,19 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 		get_tile_size(pos);
 		DDA(pos);
 		line_height(pos);
-		pos->color = 0xebab34;
+		pos->color = YELLOW;
 		if (pos->side == 1)
-			pos->color = 0xa67924;
-		yline(app, x, 0, pos->drawStart, 0x3a8399);
-		yline(app, x, pos->drawStart, pos->drawEnd, pos->color);
-		yline(app, x, pos->drawEnd, SCREEN_HEIGHT, 0x7a5631);
+			pos->color = YELLOW_SIDE;
+		set_pixel_color(pos, x);
+		// yline(app, x, 0, pos->drawStart, BLUE);
+		// yline(app, x, pos->drawStart, pos->drawEnd, pos->color);
+		// yline(app, x, pos->drawEnd, SCREEN_HEIGHT, BROWN);
 		x++;
     }
+	render_screen(app, pos->px);
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
 		img->img, 0, 0);
+	// mlx_destroy_image(img->mlx, img->img);
 	return 0;
 }
 

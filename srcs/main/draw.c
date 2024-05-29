@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:28:11 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/27 15:46:41 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/29 09:09:11 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	px_put(t_img *img, int x, int y, int color)
 
 	if (x >= SCREEN_WIDTH || x <= 0 || y >= SCREEN_HEIGHT || y <= 0)
 		return ;
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	dst = img->addr + (y * img->line_length + x * (int)(img->bits_per_pixel * 0.125));
 	*(unsigned int *)dst = color;
 }
 
@@ -35,6 +35,22 @@ int	yline(t_app *app, int x, int yStart, int yEnd, int color)
 		// if (yStart >= app->pos->drawStart && yStart <= app->pos->drawEnd)
 		px_put(app->img, x, yStart, color);
 		yStart += delta_y;
+	}
+	return (0);
+}
+
+int	xline(t_app *app, int y, int xStart, int xEnd, int **px_tab)
+{
+	float	delta_x;
+	float	px;
+
+	delta_x = xEnd - xStart;
+	px = fabs(delta_x);
+	delta_x /= px;
+	while ((int)(xStart - xEnd))
+	{
+		px_put(app->img, xStart, y, px_tab[y][xStart]);
+		xStart += delta_x;
 	}
 	return (0);
 }
