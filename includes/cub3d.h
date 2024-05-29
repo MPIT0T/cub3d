@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:03:07 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/29 09:07:02 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:52:51 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@
 # include <stdbool.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
+# include <stdint.h>
 
 # define MAP_WIDTH		24
 # define MAP_HEIGHT		24
 # define SCREEN_WIDTH	1920
 # define SCREEN_HEIGHT	1080
+# define TEX_WIDTH		64
+# define TEX_HEIGHT		64
 
 # define EXIT_SUCCESS	0
 # define ALLOC_FAILURE	1
@@ -39,6 +42,18 @@
 # define YELLOW			0xebab34
 # define YELLOW_SIDE	0xa67924
 # define BROWN			0x7a5631
+
+typedef	struct	s_tex
+{
+	char	*file;
+	int		width;
+	int		height;
+	void	*img;
+	char	*address;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+} t_tex;
 
 typedef struct s_pos
 {
@@ -81,6 +96,11 @@ typedef struct s_pos
 	bool	rotate_left;
 	bool	rotate_right;
 	int		**px;
+	char	wallDir;
+	t_tex	*tex_north;
+	t_tex	*tex_south;
+	t_tex	*tex_east;
+	t_tex	*tex_west;
 } t_pos;
 
 typedef struct s_img

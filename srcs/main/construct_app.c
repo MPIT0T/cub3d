@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:27:06 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/29 09:13:51 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:53:56 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,26 @@ int	initiate_positions(t_app *app)
 	app->pos->time = 0; //time of current frame
 	app->pos->oldTime = 0; //time of previous frame
 	app->pos->h = 1;
-	app->pos->moveSpeed = 0.1;
-	app->pos->rotSpeed = 0.1;
-	// app->pos->has_mooved = false;
-
+	app->pos->moveSpeed = 0.05;
+	app->pos->rotSpeed = 0.05;
 	app->pos->motion_up = false;
 	app->pos->motion_down = false;
 	app->pos->rotate_left = false;
 	app->pos->rotate_right = false;
 
-	app->pos->px = malloc(SCREEN_HEIGHT * sizeof(int *));
-	if (!app->pos->px)
-		return (app->err = 1);
-	while(++y < SCREEN_HEIGHT)
+	uint32_t buffer [SCREEN_HEIGHT][SCREEN_WIDTH];
+	
+	uint32_t	*texture[8];
+	int	i;
+	i = 0;
+	while (i < 8)
 	{
-		app->pos->px[y] = malloc(SCREEN_WIDTH * sizeof(int));
-		if (!app->pos->px[y])
+		texture[i] = malloc(TEX_WIDTH * TEX_HEIGHT * sizeof(uint32_t));
+		if (!texture[i])
 			return (app->err = 1);
 	}
+	unsigned long tw, th;
+	
 	return (0);
 }
 
@@ -84,11 +86,19 @@ int	initiate_mlx(t_app *app)
 	return (0);
 }
 
+int	get_textures(t_app *app)
+{
+	void	*mlx_xpm_file_to_image(app->img->mlx, app->pos->tex_north->file,
+		app->pos->tex_north->width, app->pos->tex_north->height);
+}
+
 int	construct_app(t_app *app)
 {
 	if (malloc_app(app) == ALLOC_FAILURE)
 		return (app->err);
 	if (initiate_positions(app) == ALLOC_FAILURE)
+		return (app->err);
+	if (get_textures(app) == ALLOC_FAILURE)
 		return (app->err);
 	return (0);
 }
