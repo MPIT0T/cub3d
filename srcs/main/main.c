@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/29 08:41:50 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/29 14:37:55 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,15 @@ int main(void)
 	t_app	app;
 
 	app.err = 0;
+	write(1, "hey\n", 5);
 	if (construct_app(&app) == 1)
 		return (handle_err(&app));
 	if (get_map(app.pos, &app.err) == 1)
 		return (handle_err(&app));
 	if (initiate_mlx(&app) == 1)
-		return (handle_err(&app));	
+		return (handle_err(&app));
 	raycasting_loop(app.pos, app.img, &app);
 	init_hook(&app);
 	mlx_loop(app.img->mlx);
-
 	return (0);
 }

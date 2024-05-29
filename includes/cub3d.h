@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:03:07 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/29 12:49:33 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/29 14:25:29 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@
 typedef	struct	s_tex
 {
 	char	*file;
-	int		*width;
-	int		*height;
+	int		width;
+	int		height;
 	void	*img;
 	char	*address;
 	int		bits_per_pixel;
@@ -101,6 +101,7 @@ typedef struct s_pos
 	t_tex	*tex_south;
 	t_tex	*tex_east;
 	t_tex	*tex_west;
+	uint32_t	**tex_value;
 } t_pos;
 
 typedef struct s_img
