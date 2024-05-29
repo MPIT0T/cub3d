@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/29 10:40:53 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:57:23 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 		get_tile_size(pos);
 		DDA(pos);
 		line_height(pos);
-		choose_colors(pos);
+		// choose_colors(pos);
 		pos->color = YELLOW;
 		if (pos->wallDir == 'N' || pos->wallDir == 'W')
 			pos->color = YELLOW_SIDE;

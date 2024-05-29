@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   construct_app.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:27:06 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/29 11:53:56 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:59:58 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ int	malloc_app(t_app *app)
 
 int	initiate_positions(t_app *app)
 {
-	int	y;
-
-	y = -1;
 	app->pos->posX = 22;//x and y start position
 	app->pos->posY = 12;  
 	app->pos->dirX = -1;//initial direction vector
@@ -57,9 +54,21 @@ int	initiate_positions(t_app *app)
 		if (!texture[i])
 			return (app->err = 1);
 	}
-	unsigned long tw, th;
+	
 	
 	return (0);
+}
+
+int	get_textures(t_app *app)
+{
+	mlx_xpm_file_to_image(app->img->mlx, app->pos->tex_north->file,
+		app->pos->tex_north->width, app->pos->tex_north->height);
+	mlx_xpm_file_to_image(app->img->mlx, app->pos->tex_south->file,
+		app->pos->tex_south->width, app->pos->tex_south->height);
+	mlx_xpm_file_to_image(app->img->mlx, app->pos->tex_east->file,
+		app->pos->tex_east->width, app->pos->tex_east->height);
+	mlx_xpm_file_to_image(app->img->mlx, app->pos->tex_west->file,
+		app->pos->tex_west->width, app->pos->tex_west->height);
 }
 
 int	initiate_mlx(t_app *app)
@@ -84,12 +93,6 @@ int	initiate_mlx(t_app *app)
 	if (!app->img->addr)
 		return (app->err = ALLOC_FAILURE);
 	return (0);
-}
-
-int	get_textures(t_app *app)
-{
-	void	*mlx_xpm_file_to_image(app->img->mlx, app->pos->tex_north->file,
-		app->pos->tex_north->width, app->pos->tex_north->height);
 }
 
 int	construct_app(t_app *app)
