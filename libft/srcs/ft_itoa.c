@@ -12,19 +12,6 @@
 
 #include "../incs/libft.h"
 
-static size_t	ft_count(unsigned int n)
-{
-	size_t	i;
-
-	i = 1;
-	while (n > 9)
-	{
-		n = n / 10;
-		i++;
-	}
-	return (i);
-}
-
 static void	ft_revstr(char *str, size_t j)
 {
 	size_t	i;
@@ -62,7 +49,7 @@ char	*ft_itoa(int n)
 
 	if (n < 0)
 	{
-		size = ft_count(n * -1);
+		size = ft_intlen(n * -1);
 		str = ft_calloc((size + 2), sizeof(char));
 		if (!str)
 			return (NULL);
@@ -71,7 +58,7 @@ char	*ft_itoa(int n)
 	}
 	else
 	{
-		size = ft_count(n);
+		size = ft_intlen(n);
 		str = ft_calloc((size + 1), sizeof(char));
 		if (!str)
 			return (NULL);
