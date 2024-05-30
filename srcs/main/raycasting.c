@@ -81,7 +81,6 @@ static int	DDA(t_pos *pos)
 			else
 				pos->wallDir = 'S';
 		}
-//		ft_printf("%d\t%d\n", pos->mapX, pos->mapY);
 		if (pos->map[pos->mapX][pos->mapY] == '1')
 			pos->hit = 1;
 	}
