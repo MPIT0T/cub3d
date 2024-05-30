@@ -41,9 +41,9 @@ static int		go_left(t_pos *pos)
 
 static int		go_right(t_pos *pos)
 {
-    if (pos->map[(int)(pos->posX + pos->dirY * pos->moveSpeed)][(int)pos->posY] == '0')
+    if (pos->map[(int)(pos->posX + pos->dirY * pos->moveSpeed)][(int)pos->posY] != '1')
         pos->posX += pos->dirY * pos->moveSpeed;
-    if (pos->map[(int)pos->posX][(int)(pos->posY - pos->dirX * pos->moveSpeed)] == '0')
+    if (pos->map[(int)pos->posX][(int)(pos->posY - pos->dirX * pos->moveSpeed)] != '1')
         pos->posY -= pos->dirX * pos->moveSpeed;
     return (0);
 }

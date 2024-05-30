@@ -42,7 +42,7 @@ int	change_motion_keypress(int key, t_app *app)
 	if (app->pos->motion_left == false && key == XK_a)
 		app->pos->motion_left = true;
 	if (app->pos->motion_right == false && key == XK_d)
-		app->pos->motion_right = true;	
+		app->pos->motion_right = true;
 	if (app->pos->rotate_left == false && key == XK_Left)
 		app->pos->rotate_left = true;
 	if (app->pos->rotate_right == false && key == XK_Right)
