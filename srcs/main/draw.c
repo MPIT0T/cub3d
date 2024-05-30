@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:28:11 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/30 10:46:16 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/30 11:36:41 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,28 @@ int	yline(t_app *app, int x, int yStart, int yEnd, int color)
 	{
 		px_put(app->img, x, yStart, color);
 		yStart += delta_y;
+	}
+	return (0);
+}
+
+int	yline_textured(t_app *app, t_ctex *ctex, int x, t_pos *pos)
+{
+	float	delta_y;
+	float	px;
+	int		y;
+	uint32_t color;
+
+	y = pos->drawStart;
+	delta_y = pos->drawEnd - y;
+	px = fabs(delta_y);
+	delta_y /= px;
+	while ((int)(y - pos->drawEnd))
+	{
+		ctex->texY = (int)ctex->texPos & (TEX_HEIGHT - 1);
+		ctex->texPos += ctex->step;
+		color = ctex->texture[TEX_HEIGHT * ctex->texY + ctex->texX];
+		px_put(app->img, x, y, color);
+		y += delta_y;
 	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/29 18:10:05 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/30 11:02:03 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	get_map(t_pos *pos, int *err)
 int	game_loop(t_app *app)
 {
 	motion(app);
-	// new_image(app);
+	new_image(app);
 	raycasting_loop(app->pos, app->img, app);
 	return (0);
 }

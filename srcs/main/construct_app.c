@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:27:06 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/30 09:31:19 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/30 11:24:56 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	malloc_app(t_app *app)
 	app->pos = malloc(sizeof(t_pos));
 	if (!app->pos)
 		return (app->err = ALLOC_FAILURE);
-
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:03:07 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/30 10:57:00 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/30 11:17:47 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,17 @@ typedef struct s_img
 	void	*mlx;
 	void	*mlx_win;
 } t_img;
+
+typedef struct	s_ctex
+{
+	uint32_t	*texture;
+	int 	texX;
+	int		texY;
+	double	wallX;
+	double	step;
+	double	texPos;
+	int		texNum;
+} t_ctex;
 
 typedef	struct	s_tex
 {
@@ -135,5 +146,6 @@ int	game_loop(t_app *app);
 int	initiate_textures(t_app *app);
 int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
 void	px_put(t_img *img, int x, int y, int color);
+int	yline_textured(t_app *app, t_ctex *ctex, int x, t_pos *pos);
 
 #endif
