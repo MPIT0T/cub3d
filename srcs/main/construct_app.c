@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   construct_app.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:27:06 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/30 11:24:56 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:18:00 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,12 @@ int	get_images(t_tex *tex, t_img *img)
 	tex[1] = south 
 	tex[2] = east
 	tex[3] = west 
+	tex[4] = roof
+	tex[5] = floor
 */
 int	initiate_textures(t_app *app)
 {
-	app->pos->tex = malloc(4 * sizeof(t_tex));
+	app->pos->tex = malloc(6 * sizeof(t_tex));
 	if (!app->pos->tex)
 		return (app->err = 1);
 
@@ -70,18 +72,20 @@ int	initiate_textures(t_app *app)
 	app->pos->tex[1].file = ft_strdup("textures/wall_south.xpm");
 	app->pos->tex[2].file = ft_strdup("textures/wall_east.xpm");
 	app->pos->tex[3].file = ft_strdup("textures/wall_west.xpm");
+	app->pos->tex[4].file = ft_strdup("textures/roof.xpm");
+	app->pos->tex[5].file = ft_strdup("textures/floor.xpm");
 	int	i = -1;
-	app->pos->textures = malloc(4 * sizeof(uint32_t *));
+	app->pos->textures = malloc(6 * sizeof(uint32_t *));
 	if (!app->pos->textures)
 		return (app->err = 1);
-	while (++i < 4)
+	while (++i < 6)
 	{
 		app->pos->textures[i] = malloc(TEX_WIDTH * TEX_HEIGHT * sizeof(uint32_t));
 		if (!app->pos->textures[i])
 			return (app->err = 1);
 	}
 	i = -1;
-	while (++i < 4)
+	while (++i < 6)
 	{
 		get_images(&app->pos->tex[i], app->img);
 		if (!app->pos->tex[i].img)
