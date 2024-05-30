@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 static int	__verify_path(char *path)
 {
@@ -45,14 +45,14 @@ static int	__verify_path_ext(char *path)
 	return (0);
 }
 
-void	verify_infos(t_data *data)
+void	verify_infos(t_app *app)
 {
-	if (__verify_path(data->map->no) || __verify_path(data->map->so)
-		|| __verify_path(data->map->we) || __verify_path(data->map->ea))
-		exit_parsing_error(data, "invalid texture path");
-	if (__verify_path_ext(data->map->no) || __verify_path_ext(data->map->so)
-		|| __verify_path_ext(data->map->we) || __verify_path_ext(data->map->ea))
-		exit_parsing_error(data, "invalid texture image format (.xpm required)");
-	if (__verify_color(data->map->c) || __verify_color(data->map->f))
-		exit_parsing_error(data, "invalid color format");
+	if (__verify_path(app->map->no) || __verify_path(app->map->so)
+		|| __verify_path(app->map->we) || __verify_path(app->map->ea))
+		exit_parsing_error(app, "invalid texture path");
+	if (__verify_path_ext(app->map->no) || __verify_path_ext(app->map->so)
+		|| __verify_path_ext(app->map->we) || __verify_path_ext(app->map->ea))
+		exit_parsing_error(app, "invalid texture image format (.xpm required)");
+	if (__verify_color(app->map->c) || __verify_color(app->map->f))
+		exit_parsing_error(app, "invalid color format");
 }

@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   construct_app.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:27:06 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/30 09:31:19 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/30 11:33:51 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/cub3D.h"
 
 int	malloc_app(t_app *app)
 {
 	app->img = NULL;
 	app->img = malloc(sizeof(t_img));
 	if (!app->img)
-		return (app->err = ALLOC_FAILURE);
+		exit_error(app, EXIT_MALLOC);
 	app->pos = NULL;
 	app->pos = malloc(sizeof(t_pos));
 	if (!app->pos)
-		return (app->err = ALLOC_FAILURE);
+		exit_error(app, EXIT_MALLOC);
 
 	return (0);
 }
@@ -55,12 +55,7 @@ int	get_images(t_tex *tex, t_img *img)
 	tex->data = mlx_get_data_addr(tex->img, &tex->bits_per_pixel, &tex->line_length, &tex->endian);
 	return (0);
 }
-/*
-	tex[0] = north 
-	tex[1] = south 
-	tex[2] = east
-	tex[3] = west 
-*/
+
 int	initiate_textures(t_app *app)
 {
 	app->pos->tex = malloc(4 * sizeof(t_tex));
@@ -74,19 +69,19 @@ int	initiate_textures(t_app *app)
 	int	i = -1;
 	app->pos->textures = malloc(4 * sizeof(uint32_t *));
 	if (!app->pos->textures)
-		return (app->err = 1);
+		exit_error(app, EXIT_MALLOC);
 	while (++i < 4)
 	{
 		app->pos->textures[i] = malloc(TEX_WIDTH * TEX_HEIGHT * sizeof(uint32_t));
 		if (!app->pos->textures[i])
-			return (app->err = 1);
+			exit_error(app, EXIT_MALLOC);
 	}
 	i = -1;
 	while (++i < 4)
 	{
 		get_images(&app->pos->tex[i], app->img);
 		if (!app->pos->tex[i].img)
-			return (app->err = 1);
+			exit_error(app, EXIT_MALLOC);
 	}
 	return (0);
 }
@@ -96,30 +91,28 @@ int	initiate_mlx(t_app *app)
 	app->img->mlx = NULL;
 	app->img->mlx = mlx_init();
 	if (!app->img->mlx)
-		return (app->err = ALLOC_FAILURE);
+		exit_error(app, EXIT_MLX);
 	app->img->mlx_win = NULL;
 	app->img->mlx_win = mlx_new_window(app->img->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT, "Cub3D");
 	if (!app->img->mlx_win)
-		return (app->err = ALLOC_FAILURE);
+		exit_error(app, EXIT_MLX);
 	app->img->img = NULL;
 	app->img->img = mlx_new_image(app->img->mlx,
 			SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!app->img->img)
-		return (app->err = ALLOC_FAILURE);
+		exit_error(app, EXIT_MALLOC);
 	app->img->addr = NULL;
 	app->img->addr = mlx_get_data_addr(app->img->img, &app->img->bits_per_pixel,
 			&app->img->line_length, &app->img->endian);
 	if (!app->img->addr)
-		return (app->err = ALLOC_FAILURE);
+		exit_error(app, EXIT_MALLOC);
 	return (0);
 }
 
 int	construct_app(t_app *app)
 {
-	if (malloc_app(app) == ALLOC_FAILURE)
-		return (app->err);
-	if (initiate_positions(app) == ALLOC_FAILURE)
-		return (app->err);
+	malloc_app(app);
+	initiate_positions(app);
 	return (0);
 }

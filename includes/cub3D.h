@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/29 11:51:14 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/30 11:27:08 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../libft/incs/libft.h"
 # include "../mlx_linux/mlx.h"
-# include "../mlx_linux/mlx_int.h"
+//# include "../mlx_linux/mlx_int.h"
 # include <math.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -63,6 +63,7 @@
 # define EXIT_READ 3
 # define EXIT_OPEN 4
 # define EXIT_PARSING 5
+# define EXIT_MLX 6
 
 
 /* ************************************************************************** */
@@ -108,7 +109,7 @@
 # define BROWN			0x7a5631
 # define BLACK			0x000000
 
-typedef struct s_img
+typedef struct	s_img
 {
 	void	*img;
 	char	*addr;
@@ -179,29 +180,6 @@ typedef struct s_pos
 
 } t_pos;
 
-typedef struct s_app
-{
-	t_pos	*pos;
-	t_img	*img;
-	int		err;
-} t_app;
-
-int	handle_err(t_app *app);
-int	construct_app(t_app *app);
-int	initiate_mlx(t_app *app);
-int	yline(t_app *app, int x, int yStart, int yEnd, int color);
-int	xline(t_app *app, int y, int xStart, int xEnd, int color);
-int	line(t_img *img, int startX, int startY, int nextX, int nextY, int color);
-int	change_motion_keypress(int key, t_app *app);
-int	change_motion_keyrelease(int key, t_app *app);
-int	motion(t_app *app);
-int	new_image(t_app *app);
-int	game_loop(t_app *app);
-int	initiate_textures(t_app *app);
-int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
-void	px_put(t_img *img, int x, int y, int color);
-
-#endif
 typedef struct s_color
 {
 	int		r;
@@ -222,12 +200,14 @@ typedef struct s_map
 	size_t	height;
 }	t_map;
 
-typedef struct s_data
+typedef struct s_app
 {
 	int		*err;
 	t_map	*map;
+	t_pos	*pos;
+	t_img	*img;
 	char	*full_file_string;
-}	t_data;
+}	t_app;
 
 /* ************************************************************************** */
 /*                                FUNCTIONS                                   */
@@ -237,16 +217,16 @@ typedef struct s_data
 
 /*   PARSING   */
 //parsing.c
-int		parsing(t_data *data, const char *path_to_map);
+int		parsing(t_app *app, const char *path_to_map);
 //read_map_file.c
-char	*read_map_file(t_data *data, const char *path_to_map);
+char	*read_map_file(t_app *app, const char *path_to_map);
 //info_extract.c
-t_color *get_color(t_data *data, char *str, char *id);
-char	*get_texture(t_data *data, char *str, char *id);
+t_color *get_color(t_app *app, char *str, char *id);
+char	*get_texture(t_app *app, char *str, char *id);
 //info_verif.c
-void	verify_infos(t_data *data);
+void	verify_infos(t_app *app);
 //map_parsing.c
-void	parse_map(t_data *data, char *full_file_string);
+void	parse_map(t_app *app, char *full_file_string);
 //map_verif.c
 int	is_map_line(char *str);
 int	verify_map_border(char **map);
@@ -255,9 +235,24 @@ int	check_double_nl(const char *str);
 
 /*   EXIT   */
 //exit.c
-void	exit_error(t_data *data, int error);
-void	exit_parsing_error(t_data *data, const char *msg);
+void	exit_error(t_app *app, int error);
+void	exit_parsing_error(t_app *app, const char *msg);
 //free.c
-void	free_data(t_data *data);
+void	free_app(t_app *app);
+
+int	handle_err(t_app *app);
+int	construct_app(t_app *app);
+int	initiate_mlx(t_app *app);
+int	yline(t_app *app, int x, int yStart, int yEnd, int color);
+int	xline(t_app *app, int y, int xStart, int xEnd, int color);
+int	line(t_img *img, int startX, int startY, int nextX, int nextY, int color);
+int	change_motion_keypress(int key, t_app *app);
+int	change_motion_keyrelease(int key, t_app *app);
+int	motion(t_app *app);
+int	new_image(t_app *app);
+int	game_loop(t_app *app);
+int	initiate_textures(t_app *app);
+int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
+void	px_put(t_img *img, int x, int y, int color);
 
 #endif

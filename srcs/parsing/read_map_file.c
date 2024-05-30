@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
-static char	*__read_entire_file(t_data *data, int fd)
+static char	*__read_entire_file(t_app *app, int fd)
 {
 	ssize_t	sz;
 	char	buff[1025];
@@ -26,30 +26,30 @@ static char	*__read_entire_file(t_data *data, int fd)
 		if (sz == -1)
 		{
 			ft_free(result_str);
-			exit_error(data, EXIT_READ);
+			exit_error(app, EXIT_READ);
 		}
 		if (sz == 0 && !result_str)
 			break ;
 		buff[sz] = '\0';
 		result_str = ft_strjoin_free(result_str, buff, 1);
 		if (!result_str)
-			exit_error(data, EXIT_MALLOC);
+			exit_error(app, EXIT_MALLOC);
 		ft_bzero(buff, 1025);
 	}
 	return (result_str);
 }
 
-char	*read_map_file(t_data *data, const char *path_to_map)
+char	*read_map_file(t_app *app, const char *path_to_map)
 {
 	char	*result_str;
 	int		fd;
 
 	fd = open(path_to_map, O_RDONLY);
 	if (fd == -1)
-		exit_error(data, EXIT_OPEN);
-	result_str = __read_entire_file(data, fd);
+		exit_error(app, EXIT_OPEN);
+	result_str = __read_entire_file(app, fd);
 	close(fd);
 	if (!result_str)
-		exit_error(data, EXIT_READ);
+		exit_error(app, EXIT_READ);
 	return (result_str);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 static int	__check_color(char *str)
 {
@@ -36,18 +36,18 @@ static int	__check_color(char *str)
 	return (0);
 }
 
-static t_color	*__parse_color(t_data *data, char *str)
+static t_color	*__parse_color(t_app *app, char *str)
 {
 	size_t	i;
 	t_color	*color;
 
 	color = malloc(sizeof(t_color));
 	if (!color)
-		exit_error(data, EXIT_MALLOC);
+		exit_error(app, EXIT_MALLOC);
 	if (__check_color(str))
 	{
 		ft_free(color);
-		exit_parsing_error(data, "invalid color format");
+		exit_parsing_error(app, "invalid color format");
 	}
 	i = 0;
 	color->r = ft_atoi(&str[i]);
@@ -58,7 +58,7 @@ static t_color	*__parse_color(t_data *data, char *str)
 	return (color);
 }
 
-t_color *get_color(t_data *data, char *str, char *id)
+t_color *get_color(t_app *app, char *str, char *id)
 {
 	size_t	i;
 	t_color	*result;
@@ -71,11 +71,11 @@ t_color *get_color(t_data *data, char *str, char *id)
 	i+= ft_strlen(id);
 	while (str[i] && str[i] == ' ')
 		i++;
-	result = __parse_color(data, &str[i]);
+	result = __parse_color(app, &str[i]);
 	return (result);
 }
 
-char	*get_texture(t_data *data, char *str, char *id)
+char	*get_texture(t_app *app, char *str, char *id)
 {
 	size_t	i;
 	size_t	j;
@@ -100,7 +100,7 @@ char	*get_texture(t_data *data, char *str, char *id)
 		return (NULL);
 	result = malloc(sizeof(char) * (size + 1));
 	if (result == NULL)
-		exit_error(data, EXIT_MALLOC);
+		exit_error(app, EXIT_MALLOC);
 	ft_strlcpy(result, &str[i], size + 1);
 	return (result);
 }

@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/23 13:58:44 by mpitot           ###   ########.fr        #
+#    Updated: 2024/05/30 11:16:44 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ USRLIB_LINKS	=	-lXext -lX11 -lm -lz
 
 all		:	mlx libft .internal_separate2 ${NAME}
 
-${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/cub3d.h mlx_linux/mlx.h mlx_linux/mlx_int.h
+${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/cub3D.h mlx_linux/mlx.h mlx_linux/mlx_int.h
 	@$(call print_progress,$<)
 	@${CC} ${FLAGS} -I${HEAD} -I${MLX_DIR} -I${USRLIB_DIR} -c $< -o $@
 	@$(call update_progress,$<)
