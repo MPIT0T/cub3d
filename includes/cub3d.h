@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:03:07 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/29 14:25:29 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/29 18:32:32 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,30 @@
 # define TEX_WIDTH		64
 # define TEX_HEIGHT		64
 
+# define N 0
+# define S 1
+# define E 2
+# define W 3
+
 # define EXIT_SUCCESS	0
 # define ALLOC_FAILURE	1
-
-# define UP		65362
-# define DOWN	65364
-# define LEFT	65361
-# define RIGHT	65363
-# define ESC	65307
 
 # define BLUE			0x3a8399
 # define YELLOW			0xebab34
 # define YELLOW_SIDE	0xa67924
 # define BROWN			0x7a5631
+
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	void	*mlx;
+	void	*mlx_win;
+} t_img;
 
 typedef	struct	s_tex
 {
@@ -49,15 +60,12 @@ typedef	struct	s_tex
 	int		width;
 	int		height;
 	void	*img;
-	char	*address;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	uint32_t	*tex_value;
 } t_tex;
 
 typedef struct s_pos
 {
-	int map[MAP_WIDTH][MAP_HEIGHT];
+	int		map[MAP_WIDTH][MAP_HEIGHT];
 	double	posX;
 	double	posY;
 	double	dirX;
@@ -97,23 +105,10 @@ typedef struct s_pos
 	bool	rotate_right;
 	int		**px;
 	char	wallDir;
-	t_tex	*tex_north;
-	t_tex	*tex_south;
-	t_tex	*tex_east;
-	t_tex	*tex_west;
-	uint32_t	**tex_value;
-} t_pos;
+	t_tex	*tex;
+	uint32_t	**textures;
 
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	void	*mlx;
-	void	*mlx_win;
-} t_img;
+} t_pos;
 
 typedef struct s_app
 {
@@ -133,7 +128,7 @@ int	change_motion_keyrelease(int key, t_app *app);
 int	motion(t_app *app);
 int	new_image(t_app *app);
 int	game_loop(t_app *app);
-
+int	initiate_textures(t_app *app);
 int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
 
 #endif

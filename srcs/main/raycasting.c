@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/29 14:54:45 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/30 07:38:26 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,68 +105,87 @@ static int	line_height(t_pos *pos)
 	return (0);
 }
 
-t_tex	*get_textures(t_pos *pos, size_t *x)
+t_tex	*get_textures(t_pos *pos, size_t x)
 {
-	t_tex 	*texture = NULL;
+	void	*texture = NULL;
+	
 	int 	texX;
 	double	wallX;
 	double	step;
 	double	texPos;
 
 	if (pos->wallDir == 'N')
-		texture = pos->tex_north;
+		texture = pos->tex[N].img;
 	else if (pos->wallDir == 'S')
-		texture = pos->tex_south;
+		texture = pos->tex[S].img;
 	else if (pos->wallDir == 'E')
-		texture = pos->tex_east;
+		texture = pos->tex[E].img;
 	else if (pos->wallDir == 'W')
-		texture = pos->tex_west;
+		texture = pos->tex[W].img;
 
 	if (pos->side == 0)
 		wallX = pos->posY + pos->perpWallDist * pos->rayDirY;
 	else
 		wallX = pos->posX + pos->perpWallDist * pos->rayDirX;
 	wallX -= floor(wallX);
-	texX = (int)(wallX * (double)texture->width);
+	texX = (int)(wallX * (double)64);
 	if (pos->side == 0 && pos->rayDirX > 0)
-		texX = texture->width - texX - 1;
+		texX = 64 - texX - 1;
 	if (pos->side == 1 && pos->rayDirY < 0)
-		texX = texture->width - texX - 1;
+		texX = 64 - texX - 1;
 	step = 1.0 * TEX_HEIGHT / pos->lineHeight;
 	texPos = (pos->drawStart - SCREEN_HEIGHT * 0.5 + pos->lineHeight * 0.5) * step;
 
-	int	y;
+	int	y;	
 	y = pos->drawStart;
 	while (y < pos->drawEnd)
 	{
 		int	texY = (int)texPos & (TEX_HEIGHT - 1);
 		texPos += step;
-		pos->tex_value[y][*x] = texture->address[texY * TEX_WIDTH + texX];
+		uint32_t color = texture[texY * TEX_WIDTH + texX];
+		pos->textures[y][(int)x] = color;
 	}
-	return (texture);
+	return (NULL);
+}
+
+int	px_screen(t_pos *pos, t_img *img)
+{
+	int	x;
+	int	y;
+
+	x = -1;
+	y = -1;
+	while (++y < SCREEN_HEIGHT)
+	{
+		while (++x < SCREEN_WIDTH)
+			mlx_pixel_put(img->mlx, img->mlx_win, x, y, pos->textures[y][x]);
+	}
+	return (0);
 }
 
 int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 {
 	size_t	x;
-	t_tex	*texture;
 	
 	x = 0;
+	(void) app;
+
 	while (x < SCREEN_WIDTH)
 	{
 		get_ray_length(pos, x);
 		get_tile_size(pos);
 		DDA(pos);
 		line_height(pos);
-		texture = get_textures(pos, &x);
-		pos->color = YELLOW;
-		if (pos->wallDir == 'N' || pos->wallDir == 'W')
-			pos->color = YELLOW_SIDE;
-		yline(app, x, 0, pos->drawStart, BLUE);
-		yline(app, x, pos->drawStart, pos->drawEnd, pos->color);
-		yline(app, x, pos->drawEnd, SCREEN_HEIGHT, BROWN);
+		get_textures(pos, x);
+		// pos->color = YELLOW;
+		// if (pos->wallDir == 'N' || pos->wallDir == 'W')
+		// 	pos->color = YELLOW_SIDE;
+		// yline(app, x, 0, pos->drawStart, BLUE);
+		// yline(app, x, pos->drawStart, pos->drawEnd, pos->color);
+		// yline(app, x, pos->drawEnd, SCREEN_HEIGHT, BROWN);
 		x++;
     }
+	px_screen(pos, img);
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
 		img->img, 0, 0);
 	return 0;

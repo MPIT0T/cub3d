@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   construct_app.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:27:06 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/29 14:51:55 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/30 07:19:11 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ int	malloc_app(t_app *app)
 	app->pos = malloc(sizeof(t_pos));
 	if (!app->pos)
 		return (app->err = ALLOC_FAILURE);
-	// app->pos->tex_north = malloc(sizeof(t_tex));
-	// app->pos->tex_south = malloc(sizeof(t_tex));
-	// app->pos->tex_east = malloc(sizeof(t_tex));
-	// app->pos->tex_west = malloc(sizeof(t_tex));
 
 	return (0);
 }
@@ -47,31 +43,42 @@ int	initiate_positions(t_app *app)
 	app->pos->motion_down = false;
 	app->pos->rotate_left = false;
 	app->pos->rotate_right = false;
-	app->pos->tex_north->file = "wolftex/mossy.png";
-	app->pos->tex_south->file = "wolftex/greystone.png";
-	app->pos->tex_east->file = "wolftex/wood.png";
-	app->pos->tex_west->file = "wolftex/colorstone.png";
-	int	i = 0;
-	app->pos->tex_value = malloc(4 * sizeof(uint32_t *));
-	while (i < 4)
-	{
-		app->pos->tex_value[i] = malloc(TEX_WIDTH * TEX_HEIGHT * sizeof(uint32_t));
-		if (!app->pos->tex_value[i])
-			return (app->err = 1);
-	}
 	return (0);
 }
-
-int	get_images_from_textures(t_app *app)
+/*
+	tex[0] = north 
+	tex[1] = south 
+	tex[2] = east
+	tex[3] = west 
+*/
+int	initiate_textures(t_app *app)
 {
-	mlx_xpm_file_to_image(app->pos->tex_north->img, app->pos->tex_north->file,
-		&app->pos->tex_north->width, &app->pos->tex_north->height);
-	mlx_xpm_file_to_image(app->pos->tex_south->img, app->pos->tex_south->file,
-		&app->pos->tex_south->width, &app->pos->tex_south->height);
-	mlx_xpm_file_to_image(app->pos->tex_east->img, app->pos->tex_east->file,
-		&app->pos->tex_east->width, &app->pos->tex_east->height);
-	mlx_xpm_file_to_image(app->pos->tex_west->img, app->pos->tex_west->file,
-		&app->pos->tex_west->width, &app->pos->tex_west->height);
+	app->pos->tex = malloc(4 * sizeof(t_tex));
+	if (!app->pos->tex)
+		return (app->err = 1);
+
+	app->pos->tex[0].file = ft_strdup("textures/wall_north.xpm");
+	app->pos->tex[1].file = ft_strdup("textures/wall_south.xpm");
+	app->pos->tex[2].file = ft_strdup("textures/wall_east.xpm");
+	app->pos->tex[3].file = ft_strdup("textures/wall_west.xpm");
+	int	i = -1;
+	app->pos->textures = malloc(sizeof(uint32_t *));
+	while (++i < 4)
+	{
+		app->pos->textures[i] = malloc(TEX_WIDTH * TEX_HEIGHT * sizeof(uint32_t));
+		if (!app->pos->textures[i])
+			return (app->err = 1);
+	}
+	app->pos->tex[0].img = mlx_xpm_file_to_image(app->img->mlx, app->pos->tex[0].file,
+		&app->pos->tex[0].width, &app->pos->tex[0].height);
+	app->pos->tex[1].img = mlx_xpm_file_to_image(app->img->mlx, app->pos->tex[1].file,
+		&app->pos->tex[1].width, &app->pos->tex[1].height);
+	app->pos->tex[2].img = mlx_xpm_file_to_image(app->img->mlx, app->pos->tex[2].file,
+		&app->pos->tex[2].width, &app->pos->tex[2].height);
+	app->pos->tex[3].img = mlx_xpm_file_to_image(app->img->mlx, app->pos->tex[3].file,
+		&app->pos->tex[3].width, &app->pos->tex[3].height);
+	printf("jug\n");
+	printf("img is %s\n", (char *)app->pos->tex[0].img);
 	return (0);
 }
 
@@ -105,7 +112,7 @@ int	construct_app(t_app *app)
 		return (app->err);
 	if (initiate_positions(app) == ALLOC_FAILURE)
 		return (app->err);
-	// if (get_images_from_textures(app) == ALLOC_FAILURE)
-	// 	return (app->err);
+
+
 	return (0);
 }

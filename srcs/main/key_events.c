@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:08:19 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/29 09:22:17 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/29 22:21:34 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		new_image(t_app *app)
 
 int	change_motion_keypress(int key, t_app *app)
 {
-	if (key == ESC)
+	if (key == XK_Escape)
 	{
 		app->err = 3;
 		handle_err(app);
