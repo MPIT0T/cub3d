@@ -6,7 +6,7 @@
 #    By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/29 09:52:42 by cefuente         ###   ########.fr        #
+#    Updated: 2024/05/30 09:26:15 by cefuente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ NAME	=	cub3D
 
 CC		=	cc
 
-FLAGS	=	-Wall -Wextra -Werror -O3 #-g3
+FLAGS	=	-Wall -Wextra -Werror -g #-g3
 
 MLX				= 	mlx_linux/libmlx_Linux.a
 MLX_DIR			=	mlx_linux/

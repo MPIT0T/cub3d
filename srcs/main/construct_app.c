@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   construct_app.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:27:06 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/30 07:19:11 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/30 09:31:19 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@ int	initiate_positions(t_app *app)
 	app->pos->rotate_right = false;
 	return (0);
 }
+
+int	get_images(t_tex *tex, t_img *img)
+{
+	tex->img = mlx_xpm_file_to_image(img->mlx, tex->file,
+		&tex->width, &tex->height);
+	if (!tex->img)
+		return (1);
+	tex->data = mlx_get_data_addr(tex->img, &tex->bits_per_pixel, &tex->line_length, &tex->endian);
+	return (0);
+}
 /*
 	tex[0] = north 
 	tex[1] = south 
@@ -62,23 +72,22 @@ int	initiate_textures(t_app *app)
 	app->pos->tex[2].file = ft_strdup("textures/wall_east.xpm");
 	app->pos->tex[3].file = ft_strdup("textures/wall_west.xpm");
 	int	i = -1;
-	app->pos->textures = malloc(sizeof(uint32_t *));
+	app->pos->textures = malloc(4 * sizeof(uint32_t *));
+	if (!app->pos->textures)
+		return (app->err = 1);
 	while (++i < 4)
 	{
 		app->pos->textures[i] = malloc(TEX_WIDTH * TEX_HEIGHT * sizeof(uint32_t));
 		if (!app->pos->textures[i])
 			return (app->err = 1);
 	}
-	app->pos->tex[0].img = mlx_xpm_file_to_image(app->img->mlx, app->pos->tex[0].file,
-		&app->pos->tex[0].width, &app->pos->tex[0].height);
-	app->pos->tex[1].img = mlx_xpm_file_to_image(app->img->mlx, app->pos->tex[1].file,
-		&app->pos->tex[1].width, &app->pos->tex[1].height);
-	app->pos->tex[2].img = mlx_xpm_file_to_image(app->img->mlx, app->pos->tex[2].file,
-		&app->pos->tex[2].width, &app->pos->tex[2].height);
-	app->pos->tex[3].img = mlx_xpm_file_to_image(app->img->mlx, app->pos->tex[3].file,
-		&app->pos->tex[3].width, &app->pos->tex[3].height);
-	printf("jug\n");
-	printf("img is %s\n", (char *)app->pos->tex[0].img);
+	i = -1;
+	while (++i < 4)
+	{
+		get_images(&app->pos->tex[i], app->img);
+		if (!app->pos->tex[i].img)
+			return (app->err = 1);
+	}
 	return (0);
 }
 
@@ -112,7 +121,5 @@ int	construct_app(t_app *app)
 		return (app->err);
 	if (initiate_positions(app) == ALLOC_FAILURE)
 		return (app->err);
-
-
 	return (0);
 }

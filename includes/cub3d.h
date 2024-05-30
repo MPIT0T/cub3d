@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:03:07 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/29 18:32:32 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/30 10:57:00 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define YELLOW			0xebab34
 # define YELLOW_SIDE	0xa67924
 # define BROWN			0x7a5631
-
+# define BLACK			0x000000
 
 typedef struct s_img
 {
@@ -60,6 +60,10 @@ typedef	struct	s_tex
 	int		width;
 	int		height;
 	void	*img;
+	char	*data;
+	int		bits_per_pixel;
+	int		endian;
+	int		line_length;
 	uint32_t	*tex_value;
 } t_tex;
 
@@ -121,7 +125,7 @@ int	handle_err(t_app *app);
 int	construct_app(t_app *app);
 int	initiate_mlx(t_app *app);
 int	yline(t_app *app, int x, int yStart, int yEnd, int color);
-int	xline(t_app *app, int y, int xStart, int xEnd, int **px_tab);
+int	xline(t_app *app, int y, int xStart, int xEnd, int color);
 int	line(t_img *img, int startX, int startY, int nextX, int nextY, int color);
 int	change_motion_keypress(int key, t_app *app);
 int	change_motion_keyrelease(int key, t_app *app);
@@ -130,5 +134,6 @@ int	new_image(t_app *app);
 int	game_loop(t_app *app);
 int	initiate_textures(t_app *app);
 int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
+void	px_put(t_img *img, int x, int y, int color);
 
 #endif

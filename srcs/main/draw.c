@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:28:11 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/29 09:09:11 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/30 10:46:16 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,13 @@ int	yline(t_app *app, int x, int yStart, int yEnd, int color)
 	delta_y /= px;
 	while ((int)(yStart - yEnd))
 	{
-		// if (yStart >= app->pos->drawStart && yStart <= app->pos->drawEnd)
 		px_put(app->img, x, yStart, color);
 		yStart += delta_y;
 	}
 	return (0);
 }
 
-int	xline(t_app *app, int y, int xStart, int xEnd, int **px_tab)
+int	xline(t_app *app, int y, int xStart, int xEnd, /*uint32_t **px_tab*/ int color)
 {
 	float	delta_x;
 	float	px;
@@ -49,7 +48,7 @@ int	xline(t_app *app, int y, int xStart, int xEnd, int **px_tab)
 	delta_x /= px;
 	while ((int)(xStart - xEnd))
 	{
-		px_put(app->img, xStart, y, px_tab[y][xStart]);
+		px_put(app->img, xStart, y, /*(int)px_tab[y][xStart]*/ color);
 		xStart += delta_x;
 	}
 	return (0);
