@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/30 14:36:37 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/30 15:21:41 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	set_camera_pos_and_dir(t_app *app)
 
 	app->pos->dirX = 0;
 	app->pos->dirY = 0;
+	app->pos->planeX = 0;
+	app->pos->planeY = 0;
 	y = -1;
 	while (app->pos->map[++y])
 	{
@@ -65,15 +67,28 @@ void	set_camera_pos_and_dir(t_app *app)
 			if (ft_strchr("NSWE", app->pos->map[y][x]))
 			{
 				if (app->pos->map[y][x] == 'N')
-					app->pos->dirY = -1;
-				if (app->pos->map[y][x] == 'S')
-					app->pos->dirY = 1;
-				if (app->pos->map[y][x] == 'W')
+				{
 					app->pos->dirX = -1;
-				if (app->pos->map[y][x] == 'E')
+					app->pos->planeY = 0.66;
+				}
+				if (app->pos->map[y][x] == 'S')
+				{
 					app->pos->dirX = 1;
+					app->pos->planeY = -0.66;
+				}
+				if (app->pos->map[y][x] == 'W')
+				{
+					app->pos->dirY = 1;
+					app->pos->planeX = 0.66;
+				}
+				if (app->pos->map[y][x] == 'E')
+				{
+					app->pos->dirY = -1;
+					app->pos->planeX = -0.66;
+				}
 				app->pos->posY = (double) x;
 				app->pos->posX = (double) y;
+				printf("dirX: %f\ndirY: %f\nposX: %f\nposY: %f\n", app->pos->dirX, app->pos->dirY, app->pos->posX, app->pos->posY);
 			}
 		}
 	}
@@ -82,8 +97,6 @@ void	set_camera_pos_and_dir(t_app *app)
 int	initiate_positions(t_app *app)
 {
 	set_camera_pos_and_dir(app);
-	app->pos->planeX = 0;
-	app->pos->planeY = 0.66;
 	app->pos->time = 0;
 	app->pos->oldTime = 0;
 	app->pos->h = 1;

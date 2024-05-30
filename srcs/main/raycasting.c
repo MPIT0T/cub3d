@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/30 14:19:10 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/30 15:08:35 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,12 +178,12 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 		DDA(pos);
 		line_height(pos);
 		get_textures(pos, x, app);
-		// pos->color = YELLOW;
-		// if (pos->wallDir == 'N' || pos->wallDir == 'W')
-		// 	pos->color = YELLOW_SIDE;
-		// yline(app, x, 0, pos->drawStart, BLUE);
-		// yline(app, x, pos->drawStart, pos->drawEnd, pos->color);
-		// yline(app, x, pos->drawEnd, SCREEN_HEIGHT, BROWN);
+		/*pos->color = YELLOW;
+		if (pos->wallDir == 'N' || pos->wallDir == 'W')
+			pos->color = YELLOW_SIDE;
+		yline(app, x, 0, pos->drawStart, BLUE);
+		yline(app, x, pos->drawStart, pos->drawEnd, pos->color);
+		yline(app, x, pos->drawEnd, SCREEN_HEIGHT, BROWN);*/
 		x++;
 
     }
