@@ -58,14 +58,14 @@ static void	__make_map_rect(t_app *app)
 	size_t	i;
 	size_t	line_size;
 
-	line_size = __get_longest_line(app->map->map);
+	line_size = __get_longest_line(app->pos->map);
 	i = -1;
-	while (app->map->map[++i])
+	while (app->pos->map[++i])
 	{
-		if (ft_strlen(app->map->map[i]) < line_size)
+		if (ft_strlen(app->pos->map[i]) < line_size)
 		{
-			app->map->map[i] = __make_new_map_line(app->map->map[i], line_size);
-			if (!app->map->map[i])
+			app->pos->map[i] = __make_new_map_line(app->pos->map[i], line_size);
+			if (!app->pos->map[i])
 				exit_error(app, EXIT_MALLOC);
 		}
 	}
@@ -82,12 +82,12 @@ void	parse_map(t_app *app, char *full_file_string)
 		exit_parsing_error(app, "map not found in file");
 	if (check_double_nl(&full_file_string[i]))
 		exit_parsing_error(app, "empty line found in map");
-	app->map->map = ft_split(&full_file_string[i], '\n');
-	if (!app->map->map)
+	app->pos->map = ft_split(&full_file_string[i], '\n');
+	if (!app->pos->map)
 		exit_error(app, EXIT_MALLOC);
 	__make_map_rect(app);
-	if (verify_map_chars(app->map->map))
+	if (verify_map_chars(app->pos->map))
 		exit_parsing_error(app, "invalid map character");
-	if (verify_map_border(app->map->map))
+	if (verify_map_border(app->pos->map))
 		exit_parsing_error(app, "map border not closed");
 }

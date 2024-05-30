@@ -6,45 +6,11 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 09:27:06 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/30 11:33:51 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/30 14:13:38 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
-
-int	malloc_app(t_app *app)
-{
-	app->img = NULL;
-	app->img = malloc(sizeof(t_img));
-	if (!app->img)
-		exit_error(app, EXIT_MALLOC);
-	app->pos = NULL;
-	app->pos = malloc(sizeof(t_pos));
-	if (!app->pos)
-		exit_error(app, EXIT_MALLOC);
-
-	return (0);
-}
-
-int	initiate_positions(t_app *app)
-{
-	app->pos->posX = 22;//x and y start position
-	app->pos->posY = 12;  
-	app->pos->dirX = -1;//initial direction vector
-	app->pos->dirY = 0; 
-	app->pos->planeX = 0;//the 2d raycaster version of camera plane
-	app->pos->planeY = 0.66; 
-	app->pos->time = 0; //time of current frame
-	app->pos->oldTime = 0; //time of previous frame
-	app->pos->h = 1;
-	app->pos->moveSpeed = 0.05;
-	app->pos->rotSpeed = 0.05;
-	app->pos->motion_up = false;
-	app->pos->motion_down = false;
-	app->pos->rotate_left = false;
-	app->pos->rotate_right = false;
-	return (0);
-}
 
 int	get_images(t_tex *tex, t_img *img)
 {
@@ -60,12 +26,12 @@ int	initiate_textures(t_app *app)
 {
 	app->pos->tex = malloc(4 * sizeof(t_tex));
 	if (!app->pos->tex)
-		return (app->err = 1);
+		exit_error(app, EXIT_MALLOC);
 
-	app->pos->tex[0].file = ft_strdup("textures/wall_north.xpm");
-	app->pos->tex[1].file = ft_strdup("textures/wall_south.xpm");
-	app->pos->tex[2].file = ft_strdup("textures/wall_east.xpm");
-	app->pos->tex[3].file = ft_strdup("textures/wall_west.xpm");
+	app->pos->tex[0].file = app->pos->no;
+	app->pos->tex[1].file = app->pos->so;
+	app->pos->tex[2].file = app->pos->we;
+	app->pos->tex[3].file = app->pos->ea;
 	int	i = -1;
 	app->pos->textures = malloc(4 * sizeof(uint32_t *));
 	if (!app->pos->textures)
@@ -112,7 +78,20 @@ int	initiate_mlx(t_app *app)
 
 int	construct_app(t_app *app)
 {
-	malloc_app(app);
-	initiate_positions(app);
+	app->img = NULL;
+	app->img = malloc(sizeof(t_img));
+	if (!app->img)
+		return (1);
+	app->pos = NULL;
+	app->pos = malloc(sizeof(t_pos));
+	if (!app->pos)
+		return (1);
+	app->pos->no = NULL;
+	app->pos->so = NULL;
+	app->pos->we = NULL;
+	app->pos->ea = NULL;
+	app->pos->f = 0;
+	app->pos->c = 0;
+	app->full_file_string = NULL;
 	return (0);
 }

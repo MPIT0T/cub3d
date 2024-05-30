@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 13:34:33 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/28 13:41:47 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/30 13:25:28 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,27 @@ static t_color	*__parse_color(t_app *app, char *str)
 	return (color);
 }
 
-t_color *get_color(t_app *app, char *str, char *id)
+unsigned int	get_color(t_app *app, char *str, char *id)
 {
-	size_t	i;
-	t_color	*result;
+	size_t			i;
+	t_color			*color;
+	unsigned int	result;
 
 	i = 0;
 	while (str[i] && ft_strncmp(&str[i], id, ft_strlen(id)))
 		i++;
 	if (str[i] == '\0')
-		return (NULL);
+		exit_parsing_error(app, "missing color");
 	i+= ft_strlen(id);
 	while (str[i] && str[i] == ' ')
 		i++;
-	result = __parse_color(app, &str[i]);
+	color = __parse_color(app, &str[i]);
+	if (verify_color(color))
+		exit_parsing_error(app, "invalid color format");
+	result = 0;
+	result |= color->r << 16;
+	result |= color->g << 8;
+	result |= color->b;
 	return (result);
 }
 

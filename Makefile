@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/30 11:16:44 by mpitot           ###   ########.fr        #
+#    Updated: 2024/05/30 13:30:59 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ ${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/cub3D.h mlx_linux/mlx.h mlx
 
 ${NAME}	:	${OBJ_D} ${OBJS} libft/libft.a
 	@$(call print_progress,$(NAME))
-	@${CC} ${FLAGS} ${OBJS} -L./libft -lft -I${HEAD} -o ${NAME}
+	@${CC} ${FLAGS} ${OBJS} -L./libft -lft -I${HEAD} -L${MLX_DIR} -l${MLX_LINKS} -I${USRLIB_DIR} ${USRLIB_LINKS} -o ${NAME}
 	@$(eval CHANGED=1)
 	@$(call erase)
 	@$(call done_and_dusted,$(NAME))

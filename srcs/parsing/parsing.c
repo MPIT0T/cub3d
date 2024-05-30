@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:25:18 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/29 14:25:57 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/30 12:58:08 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void	__fill_map_infos(t_app *app, char *full_file_string)
 {
-	app->map->no = get_texture(app, full_file_string, ID_NORTH);
-	app->map->so = get_texture(app, full_file_string, ID_SOUTH);
-	app->map->we = get_texture(app, full_file_string, ID_WEST);
-	app->map->ea = get_texture(app, full_file_string, ID_EAST);
-	app->map->f = get_color(app, full_file_string, ID_FLOOR);
-	app->map->c = get_color(app, full_file_string, ID_CEILING);
-	if (!app->map->no || !app->map->so || !app->map->we
-		|| !app->map->ea || !app->map->f || !app->map->c)
+	app->pos->no = get_texture(app, full_file_string, ID_NORTH);
+	app->pos->so = get_texture(app, full_file_string, ID_SOUTH);
+	app->pos->we = get_texture(app, full_file_string, ID_WEST);
+	app->pos->ea = get_texture(app, full_file_string, ID_EAST);
+	app->pos->f = get_color(app, full_file_string, ID_FLOOR);
+	app->pos->c = get_color(app, full_file_string, ID_CEILING);
+	if (!app->pos->no || !app->pos->so || !app->pos->we
+		|| !app->pos->ea)
 		exit_parsing_error(app, "wrong or missing texture");
 	verify_infos(app);
 }

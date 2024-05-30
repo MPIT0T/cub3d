@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/30 10:56:30 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:19:10 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ static int	DDA(t_pos *pos)
 			else
 				pos->wallDir = 'S';
 		}
-		if (pos->map[pos->mapX][pos->mapY] > 0)
+//		ft_printf("%d\t%d\n", pos->mapX, pos->mapY);
+		if (pos->map[pos->mapX][pos->mapY] == '1')
 			pos->hit = 1;
 	}
 	return (0);
@@ -185,6 +186,7 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 		// yline(app, x, pos->drawStart, pos->drawEnd, pos->color);
 		// yline(app, x, pos->drawEnd, SCREEN_HEIGHT, BROWN);
 		x++;
+
     }
 	// px_screen(app);
 	mlx_put_image_to_window(img->mlx, img->mlx_win,

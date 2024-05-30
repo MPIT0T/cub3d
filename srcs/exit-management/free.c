@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:34:59 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/30 11:50:20 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/30 12:01:10 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,13 @@ void	free_app(t_app *app)
 	if (app)
 	{
 		free_mlx(app);
-		ft_free(app->map->no);
-		ft_free(app->map->so);
-		ft_free(app->map->we);
-		ft_free(app->map->ea);
-		ft_free(app->map->f);
-		ft_free(app->map->c);
+		ft_free(app->pos->no);
+		ft_free(app->pos->so);
+		ft_free(app->pos->we);
+		ft_free(app->pos->ea);
 		ft_free(app->full_file_string);
-		if (app->map)
-			ft_free_tab(app->map->map);
-		ft_free(app->map);
+		if (app->pos)
+			ft_free_tab(app->pos->map);
+		ft_free(app->pos);
 	}
 }

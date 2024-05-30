@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/30 11:27:08 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/30 13:28:28 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../libft/incs/libft.h"
 # include "../mlx_linux/mlx.h"
-//# include "../mlx_linux/mlx_int.h"
 # include <math.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -28,8 +27,6 @@
 /*                              DEFINES                                       */
 /* ************************************************************************** */
 
-# define MAP_WIDTH		24
-# define MAP_HEIGHT		24
 # define SCREEN_WIDTH	1920
 # define SCREEN_HEIGHT	1080
 # define TEX_WIDTH		64
@@ -133,53 +130,6 @@ typedef	struct	s_tex
 	uint32_t	*tex_value;
 } t_tex;
 
-typedef struct s_pos
-{
-	int		map[MAP_WIDTH][MAP_HEIGHT];
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
-	double	time;
-	double	oldTime;
-	double	cameraX; //x-coordinate in camera space
-	double	rayDirX;
-	double	rayDirY;
-	int		mapX; //which box of the map we're in
-	int		mapY;
-	double	sideDistX; //length of ray from current position to next x or y-side
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	perpWallDist;
-	int		stepX; //what direction to step in x or y-direction (either +1 or -1)
-	int		stepY;
-	int		hit; //was there a wall hit?
-	int		side; //was a NS or a EW wall hit?
-	int		h;
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
-	int		color;
-	double	oldDirX;
-	double	oldPlaneX;
-	double	moveSpeed;
-	double	rotSpeed;
-	bool	motion_up;
-	bool	motion_down;
-	bool	motion_left;
-	bool	motion_right;
-	bool	rotate_left;
-	bool	rotate_right;
-	int		**px;
-	char	wallDir;
-	t_tex	*tex;
-	uint32_t	**textures;
-
-} t_pos;
-
 typedef struct s_color
 {
 	int		r;
@@ -187,23 +137,62 @@ typedef struct s_color
 	int		b;
 }	t_color;
 
-typedef struct s_map
+typedef struct s_pos
 {
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	t_color	*c;
-	t_color	*f;
-	char	**map;
-	size_t	weight;
-	size_t	height;
-}	t_map;
+	char			**map;
+	char			*no;
+	char			*so;
+	char			*we;
+	char			*ea;
+	unsigned int	c;
+	unsigned int	f;
+	double			posX;
+	double			posY;
+	double			dirX;
+	double			dirY;
+	double			planeX;
+	double			planeY;
+	double			time;
+	double			oldTime;
+	double			cameraX; //x-coordinate in camera space
+	double			rayDirX;
+	double			rayDirY;
+	int				mapX; //which box of the map we're in
+	int				mapY;
+	double			sideDistX; //length of ray from current position to next x or y-side
+	double			sideDistY;
+	double			deltaDistX;
+	double			deltaDistY;
+	double			perpWallDist;
+	int				stepX; //what direction to step in x or y-direction (either +1 or -1)
+	int				stepY;
+	int				hit; //was there a wall hit?
+	int				side; //was a NS or a EW wall hit?
+	int				h;
+	int				lineHeight;
+	int				drawStart;
+	int				drawEnd;
+	int				color;
+	double			oldDirX;
+	double			oldPlaneX;
+	double			moveSpeed;
+	double			rotSpeed;
+	bool			motion_up;
+	bool			motion_down;
+	bool			motion_left;
+	bool			motion_right;
+	bool			rotate_left;
+	bool			rotate_right;
+	int				**px;
+	char			wallDir;
+	t_tex			*tex;
+	uint32_t		**textures;
+
+} t_pos;
 
 typedef struct s_app
 {
 	int		*err;
-	t_map	*map;
 	t_pos	*pos;
 	t_img	*img;
 	char	*full_file_string;
@@ -221,10 +210,11 @@ int		parsing(t_app *app, const char *path_to_map);
 //read_map_file.c
 char	*read_map_file(t_app *app, const char *path_to_map);
 //info_extract.c
-t_color *get_color(t_app *app, char *str, char *id);
+unsigned int	get_color(t_app *app, char *str, char *id);
 char	*get_texture(t_app *app, char *str, char *id);
 //info_verif.c
 void	verify_infos(t_app *app);
+int		verify_color(t_color *color);
 //map_parsing.c
 void	parse_map(t_app *app, char *full_file_string);
 //map_verif.c
@@ -240,7 +230,6 @@ void	exit_parsing_error(t_app *app, const char *msg);
 //free.c
 void	free_app(t_app *app);
 
-int	handle_err(t_app *app);
 int	construct_app(t_app *app);
 int	initiate_mlx(t_app *app);
 int	yline(t_app *app, int x, int yStart, int yEnd, int color);

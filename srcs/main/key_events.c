@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:08:19 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/29 22:21:34 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/30 13:18:57 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,18 @@ int		new_image(t_app *app)
 	app->img->img = mlx_new_image(app->img->mlx,
 			SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!app->img->img)
-		return (app->err = 1);
+		exit_error(app, EXIT_MLX);
 	app->img->addr = mlx_get_data_addr(app->img->img, &app->img->bits_per_pixel,
 			&app->img->line_length, &app->img->endian);
 	if (!app->img->addr)
-		return (app->err = 1);
+		exit_error(app, EXIT_MLX);
 	return (0);	
 }
 
 int	change_motion_keypress(int key, t_app *app)
 {
 	if (key == XK_Escape)
-	{
-		app->err = 3;
-		handle_err(app);
-	}
+		exit_error(app, EXIT_SUCCESS);
 	if (app->pos->motion_up == false && key == XK_w)
 		app->pos->motion_up = true;
 	if (app->pos->motion_down == false && key == XK_s)
@@ -69,5 +66,3 @@ int	change_motion_keyrelease(int key, t_app *app)
 		app->pos->rotate_right = false;
 	return (0);	
 }
-
-

@@ -6,26 +6,11 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/30 11:13:09 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/30 14:36:37 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-int	init_data_structs(t_data *data)
-{
-	data->map = ft_calloc(sizeof(t_map), 1);
-	if (!data->map)
-		return (1);
-	data->map->no = NULL;
-	data->map->so = NULL;
-	data->map->we = NULL;
-	data->map->ea = NULL;
-	data->map->f = NULL;
-	data->map->c = NULL;
-	data->full_file_string = NULL;
-	return (0);
-}
 
 void	ft_check_args(int ac, char **av)
 {
@@ -48,26 +33,84 @@ void	ft_check_args(int ac, char **av)
 	exit(EXIT_ARGS);
 }
 
+int    game_loop(t_app *app)
+{
+	motion(app);
+	new_image(app);
+	raycasting_loop(app->pos, app->img, app);
+	return (0);
+}
+
+int	init_hook(t_app *app)
+{
+	mlx_hook(app->img->mlx_win, KeyPress, KeyPressMask, change_motion_keypress, app);
+	mlx_hook(app->img->mlx_win, KeyRelease, KeyReleaseMask, change_motion_keyrelease, app);
+	mlx_loop_hook(app->img->mlx, game_loop, app);
+	return (0);
+}
+
+void	set_camera_pos_and_dir(t_app *app)
+{
+	size_t	x;
+	size_t	y;
+
+	app->pos->dirX = 0;
+	app->pos->dirY = 0;
+	y = -1;
+	while (app->pos->map[++y])
+	{
+		x = -1;
+		while (app->pos->map[y][++x])
+		{
+			if (ft_strchr("NSWE", app->pos->map[y][x]))
+			{
+				if (app->pos->map[y][x] == 'N')
+					app->pos->dirY = -1;
+				if (app->pos->map[y][x] == 'S')
+					app->pos->dirY = 1;
+				if (app->pos->map[y][x] == 'W')
+					app->pos->dirX = -1;
+				if (app->pos->map[y][x] == 'E')
+					app->pos->dirX = 1;
+				app->pos->posY = (double) x;
+				app->pos->posX = (double) y;
+			}
+		}
+	}
+}
+
+int	initiate_positions(t_app *app)
+{
+	set_camera_pos_and_dir(app);
+	app->pos->planeX = 0;
+	app->pos->planeY = 0.66;
+	app->pos->time = 0;
+	app->pos->oldTime = 0;
+	app->pos->h = 1;
+	app->pos->moveSpeed = 0.05;
+	app->pos->rotSpeed = 0.05;
+	app->pos->motion_up = false;
+	app->pos->motion_down = false;
+	app->pos->rotate_left = false;
+	app->pos->rotate_right = false;
+	return (0);
+}
+
 int main(int ac, char **av)
 {
 	t_app	app;
 
 	app.err = 0;
 	ft_check_args(ac, av);
-	if (init_data_structs(&app))
+	if (construct_app(&app))
 		return (EXIT_MALLOC);
-	parsing(&app, av[1]);
-	if (construct_app(&app) == 1)
-		return (handle_err(&app));
-	if (get_map(app.pos, &app.err) == 1)
-		return (handle_err(&app));
-	if (initiate_mlx(&app) == 1)
-		return (handle_err(&app));
-	if (initiate_textures(&app) == 1)
-		return (handle_err(&app));
+	parsing(&app, av[1]);		//TODO check si il n'y a pas plusieurs char NSWE dans la map
+	initiate_positions(&app);
+	initiate_mlx(&app);
+	initiate_textures(&app);
 	raycasting_loop(app.pos, app.img, &app);
 	init_hook(&app);
 	mlx_loop(app.img->mlx);
-	free_data(&app);
+	free_app(&app);
 	return (EXIT_SUCCESS);
 }
