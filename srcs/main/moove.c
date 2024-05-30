@@ -3,47 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   moove.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:26:34 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/29 08:33:23 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:34:42 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3D.h"
+#include "cub3D.h"
 
 static int		go_forward(t_pos *pos)
 {
-	if (pos->map[(int)(pos->posX + pos->dirX * pos->moveSpeed)][(int)pos->posY] == 0)
+	if (pos->map[(int)(pos->posX + pos->dirX * pos->moveSpeed)][(int)pos->posY] != '1')
 		pos->posX += pos->dirX * pos->moveSpeed;
-	if (pos->map[(int)(pos->posX)][(int)(pos->posY + pos->dirY * pos->moveSpeed)] == 0)
+	if (pos->map[(int)(pos->posX)][(int)(pos->posY + pos->dirY * pos->moveSpeed)] != '1')
 		pos->posY += pos->dirY * pos->moveSpeed;
 	return (0);
 }
 
 static int		go_backward(t_pos *pos)
 {
-	if (pos->map[(int)(pos->posX - pos->dirX * pos->moveSpeed)][(int)pos->posY] == 0)
+	if (pos->map[(int)(pos->posX - pos->dirX * pos->moveSpeed)][(int)pos->posY] != '1')
 		pos->posX -= pos->dirX * pos->moveSpeed;
-	if (pos->map[(int)pos->posX][(int)(pos->posY - pos->dirY * pos->moveSpeed)] == 0)
+	if (pos->map[(int)pos->posX][(int)(pos->posY - pos->dirY * pos->moveSpeed)] != '1')
 		pos->posY -= pos->dirY * pos->moveSpeed;
 	return (0);
 }
 
 static int		go_left(t_pos *pos)
 {
-    if (pos->map[(int)(pos->posX - pos->dirY * pos->moveSpeed)][(int)pos->posY] == 0)
+    if (pos->map[(int)(pos->posX - pos->dirY * pos->moveSpeed)][(int)pos->posY] != '1')
         pos->posX -= pos->dirY * pos->moveSpeed;
-    if (pos->map[(int)pos->posX][(int)(pos->posY + pos->dirX * pos->moveSpeed)] == 0)
+    if (pos->map[(int)pos->posX][(int)(pos->posY + pos->dirX * pos->moveSpeed)] != '1')
         pos->posY += pos->dirX * pos->moveSpeed;
     return (0);
 }
 
 static int		go_right(t_pos *pos)
 {
-    if (pos->map[(int)(pos->posX + pos->dirY * pos->moveSpeed)][(int)pos->posY] == 0)
+    if (pos->map[(int)(pos->posX + pos->dirY * pos->moveSpeed)][(int)pos->posY] == '0')
         pos->posX += pos->dirY * pos->moveSpeed;
-    if (pos->map[(int)pos->posX][(int)(pos->posY - pos->dirX * pos->moveSpeed)] == 0)
+    if (pos->map[(int)pos->posX][(int)(pos->posY - pos->dirX * pos->moveSpeed)] == '0')
         pos->posY -= pos->dirX * pos->moveSpeed;
     return (0);
 }
