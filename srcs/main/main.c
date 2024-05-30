@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/30 15:21:41 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/30 15:22:09 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	set_camera_pos_and_dir(t_app *app)
 				}
 				app->pos->posY = (double) x;
 				app->pos->posX = (double) y;
-				printf("dirX: %f\ndirY: %f\nposX: %f\nposY: %f\n", app->pos->dirX, app->pos->dirY, app->pos->posX, app->pos->posY);
 			}
 		}
 	}
