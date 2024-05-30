@@ -6,11 +6,11 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 13:34:33 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/28 13:41:47 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/30 13:25:28 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 static int	__check_color(char *str)
 {
@@ -36,18 +36,18 @@ static int	__check_color(char *str)
 	return (0);
 }
 
-static t_color	*__parse_color(t_data *data, char *str)
+static t_color	*__parse_color(t_app *app, char *str)
 {
 	size_t	i;
 	t_color	*color;
 
 	color = malloc(sizeof(t_color));
 	if (!color)
-		exit_error(data, EXIT_MALLOC);
+		exit_error(app, EXIT_MALLOC);
 	if (__check_color(str))
 	{
 		ft_free(color);
-		exit_parsing_error(data, "invalid color format");
+		exit_parsing_error(app, "invalid color format");
 	}
 	i = 0;
 	color->r = ft_atoi(&str[i]);
@@ -58,24 +58,31 @@ static t_color	*__parse_color(t_data *data, char *str)
 	return (color);
 }
 
-t_color *get_color(t_data *data, char *str, char *id)
+unsigned int	get_color(t_app *app, char *str, char *id)
 {
-	size_t	i;
-	t_color	*result;
+	size_t			i;
+	t_color			*color;
+	unsigned int	result;
 
 	i = 0;
 	while (str[i] && ft_strncmp(&str[i], id, ft_strlen(id)))
 		i++;
 	if (str[i] == '\0')
-		return (NULL);
+		exit_parsing_error(app, "missing color");
 	i+= ft_strlen(id);
 	while (str[i] && str[i] == ' ')
 		i++;
-	result = __parse_color(data, &str[i]);
+	color = __parse_color(app, &str[i]);
+	if (verify_color(color))
+		exit_parsing_error(app, "invalid color format");
+	result = 0;
+	result |= color->r << 16;
+	result |= color->g << 8;
+	result |= color->b;
 	return (result);
 }
 
-char	*get_texture(t_data *data, char *str, char *id)
+char	*get_texture(t_app *app, char *str, char *id)
 {
 	size_t	i;
 	size_t	j;
@@ -100,7 +107,7 @@ char	*get_texture(t_data *data, char *str, char *id)
 		return (NULL);
 	result = malloc(sizeof(char) * (size + 1));
 	if (result == NULL)
-		exit_error(data, EXIT_MALLOC);
+		exit_error(app, EXIT_MALLOC);
 	ft_strlcpy(result, &str[i], size + 1);
 	return (result);
 }

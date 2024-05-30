@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:18:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/29 11:51:14 by mpitot           ###   ########.fr        #
+#    Updated: 2024/05/23 13:53:09 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,15 @@ SRCS	=	$(MAIN)		\
 
 
 DIR_MAIN	=	main/
-SRC_MAIN	=	main.c
+
+SRC_MAIN	=	main.c	\
+				exit_errors.c \
+				construct_app.c \
+				draw.c \
+				key_events.c \
+				moove.c \
+				raycasting.c
+
 MAIN	=	$(addprefix $(DIR_MAIN), $(SRC_MAIN))
 
 DIR_PARS	=	parsing/

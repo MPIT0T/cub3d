@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/28 09:57:05 by mpitot           ###   ########.fr        #
+#    Updated: 2024/05/30 13:30:59 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,22 +21,29 @@ OBJ_D	=	.objs/
 
 HEAD	=	includes/
 
-NAME	=	cub3d
+NAME	=	cub3D
 
 CC		=	cc
 
 FLAGS	=	-Wall -Wextra -Werror -g3
 
+MLX				= 	mlx_linux/libmlx_Linux.a
+MLX_DIR			=	mlx_linux/
+MLX_LINKS		=	mlx_Linux
+
+USRLIB_DIR		=	/usr/lib/
+USRLIB_LINKS	=	-lXext -lX11 -lm -lz
+
 all		:	mlx libft .internal_separate2 ${NAME}
 
-${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/cub3d.h mlx_linux/mlx.h mlx_linux/mlx_int.h
+${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/cub3D.h mlx_linux/mlx.h mlx_linux/mlx_int.h
 	@$(call print_progress,$<)
-	@${CC} ${FLAGS} -I/usr/include -Imlx_linux -I${HEAD} -c $< -o $@
+	@${CC} ${FLAGS} -I${HEAD} -I${MLX_DIR} -I${USRLIB_DIR} -c $< -o $@
 	@$(call update_progress,$<)
 
 ${NAME}	:	${OBJ_D} ${OBJS} libft/libft.a
 	@$(call print_progress,$(NAME))
-	@${CC} ${FLAGS} ${OBJS} -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -L./libft -lft -Imlx_linux -I${HEAD} -o ${NAME}
+	@${CC} ${FLAGS} ${OBJS} -L./libft -lft -I${HEAD} -L${MLX_DIR} -l${MLX_LINKS} -I${USRLIB_DIR} ${USRLIB_LINKS} -o ${NAME}
 	@$(eval CHANGED=1)
 	@$(call erase)
 	@$(call done_and_dusted,$(NAME))
@@ -47,15 +54,16 @@ ${OBJ_D}:
 	@mkdir -p ${OBJ_D}parsing
 	@mkdir -p ${OBJ_D}exit-management
 
+mlx		:
+	@make --no-print-directory -C $(MLX_DIR)
+
 libft	:
 	@make --no-print-directory -C ./libft
-
-mlx		:
-	@make --no-print-directory -C ./mlx_linux
 
 clean	:
 	@echo "Cleaning $(WHITE)[$(RED)libft$(WHITE)]...$(DEFAULT)"
 	@make --no-print-directory -C ./libft clean
+	@make --no-print-directory -C ${MLX_DIR} clean
 	@$(call separator)
 	@echo "Cleaning $(WHITE)[$(RED)$(NAME)$(WHITE)]...$(DEFAULT)"
 	@rm -rf ${OBJ_D}
@@ -64,6 +72,7 @@ clean	:
 fclean	:
 	@echo "F***ing-Cleaning $(WHITE)[$(RED)libft$(WHITE)]...$(DEFAULT)"
 	@make --no-print-directory -C ./libft fclean
+	@make --no-print-directory -C ${MLX_DIR} clean
 	@$(call separator)
 	@echo "F***ing-Cleaning $(WHITE)[$(RED)$(NAME)$(WHITE)]...$(DEFAULT)"
 	@rm -rf ${OBJ_D}
@@ -82,6 +91,7 @@ ARGS = "maps/map_subject.cub"
 
 leak: all .internal_separate3
 	@echo "$(MAGENTA)Valgrind $(WHITE)~ $(YELLOW)Flags:$(DEFAULT)"
+	@echo "   $(YELLOW)-$(DEFAULT)Suppressed Readline Lib"
 	@echo "   $(YELLOW)-$(DEFAULT)Show Leak Kinds"
 	@echo "   $(YELLOW)-$(DEFAULT)Track FDs"
 	@echo "   $(YELLOW)-$(DEFAULT)Show Mismatched Frees"
@@ -99,7 +109,7 @@ leak: all .internal_separate3
 
 re		:	fclean .internal_separate1 all
 
-.PHONY	:	all clean fclean re libft leak
+.PHONY	:	all clean fclean re libft mlx leak
 
 .NOTPARALLEL all:
 	@if [ $(CHANGED) -eq 0 ]; then \

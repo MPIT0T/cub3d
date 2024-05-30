@@ -6,11 +6,11 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 14:06:59 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/28 14:07:44 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/30 13:08:09 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 static int	__verify_path(char *path)
 {
@@ -23,7 +23,7 @@ static int	__verify_path(char *path)
 	return (0);
 }
 
-static int	__verify_color(t_color *color)
+int	verify_color(t_color *color)
 {
 	if (color->r < 0 || color->r > 255
 		|| color->g < 0 || color->g > 255
@@ -45,14 +45,12 @@ static int	__verify_path_ext(char *path)
 	return (0);
 }
 
-void	verify_infos(t_data *data)
+void	verify_infos(t_app *app)
 {
-	if (__verify_path(data->map->no) || __verify_path(data->map->so)
-		|| __verify_path(data->map->we) || __verify_path(data->map->ea))
-		exit_parsing_error(data, "invalid texture path");
-	if (__verify_path_ext(data->map->no) || __verify_path_ext(data->map->so)
-		|| __verify_path_ext(data->map->we) || __verify_path_ext(data->map->ea))
-		exit_parsing_error(data, "invalid texture image format (.xpm required)");
-	if (__verify_color(data->map->c) || __verify_color(data->map->f))
-		exit_parsing_error(data, "invalid color format");
+	if (__verify_path(app->pos->no) || __verify_path(app->pos->so)
+		|| __verify_path(app->pos->we) || __verify_path(app->pos->ea))
+		exit_parsing_error(app, "invalid texture path");
+	if (__verify_path_ext(app->pos->no) || __verify_path_ext(app->pos->so)
+		|| __verify_path_ext(app->pos->we) || __verify_path_ext(app->pos->ea))
+		exit_parsing_error(app, "invalid texture image format (.xpm required)");
 }

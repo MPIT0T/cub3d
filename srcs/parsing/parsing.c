@@ -6,32 +6,32 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:25:18 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/29 14:25:57 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/30 12:58:08 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
-static void	__fill_map_infos(t_data *data, char *full_file_string)
+static void	__fill_map_infos(t_app *app, char *full_file_string)
 {
-	data->map->no = get_texture(data, full_file_string, ID_NORTH);
-	data->map->so = get_texture(data, full_file_string, ID_SOUTH);
-	data->map->we = get_texture(data, full_file_string, ID_WEST);
-	data->map->ea = get_texture(data, full_file_string, ID_EAST);
-	data->map->f = get_color(data, full_file_string, ID_FLOOR);
-	data->map->c = get_color(data, full_file_string, ID_CEILING);
-	if (!data->map->no || !data->map->so || !data->map->we
-		|| !data->map->ea || !data->map->f || !data->map->c)
-		exit_parsing_error(data, "wrong or missing texture");
-	verify_infos(data);
+	app->pos->no = get_texture(app, full_file_string, ID_NORTH);
+	app->pos->so = get_texture(app, full_file_string, ID_SOUTH);
+	app->pos->we = get_texture(app, full_file_string, ID_WEST);
+	app->pos->ea = get_texture(app, full_file_string, ID_EAST);
+	app->pos->f = get_color(app, full_file_string, ID_FLOOR);
+	app->pos->c = get_color(app, full_file_string, ID_CEILING);
+	if (!app->pos->no || !app->pos->so || !app->pos->we
+		|| !app->pos->ea)
+		exit_parsing_error(app, "wrong or missing texture");
+	verify_infos(app);
 }
 
-int	parsing(t_data *data, const char *path_to_map)
+int	parsing(t_app *app, const char *path_to_map)
 {
-	data->full_file_string = read_map_file(data, path_to_map);
-	if (!data->full_file_string)
-		exit_parsing_error(data, "empty map");
-	__fill_map_infos(data, data->full_file_string);
-	parse_map(data, data->full_file_string);
+	app->full_file_string = read_map_file(app, path_to_map);
+	if (!app->full_file_string)
+		exit_parsing_error(app, "empty map");
+	__fill_map_infos(app, app->full_file_string);
+	parse_map(app, app->full_file_string);
 	return (0);
 }
