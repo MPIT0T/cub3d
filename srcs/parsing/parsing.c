@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:25:18 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/30 12:58:08 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/31 09:25:12 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	__fill_map_infos(t_app *app, char *full_file_string)
 {
 	app->pos->no = get_texture(app, full_file_string, ID_NORTH);
 	app->pos->so = get_texture(app, full_file_string, ID_SOUTH);
-	app->pos->we = get_texture(app, full_file_string, ID_WEST);
 	app->pos->ea = get_texture(app, full_file_string, ID_EAST);
+	app->pos->we = get_texture(app, full_file_string, ID_WEST);
 	app->pos->f = get_color(app, full_file_string, ID_FLOOR);
 	app->pos->c = get_color(app, full_file_string, ID_CEILING);
 	if (!app->pos->no || !app->pos->so || !app->pos->we

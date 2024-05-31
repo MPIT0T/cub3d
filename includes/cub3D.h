@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/31 10:49:14 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/30 13:28:28 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,19 @@ typedef struct	s_img
 	void	*mlx_win;
 } t_img;
 
+typedef struct	s_ctex
+{
+	uint32_t	*texture;
+	int 	texX;
+	int		texY;
+	double	wallX;
+	double	step;
+	double	texPos;
+	int		texNum;
+	int		x;
+
+} t_ctex;
+
 typedef	struct	s_tex
 {
 	char	*file;
@@ -186,8 +199,6 @@ typedef struct s_app
 
 /*   MAIN   */
 
-/*   MINIMAP   */
-void	put_minimap(t_app *app);
 /*   PARSING   */
 //parsing.c
 int		parsing(t_app *app, const char *path_to_map);
@@ -227,5 +238,6 @@ int	game_loop(t_app *app);
 int	initiate_textures(t_app *app);
 int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
 void	px_put(t_img *img, int x, int y, int color);
+int	yline_textured(t_app *app, t_ctex *ctex, int start, int end);
 
 #endif

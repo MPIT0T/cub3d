@@ -56,7 +56,6 @@ static char	*__make_new_map_line(char *old_line, size_t len)
 static void	__make_map_rect(t_app *app)
 {
 	size_t	i;
-	size_t	line_size;
 
 	app->pos->MAP_WIDTH = __get_longest_line(app->pos->map);
 	i = -1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:28:11 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/30 10:46:16 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/30 13:13:59 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,27 @@ int	yline(t_app *app, int x, int yStart, int yEnd, int color)
 	{
 		px_put(app->img, x, yStart, color);
 		yStart += delta_y;
+	}
+	return (0);
+}
+
+int	yline_textured(t_app *app, t_ctex *ctex, int start, int end)
+{
+	float	delta_y;
+	float	px;
+	uint32_t color;
+
+	delta_y = end - start;
+	px = fabs(delta_y);
+	delta_y /= px;
+	while ((int)(start - end))
+	{
+
+		ctex->texY = (int)ctex->texPos & (TEX_HEIGHT - 1);
+		ctex->texPos += ctex->step;
+		color = ctex->texture[TEX_HEIGHT * ctex->texY + ctex->texX];
+		px_put(app->img, ctex->x, start, color);
+		start += delta_y;
 	}
 	return (0);
 }
