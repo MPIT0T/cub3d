@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/30 13:28:28 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/31 11:00:46 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ typedef struct s_app
 /* ************************************************************************** */
 
 /*   MAIN   */
-
+void	put_minimap(t_app *app);
 /*   PARSING   */
 //parsing.c
 int		parsing(t_app *app, const char *path_to_map);

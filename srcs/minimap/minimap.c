@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:48:23 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/31 10:57:36 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/31 11:55:57 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,15 @@ void	put_minimap(t_app *app)
 	modf(mm.endX, &mm.endXi);
 	modf(mm.endY, &mm.endYi);
 
-
+	while (mm.startYi < mm.endYi)
+	{
+		while (mm.startXi < mm.endXi)
+		{
+			write(1, &app->pos->map[(int) mm.startYi][(int) mm.startXi], 1);
+			mm.startXi++;
+		}
+		write(1, "\n", 1);
+		mm.startYi++;
+	}
+	write(1, "\n\n\n", 3);
 }
