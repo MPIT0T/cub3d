@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/30 15:22:09 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/31 09:20:56 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int    game_loop(t_app *app)
 {
 	motion(app);
 	new_image(app);
+	// new_image(app);
 	raycasting_loop(app->pos, app->img, app);
 	return (0);
 }

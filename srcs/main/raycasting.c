@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/30 15:08:35 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/31 09:24:15 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,7 @@ static int	line_height(t_pos *pos)
 		pos->perpWallDist = (pos->sideDistX - pos->deltaDistX);
 	else
 		pos->perpWallDist = (pos->sideDistY - pos->deltaDistY);
-
 	pos->lineHeight = (int)(SCREEN_HEIGHT / pos->perpWallDist);
-
 	pos->drawStart = (-pos->lineHeight * 0.5) + (SCREEN_HEIGHT * 0.5);
 	if (pos->drawStart < 0)
 		pos->drawStart = 0;
@@ -105,89 +103,55 @@ static int	line_height(t_pos *pos)
 	return (0);
 }
 
-t_tex	*get_textures(t_pos *pos, size_t x, t_app *app)
+int	 get_textures(t_pos *pos, size_t x, t_ctex *ctex)
 {
-	uint32_t	*texture = NULL;
-	
-	int 	texX;
-	double	wallX;
-	double	step;
-	double	texPos;
-	int		texNum = 0;
-
 	if (pos->wallDir == 'N')
-		texNum = 0;
+		ctex->texNum = 0;
 	else if (pos->wallDir == 'S')
-		texNum = 1;
+		ctex->texNum = 1;
 	else if (pos->wallDir == 'E')
-		texNum = 2;
+		ctex->texNum = 2;
 	else if (pos->wallDir == 'W')
-		texNum = 3;
-	texture = (uint32_t *)pos->tex[texNum].data;
-
+		ctex->texNum = 3;
+	ctex->texture = (uint32_t *)pos->tex[ctex->texNum].data;
 	if (pos->side == 0)
-		wallX = pos->posY + pos->perpWallDist * pos->rayDirY;
+		ctex->wallX = pos->posY + pos->perpWallDist * pos->rayDirY;
 	else
-		wallX = pos->posX + pos->perpWallDist * pos->rayDirX;
-	wallX -= floor(wallX);
-	texX = (int)(wallX * (double)64);
+		ctex->wallX = pos->posX + pos->perpWallDist * pos->rayDirX;
+	ctex->wallX -= floor(ctex->wallX);
+	ctex->texX = (int)(ctex->wallX * (double)64);
 	if (pos->side == 0 && pos->rayDirX > 0)
-		texX = 64 - texX - 1;
+		ctex->texX = 64 - ctex->texX - 1;
 	if (pos->side == 1 && pos->rayDirY < 0)
-		texX = 64 - texX - 1;
-	step = 1.0 * TEX_HEIGHT / pos->lineHeight;
-	texPos = (pos->drawStart - SCREEN_HEIGHT * 0.5 + pos->lineHeight * 0.5) * step;
-	int	y;	
-	y = pos->drawStart;
-	yline(app, x, 0, pos->drawStart, BLACK);
-	while (y < pos->drawEnd)
-	{
-		int	texY = (int)texPos & (TEX_HEIGHT - 1);
-		texPos += step;
-		uint32_t color = texture[TEX_HEIGHT * texY + texX];
-		px_put(app->img, x, y, color);
-		y++;
-	}
-	yline(app, x, pos->drawEnd, SCREEN_HEIGHT, BLACK);
-
-	return (NULL);
-}
-
-
-int	px_screen(t_app *app)
-{
-	int	y;
-
-	y = -1;
-	while (++y < SCREEN_HEIGHT)
-		xline(app, y, 0, SCREEN_WIDTH, 0xFFFFFF);
+		ctex->texX = 64 - ctex->texX - 1;
+	ctex->step = 1.0 * TEX_HEIGHT / pos->lineHeight;
+	ctex->texPos = (pos->drawStart - SCREEN_HEIGHT * 0.5 + pos->lineHeight * 0.5) * ctex->step;
+	ctex->x = x;
 	return (0);
 }
+
 
 int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 {
 	size_t	x;
+	t_ctex	ctex;
 	
 	x = 0;
-	(void) app;
-
 	while (x < SCREEN_WIDTH)
 	{
 		get_ray_length(pos, x);
 		get_tile_size(pos);
 		DDA(pos);
 		line_height(pos);
-		get_textures(pos, x, app);
-		/*pos->color = YELLOW;
-		if (pos->wallDir == 'N' || pos->wallDir == 'W')
-			pos->color = YELLOW_SIDE;
-		yline(app, x, 0, pos->drawStart, BLUE);
-		yline(app, x, pos->drawStart, pos->drawEnd, pos->color);
-		yline(app, x, pos->drawEnd, SCREEN_HEIGHT, BROWN);*/
+		// get_floor_texture(pos, x, &ctex);
+		get_textures(pos, x, &ctex);
+		yline(app, x, 0, pos->drawStart, BLACK);
+		yline_textured(app, &ctex, pos->drawStart, pos->drawEnd);
+		// yline_textured(app, &ctex, pos->drawEnd, pos->drawEnd * 1.5);
+		yline(app, x, pos->drawEnd * 1.5, SCREEN_HEIGHT, BLACK);
 		x++;
 
     }
-	// px_screen(app);
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
 		img->img, 0, 0);
 	return 0;

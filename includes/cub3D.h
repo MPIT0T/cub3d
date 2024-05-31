@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/30 13:28:28 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/31 08:58:31 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,19 @@ typedef struct	s_img
 	void	*mlx;
 	void	*mlx_win;
 } t_img;
+
+typedef struct	s_ctex
+{
+	uint32_t	*texture;
+	int 	texX;
+	int		texY;
+	double	wallX;
+	double	step;
+	double	texPos;
+	int		texNum;
+	int		x;
+
+} t_ctex;
 
 typedef	struct	s_tex
 {
@@ -243,5 +256,6 @@ int	game_loop(t_app *app);
 int	initiate_textures(t_app *app);
 int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
 void	px_put(t_img *img, int x, int y, int color);
+int	yline_textured(t_app *app, t_ctex *ctex, int start, int end);
 
 #endif
