@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/31 11:00:46 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/31 18:46:11 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 /*                              DEFINES                                       */
 /* ************************************************************************** */
 
-# define SCREEN_WIDTH	1920
-# define SCREEN_HEIGHT	1080
+# define SCREEN_WIDTH	900 //1920
+# define SCREEN_HEIGHT	500 //1080
 # define TEX_WIDTH		64
 # define TEX_HEIGHT		64
 
