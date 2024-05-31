@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/31 09:24:15 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/31 16:58:51 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,54 +103,22 @@ static int	line_height(t_pos *pos)
 	return (0);
 }
 
-int	 get_textures(t_pos *pos, size_t x, t_ctex *ctex)
-{
-	if (pos->wallDir == 'N')
-		ctex->texNum = 0;
-	else if (pos->wallDir == 'S')
-		ctex->texNum = 1;
-	else if (pos->wallDir == 'E')
-		ctex->texNum = 2;
-	else if (pos->wallDir == 'W')
-		ctex->texNum = 3;
-	ctex->texture = (uint32_t *)pos->tex[ctex->texNum].data;
-	if (pos->side == 0)
-		ctex->wallX = pos->posY + pos->perpWallDist * pos->rayDirY;
-	else
-		ctex->wallX = pos->posX + pos->perpWallDist * pos->rayDirX;
-	ctex->wallX -= floor(ctex->wallX);
-	ctex->texX = (int)(ctex->wallX * (double)64);
-	if (pos->side == 0 && pos->rayDirX > 0)
-		ctex->texX = 64 - ctex->texX - 1;
-	if (pos->side == 1 && pos->rayDirY < 0)
-		ctex->texX = 64 - ctex->texX - 1;
-	ctex->step = 1.0 * TEX_HEIGHT / pos->lineHeight;
-	ctex->texPos = (pos->drawStart - SCREEN_HEIGHT * 0.5 + pos->lineHeight * 0.5) * ctex->step;
-	ctex->x = x;
-	return (0);
-}
-
-
 int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 {
-	size_t	x;
-	t_ctex	ctex;
+	size_t		x;
+	t_walltex	walltex;
+	t_horiztex	horiztex;
 	
-	x = 0;
-	while (x < SCREEN_WIDTH)
+	x = -1;
+	draw_horizontal_texture(app, pos, &horiztex);
+	while (++x < SCREEN_WIDTH)
 	{
 		get_ray_length(pos, x);
 		get_tile_size(pos);
 		DDA(pos);
 		line_height(pos);
-		// get_floor_texture(pos, x, &ctex);
-		get_textures(pos, x, &ctex);
-		yline(app, x, 0, pos->drawStart, BLACK);
-		yline_textured(app, &ctex, pos->drawStart, pos->drawEnd);
-		// yline_textured(app, &ctex, pos->drawEnd, pos->drawEnd * 1.5);
-		yline(app, x, pos->drawEnd * 1.5, SCREEN_HEIGHT, BLACK);
-		x++;
-
+		walltex.x = x;
+		draw_wall_texture(app, pos, &walltex);
     }
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
 		img->img, 0, 0);

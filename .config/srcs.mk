@@ -6,7 +6,7 @@
 #    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:18:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/31 09:02:01 by cesar            ###   ########.fr        #
+#    Updated: 2024/05/31 15:04:19 by cesar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC_MAIN	=	main.c	\
 				draw.c \
 				key_events.c \
 				moove.c \
-				raycasting.c
+				raycasting.c \
+				textures.c
 
 MAIN	=	$(addprefix $(DIR_MAIN), $(SRC_MAIN))
 

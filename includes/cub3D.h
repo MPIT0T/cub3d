@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/31 08:58:31 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/31 16:52:01 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define SCREEN_HEIGHT	1080
 # define TEX_WIDTH		64
 # define TEX_HEIGHT		64
+# define MAP_WIDTH		24
+# define MAP_HEIGHT		24
 
 # define N 0
 # define S 1
@@ -38,10 +40,11 @@
 # define W 3
 
 # define BLUE			0x3a8399
-# define YELLOW			0xebab34
+# define YELLOW			0xFFFF00
 # define YELLOW_SIDE	0xa67924
 # define BROWN			0x7a5631
 # define BLACK			0x000000
+# define SKY (rand() < RAND_MAX * 0.9999 ? BLACK : YELLOW)
 
 # define ERRMSG "\e[0;91mError\e[0m"
 
@@ -76,35 +79,6 @@
 /*                                STRUCTS                                     */
 /* ************************************************************************** */
 
-# include <../mlx_linux/mlx.h>
-# include <../libft/incs/libft.h>
-# include <math.h>
-# include <stdio.h>
-# include <stdbool.h>
-# include <X11/keysym.h>
-# include <X11/X.h>
-# include <stdint.h>
-
-# define MAP_WIDTH		24
-# define MAP_HEIGHT		24
-# define SCREEN_WIDTH	1920
-# define SCREEN_HEIGHT	1080
-# define TEX_WIDTH		64
-# define TEX_HEIGHT		64
-
-# define N 0
-# define S 1
-# define E 2
-# define W 3
-
-# define EXIT_SUCCESS	0
-# define ALLOC_FAILURE	1
-
-# define BLUE			0x3a8399
-# define YELLOW			0xebab34
-# define YELLOW_SIDE	0xa67924
-# define BROWN			0x7a5631
-# define BLACK			0x000000
 
 typedef struct	s_img
 {
@@ -117,9 +91,9 @@ typedef struct	s_img
 	void	*mlx_win;
 } t_img;
 
-typedef struct	s_ctex
+typedef struct	s_walltex
 {
-	uint32_t	*texture;
+	uint32_t	*tex_content;
 	int 	texX;
 	int		texY;
 	double	wallX;
@@ -127,8 +101,34 @@ typedef struct	s_ctex
 	double	texPos;
 	int		texNum;
 	int		x;
+} t_walltex;
 
-} t_ctex;
+typedef struct	s_horiztex
+{
+	uint32_t	*floor_tex_content;
+	uint32_t	*roof_tex_content;
+	uint32_t floor_tex_px;
+	uint32_t roof_tex_px;
+	float	rayDirX0;
+	float	rayDirY0;
+	float	rayDirX1;
+	float	rayDirY1;
+	int		p;
+	float	posZ;
+	float	rowDistance;
+	float	floorStepX;
+	float	floorStepY;
+	float	floorX;
+	float	floorY;
+	int		cellX;
+	int		cellY;
+	int		tx;
+	int		ty;
+	int		floorTexture;
+	int		ceilingTexture;
+	int		y;
+
+} t_horiztex;
 
 typedef	struct	s_tex
 {
@@ -140,7 +140,6 @@ typedef	struct	s_tex
 	int		bits_per_pixel;
 	int		endian;
 	int		line_length;
-	uint32_t	*tex_value;
 } t_tex;
 
 typedef struct s_color
@@ -245,9 +244,6 @@ void	free_app(t_app *app);
 
 int	construct_app(t_app *app);
 int	initiate_mlx(t_app *app);
-int	yline(t_app *app, int x, int yStart, int yEnd, int color);
-int	xline(t_app *app, int y, int xStart, int xEnd, int color);
-int	line(t_img *img, int startX, int startY, int nextX, int nextY, int color);
 int	change_motion_keypress(int key, t_app *app);
 int	change_motion_keyrelease(int key, t_app *app);
 int	motion(t_app *app);
@@ -255,7 +251,7 @@ int	new_image(t_app *app);
 int	game_loop(t_app *app);
 int	initiate_textures(t_app *app);
 int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
-void	px_put(t_img *img, int x, int y, int color);
-int	yline_textured(t_app *app, t_ctex *ctex, int start, int end);
+int	 draw_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex);
+int	draw_horizontal_texture(t_app *app, t_pos *pos, t_horiztex *horiztex);
 
 #endif
