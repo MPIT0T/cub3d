@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/30 15:22:09 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/31 10:10:32 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	set_camera_pos_and_dir(t_app *app)
 				}
 				app->pos->posY = (double) x;
 				app->pos->posX = (double) y;
+				app->pos->map[y][x] = '0';
 			}
 		}
 	}
@@ -99,7 +100,7 @@ int	initiate_positions(t_app *app)
 	app->pos->time = 0;
 	app->pos->oldTime = 0;
 	app->pos->h = 1;
-	app->pos->moveSpeed = 0.05;
+	app->pos->moveSpeed = 0.1;
 	app->pos->rotSpeed = 0.05;
 	app->pos->motion_up = false;
 	app->pos->motion_down = false;

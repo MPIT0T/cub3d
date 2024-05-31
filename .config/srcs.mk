@@ -6,17 +6,17 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:18:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/23 13:53:09 by mpitot           ###   ########.fr        #
+#    Updated: 2024/05/30 15:51:23 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	=	$(MAIN)		\
+			$(MINIMAP)	\
 			$(PARSING)	\
 			$(EXIT)
 
 
 DIR_MAIN	=	main/
-
 SRC_MAIN	=	main.c	\
 				exit_errors.c \
 				construct_app.c \
@@ -24,8 +24,12 @@ SRC_MAIN	=	main.c	\
 				key_events.c \
 				moove.c \
 				raycasting.c
-
 MAIN	=	$(addprefix $(DIR_MAIN), $(SRC_MAIN))
+
+DIR_MINI	=	minimap/
+SRC_MINI	=	minimap.c
+MINIMAP	=	$(addprefix $(DIR_MINI), $(SRC_MINI))
+
 
 DIR_PARS	=	parsing/
 SRC_PARS	=	parsing.c			\

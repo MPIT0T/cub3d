@@ -51,6 +51,7 @@ ${NAME}	:	${OBJ_D} ${OBJS} libft/libft.a
 ${OBJ_D}:
 	@mkdir -p ${OBJ_D}
 	@mkdir -p ${OBJ_D}main
+	@mkdir -p ${OBJ_D}minimap
 	@mkdir -p ${OBJ_D}parsing
 	@mkdir -p ${OBJ_D}exit-management
 

@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/30 13:28:28 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/31 10:49:14 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@
 # define BROWN			0x7a5631
 # define BLACK			0x000000
 
-# define ERRMSG "\e[0;91mError\e[0m"
-
 # define MAP_CHARS " 01NSWE"
 
 # define ID_NORTH "NO "
@@ -54,6 +52,7 @@
 # define ID_FLOOR "F "
 # define ID_CEILING "C "
 
+# define ERRMSG "\e[0;91mError\e[0m"
 # define EXIT_SUCCESS 0
 # define EXIT_MALLOC 1
 # define EXIT_ARGS 2
@@ -61,7 +60,6 @@
 # define EXIT_OPEN 4
 # define EXIT_PARSING 5
 # define EXIT_MLX 6
-
 
 /* ************************************************************************** */
 /*                                 ENUM                                       */
@@ -76,35 +74,17 @@
 /*                                STRUCTS                                     */
 /* ************************************************************************** */
 
-# include <../mlx_linux/mlx.h>
-# include <../libft/incs/libft.h>
-# include <math.h>
-# include <stdio.h>
-# include <stdbool.h>
-# include <X11/keysym.h>
-# include <X11/X.h>
-# include <stdint.h>
-
-# define MAP_WIDTH		24
-# define MAP_HEIGHT		24
-# define SCREEN_WIDTH	1920
-# define SCREEN_HEIGHT	1080
-# define TEX_WIDTH		64
-# define TEX_HEIGHT		64
-
-# define N 0
-# define S 1
-# define E 2
-# define W 3
-
-# define EXIT_SUCCESS	0
-# define ALLOC_FAILURE	1
-
-# define BLUE			0x3a8399
-# define YELLOW			0xebab34
-# define YELLOW_SIDE	0xa67924
-# define BROWN			0x7a5631
-# define BLACK			0x000000
+typedef struct	s_minimap
+{
+	double	startX;
+	double	startXi;
+	double	endX;
+	double	endXi;
+	double	startY;
+	double	startYi;
+	double	endY;
+	double	endYi;
+}	t_minimap;
 
 typedef struct	s_img
 {
@@ -146,6 +126,8 @@ typedef struct s_pos
 	char			*ea;
 	unsigned int	c;
 	unsigned int	f;
+	size_t			MAP_WIDTH;
+	size_t			MAP_HEIGHT;
 	double			posX;
 	double			posY;
 	double			dirX;
@@ -204,6 +186,8 @@ typedef struct s_app
 
 /*   MAIN   */
 
+/*   MINIMAP   */
+void	put_minimap(t_app *app);
 /*   PARSING   */
 //parsing.c
 int		parsing(t_app *app, const char *path_to_map);

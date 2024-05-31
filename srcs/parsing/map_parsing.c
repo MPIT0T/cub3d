@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 11:50:13 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/29 11:51:14 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/31 10:49:14 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,18 @@ static void	__make_map_rect(t_app *app)
 	size_t	i;
 	size_t	line_size;
 
-	line_size = __get_longest_line(app->pos->map);
+	app->pos->MAP_WIDTH = __get_longest_line(app->pos->map);
 	i = -1;
 	while (app->pos->map[++i])
 	{
-		if (ft_strlen(app->pos->map[i]) < line_size)
+		if (ft_strlen(app->pos->map[i]) < app->pos->MAP_WIDTH)
 		{
-			app->pos->map[i] = __make_new_map_line(app->pos->map[i], line_size);
+			app->pos->map[i] = __make_new_map_line(app->pos->map[i], app->pos->MAP_WIDTH);
 			if (!app->pos->map[i])
 				exit_error(app, EXIT_MALLOC);
 		}
 	}
+	app->pos->MAP_HEIGHT = i;
 }
 
 void	parse_map(t_app *app, char *full_file_string)

@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/30 15:08:35 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/31 10:07:22 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 	// px_screen(app);
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
 		img->img, 0, 0);
+	put_minimap(app);
 	return 0;
 }
 
