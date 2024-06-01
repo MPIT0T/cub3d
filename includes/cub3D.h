@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/31 18:46:11 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/02 00:27:19 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@
 # define W 3
 
 # define BLUE			0x3a8399
-# define YELLOW			0xebab34
+# define RED			0xFF0000
+# define YELLOW			0xffff00
 # define YELLOW_SIDE	0xa67924
 # define BROWN			0x7a5631
 # define BLACK			0x000000
+# define WHITE			0xffffff
 
 # define MAP_CHARS " 01NSWE"
 
@@ -74,16 +76,26 @@
 /*                                STRUCTS                                     */
 /* ************************************************************************** */
 
+typedef	struct	s_connection
+{
+	bool	n;
+	bool	s;
+	bool	w;
+	bool	e;
+	bool	nw;
+	bool	ne;
+	bool	sw;
+	bool	se;
+}	t_con;
+
 typedef struct	s_minimap
 {
+	int		pixX;
+	int		pixY;
 	double	startX;
-	double	startXi;
-	double	endX;
-	double	endXi;
+	double	intX;
 	double	startY;
-	double	startYi;
-	double	endY;
-	double	endYi;
+	double	intY;
 }	t_minimap;
 
 typedef struct	s_img
