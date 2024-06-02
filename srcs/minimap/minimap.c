@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:48:23 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/02 00:27:19 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/02 16:11:53 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,26 @@ void	put_minimap_on_screen(t_app *app, t_minimap *mm)
 	double	tmp = mm->startX;
 
 	mm->pixY = 0;
-	while (mm->pixY < (double) 100)
+	while (mm->pixY < (double) 105)
 	{
 		mm->startX = tmp;
 		mm->pixX = 0;
-		while (mm->pixX < (double) 100)
+		while (mm->pixX < (double) 105)
 		{
+			if (mm->pixY < 5 || mm->pixY >= 100)
+			{
+				px_put(app->img, mm->pixX, mm->pixY, YELLOW);
+				mm->startX += 0.1;
+				mm->pixX++;
+				continue ;
+			}
+			if (mm->pixX < 5 || mm->pixX >= 100)
+			{
+				px_put(app->img, mm->pixX, mm->pixY, YELLOW);
+				mm->startX += 0.1;
+				mm->pixX++;
+				continue ;
+			}
 			modf(mm->startX, &mm->intX);
 			modf(mm->startY, &mm->intY);
 			if (app->pos->map[(int) mm->intY][(int) mm->intX] == '1')
@@ -62,40 +76,61 @@ void	put_minimap(t_app *app)
 	put_minimap_on_screen(app, &mm);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 
-void	make_connections(t_app *app, int x, int y, t_con connections)
+void	make_connections(t_app *app, int x, int y, t_con *connections)
 {
-	connections.n = false;
-	connections.s = false;
-	connections.w = false;
-	connections.e = false;
-	connections.nw = false;
-	connections.ne = false;
-	connections.sw = false;
-	connections.se = false;
+	connections->n = false;
+	connections->s = false;
+	connections->w = false;
+	connections->e = false;
+	connections->nw = false;
+	connections->ne = false;
+	connections->sw = false;
+	connections->se = false;
 	if (x != 0 && app->pos->map[y][x - 1] == '1')
-		connections.n = true;
+		connections->n = true;
 	if (app->pos->map[y][x + 1] == '1')
-		connections.s = true;
+		connections->s = true;
 	if (y != 0 && app->pos->map[y - 1][x] == '1')
-		connections.w = true;
+		connections->w = true;
 	if (app->pos->map[y + 1][x] == '1')
-		connections.e = true;
+		connections->e = true;
 	if (x != 0 && y != 0 && app->pos->map[y - 1][x - 1] == '1')
-		connections.nw = true;
+		connections->nw = true;
 	if (x != 0 && app->pos->map[y + 1][x - 1] == '1')
-		connections.ne = true;
+		connections->ne = true;
 	if (y != 0 && app->pos->map[y - 1][x + 1] == '1')
-		connections.sw = true;
+		connections->sw = true;
 	if (app->pos->map[y + 1][x + 1] == '1')
-		connections.se = true;
+		connections->se = true;
 }
 
 void	put_right_wall(t_app *app, int x, int y)
 {
-	t_con	connections;
+	t_con	cons;
 
-	if ()
+	make_connections(app, x, y, &cons);
+
 }
 */
+
