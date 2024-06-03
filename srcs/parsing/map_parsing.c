@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 11:50:13 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/31 10:49:14 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/03 17:06:03 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	*__make_new_map_line(char *old_line, size_t len)
 
 	new = malloc(sizeof(char) * (len + 1));
 	if (!new)
-		return (NULL);		//TODO remonter l'erreur
+		return (NULL);
 	i = -1;
 	while (old_line[++i])
 		new[i] = old_line[i];
@@ -86,8 +86,10 @@ void	parse_map(t_app *app, char *full_file_string)
 	if (!app->pos->map)
 		exit_error(app, EXIT_MALLOC);
 	__make_map_rect(app);
-	if (verify_map_chars(app->pos->map))
+	if (verify_map_chars(app->pos->map) == 1)
 		exit_parsing_error(app, "invalid map character");
+	if (verify_map_chars(app->pos->map) == 2)
+		exit_parsing_error(app, "wrong amount of player start character(s)");
 	if (verify_map_border(app->pos->map))
 		exit_parsing_error(app, "map border not closed");
 }

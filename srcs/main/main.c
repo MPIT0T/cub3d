@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/03 16:32:15 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/03 16:54:22 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_check_args(int ac, char **av)
 	exit(EXIT_ARGS);
 }
 
-int    game_loop(t_app *app)
+int	game_loop(t_app *app)
 {
 	mlx_mouse_move(app->img->mlx, app->img->mlx_win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	motion(app);
@@ -129,7 +129,7 @@ int main(int ac, char **av)
 	ft_check_args(ac, av);
 	if (construct_app(&app))
 		return (EXIT_MALLOC);
-	parsing(&app, av[1]);		//TODO check si il n'y a pas plusieurs char NSWE dans la map
+	parsing(&app, av[1]);
 	initiate_positions(&app);
 	initiate_mlx(&app);
 	initiate_textures(&app);

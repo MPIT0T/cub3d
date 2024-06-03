@@ -91,6 +91,7 @@ int	construct_app(t_app *app)
 	app->pos->so = NULL;
 	app->pos->ea = NULL;
 	app->pos->we = NULL;
+	app->pos->map = NULL;
 	app->pos->f = 0;
 	app->pos->c = 0;
 	app->full_file_string = NULL;
