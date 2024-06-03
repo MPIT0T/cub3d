@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 10:12:44 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/03 11:30:08 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,8 @@ typedef struct s_pos
 	char			*ea;
 	unsigned int	c;
 	unsigned int	f;
-	size_t			MAP_WIDTH;
-	size_t			MAP_HEIGHT;
+	ssize_t			MAP_WIDTH;
+	ssize_t			MAP_HEIGHT;
 	double			posX;
 	double			posY;
 	double			dirX;
@@ -209,7 +209,16 @@ typedef struct s_app
 /* ************************************************************************** */
 
 /*   MAIN   */
+
+/*   MINIMAP   */
+//minimap.c
 void	put_minimap(t_app *app);
+//minimap_utils.c
+void	set_frame_dimensions(t_app *app, t_minimap *mm);
+void	get_minimap_pos(t_app *app, t_minimap *mm);
+void	put_minimap_frame(t_app *app, t_minimap *mm);
+void	put_minimap_pixel(t_app *app, t_minimap *mm);
+void	put_minimap_on_screen(t_app *app, t_minimap *mm);
 /*   PARSING   */
 //parsing.c
 int		parsing(t_app *app, const char *path_to_map);
