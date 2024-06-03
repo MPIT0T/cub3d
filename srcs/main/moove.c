@@ -74,6 +74,7 @@ static int	rotate_right(t_pos *pos)
 	return (0);
 }
 
+
 int	motion(t_app *app)
 {
 	if (app->pos->motion_up)

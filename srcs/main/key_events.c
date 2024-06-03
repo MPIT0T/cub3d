@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:08:19 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/03 16:21:08 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/03 18:39:48 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,8 @@ int	change_motion_keypress(int key, t_app *app)
 		app->pos->motion_left = true;
 	if (app->pos->motion_right == false && key == XK_d)
 		app->pos->motion_right = true;
-	/*if (app->pos->rotate_left == false && key == XK_Left)
-		app->pos->rotate_left = true;
-	if (app->pos->rotate_right == false && key == XK_Right)
-		app->pos->rotate_right = true;*/
+	if (app->pos->moveSpeed == 0.05 && key == XK_Shift_L)
+		app->pos->moveSpeed = 0.10;
 	return (0);
 }
 
@@ -60,10 +58,8 @@ int	change_motion_keyrelease(int key, t_app *app)
 		app->pos->motion_left = false;
 	if (key == XK_d && app->pos->motion_right == true)
 		app->pos->motion_right = false;
-	/*if (key == XK_Left && app->pos->rotate_left == true)
-		app->pos->rotate_left = false;
-	if (key == XK_Right && app->pos->rotate_right == true)
-		app->pos->rotate_right = false;*/
+	if (key == XK_Shift_L && app->pos->moveSpeed == 0.10)
+		app->pos->moveSpeed = 0.05;
 	return (0);	
 }
 
