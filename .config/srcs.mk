@@ -29,7 +29,8 @@ SRC_MAIN	=	main.c	\
 MAIN	=	$(addprefix $(DIR_MAIN), $(SRC_MAIN))
 
 DIR_MINI	=	minimap/
-SRC_MINI	=	minimap.c
+SRC_MINI	=	minimap.c	\
+				minimap_utils.c
 MINIMAP	=	$(addprefix $(DIR_MINI), $(SRC_MINI))
 
 

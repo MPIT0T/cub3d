@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
 /*   Updated: 2024/06/03 11:48:09 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -32,8 +31,6 @@
 # define SCREEN_HEIGHT	1080
 # define TEX_WIDTH		64
 # define TEX_HEIGHT		64
-// # define MAP_WIDTH		24
-// # define MAP_HEIGHT		24
 
 # define N 0
 # define S 1
@@ -161,6 +158,7 @@ typedef	struct	s_tex
 	int		bits_per_pixel;
 	int		endian;
 	int		line_length;
+	uint32_t	*tex_value;
 } t_tex;
 
 typedef struct s_color
@@ -179,8 +177,8 @@ typedef struct s_pos
 	char			*ea;
 	unsigned int	c;
 	unsigned int	f;
-	size_t			MAP_WIDTH;
-	size_t			MAP_HEIGHT;
+	ssize_t			MAP_WIDTH;
+	ssize_t			MAP_HEIGHT;
 	double			posX;
 	double			posY;
 	double			dirX;
@@ -238,7 +236,16 @@ typedef struct s_app
 /* ************************************************************************** */
 
 /*   MAIN   */
+
+/*   MINIMAP   */
+//minimap.c
 void	put_minimap(t_app *app);
+//minimap_utils.c
+void	set_frame_dimensions(t_app *app, t_minimap *mm);
+void	get_minimap_pos(t_app *app, t_minimap *mm);
+void	put_minimap_frame(t_app *app, t_minimap *mm);
+void	put_minimap_pixel(t_app *app, t_minimap *mm);
+void	put_minimap_on_screen(t_app *app, t_minimap *mm);
 /*   PARSING   */
 //parsing.c
 int		parsing(t_app *app, const char *path_to_map);

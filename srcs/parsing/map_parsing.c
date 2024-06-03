@@ -61,7 +61,7 @@ static void	__make_map_rect(t_app *app)
 	i = -1;
 	while (app->pos->map[++i])
 	{
-		if (ft_strlen(app->pos->map[i]) < app->pos->MAP_WIDTH)
+		if (ft_strlen(app->pos->map[i]) < (size_t) app->pos->MAP_WIDTH)
 		{
 			app->pos->map[i] = __make_new_map_line(app->pos->map[i], app->pos->MAP_WIDTH);
 			if (!app->pos->map[i])
