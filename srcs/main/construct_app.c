@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   construct_app.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/05/31 09:27:33 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/03 11:11:25 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/cub3D.h"
 
@@ -30,7 +29,6 @@ int	initiate_textures(t_app *app)
 	app->pos->tex = malloc(4 * sizeof(t_tex));
 	if (!app->pos->tex)
 		exit_error(app, EXIT_MALLOC);
-
 	app->pos->tex[0].file = app->pos->no;
 	app->pos->tex[1].file = app->pos->so;
 	app->pos->tex[2].file = app->pos->ea;

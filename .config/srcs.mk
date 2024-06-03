@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    srcs.mk                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:18:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/23 13:53:09 by mpitot           ###   ########.fr        #
+#    Updated: 2024/06/03 11:15:18 by cefuente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,9 @@ SRC_MAIN	=	main.c	\
 				draw.c \
 				key_events.c \
 				moove.c \
-				raycasting.c
+				raycasting.c \
+				textures.c
+
 MAIN	=	$(addprefix $(DIR_MAIN), $(SRC_MAIN))
 
 DIR_MINI	=	minimap/

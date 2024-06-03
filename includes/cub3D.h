@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 10:12:44 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/03 11:48:09 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -31,6 +32,8 @@
 # define SCREEN_HEIGHT	1080
 # define TEX_WIDTH		64
 # define TEX_HEIGHT		64
+// # define MAP_WIDTH		24
+// # define MAP_HEIGHT		24
 
 # define N 0
 # define S 1
@@ -44,6 +47,7 @@
 # define BROWN			0x7a5631
 # define BLACK			0x000000
 # define WHITE			0xffffff
+# define GREY			0x242b38
 
 # define MAP_CHARS " 01NSWE"
 
@@ -108,9 +112,9 @@ typedef struct	s_img
 	void	*mlx_win;
 } t_img;
 
-typedef struct	s_ctex
+typedef struct	s_walltex
 {
-	uint32_t	*texture;
+	uint32_t	*tex_content;
 	int 	texX;
 	int		texY;
 	double	wallX;
@@ -118,8 +122,34 @@ typedef struct	s_ctex
 	double	texPos;
 	int		texNum;
 	int		x;
+} t_walltex;
 
-} t_ctex;
+typedef struct	s_horiztex
+{
+	uint32_t	*floor_tex_content;
+	uint32_t	*roof_tex_content;
+	uint32_t floor_tex_px;
+	uint32_t roof_tex_px;
+	float	rayDirX0;
+	float	rayDirY0;
+	float	rayDirX1;
+	float	rayDirY1;
+	int		p;
+	float	posZ;
+	float	rowDistance;
+	float	floorStepX;
+	float	floorStepY;
+	float	floorX;
+	float	floorY;
+	int		cellX;
+	int		cellY;
+	int		tx;
+	int		ty;
+	int		floorTexture;
+	int		ceilingTexture;
+	int		y;
+
+} t_horiztex;
 
 typedef	struct	s_tex
 {
@@ -131,7 +161,6 @@ typedef	struct	s_tex
 	int		bits_per_pixel;
 	int		endian;
 	int		line_length;
-	uint32_t	*tex_value;
 } t_tex;
 
 typedef struct s_color
@@ -238,9 +267,6 @@ void	free_app(t_app *app);
 
 int	construct_app(t_app *app);
 int	initiate_mlx(t_app *app);
-int	yline(t_app *app, int x, int yStart, int yEnd, int color);
-int	xline(t_app *app, int y, int xStart, int xEnd, int color);
-int	line(t_img *img, int startX, int startY, int nextX, int nextY, int color);
 int	change_motion_keypress(int key, t_app *app);
 int	change_motion_keyrelease(int key, t_app *app);
 int	motion(t_app *app);
@@ -248,7 +274,8 @@ int	new_image(t_app *app);
 int	game_loop(t_app *app);
 int	initiate_textures(t_app *app);
 int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
+int	 draw_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex);
+int	draw_horizontal_texture(t_app *app, t_pos *pos, t_horiztex *horiztex);
 void	px_put(t_img *img, int x, int y, int color);
-int	yline_textured(t_app *app, t_ctex *ctex, int start, int end);
 
 #endif
