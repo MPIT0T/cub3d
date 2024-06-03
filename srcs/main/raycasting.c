@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/03 11:11:47 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/03 11:19:26 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 {
 	size_t		x;
 	t_walltex	walltex;
-	
+
 	x = -1;
 	while (++x < SCREEN_WIDTH)
 	{
@@ -117,6 +117,7 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 		walltex.x = x;
 		draw_wall_texture(app, pos, &walltex);
     }
+	put_minimap(app);
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
 		img->img, 0, 0);
 	return 0;

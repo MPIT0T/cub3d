@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 10:14:44 by cefuente         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/06/03 11:17:22 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -27,8 +28,8 @@
 /*                              DEFINES                                       */
 /* ************************************************************************** */
 
-# define SCREEN_WIDTH	1920
-# define SCREEN_HEIGHT	1080
+# define SCREEN_WIDTH	900 //1920
+# define SCREEN_HEIGHT	500 //1080
 # define TEX_WIDTH		64
 # define TEX_HEIGHT		64
 # define MAP_WIDTH		24
@@ -40,14 +41,12 @@
 # define W 3
 
 # define BLUE			0x3a8399
-# define YELLOW			0xFFFF00
+# define RED			0xFF0000
+# define YELLOW			0xffff00
 # define YELLOW_SIDE	0xa67924
 # define BROWN			0x7a5631
 # define BLACK			0x000000
-# define GREY 			0x0e1b33
-// # define SKY (rand() < RAND_MAX * 0.99999 ? BLACK : YELLOW)
-
-# define ERRMSG "\e[0;91mError\e[0m"
+# define WHITE			0xffffff
 
 # define MAP_CHARS " 01NSWE"
 
@@ -58,6 +57,7 @@
 # define ID_FLOOR "F "
 # define ID_CEILING "C "
 
+# define ERRMSG "\e[0;91mError\e[0m"
 # define EXIT_SUCCESS 0
 # define EXIT_MALLOC 1
 # define EXIT_ARGS 2
@@ -66,13 +66,9 @@
 # define EXIT_PARSING 5
 # define EXIT_MLX 6
 
-
 /* ************************************************************************** */
 /*                                 ENUM                                       */
 /* ************************************************************************** */
-
-
-
 
 
 
@@ -80,6 +76,27 @@
 /*                                STRUCTS                                     */
 /* ************************************************************************** */
 
+typedef	struct	s_connection
+{
+	bool	n;
+	bool	s;
+	bool	w;
+	bool	e;
+	bool	nw;
+	bool	ne;
+	bool	sw;
+	bool	se;
+}	t_con;
+
+typedef struct	s_minimap
+{
+	int		pixX;
+	int		pixY;
+	double	startX;
+	double	intX;
+	double	startY;
+	double	intY;
+}	t_minimap;
 
 typedef struct	s_img
 {
@@ -159,6 +176,8 @@ typedef struct s_pos
 	char			*ea;
 	unsigned int	c;
 	unsigned int	f;
+	size_t			MAP_WIDTH;
+	size_t			MAP_HEIGHT;
 	double			posX;
 	double			posY;
 	double			dirX;
@@ -216,7 +235,7 @@ typedef struct s_app
 /* ************************************************************************** */
 
 /*   MAIN   */
-
+void	put_minimap(t_app *app);
 /*   PARSING   */
 //parsing.c
 int		parsing(t_app *app, const char *path_to_map);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/31 09:20:56 by cesar            ###   ########.fr       */
+/*   Updated: 2024/05/30 15:22:09 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	set_camera_pos_and_dir(t_app *app)
 				}
 				app->pos->posY = (double) x;
 				app->pos->posX = (double) y;
+				app->pos->map[y][x] = '0';
 			}
 		}
 	}
