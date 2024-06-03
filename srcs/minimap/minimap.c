@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:48:23 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/02 16:11:53 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/03 10:15:25 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,24 @@
 
 void	get_minimap_pos(t_app *app, t_minimap *mm)
 {
-	mm->startX = app->pos->posY - 5;
-	if (app->pos->posY > app->pos->MAP_WIDTH - 5)
-		mm->startX = app->pos->MAP_WIDTH - 10;
-	else if (app->pos->posY - 5 < 0)
+	mm->startX = app->pos->posY - 7;
+	if (app->pos->posY > (int) app->pos->MAP_WIDTH - 7)
+		mm->startX = (int) app->pos->MAP_WIDTH - 14;
+	else if (app->pos->posY - 7 < 0)
 		mm->startX = 0;
 	mm->startY = app->pos->posX - 5;
-	if (app->pos->posX > app->pos->MAP_HEIGHT - 5)
-		mm->startY = app->pos->MAP_HEIGHT - 10;
+	if (app->pos->posX > (int) app->pos->MAP_HEIGHT - 5)
+		mm->startY = (int) app->pos->MAP_HEIGHT - 10;
 	else if (app->pos->posX - 5 < 0)
 		mm->startY = 0;
+	if (app->pos->MAP_WIDTH >= 14)
+		mm->mapSizeX = 14;
+	else
+		mm->mapSizeX = (int) app->pos->MAP_WIDTH;
+	if (app->pos->MAP_HEIGHT >= 10)
+		mm->mapSizeY = 10;
+	else
+		mm->mapSizeY = (int) app->pos->MAP_HEIGHT;
 }
 
 void	put_minimap_on_screen(t_app *app, t_minimap *mm)
@@ -31,23 +39,23 @@ void	put_minimap_on_screen(t_app *app, t_minimap *mm)
 	double	tmp = mm->startX;
 
 	mm->pixY = 0;
-	while (mm->pixY < (double) 105)
+	while (mm->pixY < (20 * mm->mapSizeY) + 10)
 	{
 		mm->startX = tmp;
 		mm->pixX = 0;
-		while (mm->pixX < (double) 105)
+		while (mm->pixX < (20 * mm->mapSizeX) + 10)
 		{
-			if (mm->pixY < 5 || mm->pixY >= 100)
+			if (mm->pixY < 5 || mm->pixY >= (20 * mm->mapSizeY))
 			{
 				px_put(app->img, mm->pixX, mm->pixY, YELLOW);
-				mm->startX += 0.1;
+//				mm->startX += 0.05;
 				mm->pixX++;
 				continue ;
 			}
-			if (mm->pixX < 5 || mm->pixX >= 100)
+			if (mm->pixX < 5 || mm->pixX >= (20 * mm->mapSizeX))
 			{
 				px_put(app->img, mm->pixX, mm->pixY, YELLOW);
-				mm->startX += 0.1;
+//				mm->startX += 0.05;
 				mm->pixX++;
 				continue ;
 			}
@@ -60,10 +68,10 @@ void	put_minimap_on_screen(t_app *app, t_minimap *mm)
 			if (mm->startX > app->pos->posY - 0.2 && mm->startX < app->pos->posY + 0.2
 				&& mm->startY > app->pos->posX - 0.2 && mm->startY < app->pos->posX + 0.2)
 				px_put(app->img, mm->pixX, mm->pixY, YELLOW);
-			mm->startX += 0.1;
+			mm->startX += 0.05;
 			mm->pixX++;
 		}
-		mm->startY += 0.1;
+		mm->startY += 0.05;
 		mm->pixY++;
 	}
 }
