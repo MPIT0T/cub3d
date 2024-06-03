@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/03 15:05:41 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/03 23:18:51 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,10 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 {
 	size_t		x;
 	t_walltex	walltex;
+	t_horiztex	horiztex;
 
 	x = -1;
+	get_horizontal_texture(pos, &horiztex);
 	while (++x < SCREEN_WIDTH)
 	{
 		get_ray_length(pos, x);
@@ -117,8 +119,9 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 		DDA(pos);
 		line_height(pos);
 		walltex.x = x;
-		draw_wall_texture(app, pos, &walltex);
+		get_wall_texture(app, pos, &walltex);
     }
+	draw_screen(pos, img);
 	put_minimap(app);
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
 		img->img, 0, 0);

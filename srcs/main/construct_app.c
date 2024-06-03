@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/03 18:40:35 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/03 23:20:20 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,37 @@ int	get_images(t_tex *tex, t_img *img)
 
 int	initiate_textures(t_app *app)
 {
-	app->pos->tex = malloc(5 * sizeof(t_tex));
+	ssize_t	y;
+	y = -1;
+	app->pos->px = malloc(SCREEN_HEIGHT * sizeof(uint32_t *));
+	while (++y < SCREEN_HEIGHT)
+		app->pos->px[y] = malloc(SCREEN_WIDTH * sizeof(uint32_t));
+
+	if (!app->pos->px)
+		exit_error(app, EXIT_MALLOC);
+	app->pos->tex = malloc(7 * sizeof(t_tex));
 	if (!app->pos->tex)
 		exit_error(app, EXIT_MALLOC);
 	app->pos->tex[0].file = app->pos->no;
 	app->pos->tex[1].file = app->pos->so;
 	app->pos->tex[2].file = app->pos->ea;
 	app->pos->tex[3].file = app->pos->we;
-	app->pos->tex[4].file = DOOR_TEX;
+	app->pos->tex[4].file = ROOF_TEX;
+	app->pos->tex[5].file = FLOOR_TEX;
+	app->pos->tex[6].file = DOOR_TEX;
+	// app->pos->tex[5].file = GHOST_TEX;
 	int	i = -1;
-	app->pos->textures = malloc(5 * sizeof(uint32_t *));
+	app->pos->textures = malloc(7 * sizeof(uint32_t *));
 	if (!app->pos->textures)
 		exit_error(app, EXIT_MALLOC);
-	while (++i < 5)
+	while (++i < 7)
 	{
 		app->pos->textures[i] = malloc(TEX_WIDTH * TEX_HEIGHT * sizeof(uint32_t));
 		if (!app->pos->textures[i])
 			exit_error(app, EXIT_MALLOC);
 	}
 	i = -1;
-	while (++i < 5)
+	while (++i < 7)
 	{
 		get_images(&app->pos->tex[i], app->img);
 		if (!app->pos->tex[i].data)

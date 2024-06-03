@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 18:39:34 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/03 23:21:01 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@
 # define TEX_WIDTH		64
 # define TEX_HEIGHT		64
 
+# define ROOF_TEX "./textures/roof.xpm"
+# define FLOOR_TEX "./textures/floor.xpm"
 # define DOOR_TEX "./textures/door.xpm"
+# define GHOST_TEX "./textures/ghost.xpm"
 
 # define N 0
 # define S 1
@@ -226,7 +229,7 @@ typedef struct s_pos
 	bool			motion_right;
 	bool			rotate_left;
 	bool			rotate_right;
-	int				**px;
+	uint32_t		**px;
 	char			wallDir;
 	t_tex			*tex;
 	uint32_t		**textures;
@@ -297,8 +300,9 @@ int	new_image(t_app *app);
 int	game_loop(t_app *app);
 int	initiate_textures(t_app *app);
 int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
-int	 draw_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex);
-int	draw_horizontal_texture(t_app *app, t_pos *pos, t_horiztex *horiztex);
+int	 get_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex);
+int	get_horizontal_texture(t_pos *pos, t_horiztex *horiztex);
 void	px_put(t_img *img, int x, int y, int color);
+void	draw_screen(t_pos *pos, t_img *img);
 
 #endif

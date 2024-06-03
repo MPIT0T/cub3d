@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    srcs.mk                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+         #
+#    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:18:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/06/03 11:15:18 by cefuente         ###   ########.fr        #
+#    Updated: 2024/06/03 23:17:34 by cesar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC_MAIN	=	main.c	\
 				key_events.c \
 				moove.c \
 				raycasting.c \
-				textures.c
+				wall_textures.c \
+				horizontal_textures.c
 
 MAIN	=	$(addprefix $(DIR_MAIN), $(SRC_MAIN))
 
