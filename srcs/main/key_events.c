@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:08:19 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/31 08:57:51 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/03 16:21:08 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int	change_motion_keypress(int key, t_app *app)
 		app->pos->motion_left = true;
 	if (app->pos->motion_right == false && key == XK_d)
 		app->pos->motion_right = true;
-	if (app->pos->rotate_left == false && key == XK_Left)
+	/*if (app->pos->rotate_left == false && key == XK_Left)
 		app->pos->rotate_left = true;
 	if (app->pos->rotate_right == false && key == XK_Right)
-		app->pos->rotate_right = true;
+		app->pos->rotate_right = true;*/
 	return (0);
 }
 
@@ -60,9 +60,37 @@ int	change_motion_keyrelease(int key, t_app *app)
 		app->pos->motion_left = false;
 	if (key == XK_d && app->pos->motion_right == true)
 		app->pos->motion_right = false;
-	if (key == XK_Left && app->pos->rotate_left == true)
+	/*if (key == XK_Left && app->pos->rotate_left == true)
 		app->pos->rotate_left = false;
 	if (key == XK_Right && app->pos->rotate_right == true)
-		app->pos->rotate_right = false;
+		app->pos->rotate_right = false;*/
 	return (0);	
+}
+
+int	mouse_motion(int x, int y, t_app *app)
+{
+	(void) y;
+	(void) x;
+	(void) app;
+	int		diff;
+
+	diff = abs(x - (SCREEN_WIDTH / 2));
+	app->pos->rotSpeed = ((double) diff) / 400;
+//	app->pos->rotSpeedSave = app->pos->rotSpeed;
+//	app->pos->rotSpeed = abs(x - (SCREEN_WIDTH / 2));
+	if (x < SCREEN_WIDTH / 2)
+		app->pos->rotate_left = true;
+	else
+	{
+		app->pos->rotate_left = false;
+//		app->pos->rotSpeed = app->pos->rotSpeedSave;
+	}
+	if (x > SCREEN_WIDTH / 2)
+		app->pos->rotate_right = true;
+	else
+	{
+		app->pos->rotate_right = false;
+//		app->pos->rotSpeed = app->pos->rotSpeedSave;
+	}
+	return (0);
 }

@@ -39,8 +39,9 @@ SRC_PARS	=	parsing.c			\
 				read_map_file.c		\
 				info_extract.c		\
 				info_verif.c		\
-				map_parsing.c			\
-				map_verif.c
+				map_parsing.c		\
+				map_verif.c			\
+				parsing_utils.c
 PARSING		=	$(addprefix $(DIR_PARS), $(SRC_PARS))
 
 DIR_EXIT	=	exit-management/

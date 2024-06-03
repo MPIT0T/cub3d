@@ -92,7 +92,6 @@ ARGS = "maps/map_subject.cub"
 
 leak: all .internal_separate3
 	@echo "$(MAGENTA)Valgrind $(WHITE)~ $(YELLOW)Flags:$(DEFAULT)"
-	@echo "   $(YELLOW)-$(DEFAULT)Suppressed Readline Lib"
 	@echo "   $(YELLOW)-$(DEFAULT)Show Leak Kinds"
 	@echo "   $(YELLOW)-$(DEFAULT)Track FDs"
 	@echo "   $(YELLOW)-$(DEFAULT)Show Mismatched Frees"

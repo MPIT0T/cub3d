@@ -6,11 +6,26 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 14:06:59 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/30 13:08:09 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/03 18:15:03 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+int	check_multiple_id_instances(char *str, char *id)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] && ft_strncmp(&str[i], id, ft_strlen(id)))
+		i++;
+	i++;
+	while (str[i] && ft_strncmp(&str[i], id, ft_strlen(id)))
+		i++;
+	if (str[i] != '\0')
+		return (1);
+	return (0);
+}
 
 static int	__verify_path(char *path)
 {

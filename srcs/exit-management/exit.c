@@ -37,6 +37,6 @@ void	exit_parsing_error(t_app *app, const char *msg)
 		perror(ERRMSG);
 	else
 		ft_printf_fd(2, "%s: %s\n", ERRMSG, msg);
-	free_app(app);
+	free_parsing_exit(app);
 	exit(EXIT_PARSING);
 }

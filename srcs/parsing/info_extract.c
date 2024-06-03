@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   info_extract.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 13:34:33 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 13:16:23 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:40:16 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,30 +85,27 @@ unsigned int	get_color(t_app *app, char *str, char *id)
 
 char	*get_texture(t_app *app, char *str, char *id)
 {
-	size_t	i;
-	size_t	j;
-	size_t	size;
-	char	*result;
+	t_triplet	var;
 
-	i = 0;
-	while (str[i] && ft_strncmp(&str[i], id, ft_strlen(id)))
-		i++;
-	if (str[i] == '\0')
+	var.a = 0;
+	while (str[var.a] && ft_strncmp(&str[var.a], id, ft_strlen(id)))
+	{
+		if ((var.a == 0 || str[var.a - 1] == '\n') && is_map_line(&str[var.a]))
+			return (NULL);
+		var.a++;
+	}
+	if (str[var.a] == '\0')
 		return (NULL);
-	i += ft_strlen(id);
-	while (str[i] && str[i] == ' ')
-		i++;
-	size = 0;
-	while (str[i + size] && !ft_isblank(str[i + size]) && str[i + size] != '\n')
-		size++;
-	j = 0;
-	while (str[i + size + j] && ft_isblank(str[i + size + j]))
-		j++;
-	if (str[i + size + j] && str[i + size + j] != '\n')
+	var.a += ft_strlen(id);
+	skip_blanks(str, &var.a);
+	var.c = 0;
+	while (str[var.a + var.c] && !ft_isblank(str[var.a + var.c])
+		&& str[var.a + var.c] != '\n')
+		var.c++;
+	var.b = 0;
+	while (str[var.a + var.c + var.b] && ft_isblank(str[var.a + var.c + var.b]))
+		var.b++;
+	if (str[var.a + var.c + var.b] && str[var.a + var.c + var.b] != '\n')
 		return (NULL);
-	result = malloc(sizeof(char) * (size + 1));
-	if (result == NULL)
-		exit_error(app, EXIT_MALLOC);
-	ft_strlcpy(result, &str[i], size + 1);
-	return (result);
+	return (ft_strndup(app, &str[var.a], var.c));
 }

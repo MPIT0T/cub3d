@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_verif.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 11:47:15 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 15:24:13 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:48:50 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,23 @@ int	verify_map_chars(char **map)
 {
 	size_t	i;
 	size_t	j;
+	int		player;
 
 	i = -1;
+	player = 0;
 	while (map[++i])
 	{
 		j = -1;
 		while (map[i][++j])
 		{
+			if (ft_strchr("NSWE", map[i][j]))
+				player++;
 			if (!ft_strchr(MAP_CHARS, map[i][j]))
 				return (1);
 		}
 	}
+	if (player != 1)
+		return (2);
 	return (0);
 }
 
@@ -58,11 +64,11 @@ int	verify_map_border(char **map)
 			{
 				if (map[i + 1] && map [i + 1][j] == ' ')
 					return (1);
-				if (map[i - 1] && map [i - 1][j] == ' ')
+				if (i == 0 || (map[i - 1] && map [i - 1][j] == ' '))
 					return (1);
 				if (map[i][j + 1] && map [i][j + 1] == ' ')
 					return (1);
-				if (map[i][j - 1] && map [i][j - 1] == ' ')
+				if (j == 0 || (map[i][j - 1] && map [i][j - 1] == ' '))
 					return (1);
 			}
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 14:51:56 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/03 11:48:09 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,13 @@
 /* ************************************************************************** */
 /*                                STRUCTS                                     */
 /* ************************************************************************** */
+
+typedef struct	s_triplet
+{
+	size_t	a;
+	size_t	b;
+	size_t	c;
+}	t_triplet;
 
 typedef	struct	s_connection
 {
@@ -212,6 +219,7 @@ typedef struct s_pos
 	double			oldPlaneX;
 	double			moveSpeed;
 	double			rotSpeed;
+	double			rotSpeedSave;
 	bool			motion_up;
 	bool			motion_down;
 	bool			motion_left;
@@ -259,6 +267,7 @@ char	*get_texture(t_app *app, char *str, char *id);
 //info_verif.c
 void	verify_infos(t_app *app);
 int		verify_color(t_color *color);
+int	check_multiple_id_instances(char *str, char *id);
 //map_parsing.c
 void	parse_map(t_app *app, char *full_file_string);
 //map_verif.c
@@ -266,6 +275,9 @@ int	is_map_line(char *str);
 int	verify_map_border(char **map);
 int	verify_map_chars(char **map);
 int	check_double_nl(const char *str);
+//parsing_utils.c
+void	skip_blanks(char *str, size_t *i);
+char	*ft_strndup(t_app *app, char *str, size_t size);
 
 /*   EXIT   */
 //exit.c
@@ -273,11 +285,13 @@ void	exit_error(t_app *app, int error);
 void	exit_parsing_error(t_app *app, const char *msg);
 //free.c
 void	free_app(t_app *app);
+void	free_parsing_exit(t_app *app);
 
 int	construct_app(t_app *app);
 int	initiate_mlx(t_app *app);
 int	change_motion_keypress(int key, t_app *app);
 int	change_motion_keyrelease(int key, t_app *app);
+int	mouse_motion(int x, int y, t_app *app);
 int	motion(t_app *app);
 int	new_image(t_app *app);
 int	game_loop(t_app *app);
