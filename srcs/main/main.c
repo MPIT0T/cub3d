@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/30 15:22:09 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/03 12:58:55 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,21 @@ void	ft_check_args(int ac, char **av)
 int    game_loop(t_app *app)
 {
 	motion(app);
-	new_image(app);
+	// new_image(app);
 	// new_image(app);
 	raycasting_loop(app->pos, app->img, app);
 	return (0);
 }
 
+int	little_red_cross(t_app *app)
+{
+	exit_error(app, EXIT_SUCCESS);
+	return (0);
+}
+
 int	init_hook(t_app *app)
 {
+	mlx_hook(app->img->mlx_win, 17, 0, little_red_cross, app);
 	mlx_hook(app->img->mlx_win, KeyPress, KeyPressMask, change_motion_keypress, app);
 	mlx_hook(app->img->mlx_win, KeyRelease, KeyReleaseMask, change_motion_keyrelease, app);
 	mlx_loop_hook(app->img->mlx, game_loop, app);
@@ -123,6 +130,7 @@ int main(int ac, char **av)
 	initiate_mlx(&app);
 	initiate_textures(&app);
 	raycasting_loop(app.pos, app.img, &app);
+	
 	init_hook(&app);
 	mlx_loop(app.img->mlx);
 	free_app(&app);

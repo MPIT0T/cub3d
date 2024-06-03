@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:34:59 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/30 12:01:10 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/03 13:26:58 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,25 @@ void	free_mlx(t_app *app)
 	free(app->img);
 }
 
+void	free_tex(t_app *app)
+{
+	size_t	i;
+
+	i = -1;
+	while (++i < 4)
+	{
+		mlx_destroy_image(app->img->mlx, app->pos->tex[i].img);
+		ft_free(app->pos->textures[i]);
+	}
+	ft_free(app->pos->tex);
+	ft_free(app->pos->textures);
+	ft_free(app->pos);
+}
+
 void	free_app(t_app *app)
 {
 	if (app)
 	{
-		free_mlx(app);
 		ft_free(app->pos->no);
 		ft_free(app->pos->so);
 		ft_free(app->pos->we);
@@ -39,6 +53,7 @@ void	free_app(t_app *app)
 		ft_free(app->full_file_string);
 		if (app->pos)
 			ft_free_tab(app->pos->map);
-		ft_free(app->pos);
+		free_tex(app);
+		free_mlx(app);
 	}
 }
