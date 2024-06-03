@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:43:28 by cesar             #+#    #+#             */
-/*   Updated: 2024/05/31 17:02:00 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/03 09:30:57 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,8 @@ static int	xline_textured(t_app *app, t_horiztex *horiztex, int start, int end)
 		horiztex->roof_tex_px = horiztex->roof_tex_content[TEX_WIDTH * horiztex->ty + horiztex->tx];
 		// (void) app;
 		px_put(app->img, start, horiztex->y, horiztex->floor_tex_px);
-		px_put(app->img, start, SCREEN_HEIGHT - horiztex->y - 1, SKY);
+		px_put(app->img, start, SCREEN_HEIGHT - horiztex->y - 1, BLACK);
 		start += delta_x;
-	}
-	return (0);
-}
-
-static int	yline_textured(t_app *app, t_walltex *walltex, int start, int end)
-{
-	float	delta_y;
-	float	px;
-	uint32_t color;
-
-	delta_y = end - start;
-	px = fabs(delta_y);
-	delta_y /= px;
-	while ((int)(start - end))
-	{
-		walltex->texY = (int)walltex->texPos & (TEX_HEIGHT - 1);
-		walltex->texPos += walltex->step;
-		color = walltex->tex_content[TEX_HEIGHT * walltex->texY + walltex->texX];
-		px_put(app->img, walltex->x, start, color);
-		start += delta_y;
 	}
 	return (0);
 }
@@ -95,6 +75,26 @@ int	draw_horizontal_texture(t_app *app, t_pos *pos, t_horiztex *horiztex)
 	return (0);
 }
 
+static int	yline_textured(t_app *app, t_walltex *walltex, int start, int end)
+{
+	float	delta_y;
+	float	px;
+	uint32_t color;
+
+	delta_y = end - start;
+	px = fabs(delta_y);
+	delta_y /= px;
+	while ((int)(start - end))
+	{
+		walltex->texY = (int)walltex->texPos & (TEX_HEIGHT - 1);
+		walltex->texPos += walltex->step;
+		color = walltex->tex_content[TEX_HEIGHT * walltex->texY + walltex->texX];
+		px_put(app->img, walltex->x, start, color);
+		start += delta_y;
+	}
+	return (0);
+}
+
 int	 draw_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex)
 {
 	if (pos->wallDir == 'N')
@@ -111,9 +111,9 @@ int	 draw_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex)
 	else
 		walltex->wallX = pos->posX + pos->perpWallDist * pos->rayDirX;
 	walltex->wallX -= floor(walltex->wallX);
-	walltex->texX = (int)(walltex->wallX * (double)64);
+	walltex->texX = (int)(walltex->wallX * (double)TEX_WIDTH);
 	if ((pos->side == 0 && pos->rayDirX > 0) || (pos->side == 1 && pos->rayDirY < 0))
-		walltex->texX *= -1;
+		walltex->texX = TEX_WIDTH - walltex->texX - 1;
 	walltex->step = (double)TEX_HEIGHT / pos->lineHeight;
 	walltex->texPos = walltex->step * (pos->drawStart - (SCREEN_HEIGHT * 0.5) + (pos->lineHeight * 0.5));
 	yline_textured(app, walltex, pos->drawStart, pos->drawEnd);
