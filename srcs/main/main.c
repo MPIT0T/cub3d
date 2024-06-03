@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/03 16:54:22 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/03 19:16:45 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,14 @@ int	initiate_positions(t_app *app)
 	app->pos->oldTime = 0;
 	app->pos->h = 1;
 	app->pos->moveSpeed = 0.05;
-	app->pos->rotSpeed = 0.00;
+	app->pos->rotSpeedArrows = 0.05;
+	app->pos->rotSpeedMouse = 0.00;
 	app->pos->motion_up = false;
 	app->pos->motion_down = false;
-	app->pos->rotate_left = false;
-	app->pos->rotate_right = false;
+	app->pos->rotate_left_arrows = false;
+	app->pos->rotate_right_arrows = false;
+	app->pos->rotate_right_mouse = false;
+	app->pos->rotate_right_mouse = false;
 	return (0);
 }
 
