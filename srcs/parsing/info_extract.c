@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   info_extract.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 13:34:33 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/30 13:25:28 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/03 13:16:23 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ unsigned int	get_color(t_app *app, char *str, char *id)
 	result |= color->r << 16;
 	result |= color->g << 8;
 	result |= color->b;
+	ft_free(color);
 	return (result);
 }
 

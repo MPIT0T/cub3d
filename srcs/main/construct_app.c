@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/03 11:11:25 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:00:47 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,9 @@ int	construct_app(t_app *app)
 	app->pos->f = 0;
 	app->pos->c = 0;
 	app->full_file_string = NULL;
+	app->pos->motion_up = false;
+	app->pos->motion_down = false;
+	app->pos->motion_left = false;
+	app->pos->motion_right = false;
 	return (0);
 }
