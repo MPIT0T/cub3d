@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/31 18:23:14 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/03 15:05:41 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,10 @@ static int	DDA(t_pos *pos)
 			else
 				pos->wallDir = 'S';
 		}
-		if (pos->map[pos->mapX][pos->mapY] == '1')
+		if (pos->map[pos->mapX][pos->mapY] == '1' || pos->map[pos->mapX][pos->mapY] == '2')
 			pos->hit = 1;
+		if (pos->map[pos->mapX][pos->mapY] == '2')
+			pos->wallDir = 'D';
 	}
 	return (0);
 }

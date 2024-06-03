@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:34:59 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 13:26:58 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/03 15:15:57 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	free_tex(t_app *app)
 	size_t	i;
 
 	i = -1;
-	while (++i < 4)
+	while (++i < 5)
 	{
 		mlx_destroy_image(app->img->mlx, app->pos->tex[i].img);
 		ft_free(app->pos->textures[i]);

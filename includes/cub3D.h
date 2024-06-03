@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 11:48:09 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:51:56 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define TEX_WIDTH		64
 # define TEX_HEIGHT		64
 
+# define DOOR_TEX "./textures/door.xpm"
+
 # define N 0
 # define S 1
 # define E 2
@@ -46,7 +48,7 @@
 # define WHITE			0xffffff
 # define GREY			0x242b38
 
-# define MAP_CHARS " 01NSWE"
+# define MAP_CHARS " 012NSWE"
 
 # define ID_NORTH "NO "
 # define ID_SOUTH "SO "

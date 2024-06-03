@@ -14,10 +14,14 @@
 
 static int		go_forward(t_pos *pos)
 {
-	if (pos->map[(int)(pos->posX + pos->dirX * pos->moveSpeed)][(int)pos->posY] != '1')
+	if (pos->map[(int)(pos->posX + pos->dirX * pos->moveSpeed)][(int)pos->posY] != '1' && pos->map[(int)(pos->posX + pos->dirX * pos->moveSpeed)][(int)pos->posY] != '2')
 		pos->posX += pos->dirX * pos->moveSpeed;
-	if (pos->map[(int)(pos->posX)][(int)(pos->posY + pos->dirY * pos->moveSpeed)] != '1')
+	if (pos->map[(int)(pos->posX)][(int)(pos->posY + pos->dirY * pos->moveSpeed)] != '1' && pos->map[(int)(pos->posX)][(int)(pos->posY + pos->dirY * pos->moveSpeed)] != '2')
 		pos->posY += pos->dirY * pos->moveSpeed;
+	if (pos->map[(int)(pos->posX + pos->dirX * pos->moveSpeed)][(int)pos->posY] == '2') 
+		pos->map[(int)(pos->posX + pos->dirX * pos->moveSpeed)][(int)pos->posY] = '3';
+	if (pos->map[(int)(pos->posX)][(int)(pos->posY + pos->dirY * pos->moveSpeed)] == '2')
+		pos->map[(int)(pos->posX)][(int)(pos->posY + pos->dirY * pos->moveSpeed)] = '3';
 	return (0);
 }
 

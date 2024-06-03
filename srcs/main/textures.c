@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:43:28 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/03 11:23:48 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:42:58 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	yline_textured(t_app *app, t_walltex *walltex, int start, int end)
 	return (0);
 }
 
-int	 draw_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex)
+static int	get_wallnum(t_walltex *walltex, t_pos *pos)
 {
 	if (pos->wallDir == 'N')
 		walltex->texNum = 0;
@@ -68,6 +68,14 @@ int	 draw_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex)
 		walltex->texNum = 2;
 	else if (pos->wallDir == 'W')
 		walltex->texNum = 3;
+	else if (pos->wallDir == 'D')
+		walltex->texNum = 4;
+	return (0);
+}
+
+int	 draw_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex)
+{
+	get_wallnum(walltex, pos);
 	walltex->tex_content = (uint32_t *)pos->tex[walltex->texNum].data;
 	if (pos->side == 0)
 		walltex->wallX = pos->posY + pos->perpWallDist * pos->rayDirY;
