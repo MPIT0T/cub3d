@@ -16,7 +16,7 @@ Install cub3d with makefile :
 
 Run it :
 ```bash
-./cub3d maps/<desired_map>.ber
+./cub3d maps/<desired_map>.cub
 ```
     
 ## Authors
