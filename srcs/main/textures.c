@@ -6,13 +6,13 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:43:28 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/03 11:01:05 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/03 11:23:48 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-static void	px_put(t_img *img, int x, int y, int color)
+void	px_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 

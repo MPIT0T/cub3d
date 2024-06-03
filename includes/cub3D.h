@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/03 11:17:22 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/03 11:25:16 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@
 /*                              DEFINES                                       */
 /* ************************************************************************** */
 
-# define SCREEN_WIDTH	900 //1920
-# define SCREEN_HEIGHT	500 //1080
+# define SCREEN_WIDTH	1920 //1920
+# define SCREEN_HEIGHT	1080 //1080
 # define TEX_WIDTH		64
 # define TEX_HEIGHT		64
-# define MAP_WIDTH		24
-# define MAP_HEIGHT		24
+// # define MAP_WIDTH		24
+// # define MAP_HEIGHT		24
 
 # define N 0
 # define S 1
@@ -47,6 +47,7 @@
 # define BROWN			0x7a5631
 # define BLACK			0x000000
 # define WHITE			0xffffff
+# define GREY			0x242b38
 
 # define MAP_CHARS " 01NSWE"
 
@@ -273,5 +274,6 @@ int	initiate_textures(t_app *app);
 int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
 int	 draw_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex);
 int	draw_horizontal_texture(t_app *app, t_pos *pos, t_horiztex *horiztex);
+void	px_put(t_img *img, int x, int y, int color);
 
 #endif
