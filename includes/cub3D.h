@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/31 16:52:01 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/03 10:14:44 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@
 # define YELLOW_SIDE	0xa67924
 # define BROWN			0x7a5631
 # define BLACK			0x000000
-# define SKY (rand() < RAND_MAX * 0.9999 ? BLACK : YELLOW)
+# define GREY 			0x0e1b33
+// # define SKY (rand() < RAND_MAX * 0.99999 ? BLACK : YELLOW)
 
 # define ERRMSG "\e[0;91mError\e[0m"
 

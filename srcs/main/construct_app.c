@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   construct_app.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/05/31 16:32:55 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/03 11:11:25 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/cub3D.h"
 
@@ -27,28 +26,25 @@ int	get_images(t_tex *tex, t_img *img)
 
 int	initiate_textures(t_app *app)
 {
-	app->pos->tex = malloc(6 * sizeof(t_tex));
+	app->pos->tex = malloc(4 * sizeof(t_tex));
 	if (!app->pos->tex)
 		exit_error(app, EXIT_MALLOC);
-
 	app->pos->tex[0].file = app->pos->no;
 	app->pos->tex[1].file = app->pos->so;
 	app->pos->tex[2].file = app->pos->ea;
 	app->pos->tex[3].file = app->pos->we;
-	app->pos->tex[4].file = "./textures/roof.xpm";
-	app->pos->tex[5].file = "./textures/wall_blank.xpm";
 	int	i = -1;
-	app->pos->textures = malloc(6 * sizeof(uint32_t *));
+	app->pos->textures = malloc(4 * sizeof(uint32_t *));
 	if (!app->pos->textures)
 		exit_error(app, EXIT_MALLOC);
-	while (++i < 6)
+	while (++i < 4)
 	{
 		app->pos->textures[i] = malloc(TEX_WIDTH * TEX_HEIGHT * sizeof(uint32_t));
 		if (!app->pos->textures[i])
 			exit_error(app, EXIT_MALLOC);
 	}
 	i = -1;
-	while (++i < 6)
+	while (++i < 4)
 	{
 		get_images(&app->pos->tex[i], app->img);
 		if (!app->pos->tex[i].data)

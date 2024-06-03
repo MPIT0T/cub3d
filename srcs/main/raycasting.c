@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/03 09:30:02 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/03 11:11:47 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static int	get_ray_length(t_pos *pos, int x)
 	pos->rayDirY = pos->dirY + pos->planeY * pos->cameraX;
 	pos->mapX = (int)pos->posX;
 	pos->mapY = (int)pos->posY;
-
 	if (pos->rayDirX == 0)
 		pos->deltaDistX = 1e30;
 	else
@@ -107,10 +106,8 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 {
 	size_t		x;
 	t_walltex	walltex;
-	t_horiztex	horiztex;
 	
 	x = -1;
-	draw_horizontal_texture(app, pos, &horiztex);
 	while (++x < SCREEN_WIDTH)
 	{
 		get_ray_length(pos, x);
