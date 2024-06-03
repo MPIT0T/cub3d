@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 11:48:09 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:56:04 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,7 @@ typedef struct s_pos
 	double			oldPlaneX;
 	double			moveSpeed;
 	double			rotSpeed;
+	double			rotSpeedSave;
 	bool			motion_up;
 	bool			motion_down;
 	bool			motion_left;
@@ -276,6 +277,7 @@ int	construct_app(t_app *app);
 int	initiate_mlx(t_app *app);
 int	change_motion_keypress(int key, t_app *app);
 int	change_motion_keyrelease(int key, t_app *app);
+int	mouse_motion(int x, int y, t_app *app);
 int	motion(t_app *app);
 int	new_image(t_app *app);
 int	game_loop(t_app *app);

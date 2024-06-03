@@ -54,7 +54,7 @@ int	verify_map_border(char **map)
 		j = -1;
 		while (map[i][++j])
 		{
-			if (map[i][j] == '0')
+			if (map[i][j] == '0')		//TODO segfault
 			{
 				if (map[i + 1] && map [i + 1][j] == ' ')
 					return (1);
