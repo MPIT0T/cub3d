@@ -6,13 +6,14 @@
 #    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:18:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/06/03 23:17:34 by cesar            ###   ########.fr        #
+#    Updated: 2024/06/04 23:36:46 by cesar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	=	$(MAIN)		\
 			$(MINIMAP)	\
 			$(PARSING)	\
+			$(GHOSTS)	\
 			$(EXIT)
 
 
@@ -34,6 +35,13 @@ SRC_MINI	=	minimap.c	\
 				minimap_utils.c
 MINIMAP	=	$(addprefix $(DIR_MINI), $(SRC_MINI))
 
+DIR_GHOSTS	=	ghosts/
+SRC_GHOSTS	=	spawn.c \
+				create.c \
+				pathfinding.c \
+				target_player.c \
+				spritecasting.c 
+GHOSTS	=	$(addprefix $(DIR_GHOSTS), $(SRC_GHOSTS))
 
 DIR_PARS	=	parsing/
 SRC_PARS	=	parsing.c			\

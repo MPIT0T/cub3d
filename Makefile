@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/06/03 13:28:09 by mpitot           ###   ########.fr        #
+#    Updated: 2024/06/04 01:37:13 by cesar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ ${NAME}	:	${OBJ_D} ${OBJS} libft/libft.a
 ${OBJ_D}:
 	@mkdir -p ${OBJ_D}
 	@mkdir -p ${OBJ_D}main
+	@mkdir -p ${OBJ_D}ghosts
 	@mkdir -p ${OBJ_D}minimap
 	@mkdir -p ${OBJ_D}parsing
 	@mkdir -p ${OBJ_D}exit-management

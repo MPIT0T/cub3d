@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 23:07:41 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/03 23:27:16 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/03 23:33:50 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	get_horizontal_texture(t_pos *pos, t_horiztex *horiztex)
 		horiztex->rayDirX1 = pos->dirX + pos->planeX;
 		horiztex->rayDirY1 = pos->dirY + pos->planeY;
 		horiztex->p = y - SCREEN_HEIGHT * 0.5;
-		horiztex->posZ = SCREEN_HEIGHT * 5;
+		horiztex->posZ = SCREEN_HEIGHT * 0.5;
 		horiztex->rowDistance = horiztex->posZ / horiztex->p;
 		horiztex->floorStepX = horiztex->rowDistance * (horiztex->rayDirX1 - horiztex->rayDirX0) / SCREEN_WIDTH;
 		horiztex->floorStepY = horiztex->rowDistance * (horiztex->rayDirY1 - horiztex->rayDirY0) / SCREEN_WIDTH;

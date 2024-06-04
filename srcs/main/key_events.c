@@ -6,11 +6,25 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:08:19 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/03 18:39:48 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/03 23:59:57 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+void	clear_px_buffer(uint32_t **px)
+{
+	ssize_t	y;
+	ssize_t	x;
+
+	y = -1;
+	x = -1;
+	while (++y < SCREEN_HEIGHT)
+	{
+		while (++x < SCREEN_WIDTH)
+			px[y][x] = 0;
+	}
+}
 
 int		new_image(t_app *app)
 {

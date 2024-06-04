@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/03 18:56:26 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/04 11:33:22 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ int	game_loop(t_app *app)
 {
 	mlx_mouse_move(app->img->mlx, app->img->mlx_win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	motion(app);
-	// new_image(app);
-	// new_image(app);
+	clear_px_buffer(app->pos->px);
+	new_image(app);
+	print_map(app->pos);
+	ghosts_are_coming(app);
 	raycasting_loop(app->pos, app->img, app);
 	return (0);
 }
@@ -133,6 +135,8 @@ int main(int ac, char **av)
 	initiate_positions(&app);
 	initiate_mlx(&app);
 	initiate_textures(&app);
+	if (pop_some_ghosts(&app) == 1)
+		exit_error(&app, EXIT_MALLOC);
 	raycasting_loop(app.pos, app.img, &app);
 	init_hook(&app);
 	mlx_loop(app.img->mlx);

@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 23:21:01 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/04 23:36:14 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@
 # define S 1
 # define E 2
 # define W 3
+
+# define GHOSTS_NUMBER 3
 
 # define BLUE			0x3a8399
 # define RED			0xFF0000
@@ -79,6 +81,25 @@
 /*                                STRUCTS                                     */
 /* ************************************************************************** */
 
+typedef struct	s_sptr
+{
+	double	x;
+	double	y;
+	double	invDet;
+	double	trans_X;
+	double	trans_Y;
+	int		spriteScreenX;
+	int		height;
+	int		width;
+	int		y_start;
+	int		x_start;
+	int		y_end;
+	int		x_end;
+	int		tex_x;
+	int		tex_y;
+	uint32_t	*tex_content;
+}	t_sprt;
+
 typedef struct	s_triplet
 {
 	size_t	a;
@@ -109,6 +130,20 @@ typedef struct	s_minimap
 	int		mapSizeX;
 	int		mapSizeY;
 }	t_minimap;
+
+typedef struct	s_ghost
+{
+	double	x;
+	double	y;
+	char	dir;
+	int		dir_x;
+	int		dir_y;
+	double	move_speed;
+	char	*dirset;
+	char	*x_dirs_pref;
+	char	*y_dirs_pref;
+	double	player_dist;
+}	t_ghost;
 
 typedef struct	s_img
 {
@@ -233,6 +268,7 @@ typedef struct s_pos
 	char			wallDir;
 	t_tex			*tex;
 	uint32_t		**textures;
+	int				*z_prox;
 
 } t_pos;
 
@@ -242,6 +278,8 @@ typedef struct s_app
 	t_pos	*pos;
 	t_img	*img;
 	char	*full_file_string;
+	t_ghost	*ghosts;
+	t_list	**ghosts_lst;
 }	t_app;
 
 /* ************************************************************************** */
@@ -290,19 +328,30 @@ void	exit_parsing_error(t_app *app, const char *msg);
 void	free_app(t_app *app);
 void	free_parsing_exit(t_app *app);
 
-int	construct_app(t_app *app);
-int	initiate_mlx(t_app *app);
-int	change_motion_keypress(int key, t_app *app);
-int	change_motion_keyrelease(int key, t_app *app);
-int	mouse_motion(int x, int y, t_app *app);
-int	motion(t_app *app);
-int	new_image(t_app *app);
-int	game_loop(t_app *app);
-int	initiate_textures(t_app *app);
-int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
-int	 get_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex);
-int	get_horizontal_texture(t_pos *pos, t_horiztex *horiztex);
+int		construct_app(t_app *app);
+int		initiate_mlx(t_app *app);
+int		change_motion_keypress(int key, t_app *app);
+int		change_motion_keyrelease(int key, t_app *app);
+int		mouse_motion(int x, int y, t_app *app);
+int		motion(t_app *app);
+int		new_image(t_app *app);
+int		game_loop(t_app *app);
+int		initiate_textures(t_app *app);
+int		raycasting_loop(t_pos *pos, t_img *img, t_app *app);
+int		get_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex);
+int		get_horizontal_texture(t_pos *pos, t_horiztex *horiztex);
+void	which_dir(t_pos *pos, char *set, int asdlfk);
 void	px_put(t_img *img, int x, int y, int color);
 void	draw_screen(t_pos *pos, t_img *img);
+void	clear_px_buffer(uint32_t **px);
+
+/* GHOSTS */
+int		get_opposite_of_player(t_pos *pos);
+int		spawning_point(t_pos *pos, t_ghost *ghost, int quarter);
+int		pop_some_ghosts(t_app *app);
+void 	print_map(t_pos *pos);
+int		ghosts_are_coming(t_app *app);
+int		sort_and_cast_sprites(t_pos *pos, t_list **ghosts_lst);
+
 
 #endif

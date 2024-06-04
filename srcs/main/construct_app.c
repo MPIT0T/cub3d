@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/03 23:20:20 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/04 23:43:39 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@ int	initiate_textures(t_app *app)
 	app->pos->px = malloc(SCREEN_HEIGHT * sizeof(uint32_t *));
 	while (++y < SCREEN_HEIGHT)
 		app->pos->px[y] = malloc(SCREEN_WIDTH * sizeof(uint32_t));
-
 	if (!app->pos->px)
 		exit_error(app, EXIT_MALLOC);
-	app->pos->tex = malloc(7 * sizeof(t_tex));
+	app->pos->tex = malloc(8 * sizeof(t_tex));
 	if (!app->pos->tex)
 		exit_error(app, EXIT_MALLOC);
 	app->pos->tex[0].file = app->pos->no;
@@ -44,24 +43,25 @@ int	initiate_textures(t_app *app)
 	app->pos->tex[4].file = ROOF_TEX;
 	app->pos->tex[5].file = FLOOR_TEX;
 	app->pos->tex[6].file = DOOR_TEX;
-	// app->pos->tex[5].file = GHOST_TEX;
+	app->pos->tex[7].file = GHOST_TEX;
 	int	i = -1;
-	app->pos->textures = malloc(7 * sizeof(uint32_t *));
+	app->pos->textures = malloc(8 * sizeof(uint32_t *));
 	if (!app->pos->textures)
 		exit_error(app, EXIT_MALLOC);
-	while (++i < 7)
+	while (++i < 8)
 	{
 		app->pos->textures[i] = malloc(TEX_WIDTH * TEX_HEIGHT * sizeof(uint32_t));
 		if (!app->pos->textures[i])
 			exit_error(app, EXIT_MALLOC);
 	}
 	i = -1;
-	while (++i < 7)
+	while (++i < 8)
 	{
 		get_images(&app->pos->tex[i], app->img);
 		if (!app->pos->tex[i].data)
 			exit_error(app, EXIT_MLX);
 	}
+
 	return (0);
 }
 
@@ -99,6 +99,9 @@ int	construct_app(t_app *app)
 	app->pos = malloc(sizeof(t_pos));
 	if (!app->pos)
 		return (1);
+	app->pos->z_prox = malloc(SCREEN_WIDTH * sizeof(int));
+	if (!app->pos->z_prox)
+		return (1);
 	app->pos->no = NULL;
 	app->pos->so = NULL;
 	app->pos->ea = NULL;
@@ -111,5 +114,6 @@ int	construct_app(t_app *app)
 	app->pos->motion_down = false;
 	app->pos->motion_left = false;
 	app->pos->motion_right = false;
+
 	return (0);
 }
