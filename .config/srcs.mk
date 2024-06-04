@@ -12,6 +12,7 @@
 
 SRCS	=	$(MAIN)		\
 			$(MINIMAP)	\
+			$(DOORS)	\
 			$(PARSING)	\
 			$(EXIT)
 
@@ -32,6 +33,10 @@ DIR_MINI	=	minimap/
 SRC_MINI	=	minimap.c	\
 				minimap_utils.c
 MINIMAP	=	$(addprefix $(DIR_MINI), $(SRC_MINI))
+
+DIR_DOORS	=	doors/
+SRC_DOORS	=	doors.c
+DOORS	=	$(addprefix $(DIR_DOORS), $(SRC_DOORS))
 
 
 DIR_PARS	=	parsing/

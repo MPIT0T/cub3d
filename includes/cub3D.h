@@ -32,7 +32,7 @@
 # define TEX_WIDTH		64
 # define TEX_HEIGHT		64
 
-# define DOOR_TEX "./textures/door.xpm"
+# define DOOR_TEX "./textures/v2_door.xpm"
 
 # define N 0
 # define S 1
