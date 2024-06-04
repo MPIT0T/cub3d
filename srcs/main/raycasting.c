@@ -66,9 +66,9 @@ static int	DDA(t_pos *pos)
 			pos->mapX += pos->stepX;
 			pos->side = 0;
 			if (pos->rayDirX < 0)
-				pos->wallDir = 'W';
+				pos->wallDir = 'N';
 			else
-				pos->wallDir = 'E';
+				pos->wallDir = 'S';
 		}
 		else
 		{
@@ -76,9 +76,9 @@ static int	DDA(t_pos *pos)
 			pos->mapY += pos->stepY;
 			pos->side = 1;
 			if (pos->rayDirY < 0)
-				pos->wallDir = 'N';
+				pos->wallDir = 'W';
 			else
-				pos->wallDir = 'S';
+				pos->wallDir = 'E';
 		}
 		if (pos->map[pos->mapX][pos->mapY] == '1' || pos->map[pos->mapX][pos->mapY] == '2')
 			pos->hit = 1;
