@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:34:59 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 13:26:58 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/05 17:18:04 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void	freetab(void **tab, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+		free(tab[i++]);
+	free(tab);
+}
 
 void	free_mlx(t_app *app)
 {
@@ -32,7 +42,7 @@ void	free_tex(t_app *app)
 	size_t	i;
 
 	i = -1;
-	while (++i < 5)
+	while (++i < 8)
 	{
 		mlx_destroy_image(app->img->mlx, app->pos->tex[i].img);
 		ft_free(app->pos->textures[i]);
@@ -40,6 +50,20 @@ void	free_tex(t_app *app)
 	ft_free(app->pos->tex);
 	ft_free(app->pos->textures);
 	ft_free(app->pos);
+}
+
+void	free_ghosts(t_list **lst, t_ghost *ghosts)
+{
+	ssize_t	i;
+
+	i = -1;
+	while (++i < GHOSTS_NUMBER)
+	{
+		free(ghosts[i].x_dirs_pref);
+		free(ghosts[i].y_dirs_pref);
+	}
+	free(ghosts);
+	lstfree(lst);
 }
 
 void	free_app(t_app *app)
@@ -52,7 +76,12 @@ void	free_app(t_app *app)
 		ft_free(app->pos->ea);
 		ft_free(app->full_file_string);
 		if (app->pos)
+		{
 			ft_free_tab(app->pos->map);
+			freetab((void **)app->pos->px, SCREEN_HEIGHT);
+		}
+		free(app->pos->z_prox);
+		free_ghosts(&app->ghosts_lst, app->ghosts);
 		free_tex(app);
 		free_mlx(app);
 	}

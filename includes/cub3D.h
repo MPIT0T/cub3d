@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/05 15:52:16 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 16:58:22 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -361,5 +361,6 @@ void 	print_map(t_pos *pos);
 int		ghosts_are_coming(t_app *app);
 int		sort_and_cast_sprites(t_pos *pos, t_list **ghosts_lst);
 void	sort_list(t_list **head);
+void	lstfree(t_list **lst);
 
 #endif

@@ -6,12 +6,26 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 09:33:00 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/05 09:33:19 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 16:58:13 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
+void	lstfree(t_list **lst)
+{
+	t_list	*tmp;
+
+	if (!*lst || !lst)
+		return ;
+	while (*lst != NULL)
+	{
+		tmp = (*lst)->next;
+		free(*lst);
+		*lst = tmp;
+	}
+	*lst = NULL;
+}
 
 void swap(t_list *a, t_list *b)
 {
