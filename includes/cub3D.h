@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 19:00:14 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/05 11:37:21 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ typedef struct s_pos
 	unsigned int	f;
 	ssize_t			MAP_WIDTH;
 	ssize_t			MAP_HEIGHT;
+	size_t			column;
 	double			posX;
 	double			posY;
 	double			dirX;
@@ -199,6 +200,7 @@ typedef struct s_pos
 	double			cameraX; //x-coordinate in camera space
 	double			rayDirX;
 	double			rayDirY;
+	bool			pointing_door;
 	int				mapX; //which box of the map we're in
 	int				mapY;
 	double			sideDistX; //length of ray from current position to next x or y-side

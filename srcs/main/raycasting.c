@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/03 15:05:41 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/05 11:37:21 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,10 @@ static int	DDA(t_pos *pos)
 			pos->hit = 1;
 		if (pos->map[pos->mapX][pos->mapY] == '2')
 			pos->wallDir = 'D';
+		if (pos->column == SCREEN_WIDTH / 2 && pos->map[pos->mapX][pos->mapY] == '2')
+			pos->pointing_door = true;
+		if (pos->column == SCREEN_WIDTH / 2 && pos->map[pos->mapX][pos->mapY] != '2')
+			pos->pointing_door = false;
 	}
 	return (0);
 }
@@ -112,6 +116,7 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 	x = -1;
 	while (++x < SCREEN_WIDTH)
 	{
+		pos->column = x;
 		get_ray_length(pos, x);
 		get_tile_size(pos);
 		DDA(pos);
@@ -119,9 +124,9 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 		walltex.x = x;
 		draw_wall_texture(app, pos, &walltex);
     }
+//	put_crosshair(app);
 	put_minimap(app);
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
 		img->img, 0, 0);
 	return 0;
 }
-

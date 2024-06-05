@@ -75,6 +75,7 @@ int	initiate_mlx(t_app *app)
 			&app->img->line_length, &app->img->endian);
 	if (!app->img->addr)
 		exit_error(app, EXIT_MALLOC);
+	mlx_mouse_move(app->img->mlx, app->img->mlx_win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	return (0);
 }
 
