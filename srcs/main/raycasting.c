@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/05 11:37:21 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/05 15:22:15 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,13 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 		line_height(pos);
 		walltex.x = x;
 		draw_wall_texture(app, pos, &walltex);
-    }
+	}
+	/*if (pos->pointing_door)
+		write(1, "A", 1);
+	else
+		write(1, "B", 1);*/
 //	put_crosshair(app);
+//	put_door_button(app);
 	put_minimap(app);
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
 		img->img, 0, 0);

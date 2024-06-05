@@ -305,4 +305,6 @@ int	 draw_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex);
 int	draw_horizontal_texture(t_app *app, t_pos *pos, t_horiztex *horiztex);
 void	px_put(t_img *img, int x, int y, int color);
 
+int		put_door_button(t_app *app);
+
 #endif

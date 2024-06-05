@@ -121,6 +121,7 @@ int	initiate_positions(t_app *app)
 	app->pos->rotate_right_arrows = false;
 	app->pos->rotate_right_mouse = false;
 	app->pos->rotate_right_mouse = false;
+	app->pos->pointing_door = false;
 	return (0);
 }
 
