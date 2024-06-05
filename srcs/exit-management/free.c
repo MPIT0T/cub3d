@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:34:59 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/05 17:18:04 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 17:23:07 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	free_tex(t_app *app)
 	ft_free(app->pos);
 }
 
-void	free_ghosts(t_list **lst, t_ghost *ghosts)
+void	free_ghosts(t_list **lst, t_ghost *ghosts, int map_width)
 {
 	ssize_t	i;
 
@@ -61,6 +61,8 @@ void	free_ghosts(t_list **lst, t_ghost *ghosts)
 	{
 		free(ghosts[i].x_dirs_pref);
 		free(ghosts[i].y_dirs_pref);
+		if (ghosts[i].memory)
+			freetab((void **)ghosts[i].memory, map_width);
 	}
 	free(ghosts);
 	lstfree(lst);
@@ -81,7 +83,7 @@ void	free_app(t_app *app)
 			freetab((void **)app->pos->px, SCREEN_HEIGHT);
 		}
 		free(app->pos->z_prox);
-		free_ghosts(&app->ghosts_lst, app->ghosts);
+		free_ghosts(&app->ghosts_lst, app->ghosts, app->pos->MAP_WIDTH);
 		free_tex(app);
 		free_mlx(app);
 	}

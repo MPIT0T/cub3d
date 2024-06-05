@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/05 16:58:22 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 17:52:12 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,8 @@ typedef struct	s_ghost
 	double	player_dist;
 	int		is_theone;
 	int		rank;
+	char	**memory;
+	bool	bored;
 }	t_ghost;
 
 typedef struct	s_img
