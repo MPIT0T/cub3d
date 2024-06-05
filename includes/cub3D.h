@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/04 23:36:14 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 01:46:58 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,8 @@ typedef struct	s_ghost
 	char	*x_dirs_pref;
 	char	*y_dirs_pref;
 	double	player_dist;
+	int		is_theone;
+	int		rank;
 }	t_ghost;
 
 typedef struct	s_img
@@ -279,7 +281,7 @@ typedef struct s_app
 	t_img	*img;
 	char	*full_file_string;
 	t_ghost	*ghosts;
-	t_list	**ghosts_lst;
+	t_list	*ghosts_lst;
 }	t_app;
 
 /* ************************************************************************** */
@@ -352,6 +354,28 @@ int		pop_some_ghosts(t_app *app);
 void 	print_map(t_pos *pos);
 int		ghosts_are_coming(t_app *app);
 int		sort_and_cast_sprites(t_pos *pos, t_list **ghosts_lst);
+
+/* SORT*/
+void	swap(t_list *lst);
+void	sa(t_list **la);
+void	rra(t_list **la);
+void	reverse_rotate(t_list **lst);
+void	reverse_rotate_to(char list, t_list **lst);
+void	pa(t_list **la, t_list **lb);
+void	pb(t_list **lb, t_list **la);
+void	rotate(t_list **lst);
+void	rotate_to(char list, t_list **lst);
+void	ra(t_list **la);
+void	push(t_list **dest, t_list **src);
+t_list	*lstblast(t_list *lst);
+void	lstfree(t_list **lst);
+int		sort_sprites(t_list **la);
+int		get_lowest(t_list *lst);
+int		cost(t_list *lst, int size);
+void	rb(t_list **lb);
+void	lil_sort(t_list **la, t_list **lb);
+void	get_rank(t_list **la);
+int	get_max(t_list *la);
 
 
 #endif

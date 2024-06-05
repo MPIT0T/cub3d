@@ -6,33 +6,23 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:42:31 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/04 23:42:42 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 02:19:41 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-static int	sort_sprites(t_pos *pos, t_list **ghosts_lst)
+static int	set_player_dist(t_pos *pos, t_list **lst)
 {
 	t_list	*tmp;
-	t_list	*next;
-	int		swapped;
 
-	swapped = 1;
-	tmp = *ghosts_lst;
-	while (swapped)
+	tmp = *lst;
+	while (tmp)
 	{
 		((t_ghost *)tmp->content)->player_dist = ((pos->posX - ((t_ghost *)tmp->content)->x)
 			* (pos->posX - ((t_ghost *)tmp->content)->x)
 			+ (pos->posY - ((t_ghost *)tmp->content)->y)
 			* (pos->posY - ((t_ghost *)tmp->content)->y));
-		next = tmp->next;
-		if (((t_ghost *)tmp->next->content)->player_dist > ((t_ghost *)tmp->next->content)->player_dist)
-		{
-			tmp->content = ((t_ghost *)tmp->next->content);
-			next->content = (t_ghost *)tmp->content;
-			swapped = 1;
-		}
 		tmp = tmp->next;
 	}
 	return (0);
@@ -57,7 +47,7 @@ static void	find_sprites_to_render(t_sprt *sprt, t_pos *pos)
 			{
 				d = y * 256 - SCREEN_HEIGHT * 128 + sprt->height * 128;
 				sprt->tex_y = ((d * TEX_HEIGHT) / sprt->height) / 256;
-				color = sprt->tex_content[TEX_HEIGHT * sprt->tex_y + sprt->tex_x];
+				color = sprt->tex_content[TEX_WIDTH * sprt->tex_y + sprt->tex_x];
 				pos->px[y][x] = color;
 			}
 		}
@@ -93,11 +83,60 @@ static void	cast_sprites(t_pos *pos, t_list **ghosts_lst, t_sprt *sprt)
 	}
 }
 
+void swapp(t_list *a, t_list *b)
+{
+	t_ghost *tmp;
+	
+	tmp = a->content;
+	a->content = b->content;
+	b->content = tmp;
+}
+
+void sort_list(t_list **head)
+{
+	int swapped;
+	t_list *ptr1;
+	t_list *lptr;
+	
+	lptr = NULL;
+	swapped = 1;
+	while (swapped)
+	{
+		swapped = 0;
+		ptr1 = *head;
+		while (ptr1->next != lptr)
+		{
+			if (((t_ghost *)ptr1->content)->player_dist < ((t_ghost *)ptr1->next->content)->player_dist)
+			{
+				swapp(ptr1, ptr1->next);
+				swapped = 1;
+			}
+			ptr1 = ptr1->next;
+		}
+		lptr = ptr1;
+	}
+}
+
+void	print_sorted(t_list *la)
+{
+	while (la)
+	{
+		printf("dist is %f\n", ((t_ghost *)la->content)->player_dist);
+		la = la->next;
+	}
+	printf("\n\n");
+}
+
 int	sort_and_cast_sprites(t_pos *pos, t_list **ghosts_lst)
 {
 	t_sprt	sprt;
+	t_list	*start;
 
-	sort_sprites(pos, ghosts_lst);
-	cast_sprites(pos, ghosts_lst, &sprt);
+	start = *ghosts_lst;
+	set_player_dist(pos, ghosts_lst);
+	// sort_sprites(ghosts_lst);
+	sort_list(&start);
+	print_sorted(*ghosts_lst);
+	cast_sprites(pos, &start, &sprt);
 	return (0);
 }

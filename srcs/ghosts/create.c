@@ -6,11 +6,36 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/04 23:45:31 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 01:56:39 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+static t_list	*ft_lstnew_here(void *content)
+{
+	t_list	*node;
+
+	node = malloc(sizeof(t_list));
+	if (!node)
+		return (NULL);
+	node->content = content;
+	node->next = 0;
+	return (node);
+}
+
+static void	ft_lstadd_back_here(t_list **lst, t_list *new)
+{
+	t_list	*last;
+
+	if (*lst)
+	{
+		last = ft_lstlast(*lst);
+		last->next = new;
+	}
+	else
+		*lst = new;
+}
 
 void 	print_map(t_pos *pos)
 {
@@ -111,10 +136,10 @@ int	pop_some_ghosts(t_app *app)
 		if (generate_dir_charset(&app->ghosts[i]) == 1)
 			exit_error(app, EXIT_MALLOC);
 		initial_direction(&app->ghosts[i]);
-		new = ft_lstnew(&app->ghosts[i]);
+		new = ft_lstnew_here(&app->ghosts[i]);
 		if (!new)
 			exit_error(app, EXIT_MALLOC);
-		ft_lstadd_back(app->ghosts_lst, new);
+		ft_lstadd_back_here(&app->ghosts_lst, new);
 	}
 	return (0);
 }

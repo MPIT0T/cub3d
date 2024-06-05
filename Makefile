@@ -6,7 +6,7 @@
 #    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/06/04 01:37:13 by cesar            ###   ########.fr        #
+#    Updated: 2024/06/05 01:21:58 by cesar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ ${OBJ_D}:
 	@mkdir -p ${OBJ_D}
 	@mkdir -p ${OBJ_D}main
 	@mkdir -p ${OBJ_D}ghosts
+	@mkdir -p ${OBJ_D}ghosts/sort
 	@mkdir -p ${OBJ_D}minimap
 	@mkdir -p ${OBJ_D}parsing
 	@mkdir -p ${OBJ_D}exit-management
