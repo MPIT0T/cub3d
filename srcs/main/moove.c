@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:26:34 by cefuente          #+#    #+#             */
-/*   Updated: 2024/05/30 15:34:42 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/03 19:47:07 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,47 @@ static int		go_right(t_pos *pos)
     return (0);
 }
 
-static int	rotate_left(t_pos *pos)
+static int	rotate_left_arrows(t_pos *pos)
 {
 	pos->oldDirX = pos->dirX;
-	pos->dirX = pos->dirX * cos(pos->rotSpeed) - pos->dirY * sin(pos->rotSpeed);
-	pos->dirY = pos->oldDirX * sin(pos->rotSpeed) + pos->dirY * cos(pos->rotSpeed);
+	pos->dirX = pos->dirX * cos(pos->rotSpeedArrows) - pos->dirY * sin(pos->rotSpeedArrows);
+	pos->dirY = pos->oldDirX * sin(pos->rotSpeedArrows) + pos->dirY * cos(pos->rotSpeedArrows);
 	pos->oldPlaneX = pos->planeX;
-	pos->planeX = pos->planeX * cos(pos->rotSpeed) - pos->planeY * sin(pos->rotSpeed);
-	pos->planeY = pos->oldPlaneX * sin(pos->rotSpeed) + pos->planeY * cos(pos->rotSpeed);
+	pos->planeX = pos->planeX * cos(pos->rotSpeedArrows) - pos->planeY * sin(pos->rotSpeedArrows);
+	pos->planeY = pos->oldPlaneX * sin(pos->rotSpeedArrows) + pos->planeY * cos(pos->rotSpeedArrows);
 	return (0);
 }
 
-static int	rotate_right(t_pos *pos)
+static int	rotate_right_arrows(t_pos *pos)
 {
 	pos->oldDirX = pos->dirX;
-	pos->dirX = pos->dirX * cos(-pos->rotSpeed) - pos->dirY * sin(-pos->rotSpeed);
-	pos->dirY = pos->oldDirX * sin(-pos->rotSpeed) + pos->dirY * cos(-pos->rotSpeed);
+	pos->dirX = pos->dirX * cos(-pos->rotSpeedArrows) - pos->dirY * sin(-pos->rotSpeedArrows);
+	pos->dirY = pos->oldDirX * sin(-pos->rotSpeedArrows) + pos->dirY * cos(-pos->rotSpeedArrows);
 	pos->oldPlaneX = pos->planeX;
-	pos->planeX = pos->planeX * cos(-pos->rotSpeed) - pos->planeY * sin(-pos->rotSpeed);
-	pos->planeY = pos->oldPlaneX * sin(-pos->rotSpeed) + pos->planeY * cos(-pos->rotSpeed);
+	pos->planeX = pos->planeX * cos(-pos->rotSpeedArrows) - pos->planeY * sin(-pos->rotSpeedArrows);
+	pos->planeY = pos->oldPlaneX * sin(-pos->rotSpeedArrows) + pos->planeY * cos(-pos->rotSpeedArrows);
+	return (0);
+}
+
+static int	rotate_left_mouse(t_pos *pos)
+{
+	pos->oldDirX = pos->dirX;
+	pos->dirX = pos->dirX * cos(pos->rotSpeedMouse) - pos->dirY * sin(pos->rotSpeedMouse);
+	pos->dirY = pos->oldDirX * sin(pos->rotSpeedMouse) + pos->dirY * cos(pos->rotSpeedMouse);
+	pos->oldPlaneX = pos->planeX;
+	pos->planeX = pos->planeX * cos(pos->rotSpeedMouse) - pos->planeY * sin(pos->rotSpeedMouse);
+	pos->planeY = pos->oldPlaneX * sin(pos->rotSpeedMouse) + pos->planeY * cos(pos->rotSpeedMouse);
+	return (0);
+ }
+
+static int	rotate_right_mouse(t_pos *pos)
+{
+	pos->oldDirX = pos->dirX;
+	pos->dirX = pos->dirX * cos(-pos->rotSpeedMouse) - pos->dirY * sin(-pos->rotSpeedMouse);
+	pos->dirY = pos->oldDirX * sin(-pos->rotSpeedMouse) + pos->dirY * cos(-pos->rotSpeedMouse);
+	pos->oldPlaneX = pos->planeX;
+	pos->planeX = pos->planeX * cos(-pos->rotSpeedMouse) - pos->planeY * sin(-pos->rotSpeedMouse);
+	pos->planeY = pos->oldPlaneX * sin(-pos->rotSpeedMouse) + pos->planeY * cos(-pos->rotSpeedMouse);
 	return (0);
 }
 
@@ -85,9 +107,13 @@ int	motion(t_app *app)
 		go_left(app->pos);
 	if (app->pos->motion_right)
 		go_right(app->pos);
-	if (app->pos->rotate_left)
-		rotate_left(app->pos);
-	if (app->pos->rotate_right)
-		rotate_right(app->pos);
+	if (app->pos->rotate_left_arrows)
+		rotate_left_arrows(app->pos);
+	if (app->pos->rotate_right_arrows)
+		rotate_right_arrows(app->pos);
+	if (app->pos->rotate_left_mouse)
+		rotate_left_mouse(app->pos);
+	if (app->pos->rotate_right_mouse)
+		rotate_right_mouse(app->pos);
 	return (0);
 }

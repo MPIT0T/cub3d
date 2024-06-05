@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/05 15:32:49 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 15:48:27 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,15 +262,17 @@ typedef struct s_pos
 	double			oldDirX;
 	double			oldPlaneX;
 	double			moveSpeed;
-	double			rotSpeed;
-	double			rotSpeedSave;
+	double			rotSpeedArrows;
+	double			rotSpeedMouse;
 	bool			motion_up;
 	bool			motion_down;
 	bool			motion_left;
 	bool			motion_right;
-	bool			rotate_left;
-	bool			rotate_right;
-	uint32_t		**px;
+	bool			rotate_left_arrows;
+	bool			rotate_right_arrows;
+	bool			rotate_left_mouse;
+	bool			rotate_right_mouse;
+	int				**px;
 	char			wallDir;
 	t_tex			*tex;
 	uint32_t		**textures;

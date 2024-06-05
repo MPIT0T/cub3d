@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/05 13:02:00 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 15:50:32 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,14 @@ int	initiate_positions(t_app *app)
 	app->pos->oldTime = 0;
 	app->pos->h = 1;
 	app->pos->moveSpeed = 0.05;
-	app->pos->rotSpeed = 0.00;
+	app->pos->rotSpeedArrows = 0.05;
+	app->pos->rotSpeedMouse = 0.00;
 	app->pos->motion_up = false;
 	app->pos->motion_down = false;
-	app->pos->rotate_left = false;
-	app->pos->rotate_right = false;
+	app->pos->rotate_left_arrows = false;
+	app->pos->rotate_right_arrows = false;
+	app->pos->rotate_right_mouse = false;
+	app->pos->rotate_right_mouse = false;
 	return (0);
 }
 

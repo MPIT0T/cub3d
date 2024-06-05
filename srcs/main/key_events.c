@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:08:19 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/03 23:59:57 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 15:49:44 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ int	change_motion_keypress(int key, t_app *app)
 		app->pos->motion_right = true;
 	if (app->pos->moveSpeed == 0.05 && key == XK_Shift_L)
 		app->pos->moveSpeed = 0.10;
+	if (app->pos->rotate_left_arrows == false && key == XK_Left)
+		app->pos->rotate_left_arrows = true;
+	if (app->pos->rotate_right_arrows == false && key == XK_Right)
+		app->pos->rotate_right_arrows = true;
 	return (0);
 }
 
@@ -85,21 +89,21 @@ int	mouse_motion(int x, int y, t_app *app)
 	int		diff;
 
 	diff = abs(x - (SCREEN_WIDTH / 2));
-	app->pos->rotSpeed = ((double) diff) / 400;
+	app->pos->rotSpeedMouse = ((double) diff) / 400;
 //	app->pos->rotSpeedSave = app->pos->rotSpeed;
 //	app->pos->rotSpeed = abs(x - (SCREEN_WIDTH / 2));
 	if (x < SCREEN_WIDTH / 2)
-		app->pos->rotate_left = true;
+		app->pos->rotate_left_mouse = true;
 	else
 	{
-		app->pos->rotate_left = false;
+		app->pos->rotate_left_mouse = false;
 //		app->pos->rotSpeed = app->pos->rotSpeedSave;
 	}
 	if (x > SCREEN_WIDTH / 2)
-		app->pos->rotate_right = true;
+		app->pos->rotate_right_mouse = true;
 	else
 	{
-		app->pos->rotate_right = false;
+		app->pos->rotate_right_mouse = false;
 //		app->pos->rotSpeed = app->pos->rotSpeedSave;
 	}
 	return (0);
