@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/05 15:48:27 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 15:52:16 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -351,7 +351,7 @@ int		get_horizontal_texture(t_pos *pos, t_horiztex *horiztex);
 void	which_dir(t_pos *pos, char *set, int asdlfk);
 void	px_put(t_img *img, int x, int y, int color);
 void	draw_screen(t_pos *pos, t_img *img);
-void	clear_px_buffer(uint32_t **px);
+void	clear_px_buffer(int **px);
 
 /* GHOSTS */
 int		get_opposite_of_player(t_pos *pos);

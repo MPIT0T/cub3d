@@ -6,13 +6,13 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:08:19 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/05 15:49:44 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 15:51:58 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void	clear_px_buffer(uint32_t **px)
+void	clear_px_buffer(int **px)
 {
 	ssize_t	y;
 	ssize_t	x;
