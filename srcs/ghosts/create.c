@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/05 01:56:39 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 13:30:40 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int	pop_some_ghosts(t_app *app)
 	while (++i < GHOSTS_NUMBER)
 	{
 		spawning_point(app->pos, &app->ghosts[i], quarter);
-		app->ghosts[i].move_speed = 0.20;
+		app->ghosts[i].move_speed = 0.1;
 		if (generate_dir_charset(&app->ghosts[i]) == 1)
 			exit_error(app, EXIT_MALLOC);
 		initial_direction(&app->ghosts[i]);

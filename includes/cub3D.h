@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/05 13:23:30 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 15:32:49 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define W 3
 
 # define GHOSTS_NUMBER 3
+# define GHOSTS_SIZE 0.3
 
 # define BLUE			0x3a8399
 # define RED			0xFF0000
