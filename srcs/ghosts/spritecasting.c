@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:42:31 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/05 13:24:30 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 16:14:46 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	find_sprites_to_render(t_sprt *sprt, t_pos *pos)
 	sprt->tex_content = (uint32_t *)pos->tex[7].data;
 	while (sprt->x_start < sprt->x_end && sprt->x_start < SCREEN_WIDTH)
 	{
-		if (sprt->trans_Y > 0 && sprt->trans_Y < pos->z_prox[sprt->x_start])
+		if (sprt->trans_Y > 0 && sprt->trans_Y <= pos->z_prox[sprt->x_start] + 1)
 		{
 			sprt->y_start = sprt->y_start_flag;
 			while (sprt->y_start < sprt->y_end && sprt->y_start < SCREEN_HEIGHT)

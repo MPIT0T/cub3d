@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/05 13:23:34 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 16:00:52 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	DDA(t_pos *pos)
 			pos->side = 1;
 			which_dir(pos, "NS", 2);
 		}
-		if (pos->map[pos->mapX][pos->mapY] >= '1')
+		if (pos->map[pos->mapX][pos->mapY] == '1')
 			break ;
 		// if (pos->map[pos->mapX][pos->mapY] == '2')
 		// 	pos->wallDir = 'D';
