@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/04 23:43:39 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 02:55:57 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	initiate_textures(t_app *app)
 		if (!app->pos->tex[i].data)
 			exit_error(app, EXIT_MLX);
 	}
-
 	return (0);
 }
 

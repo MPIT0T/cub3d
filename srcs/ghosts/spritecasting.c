@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:42:31 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/05 02:19:41 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 02:47:38 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static void	find_sprites_to_render(t_sprt *sprt, t_pos *pos)
 				d = y * 256 - SCREEN_HEIGHT * 128 + sprt->height * 128;
 				sprt->tex_y = ((d * TEX_HEIGHT) / sprt->height) / 256;
 				color = sprt->tex_content[TEX_WIDTH * sprt->tex_y + sprt->tex_x];
-				pos->px[y][x] = color;
+				if ((color & 0x00FFFFFF) != 0)
+					pos->px[y][x] = color;
 			}
 		}
 	}
@@ -66,7 +67,7 @@ static void	cast_sprites(t_pos *pos, t_list **ghosts_lst, t_sprt *sprt)
 		sprt->invDet = 1.0 / (pos->planeX * pos->dirY - pos->dirX * pos->planeX);
 		sprt->trans_X = sprt->invDet * (pos->dirY * sprt->x - pos->dirX * sprt->y);
 		sprt->trans_Y = sprt->invDet * (-pos->planeY * sprt->x + pos->planeX * sprt->y);
-		sprt->spriteScreenX = (int)((SCREEN_WIDTH / 2) * (1 + sprt->trans_X / sprt->trans_Y));
+		sprt->spriteScreenX = (int)(SCREEN_WIDTH / 2) * (1 + sprt->trans_X / sprt->trans_Y);
 		sprt->height  = fabs(SCREEN_HEIGHT / (sprt->trans_Y));
 		sprt->y_start = -sprt->height / 2 + SCREEN_HEIGHT / 2;
 		if (sprt->y_start < 0)
@@ -83,7 +84,7 @@ static void	cast_sprites(t_pos *pos, t_list **ghosts_lst, t_sprt *sprt)
 	}
 }
 
-void swapp(t_list *a, t_list *b)
+void swap(t_list *a, t_list *b)
 {
 	t_ghost *tmp;
 	
@@ -108,7 +109,7 @@ void sort_list(t_list **head)
 		{
 			if (((t_ghost *)ptr1->content)->player_dist < ((t_ghost *)ptr1->next->content)->player_dist)
 			{
-				swapp(ptr1, ptr1->next);
+				swap(ptr1, ptr1->next);
 				swapped = 1;
 			}
 			ptr1 = ptr1->next;
@@ -134,9 +135,8 @@ int	sort_and_cast_sprites(t_pos *pos, t_list **ghosts_lst)
 
 	start = *ghosts_lst;
 	set_player_dist(pos, ghosts_lst);
-	// sort_sprites(ghosts_lst);
 	sort_list(&start);
-	print_sorted(*ghosts_lst);
+	// print_sorted(*ghosts_lst);
 	cast_sprites(pos, &start, &sprt);
 	return (0);
 }

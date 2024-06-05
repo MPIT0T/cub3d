@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/05 00:04:54 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 02:47:57 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,9 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 		line_height(pos, x);
 		walltex.x = x;
 		get_wall_texture(app, pos, &walltex);
-		sort_and_cast_sprites(pos, &app->ghosts_lst);
+
     }
+	sort_and_cast_sprites(pos, &app->ghosts_lst);
 	draw_screen(pos, img);
 	put_minimap(app);
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
