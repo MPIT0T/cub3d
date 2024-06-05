@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:42:31 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/05 02:47:38 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 13:24:30 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,94 +28,62 @@ static int	set_player_dist(t_pos *pos, t_list **lst)
 	return (0);
 }
 
+static void	draw_sprite_px(t_sprt *sprt, t_pos *pos, int y, int x)
+{
+	uint32_t	color;
+	int		d;
+
+	sprt->tex_x = (int)(256 * (((int)x - (-sprt->width / 2 + sprt->spriteScreenX))) * TEX_WIDTH / sprt->width) / 256;
+	d = ((int)y * 256) - (SCREEN_HEIGHT * 128) + (sprt->height * 128);
+	sprt->tex_y = ((d * TEX_HEIGHT) / sprt->height) / 256;
+	color = sprt->tex_content[TEX_WIDTH * sprt->tex_y + sprt->tex_x];
+	if (color != 0x000000)
+		pos->px[y][x] = color;
+}
+
 static void	find_sprites_to_render(t_sprt *sprt, t_pos *pos)
 {
-	ssize_t	y;
-	ssize_t	x;
-	int		d;
-	uint32_t	color;
-
 	sprt->tex_content = (uint32_t *)pos->tex[7].data;
-	x = sprt->x_start - 1;
-	while (++x < sprt->x_end)
+	while (sprt->x_start < sprt->x_end && sprt->x_start < SCREEN_WIDTH)
 	{
-		sprt->tex_x = (int)(256 * (x - (-sprt->width / 2 + sprt->spriteScreenX)) * TEX_WIDTH / sprt->width) / 256;
-		if (sprt->trans_Y > 0 && x > 0 && x < SCREEN_WIDTH && sprt->trans_Y < pos->z_prox[x])
+		if (sprt->trans_Y > 0 && sprt->trans_Y < pos->z_prox[sprt->x_start])
 		{
-			y = sprt->y_start - 1;
-			while (++y < sprt->y_end)
+			sprt->y_start = sprt->y_start_flag;
+			while (sprt->y_start < sprt->y_end && sprt->y_start < SCREEN_HEIGHT)
 			{
-				d = y * 256 - SCREEN_HEIGHT * 128 + sprt->height * 128;
-				sprt->tex_y = ((d * TEX_HEIGHT) / sprt->height) / 256;
-				color = sprt->tex_content[TEX_WIDTH * sprt->tex_y + sprt->tex_x];
-				if ((color & 0x00FFFFFF) != 0)
-					pos->px[y][x] = color;
+				draw_sprite_px(sprt, pos, sprt->y_start, sprt->x_start);
+				sprt->y_start++;
 			}
 		}
+		sprt->x_start++;
 	}
 }
 
-static void	cast_sprites(t_pos *pos, t_list **ghosts_lst, t_sprt *sprt)
+static void	init_sprite(t_sprt *sprt, t_list *tmp, t_pos *pos)
 {
-	t_list *tmp;
-
-	tmp = *ghosts_lst;
-	while (tmp)
-	{
-		sprt->x = ((t_ghost *)tmp->content)->x - pos->posX;
-		sprt->y = ((t_ghost *)tmp->content)->y - pos->posY;
-		sprt->invDet = 1.0 / (pos->planeX * pos->dirY - pos->dirX * pos->planeX);
-		sprt->trans_X = sprt->invDet * (pos->dirY * sprt->x - pos->dirX * sprt->y);
-		sprt->trans_Y = sprt->invDet * (-pos->planeY * sprt->x + pos->planeX * sprt->y);
-		sprt->spriteScreenX = (int)(SCREEN_WIDTH / 2) * (1 + sprt->trans_X / sprt->trans_Y);
-		sprt->height  = fabs(SCREEN_HEIGHT / (sprt->trans_Y));
-		sprt->y_start = -sprt->height / 2 + SCREEN_HEIGHT / 2;
-		if (sprt->y_start < 0)
-			sprt->y_start = 0;
-		sprt->y_end = sprt->height / 2 + SCREEN_HEIGHT / 2;
-		if (sprt->y_end >= SCREEN_HEIGHT)
-			sprt->y_end = SCREEN_HEIGHT - 1;
-		sprt->width = fabs(SCREEN_HEIGHT / sprt->trans_Y);
-		sprt->x_start = -sprt->width / 2 + sprt->spriteScreenX;
-		if (sprt->x_end >= SCREEN_WIDTH)
-			sprt->x_end = SCREEN_WIDTH - 1;
-		find_sprites_to_render(sprt, pos);
-		tmp = tmp->next;
-	}
-}
-
-void swap(t_list *a, t_list *b)
-{
-	t_ghost *tmp;
+	sprt->x = ((t_ghost *)tmp->content)->x - pos->posX;
+	sprt->y = ((t_ghost *)tmp->content)->y - pos->posY;
+	sprt->trans_X = sprt->invDet * (pos->dirY * sprt->x - pos->dirX * sprt->y);
+	sprt->trans_Y = sprt->invDet * (-pos->planeY * sprt->x + pos->planeX * sprt->y);
+	sprt->spriteScreenX = (int)(SCREEN_WIDTH / 2.) * (1. + sprt->trans_X / sprt->trans_Y);
 	
-	tmp = a->content;
-	a->content = b->content;
-	b->content = tmp;
-}
+	sprt->height  = fabs(SCREEN_HEIGHT / sprt->trans_Y);
+	sprt->width = fabs(SCREEN_HEIGHT / sprt->trans_Y);
 
-void sort_list(t_list **head)
-{
-	int swapped;
-	t_list *ptr1;
-	t_list *lptr;
-	
-	lptr = NULL;
-	swapped = 1;
-	while (swapped)
-	{
-		swapped = 0;
-		ptr1 = *head;
-		while (ptr1->next != lptr)
-		{
-			if (((t_ghost *)ptr1->content)->player_dist < ((t_ghost *)ptr1->next->content)->player_dist)
-			{
-				swap(ptr1, ptr1->next);
-				swapped = 1;
-			}
-			ptr1 = ptr1->next;
-		}
-		lptr = ptr1;
-	}
+	sprt->y_start = -sprt->height / 2 + SCREEN_HEIGHT / 2;
+	if (sprt->y_start < 0)
+		sprt->y_start = 0;
+	sprt->y_end = sprt->height / 2 + SCREEN_HEIGHT / 2;
+	if (sprt->y_end >= SCREEN_HEIGHT)
+		sprt->y_end = SCREEN_HEIGHT - 1;
+
+	sprt->x_start = -sprt->width / 2 + sprt->spriteScreenX;
+	if (sprt->x_start < 0)
+		sprt->x_start = 0;
+	sprt->x_end = sprt->width / 2 + sprt->spriteScreenX;
+	if (sprt->x_end >= SCREEN_WIDTH)
+		sprt->x_end = SCREEN_WIDTH - 1;
+	sprt->y_start_flag = sprt->y_start;
 }
 
 void	print_sorted(t_list *la)
@@ -129,14 +97,19 @@ void	print_sorted(t_list *la)
 }
 
 int	sort_and_cast_sprites(t_pos *pos, t_list **ghosts_lst)
-{
+{  
 	t_sprt	sprt;
-	t_list	*start;
+	t_list	*tmp; 
 
-	start = *ghosts_lst;
+	tmp = *ghosts_lst;
+	sprt.invDet = 1 / ((pos->planeX * pos->dirY) - (pos->dirX * pos->planeY));
 	set_player_dist(pos, ghosts_lst);
-	sort_list(&start);
-	// print_sorted(*ghosts_lst);
-	cast_sprites(pos, &start, &sprt);
+	sort_list(ghosts_lst);
+	while (tmp)
+	{
+		init_sprite(&sprt, tmp, pos);
+		find_sprites_to_render(&sprt, pos);
+		tmp = tmp->next;
+	}
 	return (0);
 }

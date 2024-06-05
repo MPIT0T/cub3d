@@ -1,0 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/05 09:33:00 by cesar             #+#    #+#             */
+/*   Updated: 2024/06/05 09:33:19 by cesar            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/cub3D.h"
+
+
+void swap(t_list *a, t_list *b)
+{
+	t_ghost *tmp;
+	
+	tmp = a->content;
+	a->content = b->content;
+	b->content = tmp;
+}
+
+void sort_list(t_list **head)
+{
+	int swapped;
+	t_list *ptr1;
+	t_list *lptr;
+	
+	lptr = NULL;
+	swapped = 1;
+	while (swapped)
+	{
+		swapped = 0;
+		ptr1 = *head;
+		while (ptr1->next != lptr)
+		{
+			if (((t_ghost *)ptr1->content)->player_dist < ((t_ghost *)ptr1->next->content)->player_dist)
+			{
+				swap(ptr1, ptr1->next);
+				swapped = 1;
+			}
+			ptr1 = ptr1->next;
+		}
+		lptr = ptr1;
+	}
+}

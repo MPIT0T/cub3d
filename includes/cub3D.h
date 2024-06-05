@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/05 02:57:15 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 13:23:30 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define E 2
 # define W 3
 
-# define GHOSTS_NUMBER 2
+# define GHOSTS_NUMBER 3
 
 # define BLUE			0x3a8399
 # define RED			0xFF0000
@@ -98,6 +98,7 @@ typedef struct	s_sptr
 	int		tex_x;
 	int		tex_y;
 	uint32_t	*tex_content;
+	int	y_start_flag;
 }	t_sprt;
 
 typedef struct	s_triplet
@@ -135,6 +136,8 @@ typedef struct	s_ghost
 {
 	double	x;
 	double	y;
+	int		x_int;
+	int		y_int;
 	char	dir;
 	int		dir_x;
 	int		dir_y;
@@ -354,5 +357,6 @@ int		pop_some_ghosts(t_app *app);
 void 	print_map(t_pos *pos);
 int		ghosts_are_coming(t_app *app);
 int		sort_and_cast_sprites(t_pos *pos, t_list **ghosts_lst);
+void	sort_list(t_list **head);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:18:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/06/05 02:21:52 by cesar            ###   ########.fr        #
+#    Updated: 2024/06/05 09:47:46 by cesar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,8 @@ SRC_GHOSTS	=	spawn.c \
 				create.c \
 				pathfinding.c \
 				target_player.c \
-				spritecasting.c
+				spritecasting.c \
+				sort.c
 GHOSTS	=	$(addprefix $(DIR_GHOSTS), $(SRC_GHOSTS)) \
 
 DIR_PARS	=	parsing/
