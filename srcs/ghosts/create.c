@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/05 20:21:34 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/06 10:13:05 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,66 +44,55 @@ int	get_opposite_of_player(t_pos *pos)
 	return (quarter);
 }
 
-void	initial_direction(t_ghost *ghost)
+void	apply_initial_dir(t_ghost *ghost)
 {
-	if (ghost->dir == 'N')
+	if (ghost->dir == N)
 	{
 		ghost->dir_x = 0;
 		ghost->dir_y = -1;
 	}
-	else if (ghost->dir == 'S')
+	else if (ghost->dir == S)
 	{
 		ghost->dir_x = 0;
 		ghost->dir_y = 1;
 	}
-	else if (ghost->dir == 'E')
+	else if (ghost->dir == E)
 	{
 		ghost->dir_x = 1;
 		ghost->dir_y = 0;
 	}
-	else if (ghost->dir == 'W')
+	else if (ghost->dir == W)
 	{
 		ghost->dir_x = -1;
 		ghost->dir_y = 0;
 	}
 }
 
-int	generate_dir_charset(t_ghost *ghost)
+int	initial_dir(t_ghost *ghost)
 {
 	static int	i = 0;
 
 	if (i > 1)
 		i = 0;
 	if (i == 0)
-	{
-		// ghost->y_dirs_pref = ft_strdup("NS");
-		// ghost->x_dirs_pref = ft_strdup("EW");
-		ghost->dirs_pref = ft_strdup("NEWS");
-		ghost->dir = ghost->dirs_pref[0];
-	}
+		ghost->dirset = {0, 1, 2, 3};
 	else if (i == 1)
-	{
-		ghost->dirs_pref = ft_strdup("SWEN");
-		ghost->dir = ghost->x_dirs_pref[0];
-	}
+		ghost->dirset = {0, 3, 2, 1};
 	i++;
-	if (!ghost->dirs_pref)
-		return (1);
 	return (0);
 }
 
-int	set_memory(t_ghost *ghost, char **map, int height)
+int	set_walls(t_ghost *ghost, char **map, int height)
 {
-	ssize_t	y;
+	ssize_t	i;
 
-	y = -1;
-	ghost->memory = malloc(height * sizeof(char *));
-	if (!ghost->memory)
+	i = -1;
+	ghost->walls = malloc(4 * sizeof(int));
+	if (!ghost->walls)
 		return (1);
-	while (map[++y])
-	{
-		ghost->memory[y] = ft_strdup(map[y]);
-	}
+	while (++i < 4)
+		ghost->walls[i] = false;
+	ghost->wall_following = false;
 	return (0);
 }
 
@@ -123,11 +112,11 @@ int	pop_some_ghosts(t_app *app)
 	{
 		spawning_point(app->pos, &app->ghosts[i], quarter);
 		app->ghosts[i].move_speed = 0.05;
-		if (generate_dir_charset(&app->ghosts[i]) == 1)
+		if (initial_dir(&app->ghosts[i]) == 1)
 			exit_error(app, EXIT_MALLOC);
-		initial_direction(&app->ghosts[i]);
-		// if (set_memory(&app->ghosts[i], app->pos->map, app->pos->MAP_HEIGHT) == 1)
-		// 	exit_error(app, EXIT_MALLOC);
+		apply_initial_dir(&app->ghosts[i]);
+		if (set_walls(&app->ghosts[i], app->pos->map, app->pos->MAP_HEIGHT) == 1)
+			exit_error(app, EXIT_MALLOC);
 		new = ft_lstnew(&app->ghosts[i]);
 		if (!new)
 			exit_error(app, EXIT_MALLOC);

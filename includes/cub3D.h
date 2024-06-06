@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/05 20:16:00 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/06 10:13:32 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 # define GHOST_TEX "./textures/ghost.xpm"
 
 # define N 0
-# define S 1
-# define E 2
+# define E 1
+# define S 2
 # define W 3
 
 # define GHOSTS_NUMBER 1
@@ -139,19 +139,21 @@ typedef struct	s_ghost
 	double	y;
 	int		x_int;
 	int		y_int;
-	char	dir;
+	int		dir;
 	int		dir_x;
 	int		dir_y;
 	double	move_speed;
-	char	*dirset;
-	char	*x_dirs_pref;
-	char	*y_dirs_pref;
-	char	*dirs_pref;
+	int	*dirset;
 	double	player_dist;
 	int		is_theone;
 	int		rank;
-	char	**memory;
-	bool	bored;
+	bool	*walls;
+	bool	wall_N;
+	bool	wall_E;
+	bool	wall_S;
+	bool	wall_W;
+	char	opposite;
+	bool	wall_following;
 }	t_ghost;
 
 typedef struct	s_img
