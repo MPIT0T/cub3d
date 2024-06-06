@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:34:59 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/05 17:23:07 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/06 11:10:09 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ void	free_ghosts(t_list **lst, t_ghost *ghosts, int map_width)
 	ssize_t	i;
 
 	i = -1;
-	while (++i < GHOSTS_NUMBER)
-	{
-		free(ghosts[i].x_dirs_pref);
-		free(ghosts[i].y_dirs_pref);
-		if (ghosts[i].memory)
-			freetab((void **)ghosts[i].memory, map_width);
-	}
+	(void) map_width;
+	// while (++i < GHOSTS_NUMBER)
+	// {
+	// 	free(ghosts[i].y_dirs_pref);
+	// 	if (ghosts[i].memory)
+	// 		freetab((void **)ghosts[i].memory, map_width);
+	// }
 	free(ghosts);
 	lstfree(lst);
 }
