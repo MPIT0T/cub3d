@@ -14,6 +14,7 @@ SRCS	=	$(MAIN)		\
 			$(MINIMAP)	\
 			$(DOORS)	\
 			$(PARSING)	\
+			$(GHOSTS)	\
 			$(EXIT)
 
 
@@ -25,7 +26,8 @@ SRC_MAIN	=	main.c	\
 				key_events.c \
 				moove.c \
 				raycasting.c \
-				textures.c
+				wall_textures.c \
+				horizontal_textures.c
 
 MAIN	=	$(addprefix $(DIR_MAIN), $(SRC_MAIN))
 
@@ -38,6 +40,14 @@ DIR_DOORS	=	doors/
 SRC_DOORS	=	doors.c
 DOORS	=	$(addprefix $(DIR_DOORS), $(SRC_DOORS))
 
+DIR_GHOSTS	=	ghosts/
+SRC_GHOSTS	=	spawn.c \
+				create.c \
+				pathfinding.c \
+				target_player.c \
+				spritecasting.c \
+				sort.c
+GHOSTS	=	$(addprefix $(DIR_GHOSTS), $(SRC_GHOSTS)) \
 
 DIR_PARS	=	parsing/
 SRC_PARS	=	parsing.c			\

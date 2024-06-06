@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:08:19 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/03 19:42:22 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/05 15:51:58 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+void	clear_px_buffer(int **px)
+{
+	ssize_t	y;
+	ssize_t	x;
+
+	y = -1;
+	x = -1;
+	while (++y < SCREEN_HEIGHT)
+	{
+		while (++x < SCREEN_WIDTH)
+			px[y][x] = 0;
+	}
+}
 
 int		new_image(t_app *app)
 {
@@ -43,6 +57,8 @@ int	change_motion_keypress(int key, t_app *app)
 		app->pos->motion_left = true;
 	if (app->pos->motion_right == false && key == XK_d)
 		app->pos->motion_right = true;
+	if (app->pos->moveSpeed == 0.05 && key == XK_Shift_L)
+		app->pos->moveSpeed = 0.10;
 	if (app->pos->rotate_left_arrows == false && key == XK_Left)
 		app->pos->rotate_left_arrows = true;
 	if (app->pos->rotate_right_arrows == false && key == XK_Right)
@@ -60,9 +76,11 @@ int	change_motion_keyrelease(int key, t_app *app)
 		app->pos->motion_left = false;
 	if (key == XK_d && app->pos->motion_right == true)
 		app->pos->motion_right = false;
-	if (key == XK_Left && app->pos->rotate_left_arrows == true)
+	if (key == XK_Shift_L && app->pos->moveSpeed == 0.10)
+		app->pos->moveSpeed = 0.05;
+	if (app->pos->rotate_left_arrows == true && key == XK_Left)
 		app->pos->rotate_left_arrows = false;
-	if (key == XK_Right && app->pos->rotate_right_arrows == true)
+	if (app->pos->rotate_right_arrows == true && key == XK_Right)
 		app->pos->rotate_right_arrows = false;
 	return (0);	
 }

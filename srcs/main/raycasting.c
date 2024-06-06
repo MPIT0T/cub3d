@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/05 15:22:15 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/06 09:23:20 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,46 +58,44 @@ static int	get_tile_size(t_pos *pos)
 
 static int	DDA(t_pos *pos)
 {
-	while (pos->hit == 0)
+	while (1)
 	{
 		if (pos->sideDistX < pos->sideDistY)
 		{
 			pos->sideDistX += pos->deltaDistX;
 			pos->mapX += pos->stepX;
 			pos->side = 0;
-			if (pos->rayDirX < 0)
-				pos->wallDir = 'N';
-			else
-				pos->wallDir = 'S';
+			which_dir(pos, "WE", 1);
 		}
 		else
 		{
 			pos->sideDistY += pos->deltaDistY;
 			pos->mapY += pos->stepY;
 			pos->side = 1;
-			if (pos->rayDirY < 0)
-				pos->wallDir = 'W';
-			else
-				pos->wallDir = 'E';
+			which_dir(pos, "NS", 2);
 		}
-		if (pos->map[pos->mapX][pos->mapY] == '1' || pos->map[pos->mapX][pos->mapY] == '2')
-			pos->hit = 1;
+		if (pos->column == SCREEN_WIDTH / 2)
+		{
+			if (pos->map[pos->mapX][pos->mapY] == '1')
+				return (pos->pointing_door = false, 0);
+			if (pos->map[pos->mapX][pos->mapY] == '2')
+				return (pos->wallDir = 'D', pos->pointing_door = true, 0);
+		}
+		if (pos->map[pos->mapX][pos->mapY] == '1')
+			return (0);
 		if (pos->map[pos->mapX][pos->mapY] == '2')
-			pos->wallDir = 'D';
-		if (pos->column == SCREEN_WIDTH / 2 && pos->map[pos->mapX][pos->mapY] == '2')
-			pos->pointing_door = true;
-		if (pos->column == SCREEN_WIDTH / 2 && pos->map[pos->mapX][pos->mapY] != '2')
-			pos->pointing_door = false;
+			return (pos->wallDir = 'D', 0);
 	}
 	return (0);
 }
 
-static int	line_height(t_pos *pos)
+static int	line_height(t_pos *pos, size_t x)
 {
 	if (pos->side == 0)
 		pos->perpWallDist = (pos->sideDistX - pos->deltaDistX);
 	else
 		pos->perpWallDist = (pos->sideDistY - pos->deltaDistY);
+	pos->z_prox[x] = pos->perpWallDist;
 	pos->lineHeight = (int)(SCREEN_HEIGHT / pos->perpWallDist);
 	pos->drawStart = (-pos->lineHeight * 0.5) + (SCREEN_HEIGHT * 0.5);
 	if (pos->drawStart < 0)
@@ -112,26 +110,29 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 {
 	size_t		x;
 	t_walltex	walltex;
+	t_horiztex	horiztex;
 
 	x = -1;
+	get_horizontal_texture(pos, &horiztex);
 	while (++x < SCREEN_WIDTH)
 	{
 		pos->column = x;
 		get_ray_length(pos, x);
 		get_tile_size(pos);
 		DDA(pos);
-		line_height(pos);
+		line_height(pos, x);
 		walltex.x = x;
-		draw_wall_texture(app, pos, &walltex);
+		get_wall_texture(app, pos, &walltex);
 	}
 	/*if (pos->pointing_door)
 		write(1, "A", 1);
 	else
 		write(1, "B", 1);*/
-//	put_crosshair(app);
-//	put_door_button(app);
+	sort_and_cast_sprites(pos, &app->ghosts_lst);
+	draw_screen(pos, img);
 	put_minimap(app);
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
 		img->img, 0, 0);
 	return 0;
 }
+

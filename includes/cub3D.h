@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/05 11:37:21 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/05 21:41:18 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,18 @@
 # define TEX_WIDTH		64
 # define TEX_HEIGHT		64
 
+# define ROOF_TEX "./textures/roof.xpm"
+# define FLOOR_TEX "./textures/floor.xpm"
+# define GHOST_TEX "./textures/ghost.xpm"
 # define DOOR_TEX "./textures/v2_door.xpm"
 
 # define N 0
 # define S 1
 # define E 2
 # define W 3
+
+# define GHOSTS_NUMBER 3
+# define GHOSTS_SIZE 0.3
 
 # define BLUE			0x3a8399
 # define RED			0xFF0000
@@ -76,6 +82,26 @@
 /*                                STRUCTS                                     */
 /* ************************************************************************** */
 
+typedef struct	s_sptr
+{
+	double	x;
+	double	y;
+	double	invDet;
+	double	trans_X;
+	double	trans_Y;
+	int		spriteScreenX;
+	int		height;
+	int		width;
+	int		y_start;
+	int		x_start;
+	int		y_end;
+	int		x_end;
+	int		tex_x;
+	int		tex_y;
+	uint32_t	*tex_content;
+	int	y_start_flag;
+}	t_sprt;
+
 typedef struct	s_triplet
 {
 	size_t	a;
@@ -106,6 +132,24 @@ typedef struct	s_minimap
 	int		mapSizeX;
 	int		mapSizeY;
 }	t_minimap;
+
+typedef struct	s_ghost
+{
+	double	x;
+	double	y;
+	int		x_int;
+	int		y_int;
+	char	dir;
+	int		dir_x;
+	int		dir_y;
+	double	move_speed;
+	char	*dirset;
+	char	*x_dirs_pref;
+	char	*y_dirs_pref;
+	double	player_dist;
+	int		is_theone;
+	int		rank;
+}	t_ghost;
 
 typedef struct	s_img
 {
@@ -188,7 +232,6 @@ typedef struct s_pos
 	unsigned int	f;
 	ssize_t			MAP_WIDTH;
 	ssize_t			MAP_HEIGHT;
-	size_t			column;
 	double			posX;
 	double			posY;
 	double			dirX;
@@ -200,7 +243,6 @@ typedef struct s_pos
 	double			cameraX; //x-coordinate in camera space
 	double			rayDirX;
 	double			rayDirY;
-	bool			pointing_door;
 	int				mapX; //which box of the map we're in
 	int				mapY;
 	double			sideDistX; //length of ray from current position to next x or y-side
@@ -234,6 +276,9 @@ typedef struct s_pos
 	char			wallDir;
 	t_tex			*tex;
 	uint32_t		**textures;
+	int				*z_prox;
+	bool			pointing_door;
+	size_t			column;
 
 } t_pos;
 
@@ -243,6 +288,8 @@ typedef struct s_app
 	t_pos	*pos;
 	t_img	*img;
 	char	*full_file_string;
+	t_ghost	*ghosts;
+	t_list	*ghosts_lst;
 }	t_app;
 
 /* ************************************************************************** */
@@ -291,19 +338,31 @@ void	exit_parsing_error(t_app *app, const char *msg);
 void	free_app(t_app *app);
 void	free_parsing_exit(t_app *app);
 
-int	construct_app(t_app *app);
-int	initiate_mlx(t_app *app);
-int	change_motion_keypress(int key, t_app *app);
-int	change_motion_keyrelease(int key, t_app *app);
-int	mouse_motion(int x, int y, t_app *app);
-int	motion(t_app *app);
-int	new_image(t_app *app);
-int	game_loop(t_app *app);
-int	initiate_textures(t_app *app);
-int	raycasting_loop(t_pos *pos, t_img *img, t_app *app);
-int	 draw_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex);
-int	draw_horizontal_texture(t_app *app, t_pos *pos, t_horiztex *horiztex);
+int		construct_app(t_app *app);
+int		initiate_mlx(t_app *app);
+int		change_motion_keypress(int key, t_app *app);
+int		change_motion_keyrelease(int key, t_app *app);
+int		mouse_motion(int x, int y, t_app *app);
+int		motion(t_app *app);
+int		new_image(t_app *app);
+int		game_loop(t_app *app);
+int		initiate_textures(t_app *app);
+int		raycasting_loop(t_pos *pos, t_img *img, t_app *app);
+int		get_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex);
+int		get_horizontal_texture(t_pos *pos, t_horiztex *horiztex);
+void	which_dir(t_pos *pos, char *set, int asdlfk);
 void	px_put(t_img *img, int x, int y, int color);
+void	draw_screen(t_pos *pos, t_img *img);
+void	clear_px_buffer(int **px);
+
+/* GHOSTS */
+int		get_opposite_of_player(t_pos *pos);
+int		spawning_point(t_pos *pos, t_ghost *ghost, int quarter);
+int		pop_some_ghosts(t_app *app);
+void 	print_map(t_pos *pos);
+int		ghosts_are_coming(t_app *app);
+int		sort_and_cast_sprites(t_pos *pos, t_list **ghosts_lst);
+void	sort_list(t_list **head);
 
 int		put_door_button(t_app *app);
 
