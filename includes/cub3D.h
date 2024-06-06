@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/06 14:49:28 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:52:09 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define DOOR_TEX "./textures/door.xpm"
 # define GHOST_TEX "./textures/ghost.xpm"
 
-# define GHOSTS_NUMBER 1
+# define GHOSTS_NUMBER 3
 # define GHOSTS_SIZE 0.3
 
 # define BLUE			0x3a8399
@@ -147,6 +147,8 @@ typedef struct	s_ghost
 	double	move_speed;
 	int		*dirset;
 	double	player_dist;
+	t_dir	opposite;
+	t_dir	last_wall;
 }	t_ghost;
 
 typedef struct	s_img
@@ -353,7 +355,7 @@ void	clear_px_buffer(int **px);
 
 /* GHOSTS */
 int		get_opposite_of_player(t_pos *pos);
-int		spawning_point(t_pos *pos, t_ghost *ghost, int quarter);
+int		spawning_point(t_pos *pos, t_ghost *ghost);
 int		pop_some_ghosts(t_app *app);
 void 	print_map(t_pos *pos);
 int		ghosts_are_coming(t_app *app);

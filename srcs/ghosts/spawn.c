@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spawn.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 00:07:29 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/05 15:56:57 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/06 16:55:36 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,18 +112,21 @@ int	bottom_right(t_pos *pos, t_ghost *ghost)
 	return (1);
 }
 
-int	spawning_point(t_pos *pos, t_ghost *ghost, int quarter)
-{
-	int	err;
+typedef int (*spawn_func)(t_pos *, t_ghost *);
 
-	if (quarter == 1)
-		err = top_left(pos, ghost);
-	if (quarter == 2 || err == 1)
-		err = top_right(pos, ghost);
-	if (quarter == 3 || err == 1)
-		err = bottom_left(pos, ghost);
-	if (quarter == 4 || err == 1)
-		err = bottom_right(pos, ghost);
-	return (0);
+int	spawning_point(t_pos *pos, t_ghost *ghost)
+{
+	ssize_t	i;
+	spawn_func spawn_funcs[] = {top_left, top_right, bottom_left, bottom_right};
+
+	i = 0;
+	while (i < GHOSTS_NUMBER)
+	{
+		if (spawn_funcs[i % 4](pos, ghost))
+			i++;
+		if (i >= GHOSTS_NUMBER)
+			break;
+    }
+    return (0);
 }
 

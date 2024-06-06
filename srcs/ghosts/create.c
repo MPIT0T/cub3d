@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/06 14:58:06 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:48:41 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,19 @@ int	get_opposite_of_player(t_pos *pos)
 int	pop_some_ghosts(t_app *app)
 {
 	ssize_t	i;
-	int		quarter;
 	t_list	*new;
 
 	i = -1;
 	app->ghosts_lst = NULL;
-	quarter = get_opposite_of_player(app->pos);
 	app->ghosts = malloc(GHOSTS_NUMBER * sizeof(t_ghost));
 	if (!app->ghosts)
 		exit_error(app, EXIT_MALLOC);
 	while (++i < GHOSTS_NUMBER)
 	{
-		spawning_point(app->pos, &app->ghosts[i], quarter);
+		spawning_point(app->pos, &app->ghosts[i]);
 		app->ghosts[i].move_speed = 0.2;
 		app->ghosts[i].dir = i % 3;
-		// app->ghosts[i].new_dir = app->ghosts[i].dir;
-		// printf("ghost base dir is %d\n", app->ghosts[i].dir);
+		app->ghosts[i].last_wall = app->ghosts[i].dir;
 		new = ft_lstnew(&app->ghosts[i]);
 		if (!new)
 			exit_error(app, EXIT_MALLOC);
