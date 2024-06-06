@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/06 10:13:05 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/06 11:04:30 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,34 +68,6 @@ void	apply_initial_dir(t_ghost *ghost)
 	}
 }
 
-int	initial_dir(t_ghost *ghost)
-{
-	static int	i = 0;
-
-	if (i > 1)
-		i = 0;
-	if (i == 0)
-		ghost->dirset = {0, 1, 2, 3};
-	else if (i == 1)
-		ghost->dirset = {0, 3, 2, 1};
-	i++;
-	return (0);
-}
-
-int	set_walls(t_ghost *ghost, char **map, int height)
-{
-	ssize_t	i;
-
-	i = -1;
-	ghost->walls = malloc(4 * sizeof(int));
-	if (!ghost->walls)
-		return (1);
-	while (++i < 4)
-		ghost->walls[i] = false;
-	ghost->wall_following = false;
-	return (0);
-}
-
 int	pop_some_ghosts(t_app *app)
 {
 	ssize_t	i;
@@ -112,11 +84,11 @@ int	pop_some_ghosts(t_app *app)
 	{
 		spawning_point(app->pos, &app->ghosts[i], quarter);
 		app->ghosts[i].move_speed = 0.05;
-		if (initial_dir(&app->ghosts[i]) == 1)
-			exit_error(app, EXIT_MALLOC);
-		apply_initial_dir(&app->ghosts[i]);
-		if (set_walls(&app->ghosts[i], app->pos->map, app->pos->MAP_HEIGHT) == 1)
-			exit_error(app, EXIT_MALLOC);
+		// if (initial_dir(&app->ghosts[i]) == 1)
+		// 	exit_error(app, EXIT_MALLOC);
+		// apply_initial_dir(&app->ghosts[i]);
+		// if (set_walls(&app->ghosts[i], app->pos->map, app->pos->MAP_HEIGHT) == 1)
+		// 	exit_error(app, EXIT_MALLOC);
 		new = ft_lstnew(&app->ghosts[i]);
 		if (!new)
 			exit_error(app, EXIT_MALLOC);

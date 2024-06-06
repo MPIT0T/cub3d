@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/06 10:13:32 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/06 10:49:43 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,27 +133,26 @@ typedef struct	s_minimap
 	int		mapSizeY;
 }	t_minimap;
 
+typedef enum	s_dir
+{
+	UP,
+	RIGHT,
+	DOWN,
+	LEFT
+} t_dir;
+
 typedef struct	s_ghost
 {
 	double	x;
 	double	y;
-	int		x_int;
-	int		y_int;
 	int		dir;
 	int		dir_x;
 	int		dir_y;
 	double	move_speed;
-	int	*dirset;
+	int		*dirset;
 	double	player_dist;
-	int		is_theone;
-	int		rank;
-	bool	*walls;
-	bool	wall_N;
-	bool	wall_E;
-	bool	wall_S;
-	bool	wall_W;
-	char	opposite;
 	bool	wall_following;
+
 }	t_ghost;
 
 typedef struct	s_img
