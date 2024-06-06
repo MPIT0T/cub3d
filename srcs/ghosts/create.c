@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/05 17:30:38 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 20:21:34 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,18 @@ int	generate_dir_charset(t_ghost *ghost)
 		i = 0;
 	if (i == 0)
 	{
-		ghost->y_dirs_pref = ft_strdup("NS");
-		ghost->x_dirs_pref = ft_strdup("EW");
-		ghost->dir = ghost->y_dirs_pref[0];
+		// ghost->y_dirs_pref = ft_strdup("NS");
+		// ghost->x_dirs_pref = ft_strdup("EW");
+		ghost->dirs_pref = ft_strdup("NEWS");
+		ghost->dir = ghost->dirs_pref[0];
 	}
 	else if (i == 1)
 	{
-		ghost->y_dirs_pref = ft_strdup("SN");
-		ghost->x_dirs_pref = ft_strdup("WE");
+		ghost->dirs_pref = ft_strdup("SWEN");
 		ghost->dir = ghost->x_dirs_pref[0];
 	}
 	i++;
-	if (!ghost->y_dirs_pref || !ghost->x_dirs_pref)
+	if (!ghost->dirs_pref)
 		return (1);
 	return (0);
 }
@@ -126,8 +126,8 @@ int	pop_some_ghosts(t_app *app)
 		if (generate_dir_charset(&app->ghosts[i]) == 1)
 			exit_error(app, EXIT_MALLOC);
 		initial_direction(&app->ghosts[i]);
-		if (set_memory(&app->ghosts[i], app->pos->map, app->pos->MAP_HEIGHT) == 1)
-			exit_error(app, EXIT_MALLOC);
+		// if (set_memory(&app->ghosts[i], app->pos->map, app->pos->MAP_HEIGHT) == 1)
+		// 	exit_error(app, EXIT_MALLOC);
 		new = ft_lstnew(&app->ghosts[i]);
 		if (!new)
 			exit_error(app, EXIT_MALLOC);

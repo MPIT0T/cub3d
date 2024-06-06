@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/05 17:52:12 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/05 20:16:00 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define E 2
 # define W 3
 
-# define GHOSTS_NUMBER 3
+# define GHOSTS_NUMBER 1
 # define GHOSTS_SIZE 0.3
 
 # define BLUE			0x3a8399
@@ -146,6 +146,7 @@ typedef struct	s_ghost
 	char	*dirset;
 	char	*x_dirs_pref;
 	char	*y_dirs_pref;
+	char	*dirs_pref;
 	double	player_dist;
 	int		is_theone;
 	int		rank;
