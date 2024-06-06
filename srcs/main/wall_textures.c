@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:43:28 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/03 23:54:22 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/06 09:08:47 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ void	which_dir(t_pos *pos, char *set, int call)
 		if (pos->rayDirY < 0)
 			pos->wallDir = set[0];
 		else
-			pos->wallDir = set[1];		
+			pos->wallDir = set[1];
 	}
 }

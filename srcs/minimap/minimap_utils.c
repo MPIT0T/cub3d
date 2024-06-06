@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:19:12 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 13:31:02 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/06 14:32:46 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,28 @@ void	put_minimap_frame(t_app *app, t_minimap *mm)
 
 void	put_minimap_pixel(t_app *app, t_minimap *mm)
 {
+	size_t	i;
+
 	modf(mm->startX, &mm->intX);
 	modf(mm->startY, &mm->intY);
 	if (app->pos->map[(int) mm->intY][(int) mm->intX] == '1')
 		px_put(app->img, mm->pixX, mm->pixY, WHITE);
+	else if (app->pos->map[(int) mm->intY][(int) mm->intX] == '2')
+		px_put(app->img, mm->pixX, mm->pixY, YELLOW);
+	else if (app->pos->map[(int) mm->intY][(int) mm->intX] == '3')
+		px_put(app->img, mm->pixX, mm->pixY, GREY);
 	else if (app->pos->map[(int) mm->intY][(int) mm->intX] == '0')
 		px_put(app->img, mm->pixX, mm->pixY, BLACK);
+	i = 0;
+	while (i < GHOSTS_NUMBER)
+	{
+		if (mm->startX > app->ghosts[i].y - 0.1
+			&& mm->startX < app->ghosts[i].y + 0.1
+			&& mm->startY > app->ghosts[i].x - 0.1
+			&& mm->startY < app->ghosts[i].x + 0.1)
+			px_put(app->img, mm->pixX, mm->pixY, BLUE);
+		i++;
+	}
 	if (mm->startX > app->pos->posY - 0.1
 		&& mm->startX < app->pos->posY + 0.1
 		&& mm->startY > app->pos->posX - 0.1

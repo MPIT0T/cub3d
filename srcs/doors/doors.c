@@ -6,36 +6,108 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:45:58 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/05 15:09:54 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/06 19:41:19 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int		is_door_near(t_app *app)
+void	door_dir(t_pos *pos)
 {
-	double	x;
-	double	y;
+	double	posX;
+	double	posY;
 
-	modf(app->pos->posY, &x);
-	modf(app->pos->posX, &y);
-	if (x != 0 && app->pos->map[(int) x - 1][(int) y] == '2')
-		return (1);
-	if (y != 0 && app->pos->map[(int) x][(int) y - 1] == '2')
-		return (1);
-	if (x != app->pos->MAP_WIDTH && app->pos->map[(int) x + 1][(int) y] == '2')
-		return (1);
-	if (y != app->pos->MAP_HEIGHT && app->pos->map[(int) x][(int) y + 1] == '2')
-		return (1);
-	return (0);
+	modf(pos->posX, &posX);
+	modf(pos->posY, &posY);
+	if (pos->mapX == posX - 1 && pos->mapY == posY)
+		pos->pointing_door = north;
+	else if (pos->mapX == posX + 1 && pos->mapY == posY)
+		pos->pointing_door = south;
+	else if (pos->mapY == posY - 1 && pos->mapX == posX)
+		pos->pointing_door = west;
+	else if (pos->mapY == posY + 1 && pos->mapX == posX)
+		pos->pointing_door = east;
+	else
+		pos->pointing_door = none;
 }
+
+void	open_door(t_app *app)
+{
+	if (app->pos->column == SCREEN_WIDTH / 2)
+		return ;
+	if (app->pos->pointing_door == north)
+	{
+		if (app->pos->map[(int) app->pos->posX - 1][(int) app->pos->posY] == '2')
+			app->pos->map[(int) app->pos->posX - 1][(int) app->pos->posY] = '3';
+		else if (app->pos->map[(int) app->pos->posX - 1][(int) app->pos->posY] == '3')
+			app->pos->map[(int) app->pos->posX - 1][(int) app->pos->posY] = '2';
+	}
+	if (app->pos->pointing_door == south)
+	{
+		if (app->pos->map[(int) app->pos->posX + 1][(int) app->pos->posY] == '2')
+			app->pos->map[(int) app->pos->posX + 1][(int) app->pos->posY] = '3';
+		else if (app->pos->map[(int) app->pos->posX + 1][(int) app->pos->posY] == '3')
+			app->pos->map[(int) app->pos->posX + 1][(int) app->pos->posY] = '2';
+	}
+	if (app->pos->pointing_door == west)
+	{
+		if (app->pos->map[(int) app->pos->posX][(int) app->pos->posY - 1] == '2')
+			app->pos->map[(int) app->pos->posX][(int) app->pos->posY - 1] = '3';
+		else if (app->pos->map[(int) app->pos->posX][(int) app->pos->posY - 1] == '3')
+			app->pos->map[(int) app->pos->posX][(int) app->pos->posY - 1] = '2';
+	}
+	if (app->pos->pointing_door == east)
+	{
+		if (app->pos->map[(int) app->pos->posX][(int) app->pos->posY + 1] == '2')
+			app->pos->map[(int) app->pos->posX][(int) app->pos->posY + 1] = '3';
+		else if (app->pos->map[(int) app->pos->posX][(int) app->pos->posY + 1] == '3')
+			app->pos->map[(int) app->pos->posX][(int) app->pos->posY + 1] = '2';
+	}
+}
+/*
+
+void	put_open_door(t_app *app)
+{
+
+}
+
+void	put_close_door(t_app *app)
+{
+
+}
+*/
+/*
 
 int		put_door_button(t_app *app)
 {
-	if (is_door_near(app) || app->pos->pointing_door == true)
+	if (app->pos->pointing_door == north)
 	{
-//		put_door_button(app);
-		write(1, "A", 1);
+		if (app->pos->map[(int) app->pos->posX - 1][(int) app->pos->posY] == '2')
+			put_open_door(app);
+		if (app->pos->map[(int) app->pos->posX - 1][(int) app->pos->posY] == '3')
+			put_close_door(app);
+	}
+	if (app->pos->pointing_door == south)
+	{
+		if (app->pos->map[(int) app->pos->posX + 1][(int) app->pos->posY] == '2')
+			put_open_door(app);
+		if (app->pos->map[(int) app->pos->posX + 1][(int) app->pos->posY] == '3')
+			put_close_door(app);
+	}
+	if (app->pos->pointing_door == west)
+	{
+		if (app->pos->map[(int) app->pos->posX][(int) app->pos->posY - 1] == '2')
+			put_open_door(app);
+		if (app->pos->map[(int) app->pos->posX][(int) app->pos->posY - 1] == '3')
+			put_close_door(app);
+	}
+	if (app->pos->pointing_door == east)
+	{
+		if (app->pos->map[(int) app->pos->posX][(int) app->pos->posY + 1] == '2')
+			put_open_door(app);
+		if (app->pos->map[(int) app->pos->posX][(int) app->pos->posY + 1] == '3')
+			put_close_door(app);
 	}
 	return (1);
 }
+*/

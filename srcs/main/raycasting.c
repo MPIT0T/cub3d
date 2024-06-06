@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/06 09:23:20 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/06 19:30:33 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,28 +65,22 @@ static int	DDA(t_pos *pos)
 			pos->sideDistX += pos->deltaDistX;
 			pos->mapX += pos->stepX;
 			pos->side = 0;
-			which_dir(pos, "WE", 1);
+			which_dir(pos, "NS", 1);
 		}
 		else
 		{
 			pos->sideDistY += pos->deltaDistY;
 			pos->mapY += pos->stepY;
 			pos->side = 1;
-			which_dir(pos, "NS", 2);
+			which_dir(pos, "WE", 2);
 		}
-		if (pos->column == SCREEN_WIDTH / 2)
-		{
-			if (pos->map[pos->mapX][pos->mapY] == '1')
-				return (pos->pointing_door = false, 0);
-			if (pos->map[pos->mapX][pos->mapY] == '2')
-				return (pos->wallDir = 'D', pos->pointing_door = true, 0);
-		}
+		if (pos->map[pos->mapX][pos->mapY] == '2' || pos->map[pos->mapX][pos->mapY] == '3')
+			door_dir(pos);
 		if (pos->map[pos->mapX][pos->mapY] == '1')
 			return (0);
 		if (pos->map[pos->mapX][pos->mapY] == '2')
 			return (pos->wallDir = 'D', 0);
 	}
-	return (0);
 }
 
 static int	line_height(t_pos *pos, size_t x)
@@ -124,15 +118,11 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 		walltex.x = x;
 		get_wall_texture(app, pos, &walltex);
 	}
-	/*if (pos->pointing_door)
-		write(1, "A", 1);
-	else
-		write(1, "B", 1);*/
 	sort_and_cast_sprites(pos, &app->ghosts_lst);
 	draw_screen(pos, img);
 	put_minimap(app);
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
 		img->img, 0, 0);
+//	put_door_button(app);
 	return 0;
 }
-

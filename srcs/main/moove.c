@@ -1,4 +1,4 @@
- /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   moove.c                                            :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:26:34 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/06 08:55:34 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/06 14:25:54 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@ static int		go_forward(t_pos *pos)
 		pos->posX += pos->dirX * pos->moveSpeed;
 	if (pos->map[(int)(pos->posX)][(int)(pos->posY + pos->dirY * pos->moveSpeed)] != '1' && pos->map[(int)(pos->posX)][(int)(pos->posY + pos->dirY * pos->moveSpeed)] != '2')
 		pos->posY += pos->dirY * pos->moveSpeed;
-	/*if (pos->map[(int)(pos->posX + pos->dirX * pos->moveSpeed)][(int)pos->posY] == '2')
-		pos->map[(int)(pos->posX + pos->dirX * pos->moveSpeed)][(int)pos->posY] = '3';
-	if (pos->map[(int)(pos->posX)][(int)(pos->posY + pos->dirY * pos->moveSpeed)] == '2')
-		pos->map[(int)(pos->posX)][(int)(pos->posY + pos->dirY * pos->moveSpeed)] = '3';*/
 	return (0);
 }
 
@@ -29,7 +25,7 @@ static int		go_backward(t_pos *pos)
 {
 	if (pos->map[(int)(pos->posX - pos->dirX * pos->moveSpeed)][(int)pos->posY] != '1' && pos->map[(int)(pos->posX - pos->dirX * pos->moveSpeed)][(int)pos->posY] != '2')
 		pos->posX -= pos->dirX * pos->moveSpeed;
-	if (pos->map[(int)(pos->posX - pos->dirX * pos->moveSpeed)][(int)pos->posY] != '1' && pos->map[(int)(pos->posX - pos->dirX * pos->moveSpeed)][(int)pos->posY] != '2')
+	if (pos->map[(int)(pos->posX)][(int)(pos->posY - pos->dirY * pos->moveSpeed)] != '1' && pos->map[(int)(pos->posX - pos->dirX * pos->moveSpeed)][(int)pos->posY] != '2')
 		pos->posY -= pos->dirY * pos->moveSpeed;
 	return (0);
 }
