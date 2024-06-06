@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 00:07:29 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/06 16:55:36 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:58:11 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,13 +119,10 @@ int	spawning_point(t_pos *pos, t_ghost *ghost)
 	ssize_t	i;
 	spawn_func spawn_funcs[] = {top_left, top_right, bottom_left, bottom_right};
 
-	i = 0;
+	i = -1;
 	while (i < GHOSTS_NUMBER)
 	{
-		if (spawn_funcs[i % 4](pos, ghost))
-			i++;
-		if (i >= GHOSTS_NUMBER)
-			break;
+		spawn_funcs[++i % 4](pos, ghost);
     }
     return (0);
 }
