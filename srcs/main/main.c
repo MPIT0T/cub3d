@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/05 16:14:55 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/06 14:29:59 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	game_loop(t_app *app)
 	motion(app);
 	clear_px_buffer(app->pos->px);
 	new_image(app);
-	// print_map(app->pos);
+	print_map(app->pos);
 	ghosts_are_coming(app);
 	raycasting_loop(app->pos, app->img, app);
 	return (0);

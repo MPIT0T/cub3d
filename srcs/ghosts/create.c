@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/06 13:05:34 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:58:06 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,30 +44,6 @@ int	get_opposite_of_player(t_pos *pos)
 	return (quarter);
 }
 
-// void	apply_initial_dir(t_ghost *ghost)
-// {
-// 	if (ghost->dir == N)
-// 	{
-// 		ghost->dir_x = 0;
-// 		ghost->dir_y = -1;
-// 	}
-// 	else if (ghost->dir == S)
-// 	{
-// 		ghost->dir_x = 0;
-// 		ghost->dir_y = 1;
-// 	}
-// 	else if (ghost->dir == E)
-// 	{
-// 		ghost->dir_x = 1;
-// 		ghost->dir_y = 0;
-// 	}
-// 	else if (ghost->dir == W)
-// 	{
-// 		ghost->dir_x = -1;
-// 		ghost->dir_y = 0;
-// 	}
-// }
-
 int	pop_some_ghosts(t_app *app)
 {
 	ssize_t	i;
@@ -83,8 +59,10 @@ int	pop_some_ghosts(t_app *app)
 	while (++i < GHOSTS_NUMBER)
 	{
 		spawning_point(app->pos, &app->ghosts[i], quarter);
-		app->ghosts[i].move_speed = 0.05;
-		app->ghosts[i].base_dir = (i + 1) % 5;
+		app->ghosts[i].move_speed = 0.2;
+		app->ghosts[i].dir = i % 3;
+		// app->ghosts[i].new_dir = app->ghosts[i].dir;
+		// printf("ghost base dir is %d\n", app->ghosts[i].dir);
 		new = ft_lstnew(&app->ghosts[i]);
 		if (!new)
 			exit_error(app, EXIT_MALLOC);

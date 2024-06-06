@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/06 13:00:31 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:49:28 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define DOOR_TEX "./textures/door.xpm"
 # define GHOST_TEX "./textures/ghost.xpm"
 
-# define GHOSTS_NUMBER 3
+# define GHOSTS_NUMBER 1
 # define GHOSTS_SIZE 0.3
 
 # define BLUE			0x3a8399
@@ -132,23 +132,21 @@ typedef enum	s_dir
 {
 	UP,
 	LEFT,
-	DOWN,
 	RIGHT,
-	VOID,
+	DOWN,
 } t_dir;
 
 typedef struct	s_ghost
 {
 	double	x;
 	double	y;
-	int		dir;
+	t_dir	dir;
+	t_dir	new_dir;
 	int		dir_x;
 	int		dir_y;
 	double	move_speed;
 	int		*dirset;
 	double	player_dist;
-	t_dir	base_dir;
-
 }	t_ghost;
 
 typedef struct	s_img
