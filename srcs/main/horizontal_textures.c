@@ -39,7 +39,7 @@ int	get_horizontal_texture(t_pos *pos, t_horiztex *horiztex)
 	horiztex->roof_tex_content = (uint32_t *) pos->tex[4].data;
 	horiztex->floor_tex_content = (uint32_t *) pos->tex[5].data;
 	while (++y < SCREEN_HEIGHT)
-	{	
+	{
 		horiztex->y = y;
 		horiztex->rayDirX0 = pos->dirX - pos->planeX;
 		horiztex->rayDirY0 = pos->dirY - pos->planeY;

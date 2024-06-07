@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/06 19:30:33 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/07 17:48:49 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static int	get_tile_size(t_pos *pos)
 
 static int	DDA(t_pos *pos)
 {
+	pos->found_door = false;
 	while (1)
 	{
 		if (pos->sideDistX < pos->sideDistY)
@@ -74,8 +75,13 @@ static int	DDA(t_pos *pos)
 			pos->side = 1;
 			which_dir(pos, "WE", 2);
 		}
-		if (pos->map[pos->mapX][pos->mapY] == '2' || pos->map[pos->mapX][pos->mapY] == '3')
-			door_dir(pos);
+		if (pos->column == SCREEN_WIDTH / 2)
+		{
+			if (pos->map[pos->mapX][pos->mapY] == '2' || pos->map[pos->mapX][pos->mapY] == '3')
+				door_dir(pos);
+			else if (pos->found_door == false)
+				pos->pointing_door = none;
+		}
 		if (pos->map[pos->mapX][pos->mapY] == '1')
 			return (0);
 		if (pos->map[pos->mapX][pos->mapY] == '2')
@@ -121,8 +127,8 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 	sort_and_cast_sprites(pos, &app->ghosts_lst);
 	draw_screen(pos, img);
 	put_minimap(app);
+	put_door_button(app);
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
 		img->img, 0, 0);
-//	put_door_button(app);
 	return 0;
 }

@@ -53,8 +53,6 @@ int	little_red_cross(t_app *app)
 
 int	init_hook(t_app *app)
 {
-	mlx_mouse_hide(app->img->mlx, app->img->mlx_win);
-	mlx_mouse_move(app->img->mlx, app->img->mlx_win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_hook(app->img->mlx_win, 17, 0, little_red_cross, app);
 	mlx_hook(app->img->mlx_win, KeyPress, KeyPressMask, change_motion_keypress, app);
 	mlx_hook(app->img->mlx_win, KeyRelease, KeyReleaseMask, change_motion_keyrelease, app);

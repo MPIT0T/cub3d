@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pathfinding.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:39 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/05 15:56:21 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/07 10:18:03 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ static int	try_moove(t_ghost *ghost, t_pos *pos, char dir)
 {
 	if (dir == 'N' && pos->map[(int)(ghost->y - (1))][(int)(ghost->x)] != '1')
 		return (1);
-	else if (dir == 'E' && pos->map[(int)(ghost->y)][(int)(ghost->x + (1))] != '1')
+	if (dir == 'E' && pos->map[(int)(ghost->y)][(int)(ghost->x + (1))] != '1')
 		return (1);
-	else if (dir == 'S' && pos->map[(int)(ghost->y + (1))][(int)(ghost->x)] != '1')
+	if (dir == 'S' && pos->map[(int)(ghost->y + (1))][(int)(ghost->x)] != '1')
 		return (1);
-	else if (dir == 'W' && pos->map[(int)(ghost->y)][(int)(ghost->x - (1))] != '1')
+	if (dir == 'W' && pos->map[(int)(ghost->y)][(int)(ghost->x - (1))] != '1')
 		return (1);
 	return (0);
 }
@@ -59,7 +59,7 @@ static int	new_direction(t_ghost *ghost, t_pos *pos)
 
 	if (ghost->dir == 'N' || ghost->dir == 'S')
 		dirs_pref = ghost->x_dirs_pref;
-	else if (ghost->dir == 'E' || ghost->dir == 'W')
+	else/* if (ghost->dir == 'E' || ghost->dir == 'W')*/
 		dirs_pref = ghost->y_dirs_pref;
 	if (try_moove(ghost, pos, dirs_pref[0]) == 1)
 	{

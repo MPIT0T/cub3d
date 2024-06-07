@@ -288,6 +288,7 @@ typedef struct s_pos
 	int				*z_prox;
 	t_door_dir		pointing_door;
 	size_t			column;
+	bool			found_door;
 
 } t_pos;
 

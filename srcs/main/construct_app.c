@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/06 19:12:28 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/07 11:09:29 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ int	initiate_textures(t_app *app)
 	app->pos->textures[i] = ft_calloc(sizeof(uint32_t), 508 * 60);
 	if (!app->pos->textures[i])
 		exit_error(app, EXIT_MALLOC);
-	app->pos->textures[++i] = malloc(sizeof(uint32_t) * 508 * 60);
+	app->pos->textures[++i] = malloc(sizeof(uint32_t) * 543 * 60);
 	if (!app->pos->textures[i])
 		exit_error(app, EXIT_MALLOC);
 	i = -1;
-	while (++i < 8)
+	while (++i < 10)
 	{
 		get_images(&app->pos->tex[i], app->img);
 		if (!app->pos->tex[i].data)
@@ -93,6 +93,7 @@ int	initiate_mlx(t_app *app)
 			&app->img->line_length, &app->img->endian);
 	if (!app->img->addr)
 		exit_error(app, EXIT_MALLOC);
+	mlx_mouse_hide(app->img->mlx, app->img->mlx_win);
 	mlx_mouse_move(app->img->mlx, app->img->mlx_win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	return (0);
 }
