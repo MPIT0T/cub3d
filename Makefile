@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
+#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/06/05 01:21:58 by cesar            ###   ########.fr        #
+#    Updated: 2024/06/10 17:11:29 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,8 +53,7 @@ ${OBJ_D}:
 	@mkdir -p ${OBJ_D}main
 	@mkdir -p ${OBJ_D}ghosts
 	@mkdir -p ${OBJ_D}ghosts/sort
-	@mkdir -p ${OBJ_D}minimap
-	@mkdir -p ${OBJ_D}doors
+	@mkdir -p ${OBJ_D}gui
 	@mkdir -p ${OBJ_D}parsing
 	@mkdir -p ${OBJ_D}exit-management
 

@@ -127,8 +127,8 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 	sort_and_cast_sprites(pos, &app->ghosts_lst);
 	draw_screen(pos, img);
 	put_minimap(app);
-	put_door_button(app);
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
 		img->img, 0, 0);
+	put_door_button(app);
 	return 0;
 }

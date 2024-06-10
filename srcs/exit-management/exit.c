@@ -33,7 +33,7 @@ void	exit_error(t_app *app, int error)
 
 void	exit_parsing_error(t_app *app, const char *msg)
 {
-	if (!msg)
+	if (msg == NULL)
 		perror(ERRMSG);
 	else
 		ft_printf_fd(2, "%s: %s\n", ERRMSG, msg);
