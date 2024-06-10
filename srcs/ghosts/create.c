@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/06 16:48:41 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:32:10 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ int	pop_some_ghosts(t_app *app)
 		exit_error(app, EXIT_MALLOC);
 	while (++i < GHOSTS_NUMBER)
 	{
-		spawning_point(app->pos, &app->ghosts[i]);
-		app->ghosts[i].move_speed = 0.2;
-		app->ghosts[i].dir = i % 3;
-		app->ghosts[i].last_wall = app->ghosts[i].dir;
+		app->ghosts[i].move_speed = 0.15;
+		app->ghosts[i].dir = NORTH;
 		new = ft_lstnew(&app->ghosts[i]);
 		if (!new)
 			exit_error(app, EXIT_MALLOC);
+		spawning_point(app->pos, &app->ghosts[i]);
 		ft_lstadd_back(&app->ghosts_lst, new);
 	}
 	return (0);
 }
+ 

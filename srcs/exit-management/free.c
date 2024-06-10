@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:34:59 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/06 11:10:09 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/07 08:57:06 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@ void	free_tex(t_app *app)
 
 void	free_ghosts(t_list **lst, t_ghost *ghosts, int map_width)
 {
-	ssize_t	i;
-
-	i = -1;
 	(void) map_width;
 	// while (++i < GHOSTS_NUMBER)
 	// {

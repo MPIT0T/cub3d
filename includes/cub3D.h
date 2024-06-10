@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/06 16:57:47 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/10 08:09:33 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define DOOR_TEX "./textures/door.xpm"
 # define GHOST_TEX "./textures/ghost.xpm"
 
-# define GHOSTS_NUMBER 10
+# define GHOSTS_NUMBER 3
 # define GHOSTS_SIZE 0.3
 
 # define BLUE			0x3a8399
@@ -130,10 +130,10 @@ typedef struct	s_minimap
 
 typedef enum	s_dir
 {
-	UP,
-	LEFT,
-	RIGHT,
-	DOWN,
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
 } t_dir;
 
 typedef struct	s_ghost

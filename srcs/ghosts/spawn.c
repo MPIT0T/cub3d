@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spawn.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 00:07:29 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/06 16:58:11 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:04:29 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int	top_left(t_pos *pos, t_ghost *ghost)
 				ghost->x = x;
 				ghost->y = y;
 				pos->map[y][x] = 'G';
-				return (0);
+				return (1);
 			}
 			y++;
 		}
 		x++;
 	}
-	return (1);
+	return (0);
 }
 
 int	top_right(t_pos *pos, t_ghost *ghost)
@@ -53,13 +53,13 @@ int	top_right(t_pos *pos, t_ghost *ghost)
 				ghost->x = x;
 				ghost->y = y;
 				pos->map[y][x] = 'G';
-				return (0);
+				return (1);
 			}
 			y++;
 		}
 		x--;
 	}
-	return (1);
+	return (0);
 }
 
 int	bottom_left(t_pos *pos, t_ghost *ghost)
@@ -78,13 +78,13 @@ int	bottom_left(t_pos *pos, t_ghost *ghost)
 				ghost->x = x;
 				ghost->y = y;
 				pos->map[y][x] = 'G';
-				return (0);
+				return (1);
 			}
 			y--;
 		}
 		x++;
 	}
-	return (1);
+	return (0);
 }
 
 int	bottom_right(t_pos *pos, t_ghost *ghost)
@@ -103,27 +103,26 @@ int	bottom_right(t_pos *pos, t_ghost *ghost)
 				ghost->x = x;
 				ghost->y = y;
 				pos->map[y][x] = 'G';
-				return (0);
+				return (1);
 			}
 			y--;
 		}
 		x--;
 	}
-	return (1);
+	return (0);
 }
 
 typedef int (*spawn_func)(t_pos *, t_ghost *);
 
 int	spawning_point(t_pos *pos, t_ghost *ghost)
 {
-	ssize_t	i;
+	static ssize_t	j = 0;
 	spawn_func spawn_funcs[] = {top_left, top_right, bottom_left, bottom_right};
 
-	i = -1;
-	while (i < GHOSTS_NUMBER)
-	{
-		spawn_funcs[++i % 4](pos, ghost);
-    }
+	if (j > 3)
+		j = 0;
+	spawn_funcs[j](pos, ghost);
+	j++;
     return (0);
 }
 
