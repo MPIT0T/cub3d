@@ -6,29 +6,11 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:19:12 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/06 14:32:46 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/10 17:31:53 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-void	set_frame_dimensions(t_app *app, t_minimap *mm)
-{
-	if (app->pos->MAP_WIDTH >= 14)
-		mm->mapSizeX = 14;
-	if (app->pos->MAP_HEIGHT >= 10)
-		mm->mapSizeY = 10;
-	if (mm->mapSizeX == -1)
-	{
-		mm->mapSizeX = app->pos->MAP_WIDTH;
-		mm->startX = 0;
-	}
-	if (mm->mapSizeY == -1)
-	{
-		mm->mapSizeY = app->pos->MAP_HEIGHT;
-		mm->startY = 0;
-	}
-}
 
 void	get_minimap_pos(t_app *app, t_minimap *mm)
 {
@@ -68,10 +50,28 @@ void	put_minimap_frame(t_app *app, t_minimap *mm)
 	}
 }
 
-void	put_minimap_pixel(t_app *app, t_minimap *mm)
+static void	__put_entities_pixel(t_app *app, t_minimap *mm)
 {
 	size_t	i;
 
+	i = -1;
+	while (++i < GHOSTS_NUMBER)
+	{
+		if (mm->startX > app->ghosts[i].y - 0.1
+			&& mm->startX < app->ghosts[i].y + 0.1
+			&& mm->startY > app->ghosts[i].x - 0.1
+			&& mm->startY < app->ghosts[i].x + 0.1)
+			px_put(app->img, mm->pixX, mm->pixY, BLUE);
+	}
+	if (mm->startX > app->pos->posY - 0.1
+		&& mm->startX < app->pos->posY + 0.1
+		&& mm->startY > app->pos->posX - 0.1
+		&& mm->startY < app->pos->posX + 0.1)
+		px_put(app->img, mm->pixX, mm->pixY, YELLOW);
+}
+
+static void	__put_minimap_pixel(t_app *app, t_minimap *mm)
+{
 	modf(mm->startX, &mm->intX);
 	modf(mm->startY, &mm->intY);
 	if (app->pos->map[(int) mm->intY][(int) mm->intX] == '1')
@@ -82,21 +82,7 @@ void	put_minimap_pixel(t_app *app, t_minimap *mm)
 		px_put(app->img, mm->pixX, mm->pixY, GREY);
 	else if (app->pos->map[(int) mm->intY][(int) mm->intX] == '0')
 		px_put(app->img, mm->pixX, mm->pixY, BLACK);
-	i = 0;
-	while (i < GHOSTS_NUMBER)
-	{
-		if (mm->startX > app->ghosts[i].y - 0.1
-			&& mm->startX < app->ghosts[i].y + 0.1
-			&& mm->startY > app->ghosts[i].x - 0.1
-			&& mm->startY < app->ghosts[i].x + 0.1)
-			px_put(app->img, mm->pixX, mm->pixY, BLUE);
-		i++;
-	}
-	if (mm->startX > app->pos->posY - 0.1
-		&& mm->startX < app->pos->posY + 0.1
-		&& mm->startY > app->pos->posX - 0.1
-		&& mm->startY < app->pos->posX + 0.1)
-		px_put(app->img, mm->pixX, mm->pixY, YELLOW);
+	__put_entities_pixel(app, mm);
 }
 
 void	put_minimap_on_screen(t_app *app, t_minimap *mm)
@@ -111,7 +97,7 @@ void	put_minimap_on_screen(t_app *app, t_minimap *mm)
 		mm->pixX = 5;
 		while (mm->pixX < ((20 * mm->mapSizeX) + 5))
 		{
-			put_minimap_pixel(app, mm);
+			__put_minimap_pixel(app, mm);
 			mm->startX += 0.05;
 			mm->pixX++;
 		}

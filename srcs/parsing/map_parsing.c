@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 11:50:13 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 17:06:03 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/10 17:29:24 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ static void	__make_map_rect(t_app *app)
 	{
 		if (ft_strlen(app->pos->map[i]) < (size_t) app->pos->MAP_WIDTH)
 		{
-			app->pos->map[i] = __make_new_map_line(app->pos->map[i], app->pos->MAP_WIDTH);
+			app->pos->map[i] = __make_new_map_line(app->pos->map[i],
+					app->pos->MAP_WIDTH);
 			if (!app->pos->map[i])
 				exit_error(app, EXIT_MALLOC);
 		}

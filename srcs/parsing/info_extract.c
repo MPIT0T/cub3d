@@ -25,7 +25,7 @@ static int	__check_color(char *str)
 		return (1);
 	while (str[++i] && ft_isdigit(str[i]))
 		state = 'g';
-	if ((str[i] != ',' && state == 'g') || state !='g')
+	if ((str[i] != ',' && state == 'g') || state != 'g')
 		return (1);
 	while (str[++i] && ft_isdigit(str[i]))
 		state = 'b';
@@ -69,7 +69,7 @@ unsigned int	get_color(t_app *app, char *str, char *id)
 		i++;
 	if (str[i] == '\0')
 		exit_parsing_error(app, "missing color");
-	i+= ft_strlen(id);
+	i += ft_strlen(id);
 	while (str[i] && str[i] == ' ')
 		i++;
 	color = __parse_color(app, &str[i]);

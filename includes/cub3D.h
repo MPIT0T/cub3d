@@ -312,10 +312,8 @@ typedef struct s_app
 //minimap.c
 void	put_minimap(t_app *app);
 //minimap_utils.c
-void	set_frame_dimensions(t_app *app, t_minimap *mm);
 void	get_minimap_pos(t_app *app, t_minimap *mm);
 void	put_minimap_frame(t_app *app, t_minimap *mm);
-void	put_minimap_pixel(t_app *app, t_minimap *mm);
 void	put_minimap_on_screen(t_app *app, t_minimap *mm);
 /*   PARSING   */
 //parsing.c

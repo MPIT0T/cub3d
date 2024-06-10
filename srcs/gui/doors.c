@@ -6,13 +6,13 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:45:58 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/10 16:58:44 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/10 17:00:16 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-static void	toggle_door(t_app *app, int x, int y)
+static void	__toggle_door(t_app *app, int x, int y)
 {
 	if (app->pos->map[x][y] == '2')
 		app->pos->map[x][y] = '3';
@@ -20,7 +20,7 @@ static void	toggle_door(t_app *app, int x, int y)
 		app->pos->map[x][y] = '2';
 }
 
-static void	put_butt(t_app *app, const int x, const int y)
+static void	__put_butt(t_app *app, int x, int y)
 {
 	if (app->pos->map[x][y] == '2')
 	{
@@ -43,25 +43,25 @@ static void	put_butt(t_app *app, const int x, const int y)
 void	open_door(t_app *app)
 {
 	if (app->pos->pointing_door == north)
-		toggle_door(app, (int) app->pos->posX - 1, (int) app->pos->posY);
+		__toggle_door(app, (int) app->pos->posX - 1, (int) app->pos->posY);
 	if (app->pos->pointing_door == south)
-		toggle_door(app, (int) app->pos->posX + 1, (int) app->pos->posY);
+		__toggle_door(app, (int) app->pos->posX + 1, (int) app->pos->posY);
 	if (app->pos->pointing_door == west)
-		toggle_door(app, (int) app->pos->posX, (int) app->pos->posY - 1);
+		__toggle_door(app, (int) app->pos->posX, (int) app->pos->posY - 1);
 	if (app->pos->pointing_door == east)
-		toggle_door(app, (int) app->pos->posX, (int) app->pos->posY + 1);
+		__toggle_door(app, (int) app->pos->posX, (int) app->pos->posY + 1);
 }
 
 int	put_door_button(t_app *app)
 {
 	if (app->pos->pointing_door == north)
-		put_butt(app, (int) app->pos->posX - 1, (int) app->pos->posY);
+		__put_butt(app, (int) app->pos->posX - 1, (int) app->pos->posY);
 	if (app->pos->pointing_door == south)
-		put_butt(app, (int) app->pos->posX + 1, (int) app->pos->posY);
+		__put_butt(app, (int) app->pos->posX + 1, (int) app->pos->posY);
 	if (app->pos->pointing_door == west)
-		put_butt(app, (int) app->pos->posX, (int) app->pos->posY - 1);
+		__put_butt(app, (int) app->pos->posX, (int) app->pos->posY - 1);
 	if (app->pos->pointing_door == east)
-		put_butt(app, (int) app->pos->posX, (int) app->pos->posY + 1);
+		__put_butt(app, (int) app->pos->posX, (int) app->pos->posY + 1);
 	return (0);
 }
 

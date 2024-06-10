@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:48:23 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/10 17:17:04 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/10 17:58:55 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,24 @@ static void	__put_crosshair(t_app *app)
 	__put_vertical_cross(app, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 }
 
+static void	__set_frame_dimensions(t_app *app, t_minimap *mm)
+{
+	if (app->pos->MAP_WIDTH >= 14)
+		mm->mapSizeX = 14;
+	if (app->pos->MAP_HEIGHT >= 10)
+		mm->mapSizeY = 10;
+	if (mm->mapSizeX == -1)
+	{
+		mm->mapSizeX = app->pos->MAP_WIDTH;
+		mm->startX = 0;
+	}
+	if (mm->mapSizeY == -1)
+	{
+		mm->mapSizeY = app->pos->MAP_HEIGHT;
+		mm->startY = 0;
+	}
+}
+
 void	put_minimap(t_app *app)
 {
 	t_minimap	mm;
@@ -66,7 +84,7 @@ void	put_minimap(t_app *app)
 	mm.intY = -1;
 	mm.mapSizeX = -1;
 	mm.mapSizeY = -1;
-	set_frame_dimensions(app, &mm);
+	__set_frame_dimensions(app, &mm);
 	get_minimap_pos(app, &mm);
 	put_minimap_on_screen(app, &mm);
 	put_minimap_frame(app, &mm);

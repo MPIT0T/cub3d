@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/07 11:09:29 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/10 18:58:41 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,7 @@ int	initiate_textures(t_app *app)
 	app->pos->tex[7].file = GHOST_TEX;
 	app->pos->tex[8].file = OPEN_TEX;
 	app->pos->tex[9].file = CLOSE_TEX;
-	int	i = -1;
-	app->pos->textures = ft_calloc(10, sizeof(uint32_t *));
-	if (!app->pos->textures)
-		exit_error(app, EXIT_MALLOC);
-	while (++i < 8)
-	{
-		app->pos->textures[i] = ft_calloc(TEX_WIDTH * TEX_HEIGHT, sizeof(uint32_t));
-		if (!app->pos->textures[i])
-			exit_error(app, EXIT_MALLOC);
-	}
-	app->pos->textures[i] = ft_calloc(sizeof(uint32_t), 508 * 60);
-	if (!app->pos->textures[i])
-		exit_error(app, EXIT_MALLOC);
-	app->pos->textures[++i] = malloc(sizeof(uint32_t) * 543 * 60);
-	if (!app->pos->textures[i])
-		exit_error(app, EXIT_MALLOC);
-	i = -1;
+	int i = -1;
 	while (++i < 10)
 	{
 		get_images(&app->pos->tex[i], app->img);
@@ -123,6 +107,5 @@ int	construct_app(t_app *app)
 	app->pos->motion_down = false;
 	app->pos->motion_left = false;
 	app->pos->motion_right = false;
-
 	return (0);
 }
