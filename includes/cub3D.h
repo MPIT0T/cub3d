@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/10 08:09:33 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/11 09:52:56 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define DOOR_TEX "./textures/door.xpm"
 # define GHOST_TEX "./textures/ghost.xpm"
 
-# define GHOSTS_NUMBER 3
+# define GHOSTS_NUMBER 1
 # define GHOSTS_SIZE 0.3
 
 # define BLUE			0x3a8399
