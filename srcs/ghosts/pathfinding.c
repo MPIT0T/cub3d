@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:39 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/11 14:55:50 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/11 16:11:22 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 int dx[] = {0, 0, 1, -1};
 int dy[] = {-1, 1, 0, 0};
 
-int isValid(int x, int y, t_pos *pos)
+int isValid(int y, int x, t_pos *pos)
 {
-    return (x > 1 && x < pos->MAP_WIDTH - 1 && y > 1
-		&& y < pos->MAP_HEIGHT - 1 && (pos->map[y][x] == '0' || pos->map[y][x] == 'G'));
+    return (x > 0 && x < pos->MAP_WIDTH && y > 0
+		&& y < pos->MAP_HEIGHT && (pos->map[y][x] == '0' || pos->map[y][x] == 'G'));
 }
 
 
@@ -32,24 +32,24 @@ static void	wall_following_2(t_ghost *ghost, t_pos *pos)
 {
 	if (ghost->dir == EAST)
 	{
-		if (isValid(ghost->x, ghost->y + dy[SOUTH], pos))
+		if (isValid(ghost->x, ghost->y + (dy[SOUTH] * ghost->move_speed), pos))
 			return (moove_to(ghost, SOUTH));
-		else if (isValid(ghost->x + dx[EAST], ghost->y, pos))
+		if (isValid(ghost->x + (dx[EAST] * ghost->move_speed), ghost->y, pos))
 			return (moove_to(ghost, EAST));
-		else if (isValid(ghost->x, ghost->y + dy[NORTH], pos))
+		if (isValid(ghost->x, ghost->y + (dy[NORTH] * ghost->move_speed), pos))
 			return (moove_to(ghost, NORTH));
-		else if (isValid(ghost->x + dx[WEST], ghost->y, pos))
+		if (isValid(ghost->x + (dx[WEST] * ghost->move_speed), ghost->y, pos))
 			return (moove_to(ghost, WEST));
 	}
 	else if (ghost->dir == WEST)
 	{
-		if (isValid(ghost->x, ghost->y + dy[NORTH], pos))
+		if (isValid(ghost->x, ghost->y + (dy[NORTH] * ghost->move_speed), pos))
 			return (moove_to(ghost, NORTH));
-		else if (isValid(ghost->x + dx[WEST], ghost->y, pos))
+		if (isValid(ghost->x + (dx[WEST] * ghost->move_speed), ghost->y, pos))
 			return (moove_to(ghost, WEST));
-		else if (isValid(ghost->x, ghost->y + dy[SOUTH], pos))
+		if (isValid(ghost->x, ghost->y + (dy[SOUTH] * ghost->move_speed), pos))
 			return (moove_to(ghost, SOUTH));
-		else if (isValid(ghost->x + dx[EAST], ghost->y, pos))
+		if (isValid(ghost->x + (dx[EAST] * ghost->move_speed), ghost->y, pos))
 			return (moove_to(ghost, EAST));
 	}
 }
@@ -58,24 +58,24 @@ static void	wall_following_1(t_ghost *ghost, t_pos *pos)
 {
 	if (ghost->dir == NORTH)
 	{
-		if (isValid(ghost->x + dx[EAST], ghost->y, pos))
+		if (isValid(ghost->x + (dx[EAST] * ghost->move_speed), ghost->y, pos))
 			return (moove_to(ghost, EAST));
-		else if (isValid(ghost->x, ghost->y + dy[NORTH], pos))
+		if (isValid(ghost->x, ghost->y + (dy[NORTH] * ghost->move_speed), pos))
 			return (moove_to(ghost, NORTH));
-		else if (isValid(ghost->x + dx[WEST], ghost->y, pos))
+		if (isValid(ghost->x + (dx[WEST] * ghost->move_speed), ghost->y, pos))
 			return (moove_to(ghost, WEST));
-		else if (isValid(ghost->x, ghost->y + dy[SOUTH], pos))
+		if (isValid(ghost->x, ghost->y + (dy[SOUTH] * ghost->move_speed), pos))
 			return (moove_to(ghost, SOUTH));
 	}
 	else if (ghost->dir == SOUTH)
 	{
-		if (isValid(ghost->x + dx[WEST], ghost->y, pos))
+		if (isValid(ghost->x + (dx[WEST] * ghost->move_speed), ghost->y, pos))
 			return (moove_to(ghost, WEST));
-		else if (isValid(ghost->x, ghost->y + dy[SOUTH], pos))
+		if (isValid(ghost->x, ghost->y + (dy[SOUTH] * ghost->move_speed), pos))
 			return (moove_to(ghost, SOUTH));
-		else if (isValid(ghost->x + dx[EAST], ghost->y, pos))
+		if (isValid(ghost->x + (dx[EAST] * ghost->move_speed), ghost->y, pos))
 			return (moove_to(ghost, EAST));
-		else if (isValid(ghost->x, ghost->y + dy[NORTH], pos))
+		if (isValid(ghost->x, ghost->y + (dy[NORTH] * ghost->move_speed), pos))
 			return (moove_to(ghost, NORTH));
 	}
 	else
