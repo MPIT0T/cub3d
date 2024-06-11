@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 13:34:33 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 17:40:16 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/11 09:39:59 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_color	*__parse_color(t_app *app, char *str)
 
 	color = malloc(sizeof(t_color));
 	if (!color)
-		exit_error(app, EXIT_MALLOC);
+		exit_parsing_error(app, "malloc error");
 	if (__check_color(str))
 	{
 		ft_free(color);

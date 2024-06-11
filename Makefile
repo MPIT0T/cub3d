@@ -83,7 +83,7 @@ fclean	:
 	@rm -f ${NAME}
 	@echo "$(WHITE)[$(RED)$(NAME)$(WHITE)] $(RED)deleted.$(DEFAULT)"
 
-sanitize	: fclean mlx libft .internal_separate2 ${OBJ_D} ${OBJS} libft/libft.a
+sanitize	: mlx libft .internal_separate2 ${OBJ_D} ${OBJS} libft/libft.a
 	@$(call print_progress,$(NAME))
 	@${CC} ${FLAGS} ${OBJS} -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -L./libft -lft -I${HEAD} -o ${NAME} -fsanitize=address -g3
 	@$(eval CHANGED=1)
