@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:19:12 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/10 17:31:53 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/11 13:59:07 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	__put_entities_pixel(t_app *app, t_minimap *mm)
 			&& mm->startX < app->ghosts[i].y + 0.1
 			&& mm->startY > app->ghosts[i].x - 0.1
 			&& mm->startY < app->ghosts[i].x + 0.1)
-			px_put(app->img, mm->pixX, mm->pixY, BLUE);
+			px_put(app->img, mm->pixX, mm->pixY, RED);
 	}
 	if (mm->startX > app->pos->posY - 0.1
 		&& mm->startX < app->pos->posY + 0.1
@@ -80,7 +80,8 @@ static void	__put_minimap_pixel(t_app *app, t_minimap *mm)
 		px_put(app->img, mm->pixX, mm->pixY, YELLOW);
 	else if (app->pos->map[(int) mm->intY][(int) mm->intX] == '3')
 		px_put(app->img, mm->pixX, mm->pixY, GREY);
-	else if (app->pos->map[(int) mm->intY][(int) mm->intX] == '0')
+	else if (app->pos->map[(int) mm->intY][(int) mm->intX] == '0'
+		|| app->pos->map[(int) mm->intY][(int) mm->intX] == ' ')
 		px_put(app->img, mm->pixX, mm->pixY, BLACK);
 	__put_entities_pixel(app, mm);
 }

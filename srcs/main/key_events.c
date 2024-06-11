@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:08:19 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/06 12:03:20 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/11 13:24:14 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	mouse_motion(int x, int y, t_app *app)
 	int		diff;
 
 	diff = abs(x - (SCREEN_WIDTH / 2));
-	app->pos->rotSpeedMouse = ((double) diff) / 400;
+	app->pos->rotSpeedMouse = ((double) diff) / 1500;
 //	app->pos->rotSpeedSave = app->pos->rotSpeed;
 //	app->pos->rotSpeed = abs(x - (SCREEN_WIDTH / 2));
 	if (x < SCREEN_WIDTH / 2)

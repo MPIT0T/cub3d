@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/05 15:52:16 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/11 11:01:22 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@
 # define TEX_HEIGHT		64
 
 # define ROOF_TEX "./textures/roof.xpm"
-# define FLOOR_TEX "./textures/floor.xpm"
+# define FLOOR_TEX "./textures/v2_floor.xpm"
 # define GHOST_TEX "./textures/ghost.xpm"
 # define DOOR_TEX "./textures/v2_door.xpm"
 # define OPEN_TEX "./textures/v2_open_door.xpm"
 # define CLOSE_TEX "./textures/v2_close_door.xpm"
 
-# define GHOSTS_NUMBER 1
+# define GHOSTS_NUMBER 15
 # define GHOSTS_SIZE 0.3
 
 # define BLUE			0x0000FF

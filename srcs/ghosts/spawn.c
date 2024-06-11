@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spawn.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 00:07:29 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/10 16:04:29 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/11 16:53:25 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	top_left(t_pos *pos, t_ghost *ghost)
 		{
 			if (pos->map[y][x] == '0')
 			{
-				ghost->x = x;
-				ghost->y = y;
-				pos->map[y][x] = 'G';
+				ghost->x = x + 0.5;
+				ghost->y = y + 0.5;
+				// pos->map[y][x] = 'G';
 				return (1);
 			}
 			y++;
@@ -50,9 +50,9 @@ int	top_right(t_pos *pos, t_ghost *ghost)
 		{
 			if (pos->map[y][x] == '0')
 			{
-				ghost->x = x;
-				ghost->y = y;
-				pos->map[y][x] = 'G';
+				ghost->x = x + 0.5;
+				ghost->y = y + 0.5;
+				// pos->map[y][x] = 'G';
 				return (1);
 			}
 			y++;
@@ -75,9 +75,9 @@ int	bottom_left(t_pos *pos, t_ghost *ghost)
 		{
 			if (pos->map[y][x] == '0')
 			{
-				ghost->x = x;
-				ghost->y = y;
-				pos->map[y][x] = 'G';
+				ghost->x = x + 0.5;
+				ghost->y = y + 0.5;
+				// pos->map[y][x] = 'G';
 				return (1);
 			}
 			y--;
@@ -100,9 +100,9 @@ int	bottom_right(t_pos *pos, t_ghost *ghost)
 		{
 			if (pos->map[y][x] == '0')
 			{
-				ghost->x = x;
-				ghost->y = y;
-				pos->map[y][x] = 'G';
+				ghost->x = x + 0.5;
+				ghost->y = y + 0.5;
+				// pos->map[y][x] = 'G';
 				return (1);
 			}
 			y--;

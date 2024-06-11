@@ -16,6 +16,10 @@ void	ft_check_args(int ac, char **av)
 {
 	size_t	len;
 
+	if (ac < 2)
+		ft_printf_fd(2, "%s: map not provided\n", ERRMSG);
+	if (ac > 2)
+		ft_printf_fd(2, "%s: too many arguments\n", ERRMSG);
 	len = ft_strlen(av[1]);
 	if (ac == 2)
 	{
@@ -26,10 +30,6 @@ void	ft_check_args(int ac, char **av)
 			return ;
 		exit(EXIT_ARGS);
 	}
-	if (ac < 2)
-		ft_printf_fd(2, "%s: map not provided\n", ERRMSG);
-	if (ac > 2)
-		ft_printf_fd(2, "%s: too many arguments\n", ERRMSG);
 	exit(EXIT_ARGS);
 }
 
@@ -98,8 +98,8 @@ void	set_camera_pos_and_dir(t_app *app)
 					app->pos->dirY = -1;
 					app->pos->planeX = -0.66;
 				}
-				app->pos->posY = (double) x;
-				app->pos->posX = (double) y;
+				app->pos->posY = ((double) x) + 0.5;
+				app->pos->posX = ((double) y) + 0.5;
 				app->pos->map[y][x] = '0';
 			}
 		}
