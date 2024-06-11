@@ -10,18 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS		=	$(MAIN)		\
-				$(GUI)		\
-				$(PARSING)	\
-				$(GHOSTS)	\
+SRCS		=	$(MAIN)					\
+				$(GUI)					\
+				$(PARSING)				\
+				$(GHOSTS)				\
 				$(EXIT)
-
-DIR_MAIN	=	main/
-DIR_GUI		=	gui/
-DIR_DOORS	=	doors/
-DIR_GHOSTS	=	ghosts/
-DIR_PARS	=	parsing/
-DIR_EXIT	=	exit-management/
 
 SRC_MAIN	=	main.c					\
 				exit_errors.c			\
@@ -33,27 +26,35 @@ SRC_MAIN	=	main.c					\
 				wall_textures.c			\
 				horizontal_textures.c
 
-SRC_GUI		=	minimap.c		\
-				minimap_utils.c	\
+SRC_GUI		=	minimap.c				\
+				minimap_utils.c			\
 				doors.c
 
-SRC_GHOSTS	=	spawn.c			\
-				create.c		\
-				pathfinding.c	\
-				target_player.c	\
-				spritecasting.c	\
+SRC_GHOSTS	=	spawn.c					\
+				create.c				\
+				pathfinding.c			\
+				target_player.c			\
+				spritecasting.c			\
 				sort.c
 
-SRC_PARS	=	parsing.c			\
-				read_map_file.c		\
-				info_extract.c		\
-				info_verif.c		\
-				map_parsing.c		\
-				map_verif.c			\
+SRC_PARS	=	parsing.c				\
+				read_map_file.c			\
+				info_extract.c			\
+				info_verif.c			\
+				map_parsing.c			\
+				map_verif.c				\
 				parsing_utils.c
 
-SRC_EXIT	=	exit.c	\
+SRC_EXIT	=	exit.c					\
 				free.c
+
+
+DIR_MAIN	=	main/
+DIR_GUI		=	gui/
+DIR_DOORS	=	doors/
+DIR_GHOSTS	=	ghosts/
+DIR_PARS	=	parsing/
+DIR_EXIT	=	exit-management/
 
 MAIN		=	$(addprefix $(DIR_MAIN), $(SRC_MAIN))
 GUI			=	$(addprefix $(DIR_GUI), $(SRC_GUI))
