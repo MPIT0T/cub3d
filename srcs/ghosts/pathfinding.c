@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:39 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/11 14:01:05 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/11 14:40:46 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int dy[] = {-1, 1, 0, 0};
 
 int isValid(int x, int y, t_pos *pos)
 {
-    return (x > 0 && x < pos->MAP_WIDTH - 1 && y > 0 && y < pos->MAP_HEIGHT - 1 && pos->map[y][x] == '0');
+    return (x > 1 && x < pos->MAP_WIDTH - 1 && y > 1
+		&& y < pos->MAP_HEIGHT - 1 && (pos->map[y][x] == '0' || pos->map[y][x] == 'G'));
 }
 
 
