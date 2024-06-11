@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/11 13:33:30 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/11 13:57:02 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define OPEN_TEX "./textures/v2_open_door.xpm"
 # define CLOSE_TEX "./textures/v2_close_door.xpm"
 
-# define GHOSTS_NUMBER 20
+# define GHOSTS_NUMBER 10
 # define GHOSTS_SIZE 0.3
 
 # define BLUE			0x0000FF
