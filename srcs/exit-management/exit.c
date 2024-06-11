@@ -6,13 +6,13 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:29:15 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/30 11:49:43 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/10 17:10:59 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	print_err(int err)
+static void	__print_err(int err)
 {
 	if (err == EXIT_MALLOC)
 		ft_printf_fd(2, "%s: malloc error\n", ERRMSG);
@@ -26,14 +26,14 @@ void	print_err(int err)
 
 void	exit_error(t_app *app, int error)
 {
-	print_err(error);
+	__print_err(error);
 	free_app(app);
 	exit(error);
 }
 
 void	exit_parsing_error(t_app *app, const char *msg)
 {
-	if (!msg)
+	if (msg == NULL)
 		perror(ERRMSG);
 	else
 		ft_printf_fd(2, "%s: %s\n", ERRMSG, msg);

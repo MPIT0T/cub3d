@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   construct_app.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/05 02:55:57 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/10 18:58:41 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	initiate_textures(t_app *app)
 		app->pos->px[y] = malloc(SCREEN_WIDTH * sizeof(uint32_t));
 	if (!app->pos->px)
 		exit_error(app, EXIT_MALLOC);
-	app->pos->tex = malloc(8 * sizeof(t_tex));
+	app->pos->tex = malloc(10 * sizeof(t_tex));
 	if (!app->pos->tex)
 		exit_error(app, EXIT_MALLOC);
 	app->pos->tex[0].file = app->pos->no;
@@ -44,18 +44,10 @@ int	initiate_textures(t_app *app)
 	app->pos->tex[5].file = FLOOR_TEX;
 	app->pos->tex[6].file = DOOR_TEX;
 	app->pos->tex[7].file = GHOST_TEX;
-	int	i = -1;
-	app->pos->textures = malloc(8 * sizeof(uint32_t *));
-	if (!app->pos->textures)
-		exit_error(app, EXIT_MALLOC);
-	while (++i < 8)
-	{
-		app->pos->textures[i] = malloc(TEX_WIDTH * TEX_HEIGHT * sizeof(uint32_t));
-		if (!app->pos->textures[i])
-			exit_error(app, EXIT_MALLOC);
-	}
-	i = -1;
-	while (++i < 8)
+	app->pos->tex[8].file = OPEN_TEX;
+	app->pos->tex[9].file = CLOSE_TEX;
+	int i = -1;
+	while (++i < 10)
 	{
 		get_images(&app->pos->tex[i], app->img);
 		if (!app->pos->tex[i].data)
@@ -85,6 +77,8 @@ int	initiate_mlx(t_app *app)
 			&app->img->line_length, &app->img->endian);
 	if (!app->img->addr)
 		exit_error(app, EXIT_MALLOC);
+	mlx_mouse_hide(app->img->mlx, app->img->mlx_win);
+	mlx_mouse_move(app->img->mlx, app->img->mlx_win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	return (0);
 }
 
@@ -113,6 +107,5 @@ int	construct_app(t_app *app)
 	app->pos->motion_down = false;
 	app->pos->motion_left = false;
 	app->pos->motion_right = false;
-
 	return (0);
 }

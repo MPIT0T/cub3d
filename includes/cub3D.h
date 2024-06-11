@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/11 09:52:56 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/05 15:52:16 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,22 @@
 
 # define ROOF_TEX "./textures/roof.xpm"
 # define FLOOR_TEX "./textures/floor.xpm"
-# define DOOR_TEX "./textures/door.xpm"
 # define GHOST_TEX "./textures/ghost.xpm"
+# define DOOR_TEX "./textures/v2_door.xpm"
+# define OPEN_TEX "./textures/v2_open_door.xpm"
+# define CLOSE_TEX "./textures/v2_close_door.xpm"
 
 # define GHOSTS_NUMBER 1
 # define GHOSTS_SIZE 0.3
 
-# define BLUE			0x3a8399
+# define BLUE			0x0000FF
 # define RED			0xFF0000
-# define YELLOW			0xffff00
+# define YELLOW			0xffdd00
 # define YELLOW_SIDE	0xa67924
 # define BROWN			0x7a5631
 # define BLACK			0x000000
 # define WHITE			0xffffff
-# define GREY			0x242b38
+# define GREY			0xe5e5e5
 
 # define MAP_CHARS " 012NSWE"
 
@@ -71,7 +73,14 @@
 /*                                 ENUM                                       */
 /* ************************************************************************** */
 
-
+typedef enum	e_door_dir
+{
+	none,
+	north,
+	south,
+	west,
+	east
+}	t_door_dir;
 
 /* ************************************************************************** */
 /*                                STRUCTS                                     */
@@ -277,6 +286,9 @@ typedef struct s_pos
 	t_tex			*tex;
 	uint32_t		**textures;
 	int				*z_prox;
+	t_door_dir		pointing_door;
+	size_t			column;
+	bool			found_door;
 
 } t_pos;
 
@@ -300,10 +312,8 @@ typedef struct s_app
 //minimap.c
 void	put_minimap(t_app *app);
 //minimap_utils.c
-void	set_frame_dimensions(t_app *app, t_minimap *mm);
 void	get_minimap_pos(t_app *app, t_minimap *mm);
 void	put_minimap_frame(t_app *app, t_minimap *mm);
-void	put_minimap_pixel(t_app *app, t_minimap *mm);
 void	put_minimap_on_screen(t_app *app, t_minimap *mm);
 /*   PARSING   */
 //parsing.c
@@ -362,5 +372,10 @@ int		ghosts_are_coming(t_app *app);
 int		sort_and_cast_sprites(t_pos *pos, t_list **ghosts_lst);
 void	sort_list(t_list **head);
 void	lstfree(t_list **lst);
+
+//int		put_door_button(t_app *app);
+void	door_dir(t_pos *pos);
+void	open_door(t_app *app);
+int		put_door_button(t_app *app);
 
 #endif

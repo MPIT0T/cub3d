@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:08:19 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/05 15:51:58 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/06 12:03:20 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	change_motion_keypress(int key, t_app *app)
 {
 	if (key == XK_Escape)
 		exit_error(app, EXIT_SUCCESS);
+	if (app->pos->pointing_door != none && key == XK_space)
+		open_door(app);
 	if (app->pos->motion_up == false && key == XK_w)
 		app->pos->motion_up = true;
 	if (app->pos->motion_down == false && key == XK_s)
@@ -78,6 +80,10 @@ int	change_motion_keyrelease(int key, t_app *app)
 		app->pos->motion_right = false;
 	if (key == XK_Shift_L && app->pos->moveSpeed == 0.10)
 		app->pos->moveSpeed = 0.05;
+	if (app->pos->rotate_left_arrows == true && key == XK_Left)
+		app->pos->rotate_left_arrows = false;
+	if (app->pos->rotate_right_arrows == true && key == XK_Right)
+		app->pos->rotate_right_arrows = false;
 	return (0);	
 }
 

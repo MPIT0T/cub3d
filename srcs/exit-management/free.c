@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:34:59 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/07 08:57:06 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/03 13:26:58 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void	free_tex(t_app *app)
 	size_t	i;
 
 	i = -1;
-	while (++i < 8)
-	{
+	while (++i < 10)
 		mlx_destroy_image(app->img->mlx, app->pos->tex[i].img);
-		ft_free(app->pos->textures[i]);
-	}
+	i = -1;
+	while (++i < SCREEN_HEIGHT)
+		ft_free(app->pos->px[i]);
+	ft_free(app->pos->px);
 	ft_free(app->pos->tex);
-	ft_free(app->pos->textures);
 	ft_free(app->pos);
 }
 
@@ -69,17 +69,16 @@ void	free_app(t_app *app)
 {
 	if (app)
 	{
-		ft_free(app->pos->no);
-		ft_free(app->pos->so);
-		ft_free(app->pos->we);
-		ft_free(app->pos->ea);
 		ft_free(app->full_file_string);
 		if (app->pos)
 		{
+			ft_free(app->pos->no);
+			ft_free(app->pos->so);
+			ft_free(app->pos->we);
+			ft_free(app->pos->ea);
+			ft_free(app->pos->z_prox);
 			ft_free_tab(app->pos->map);
-			freetab((void **)app->pos->px, SCREEN_HEIGHT);
 		}
-		free(app->pos->z_prox);
 		free_ghosts(&app->ghosts_lst, app->ghosts, app->pos->MAP_WIDTH);
 		free_tex(app);
 		free_mlx(app);
@@ -90,13 +89,16 @@ void	free_parsing_exit(t_app *app)
 {
 	if (app)
 	{
-		ft_free(app->pos->no);
-		ft_free(app->pos->so);
-		ft_free(app->pos->we);
-		ft_free(app->pos->ea);
 		ft_free(app->full_file_string);
 		if (app->pos)
+		{
 			ft_free_tab(app->pos->map);
+			ft_free(app->pos->z_prox);
+			ft_free(app->pos->no);
+			ft_free(app->pos->so);
+			ft_free(app->pos->we);
+			ft_free(app->pos->ea);
+		}
 		ft_free(app->img);
 		ft_free(app->pos);
 	}

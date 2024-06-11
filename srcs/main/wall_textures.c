@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:43:28 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/03 23:54:22 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/07 17:05:35 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ static int	yline_textured(t_app *app, t_walltex *walltex, int start, int end)
 
 	while (start < end)
 	{
-		walltex->texY = (int)walltex->texPos & (TEX_HEIGHT - 1);
+		walltex->texY = TEX_HEIGHT - 1 & (int)walltex->texPos;
 		walltex->texPos += walltex->step;
 		color = walltex->tex_content[TEX_HEIGHT * walltex->texY + walltex->texX];
+		// ft_printf("%x\n", color);
 		app->pos->px[start][walltex->x] = color;
 		start++;
 	}
@@ -38,7 +39,7 @@ static int	get_wallnum(t_walltex *walltex, t_pos *pos)
 	else if (pos->wallDir == 'W')
 		walltex->texNum = 3;
 	else if (pos->wallDir == 'D')
-		walltex->texNum = 4;
+		walltex->texNum = 6;
 	return (0);
 }
 
@@ -54,7 +55,7 @@ int	 get_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex)
 	walltex->texX = (int)(walltex->wallX * (double)TEX_WIDTH);
 	if ((pos->side == 0 && pos->rayDirX > 0) || (pos->side == 1 && pos->rayDirY < 0))
 		walltex->texX = TEX_WIDTH - walltex->texX - 1;
-	walltex->step = (double)TEX_HEIGHT / pos->lineHeight;
+	walltex->step = (double) TEX_HEIGHT / pos->lineHeight;
 	walltex->texPos = walltex->step * (pos->drawStart - (SCREEN_HEIGHT * 0.5) + (pos->lineHeight * 0.5));
 	yline_textured(app, walltex, pos->drawStart, pos->drawEnd);
 	return (0);
@@ -74,6 +75,6 @@ void	which_dir(t_pos *pos, char *set, int call)
 		if (pos->rayDirY < 0)
 			pos->wallDir = set[0];
 		else
-			pos->wallDir = set[1];		
+			pos->wallDir = set[1];
 	}
 }

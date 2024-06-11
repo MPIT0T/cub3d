@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 13:34:33 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 17:40:16 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/11 09:39:59 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	__check_color(char *str)
 		return (1);
 	while (str[++i] && ft_isdigit(str[i]))
 		state = 'g';
-	if ((str[i] != ',' && state == 'g') || state !='g')
+	if ((str[i] != ',' && state == 'g') || state != 'g')
 		return (1);
 	while (str[++i] && ft_isdigit(str[i]))
 		state = 'b';
@@ -43,7 +43,7 @@ static t_color	*__parse_color(t_app *app, char *str)
 
 	color = malloc(sizeof(t_color));
 	if (!color)
-		exit_error(app, EXIT_MALLOC);
+		exit_parsing_error(app, "malloc error");
 	if (__check_color(str))
 	{
 		ft_free(color);
@@ -69,7 +69,7 @@ unsigned int	get_color(t_app *app, char *str, char *id)
 		i++;
 	if (str[i] == '\0')
 		exit_parsing_error(app, "missing color");
-	i+= ft_strlen(id);
+	i += ft_strlen(id);
 	while (str[i] && str[i] == ' ')
 		i++;
 	color = __parse_color(app, &str[i]);

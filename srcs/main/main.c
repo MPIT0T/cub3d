@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/06 14:29:59 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:14:55 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	game_loop(t_app *app)
 	motion(app);
 	clear_px_buffer(app->pos->px);
 	new_image(app);
-	print_map(app->pos);
+	// print_map(app->pos);
 	ghosts_are_coming(app);
 	raycasting_loop(app->pos, app->img, app);
 	return (0);
@@ -53,8 +53,6 @@ int	little_red_cross(t_app *app)
 
 int	init_hook(t_app *app)
 {
-	mlx_mouse_hide(app->img->mlx, app->img->mlx_win);
-	mlx_mouse_move(app->img->mlx, app->img->mlx_win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_hook(app->img->mlx_win, 17, 0, little_red_cross, app);
 	mlx_hook(app->img->mlx_win, KeyPress, KeyPressMask, change_motion_keypress, app);
 	mlx_hook(app->img->mlx_win, KeyRelease, KeyReleaseMask, change_motion_keyrelease, app);
@@ -123,6 +121,7 @@ int	initiate_positions(t_app *app)
 	app->pos->rotate_right_arrows = false;
 	app->pos->rotate_right_mouse = false;
 	app->pos->rotate_right_mouse = false;
+	app->pos->pointing_door = none;
 	return (0);
 }
 

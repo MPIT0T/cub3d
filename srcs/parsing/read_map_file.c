@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:32:10 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/29 14:28:34 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/11 09:35:11 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ static char	*__read_entire_file(t_app *app, int fd)
 		if (sz == -1)
 		{
 			ft_free(result_str);
-			exit_error(app, EXIT_READ);
+			exit_parsing_error(app, "error reading file");
 		}
 		if (sz == 0 && !result_str)
 			break ;
 		buff[sz] = '\0';
 		result_str = ft_strjoin_free(result_str, buff, 1);
 		if (!result_str)
-			exit_error(app, EXIT_MALLOC);
+			exit_parsing_error(app, "malloc error");
 		ft_bzero(buff, 1025);
 	}
 	return (result_str);
@@ -46,10 +46,10 @@ char	*read_map_file(t_app *app, const char *path_to_map)
 
 	fd = open(path_to_map, O_RDONLY);
 	if (fd == -1)
-		exit_error(app, EXIT_OPEN);
+		exit_parsing_error(app, "error opening file");
 	result_str = __read_entire_file(app, fd);
 	close(fd);
 	if (!result_str)
-		exit_error(app, EXIT_READ);
+		exit_parsing_error(app, "error reading file");
 	return (result_str);
 }
