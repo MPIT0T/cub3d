@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:43:28 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/07 17:05:35 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/11 14:50:27 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ static int	yline_textured(t_app *app, t_walltex *walltex, int start, int end)
 
 	while (start < end)
 	{
-		walltex->texY = TEX_HEIGHT - 1 & (int)walltex->texPos;
+		walltex->texY = (TEX_HEIGHT - 1) & (int)walltex->texPos;
 		walltex->texPos += walltex->step;
 		color = walltex->tex_content[TEX_HEIGHT * walltex->texY + walltex->texX];
-		// ft_printf("%x\n", color);
 		app->pos->px[start][walltex->x] = color;
 		start++;
 	}
