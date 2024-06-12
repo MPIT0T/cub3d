@@ -62,11 +62,11 @@ int	verify_map_border(char **map)
 		{
 			if (map[i][j] == '0')
 			{
-				if (map[i + 1] && map [i + 1][j] == ' ')
+				if (!map[i + 1] || map [i + 1][j] == ' ')
 					return (1);
 				if (i == 0 || (map[i - 1] && map [i - 1][j] == ' '))
 					return (1);
-				if (map[i][j + 1] && map [i][j + 1] == ' ')
+				if (!map[i][j + 1] || map [i][j + 1] == ' ')
 					return (1);
 				if (j == 0 || (map[i][j - 1] && map [i][j - 1] == ' '))
 					return (1);

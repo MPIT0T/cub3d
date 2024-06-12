@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 13:34:33 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/12 14:42:19 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/12 15:13:00 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_color	*__parse_color(t_app *app, char *str)
 	size_t	i;
 	t_color	*color;
 
-	if (ft_strcmp(str, "tex"))
+	if (ft_strcmp(str, "tex") == 0)
 		return (NULL);
 	if (__check_color(str))
 		exit_parsing_error(app, "invalid color format");
