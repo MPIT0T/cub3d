@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_start_vars.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:10:44 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/12 14:22:23 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/12 15:55:04 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,26 @@ static void	set_start_pos(t_app *app, char dir, int x, int y)
 {
 	if (dir == 'N')
 	{
-		app->pos->dirX = -1;
-		app->pos->planeY = 0.66;
+		app->pos->p_dir_x = -1;
+		app->pos->surf_y = 0.66;
 	}
 	if (dir == 'S')
 	{
-		app->pos->dirX = 1;
-		app->pos->planeY = -0.66;
+		app->pos->p_dir_x = 1;
+		app->pos->surf_y = -0.66;
 	}
 	if (dir == 'E')
 	{
-		app->pos->dirY = 1;
-		app->pos->planeX = 0.66;
+		app->pos->p_dir_y = 1;
+		app->pos->surf_x = 0.66;
 	}
 	if (dir == 'W')
 	{
-		app->pos->dirY = -1;
-		app->pos->planeX = -0.66;
+		app->pos->p_dir_y = -1;
+		app->pos->surf_x = -0.66;
 	}
-	app->pos->posY = x + 0.5;
-	app->pos->posX = y + 0.5;
+	app->pos->p_y = x + 0.5;
+	app->pos->p_x = y + 0.5;
 	app->pos->map[y][x] = '0';
 }
 
@@ -59,8 +59,6 @@ static void	set_camera_pos_and_dir(t_app *app)
 int	initiate_positions(t_app *app)
 {
 	set_camera_pos_and_dir(app);
-	app->pos->time = 0;
-	app->pos->oldTime = 0;
 	app->pos->h = 1;
 	app->pos->moveSpeed = 0.05;
 	app->pos->rotSpeedArrows = 0.05;

@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:43:28 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/12 14:58:35 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/12 15:52:02 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ int	 get_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex)
 	get_wallnum(walltex, pos);
 	walltex->tex_content = (uint32_t *)pos->tex[walltex->texNum].data;
 	if (pos->side == 0)
-		walltex->wallX = pos->posY + pos->perpWallDist * pos->rayDirY;
+		walltex->wallX = pos->p_y + pos->perpWallDist * pos->ray_ydir;
 	else
-		walltex->wallX = pos->posX + pos->perpWallDist * pos->rayDirX;
+		walltex->wallX = pos->p_x + pos->perpWallDist * pos->ray_xdir;
 	walltex->wallX -= floor(walltex->wallX);
 	walltex->texX = (int)(walltex->wallX * (double)TEX_WIDTH);
-	if ((pos->side == 0 && pos->rayDirX > 0) || (pos->side == 1 && pos->rayDirY < 0))
+	if ((pos->side == 0 && pos->ray_xdir > 0) || (pos->side == 1 && pos->ray_ydir < 0))
 		walltex->texX = TEX_WIDTH - walltex->texX - 1;
 	walltex->step = (double) TEX_HEIGHT / pos->lineHeight;
 	walltex->texPos = walltex->step * (pos->drawStart - (SCREEN_HEIGHT * 0.5) + (pos->lineHeight * 0.5));
@@ -78,14 +78,14 @@ void	which_dir(t_pos *pos, char *set, int call)
 {
 	if (call == 1)
 	{
-		if (pos->rayDirX < 0)
+		if (pos->ray_xdir < 0)
 			pos->wallDir = set[0];
 		else
 			pos->wallDir = set[1];
 	}
 	else
 	{
-		if (pos->rayDirY < 0)
+		if (pos->ray_ydir < 0)
 			pos->wallDir = set[0];
 		else
 			pos->wallDir = set[1];

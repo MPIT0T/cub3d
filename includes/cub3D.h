@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/12 14:23:32 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/12 15:55:04 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,17 +245,15 @@ typedef struct s_pos
 	unsigned int	f;
 	ssize_t			MAP_WIDTH;
 	ssize_t			MAP_HEIGHT;
-	double			posX;
-	double			posY;
-	double			dirX;
-	double			dirY;
-	double			planeX;
-	double			planeY;
-	double			time;
-	double			oldTime;
-	double			cameraX; //x-coordinate in camera space
-	double			rayDirX;
-	double			rayDirY;
+	double			p_x;
+	double			p_y;
+	double			p_dir_x;
+	double			p_dir_y;
+	double			surf_x;
+	double			surf_y;
+	double			cam_x; //x-coordinate in camera space
+	double			ray_xdir;
+	double			ray_ydir;
 	int				mapX; //which box of the map we're in
 	int				mapY;
 	double			sideDistX; //length of ray from current position to next x or y-side

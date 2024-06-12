@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/12 10:42:29 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:52:02 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ int	get_opposite_of_player(t_pos *pos)
 {
 	int	quarter;
 
-	if (pos->posX < pos->MAP_WIDTH * 0.5
-		&& pos->posY < pos->MAP_HEIGHT * 0.5)
+	if (pos->p_x < pos->MAP_WIDTH * 0.5
+		&& pos->p_y < pos->MAP_HEIGHT * 0.5)
 		quarter = 4;
-	else if (pos->posX >= pos->MAP_WIDTH * 0.5
-		&& pos->posY < pos->MAP_HEIGHT * 0.5)
+	else if (pos->p_x >= pos->MAP_WIDTH * 0.5
+		&& pos->p_y < pos->MAP_HEIGHT * 0.5)
 		quarter = 3;
-	else if (pos->posX < pos->MAP_WIDTH * 0.5
-		&& pos->posY >= pos->MAP_HEIGHT * 0.5)
+	else if (pos->p_x < pos->MAP_WIDTH * 0.5
+		&& pos->p_y >= pos->MAP_HEIGHT * 0.5)
 		quarter = 2;
 	else
 		quarter = 1;

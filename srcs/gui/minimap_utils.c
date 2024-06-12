@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:19:12 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/11 13:59:07 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/12 15:52:02 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@ void	get_minimap_pos(t_app *app, t_minimap *mm)
 {
 	if (mm->startX == -1)
 	{
-		mm->startX = app->pos->posY - (mm->mapSizeX / 2);
-		if (app->pos->posY > app->pos->MAP_WIDTH - (mm->mapSizeX / 2))
+		mm->startX = app->pos->p_y - (mm->mapSizeX / 2);
+		if (app->pos->p_y > app->pos->MAP_WIDTH - (mm->mapSizeX / 2))
 			mm->startX = app->pos->MAP_WIDTH - mm->mapSizeX;
-		else if (app->pos->posY - (mm->mapSizeX / 2) < 0)
+		else if (app->pos->p_y - (mm->mapSizeX / 2) < 0)
 			mm->startX = 0;
 	}
 	if (mm->startY == -1)
 	{
-		mm->startY = app->pos->posX - (mm->mapSizeY / 2);
-		if (app->pos->posX > app->pos->MAP_HEIGHT - (mm->mapSizeY / 2))
+		mm->startY = app->pos->p_x - (mm->mapSizeY / 2);
+		if (app->pos->p_x > app->pos->MAP_HEIGHT - (mm->mapSizeY / 2))
 			mm->startY = app->pos->MAP_HEIGHT - mm->mapSizeY;
-		else if (app->pos->posX - (mm->mapSizeY / 2) < 0)
+		else if (app->pos->p_x - (mm->mapSizeY / 2) < 0)
 			mm->startY = 0;
 	}
 }
@@ -63,10 +63,10 @@ static void	__put_entities_pixel(t_app *app, t_minimap *mm)
 			&& mm->startY < app->ghosts[i].x + 0.1)
 			px_put(app->img, mm->pixX, mm->pixY, RED);
 	}
-	if (mm->startX > app->pos->posY - 0.1
-		&& mm->startX < app->pos->posY + 0.1
-		&& mm->startY > app->pos->posX - 0.1
-		&& mm->startY < app->pos->posX + 0.1)
+	if (mm->startX > app->pos->p_y - 0.1
+		&& mm->startX < app->pos->p_y + 0.1
+		&& mm->startY > app->pos->p_x - 0.1
+		&& mm->startY < app->pos->p_x + 0.1)
 		px_put(app->img, mm->pixX, mm->pixY, YELLOW);
 }
 

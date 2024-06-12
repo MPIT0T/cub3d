@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/12 14:58:27 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/12 15:55:04 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,44 @@
 
 static int	get_ray_length(t_pos *pos, int x)
 {
-	pos->cameraX = 2 * x / (double)(SCREEN_WIDTH) - 1; //x-coordinate in camera space
-	pos->rayDirX = pos->dirX + pos->planeX * pos->cameraX;
-	pos->rayDirY = pos->dirY + pos->planeY * pos->cameraX;
-	pos->mapX = (int)pos->posX;
-	pos->mapY = (int)pos->posY;
-	if (pos->rayDirX == 0)
+	pos->cam_x = 2 * x / (double)(SCREEN_WIDTH) - 1; //x-coordinate in camera space
+	pos->ray_xdir = pos->p_dir_x + pos->surf_x * pos->cam_x;
+	pos->ray_ydir = pos->p_dir_y + pos->surf_y * pos->cam_x;
+	pos->mapX = (int)pos->p_x;
+	pos->mapY = (int)pos->p_y;
+	if (pos->ray_xdir == 0)
 		pos->deltaDistX = 1e30;
 	else
-		pos->deltaDistX = fabs(1 / pos->rayDirX);
-	if (pos->rayDirY == 0)
+		pos->deltaDistX = fabs(1 / pos->ray_xdir);
+	if (pos->ray_ydir == 0)
 		pos->deltaDistY = 1e30;
 	else
-		pos->deltaDistY = fabs(1 / pos->rayDirY);
+		pos->deltaDistY = fabs(1 / pos->ray_ydir);
 	pos->hit = 0;
 	return (0);
 }
 
 static int	get_tile_size(t_pos *pos)
 {
-	if (pos->rayDirX < 0)
+	if (pos->ray_xdir < 0)
 	{
 		pos->stepX = -1;
-		pos->sideDistX = (pos->posX - pos->mapX) * pos->deltaDistX;
+		pos->sideDistX = (pos->p_x - pos->mapX) * pos->deltaDistX;
 	}
 	else
 	{
 		pos->stepX = 1;
-		pos->sideDistX = (pos->mapX + 1.0 - pos->posX) * pos->deltaDistX;
+		pos->sideDistX = (pos->mapX + 1.0 - pos->p_x) * pos->deltaDistX;
 	}
-	if (pos->rayDirY < 0)
+	if (pos->ray_ydir < 0)
 	{
 		pos->stepY = -1;
-		pos->sideDistY = (pos->posY - pos->mapY) * pos->deltaDistY;
+		pos->sideDistY = (pos->p_y - pos->mapY) * pos->deltaDistY;
 	}
 	else
 	{
 		pos->stepY = 1;
-		pos->sideDistY = (pos->mapY + 1.0 - pos->posY) * pos->deltaDistY;
+		pos->sideDistY = (pos->mapY + 1.0 - pos->p_y) * pos->deltaDistY;
 	}
 	return (0);
 }

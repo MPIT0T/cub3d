@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   archive.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:28:11 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/03 23:00:23 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/12 15:52:29 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@
 // 	while (++y < SCREEN_HEIGHT)
 // 	{	
 // 		horiztex->y = y;
-// 		horiztex->rayDirX0 = pos->dirX - pos->planeX;
-// 		horiztex->rayDirY0 = pos->dirY - pos->planeY;
-// 		horiztex->rayDirX1 = pos->dirX + pos->planeX;
-// 		horiztex->rayDirY1 = pos->dirY + pos->planeY;
+// 		horiztex->rayDirX0 = pos->p_dir_x - pos->planeX;
+// 		horiztex->rayDirY0 = pos->p_dir_y - pos->planeY;
+// 		horiztex->rayDirX1 = pos->p_dir_x + pos->planeX;
+// 		horiztex->rayDirY1 = pos->p_dir_y + pos->planeY;
 // 		horiztex->p = y - SCREEN_HEIGHT * 0.5;
 // 		horiztex->posZ = SCREEN_HEIGHT * 5;
 // 		horiztex->rowDistance = horiztex->posZ / horiztex->p;

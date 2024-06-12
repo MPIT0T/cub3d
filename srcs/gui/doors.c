@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doors.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:45:58 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/11 14:17:32 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:52:02 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,25 @@ static void	__put_butt(t_app *app, int x, int y)
 void	open_door(t_app *app)
 {
 	if (app->pos->pointing_door == north)
-		__toggle_door(app, (int) app->pos->posX - 1, (int) app->pos->posY);
+		__toggle_door(app, (int) app->pos->p_x - 1, (int) app->pos->p_y);
 	if (app->pos->pointing_door == south)
-		__toggle_door(app, (int) app->pos->posX + 1, (int) app->pos->posY);
+		__toggle_door(app, (int) app->pos->p_x + 1, (int) app->pos->p_y);
 	if (app->pos->pointing_door == west)
-		__toggle_door(app, (int) app->pos->posX, (int) app->pos->posY - 1);
+		__toggle_door(app, (int) app->pos->p_x, (int) app->pos->p_y - 1);
 	if (app->pos->pointing_door == east)
-		__toggle_door(app, (int) app->pos->posX, (int) app->pos->posY + 1);
+		__toggle_door(app, (int) app->pos->p_x, (int) app->pos->p_y + 1);
 }
 
 int	put_door_button(t_app *app)
 {
 	if (app->pos->pointing_door == north)
-		__put_butt(app, (int) app->pos->posX - 1, (int) app->pos->posY);
+		__put_butt(app, (int) app->pos->p_x - 1, (int) app->pos->p_y);
 	if (app->pos->pointing_door == south)
-		__put_butt(app, (int) app->pos->posX + 1, (int) app->pos->posY);
+		__put_butt(app, (int) app->pos->p_x + 1, (int) app->pos->p_y);
 	if (app->pos->pointing_door == west)
-		__put_butt(app, (int) app->pos->posX, (int) app->pos->posY - 1);
+		__put_butt(app, (int) app->pos->p_x, (int) app->pos->p_y - 1);
 	if (app->pos->pointing_door == east)
-		__put_butt(app, (int) app->pos->posX, (int) app->pos->posY + 1);
+		__put_butt(app, (int) app->pos->p_x, (int) app->pos->p_y + 1);
 	return (0);
 }
 
@@ -70,8 +70,8 @@ void	door_dir(t_pos *pos)
 	double	pos_x;
 	double	pos_y;
 
-	modf(pos->posX, &pos_x);
-	modf(pos->posY, &pos_y);
+	modf(pos->p_x, &pos_x);
+	modf(pos->p_y, &pos_y);
 	if (pos->mapX == pos_x - 1 && pos->mapY == pos_y)
 		pos->pointing_door = north;
 	else if (pos->mapX == pos_x + 1 && pos->mapY == pos_y)
