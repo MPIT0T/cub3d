@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/12 13:12:56 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/12 14:23:32 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,6 +293,8 @@ typedef struct s_pos
 	t_door_dir		pointing_door;
 	size_t			column;
 	bool			found_door;
+	bool			floor_tex;
+	bool			roof_tex;
 
 } t_pos;
 
@@ -321,6 +323,7 @@ void	put_minimap_frame(t_app *app, t_minimap *mm);
 void	put_minimap_on_screen(t_app *app, t_minimap *mm);
 /*   PARSING   */
 //parsing.c
+void	ft_check_args(int ac, char **av);
 int		parsing(t_app *app, const char *path_to_map);
 //read_map_file.c
 char	*read_map_file(t_app *app, const char *path_to_map);
@@ -341,6 +344,8 @@ int	check_double_nl(const char *str);
 //parsing_utils.c
 void	skip_blanks(char *str, size_t *i);
 char	*ft_strndup(t_app *app, char *str, size_t size);
+//set_start_vars.c
+int	initiate_positions(t_app *app);
 
 /*   EXIT   */
 //exit.c

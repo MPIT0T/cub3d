@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 13:34:33 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/11 09:39:59 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/12 13:59:23 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,13 @@ static t_color	*__parse_color(t_app *app, char *str)
 	size_t	i;
 	t_color	*color;
 
+	if (ft_strcmp(str, "tex"))
+		return (NULL);
+	if (__check_color(str))
+		exit_parsing_error(app, "invalid color format");
 	color = malloc(sizeof(t_color));
 	if (!color)
 		exit_parsing_error(app, "malloc error");
-	if (__check_color(str))
-	{
-		ft_free(color);
-		exit_parsing_error(app, "invalid color format");
-	}
 	i = 0;
 	color->r = ft_atoi(&str[i]);
 	i += ft_intlen(color->r) + 1;
@@ -73,6 +72,10 @@ unsigned int	get_color(t_app *app, char *str, char *id)
 	while (str[i] && str[i] == ' ')
 		i++;
 	color = __parse_color(app, &str[i]);
+	if (!color && ft_strcmp("F", id))
+		(app->pos->floor_tex = true);
+	if (!color && ft_strcmp("C", id))
+		(app->pos->roof_tex = true);
 	if (verify_color(color))
 		exit_parsing_error(app, "invalid color format");
 	result = 0;

@@ -42,7 +42,8 @@ SRC_PARS	=	parsing.c				\
 				info_verif.c			\
 				map_parsing.c			\
 				map_verif.c				\
-				parsing_utils.c
+				parsing_utils.c			\
+				set_start_vars.c
 
 SRC_EXIT	=	exit.c					\
 				free.c
