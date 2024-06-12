@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/12 11:43:02 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:44:19 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,12 @@ void	set_camera_pos_and_dir(t_app *app)
 					app->pos->dirX = 1;
 					app->pos->planeY = -0.66;
 				}
-				if (app->pos->map[y][x] == 'W')
+				if (app->pos->map[y][x] == 'E')
 				{
 					app->pos->dirY = 1;
 					app->pos->planeX = 0.66;
 				}
-				if (app->pos->map[y][x] == 'E')
+				if (app->pos->map[y][x] == 'W')
 				{
 					app->pos->dirY = -1;
 					app->pos->planeX = -0.66;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/05 15:52:16 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/12 13:12:56 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,15 @@ typedef enum	e_door_dir
 	east
 }	t_door_dir;
 
+typedef enum	s_dir
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
+} t_dir;
+
+
 /* ************************************************************************** */
 /*                                STRUCTS                                     */
 /* ************************************************************************** */
@@ -136,14 +145,6 @@ typedef struct	s_minimap
 	int		mapSizeX;
 	int		mapSizeY;
 }	t_minimap;
-
-typedef enum	s_dir
-{
-	NORTH,
-	SOUTH,
-	EAST,
-	WEST,
-} t_dir;
 
 typedef struct	s_d
 {
