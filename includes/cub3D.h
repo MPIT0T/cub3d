@@ -288,7 +288,6 @@ typedef struct s_pos
 	int				**px;
 	char			wallDir;
 	t_tex			*tex;
-	uint32_t		**textures;
 	int				*z_prox;
 	t_door_dir		pointing_door;
 	size_t			column;
