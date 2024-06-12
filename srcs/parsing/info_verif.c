@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   info_verif.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 14:06:59 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 18:15:03 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/12 14:33:03 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static int	__verify_path(char *path)
 
 int	verify_color(t_color *color)
 {
+	if (!color)
+		return (0);
 	if (color->r < 0 || color->r > 255
 		|| color->g < 0 || color->g > 255
 		|| color->b < 0 || color->b > 255)

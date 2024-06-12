@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 23:07:41 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/03 23:33:50 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/12 14:46:10 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ static int	xline_textured(t_pos *pos, t_horiztex *horiztex, int start, int end)
 		horiztex->floorY += horiztex->floorStepY;
 		horiztex->floor_tex_px = horiztex->floor_tex_content[TEX_WIDTH * horiztex->ty + horiztex->tx];
 		horiztex->roof_tex_px = horiztex->roof_tex_content[TEX_WIDTH * horiztex->ty + horiztex->tx];
-		pos->px[horiztex->y][start] = horiztex->floor_tex_px;
-		pos->px[SCREEN_HEIGHT - horiztex->y - 1][start] = horiztex->roof_tex_px;
+		if (pos->floor_tex)
+			pos->px[horiztex->y][start] = horiztex->floor_tex_px;
+		if (pos->roof_tex)
+			pos->px[SCREEN_HEIGHT - horiztex->y - 1][start] = horiztex->roof_tex_px;
 		start++;
 	}
 	return (0);

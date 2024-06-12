@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   info_extract.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 13:34:33 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/12 13:59:23 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/12 14:42:19 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ unsigned int	get_color(t_app *app, char *str, char *id)
 	while (str[i] && str[i] == ' ')
 		i++;
 	color = __parse_color(app, &str[i]);
-	if (!color && ft_strcmp("F", id))
-		(app->pos->floor_tex = true);
-	if (!color && ft_strcmp("C", id))
-		(app->pos->roof_tex = true);
+	if (!color && ft_strcmp("F ", id) == 0)
+		return (app->pos->floor_tex = true, 0);
+	if (!color && ft_strcmp("C ", id) == 0)
+		return (app->pos->roof_tex = true, 0);
 	if (verify_color(color))
 		exit_parsing_error(app, "invalid color format");
 	result = 0;

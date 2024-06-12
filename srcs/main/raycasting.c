@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/07 17:48:49 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/12 14:58:27 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,8 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 	t_horiztex	horiztex;
 
 	x = -1;
-	get_horizontal_texture(pos, &horiztex);
+	if (pos->floor_tex || pos->roof_tex)
+		get_horizontal_texture(pos, &horiztex);
 	while (++x < SCREEN_WIDTH)
 	{
 		pos->column = x;

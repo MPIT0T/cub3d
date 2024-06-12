@@ -6,11 +6,21 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:43:28 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/11 14:50:27 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/12 14:58:35 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+int	yline(t_app *app, int x, int yStart, int yEnd, int color)
+{
+	while (yStart < yEnd)
+	{
+		app->pos->px[yStart][x] = color;
+		yStart++;
+	}
+	return (0);
+}
 
 static int	yline_textured(t_app *app, t_walltex *walltex, int start, int end)
 {
@@ -57,6 +67,10 @@ int	 get_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex)
 	walltex->step = (double) TEX_HEIGHT / pos->lineHeight;
 	walltex->texPos = walltex->step * (pos->drawStart - (SCREEN_HEIGHT * 0.5) + (pos->lineHeight * 0.5));
 	yline_textured(app, walltex, pos->drawStart, pos->drawEnd);
+	if (!pos->roof_tex)
+		yline(app, walltex->x, 0, pos->drawStart, pos->c);
+	if (!pos ->floor_tex)
+		yline(app, walltex->x, pos->drawEnd, SCREEN_HEIGHT, pos->f);
 	return (0);
 }
 
