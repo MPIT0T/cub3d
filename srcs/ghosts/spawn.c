@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spawn.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 00:07:29 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/11 15:49:31 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/12 12:39:42 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	top_left(t_pos *pos, t_ghost *ghost)
 			{
 				ghost->x = x;
 				ghost->y = y;
-				// pos->map[y][x] = 'G';
+				printf("top left at [%f][%f]\n", ghost->y, ghost->x);
+
 				return (1);
 			}
 			x++;
@@ -53,6 +54,8 @@ int	top_right(t_pos *pos, t_ghost *ghost)
 				ghost->x = x;
 				ghost->y = y;
 				// pos->map[y][x] = 'G';
+				printf("top right at [%f][%f]\n", ghost->y, ghost->x);
+
 				return (1);
 			}
 			x--;
@@ -78,6 +81,8 @@ int	bottom_left(t_pos *pos, t_ghost *ghost)
 				ghost->x = x;
 				ghost->y = y;
 				// pos->map[y][x] = 'G';
+				printf("bottom left at [%f][%f]\n", ghost->y, ghost->x);
+
 				return (1);
 			}
 			x++;
@@ -102,6 +107,7 @@ int	bottom_right(t_pos *pos, t_ghost *ghost)
 			{
 				ghost->x = x;
 				ghost->y = y;
+				printf("bottom right at [%f][%f]\n", ghost->y, ghost->x);
 				// pos->map[y][x] = 'G';
 				return (1);
 			}

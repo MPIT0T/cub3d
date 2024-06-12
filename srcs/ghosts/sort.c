@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 09:33:00 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/05 16:58:13 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/12 10:51:59 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,21 @@ void	lstfree(t_list **lst)
 	*lst = NULL;
 }
 
-void swap(t_list *a, t_list *b)
+void	swap(t_list *a, t_list *b)
 {
-	t_ghost *tmp;
-	
+	t_ghost	*tmp;
+
 	tmp = a->content;
 	a->content = b->content;
 	b->content = tmp;
 }
 
-void sort_list(t_list **head)
+void	sort_list(t_list **head)
 {
-	int swapped;
-	t_list *ptr1;
-	t_list *lptr;
-	
+	int		swapped;
+	t_list	*ptr1;
+	t_list	*lptr;
+
 	lptr = NULL;
 	swapped = 1;
 	while (swapped)
@@ -50,7 +50,8 @@ void sort_list(t_list **head)
 		ptr1 = *head;
 		while (ptr1->next != lptr)
 		{
-			if (((t_ghost *)ptr1->content)->player_dist < ((t_ghost *)ptr1->next->content)->player_dist)
+			if (((t_ghost *)ptr1->content)->player_dist
+				< ((t_ghost *)ptr1->next->content)->player_dist)
 			{
 				swap(ptr1, ptr1->next);
 				swapped = 1;
