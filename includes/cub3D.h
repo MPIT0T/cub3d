@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/11 11:01:22 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/05 15:52:16 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define OPEN_TEX "./textures/v2_open_door.xpm"
 # define CLOSE_TEX "./textures/v2_close_door.xpm"
 
-# define GHOSTS_NUMBER 15
+# define GHOSTS_NUMBER 5
 # define GHOSTS_SIZE 0.3
 
 # define BLUE			0x0000FF
@@ -145,19 +145,22 @@ typedef enum	s_dir
 	WEST,
 } t_dir;
 
+typedef struct	s_d
+{
+	int y[4];
+	int x[4];
+} t_d;
+
 typedef struct	s_ghost
 {
 	double	x;
 	double	y;
 	t_dir	dir;
-	t_dir	new_dir;
 	int		dir_x;
 	int		dir_y;
 	double	move_speed;
 	int		*dirset;
 	double	player_dist;
-	t_dir	opposite;
-	t_dir	last_wall;
 }	t_ghost;
 
 typedef struct	s_img

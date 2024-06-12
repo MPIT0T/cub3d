@@ -3,91 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   pathfinding.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:39 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/11 17:36:35 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/12 12:55:14 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
-int dx[] = {0, 0, 1, -1};
-int dy[] = {-1, 1, 0, 0};
 
-int isValid(int y, int x, t_pos *pos)
+static int	is_valid(t_ghost *ghost, t_dir dir, t_pos *pos, t_d d)
 {
-	return (x > 0 && x < pos->MAP_WIDTH && y > 0 && y < pos->MAP_HEIGHT && (pos->map[y][x] == '0' || pos->map[y][x] == '3'));
+	double	y;
+	double	x;
+
+	printf("checking if %d is valid\n", dir);
+	// x = ghost->x;
+	// y = ghost->y;
+	x = ghost->y + (d.y[dir] * ghost->move_speed);
+	y = ghost->x + (d.x[dir] * ghost->move_speed);
+	return (x > 0 && x < pos->MAP_WIDTH && y > 0 && y < pos->MAP_HEIGHT
+		&& (pos->map[(int)y][(int)x] == '0' || pos->map[(int)y][(int)x] == 'G'));
 }
 
-
-static	void moove_to(t_ghost *ghost, t_dir dir)
+static void	moove_to(t_ghost *ghost, t_dir dir, t_d d)
 {
-	// return ;
-	ghost->x += dx[dir] * ghost->move_speed;
-	ghost->y += dy[dir] * ghost->move_speed;
+	ghost->y += d.y[dir] * ghost->move_speed;
+	ghost->x += d.x[dir] * ghost->move_speed;
 	ghost->dir = dir;
+	printf("ghost moved to [%f][%f]\n", ghost->y, ghost->x);
 }
 
-static void	wall_following_2(t_ghost *ghost, t_pos *pos)
+static void	wall_following_2(t_ghost *ghost, t_pos *pos, t_d d)
 {
 	if (ghost->dir == EAST)
 	{
-		if (isValid(ghost->x - 0.5 + dx[SOUTH] * ghost->move_speed, ghost->y - 0.5 + dy[SOUTH] * ghost->move_speed, pos))
-			return (moove_to(ghost, SOUTH));
-		if (isValid(ghost->x - 0.5 + dx[EAST] * ghost->move_speed, ghost->y - 0.5 + dy[EAST] * ghost->move_speed, pos))
-			return (moove_to(ghost, EAST));
-		if (isValid(ghost->x - 0.5 + dx[NORTH] * ghost->move_speed, ghost->y - 0.5 + dy[NORTH] * ghost->move_speed, pos))
-			return (moove_to(ghost, NORTH));
-		if (isValid(ghost->x - 0.5 + dx[WEST] * ghost->move_speed, ghost->y - 0.5 + dy[WEST] * ghost->move_speed, pos))
-			return (moove_to(ghost, WEST));
+		if (is_valid(ghost, SOUTH, pos, d))
+			return (moove_to(ghost, SOUTH, d));
+		if (is_valid(ghost, EAST, pos, d))
+			return (moove_to(ghost, EAST, d));
+		if (is_valid(ghost, NORTH, pos, d))
+			return (moove_to(ghost, NORTH, d));
+		if (is_valid(ghost, WEST, pos, d))
+			return (moove_to(ghost, WEST, d));
 	}
 	else if (ghost->dir == WEST)
 	{
-		if (isValid(ghost->x - 0.5 + dx[NORTH] * ghost->move_speed, ghost->y - 0.5 + dy[NORTH] * ghost->move_speed, pos))
-			return (moove_to(ghost, NORTH));
-		if (isValid(ghost->x - 0.5 + dx[WEST] * ghost->move_speed, ghost->y - 0.5 + dy[WEST] * ghost->move_speed, pos))
-			return (moove_to(ghost, WEST));
-		if (isValid(ghost->x - 0.5 + dx[SOUTH] * ghost->move_speed, ghost->y - 0.5 + dy[SOUTH] * ghost->move_speed, pos))
-			return (moove_to(ghost, SOUTH));
-		if (isValid(ghost->x - 0.5 + dx[EAST] * ghost->move_speed, ghost->y - 0.5 + dy[EAST] * ghost->move_speed, pos))
-			return (moove_to(ghost, EAST));
+		if (is_valid(ghost, NORTH, pos, d))
+			return (moove_to(ghost, NORTH, d));
+		if (is_valid(ghost, WEST, pos, d))
+			return (moove_to(ghost, WEST, d));
+		if (is_valid(ghost, SOUTH, pos, d))
+			return (moove_to(ghost, SOUTH, d));
+		if (is_valid(ghost, EAST, pos, d))
+			return (moove_to(ghost, EAST, d));
 	}
 }
 
-static void	wall_following_1(t_ghost *ghost, t_pos *pos)
+static void	wall_following_1(t_ghost *ghost, t_pos *pos, t_d d)
 {
+
 	if (ghost->dir == NORTH)
 	{
-		if (isValid(ghost->x - 0.5 + dx[EAST] * ghost->move_speed, ghost->y - 0.5 + dy[EAST] * ghost->move_speed, pos))
-			return (moove_to(ghost, EAST));
-		if (isValid(ghost->x - 0.5 + dx[NORTH] * ghost->move_speed, ghost->y - 0.5 + dy[NORTH] * ghost->move_speed, pos))
-			return (moove_to(ghost, NORTH));
-		if (isValid(ghost->x - 0.5 + dx[WEST] * ghost->move_speed, ghost->y - 0.5 + dy[WEST] * ghost->move_speed, pos))
-			return (moove_to(ghost, WEST));
-		if (isValid(ghost->x - 0.5 + dx[SOUTH] * ghost->move_speed, ghost->y - 0.5 + dy[SOUTH] * ghost->move_speed, pos))
-			return (moove_to(ghost, SOUTH));
+		if (is_valid(ghost, EAST, pos, d))
+			return (moove_to(ghost, EAST, d));
+		if (is_valid(ghost, NORTH, pos, d))
+			return (moove_to(ghost, NORTH, d));
+		if (is_valid(ghost, WEST, pos, d))
+			return (moove_to(ghost, WEST, d));
+		if (is_valid(ghost, SOUTH, pos, d))
+			return (moove_to(ghost, SOUTH, d));
 	}
 	else if (ghost->dir == SOUTH)
 	{
-		if (isValid(ghost->x - 0.5 + dx[WEST] * ghost->move_speed, ghost->y - 0.5 + dy[WEST] * ghost->move_speed, pos))
-			return (moove_to(ghost, WEST));
-		if (isValid(ghost->x - 0.5 + dx[SOUTH] * ghost->move_speed, ghost->y - 0.5 + dy[SOUTH] * ghost->move_speed, pos))
-			return (moove_to(ghost, SOUTH));
-		if (isValid(ghost->x - 0.5 + dx[EAST] * ghost->move_speed, ghost->y - 0.5 + dy[EAST] * ghost->move_speed, pos))
-			return (moove_to(ghost, EAST));
-		if (isValid(ghost->x - 0.5 + dx[NORTH] * ghost->move_speed, ghost->y - 0.5 + dy[NORTH] * ghost->move_speed, pos))
-			return (moove_to(ghost, NORTH));
+		if (is_valid(ghost, WEST, pos, d))
+			return (moove_to(ghost, WEST, d));
+		if (is_valid(ghost, SOUTH, pos, d))
+			return (moove_to(ghost, SOUTH, d));
+		if (is_valid(ghost, EAST, pos, d))
+			return (moove_to(ghost, EAST, d));
+		if (is_valid(ghost, NORTH, pos, d))
+			return (moove_to(ghost, NORTH, d));
 	}
 	else
-		wall_following_2(ghost, pos);
+		wall_following_2(ghost, pos, d);
 }
 
 int	ghosts_are_coming(t_app *app)
 {
-	ssize_t	i;
+	ssize_t		i;
+	const t_d	d = {{-1, 1, 0, 0}, {0, 0, 1, -1}};
 
 	i = -1;
+	// printf("dy is %d, %d, and dx is %d, %d\n", d.y[0], d.y[1], d.x[0], d.x[1]);
 	while (++i < GHOSTS_NUMBER)
-		wall_following_1(&app->ghosts[i], app->pos);
+		wall_following_1(&app->ghosts[i], app->pos, d);
 	return (0);
 }

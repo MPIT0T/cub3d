@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/11 16:33:15 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/12 10:42:29 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void 	print_map(t_pos *pos)
+void	print_map(t_pos *pos)
 {
 	ssize_t	y;
 	ssize_t	x;
@@ -33,11 +33,14 @@ int	get_opposite_of_player(t_pos *pos)
 {
 	int	quarter;
 
-	if (pos->posX < pos->MAP_WIDTH * 0.5 && pos->posY < pos->MAP_HEIGHT * 0.5)
+	if (pos->posX < pos->MAP_WIDTH * 0.5
+		&& pos->posY < pos->MAP_HEIGHT * 0.5)
 		quarter = 4;
-	else if (pos->posX >= pos->MAP_WIDTH * 0.5 && pos->posY < pos->MAP_HEIGHT * 0.5)
+	else if (pos->posX >= pos->MAP_WIDTH * 0.5
+		&& pos->posY < pos->MAP_HEIGHT * 0.5)
 		quarter = 3;
-	else if (pos->posX < pos->MAP_WIDTH * 0.5 && pos->posY >= pos->MAP_HEIGHT * 0.5)
+	else if (pos->posX < pos->MAP_WIDTH * 0.5
+		&& pos->posY >= pos->MAP_HEIGHT * 0.5)
 		quarter = 2;
 	else
 		quarter = 1;
@@ -56,7 +59,7 @@ int	pop_some_ghosts(t_app *app)
 		exit_error(app, EXIT_MALLOC);
 	while (++i < GHOSTS_NUMBER)
 	{
-		app->ghosts[i].move_speed = 0.15;
+		app->ghosts[i].move_speed = 0.10;
 		app->ghosts[i].dir = NORTH;
 		new = ft_lstnew(&app->ghosts[i]);
 		if (!new)

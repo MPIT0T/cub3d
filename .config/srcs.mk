@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    srcs.mk                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: cesar <cesar@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:18:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/06/10 17:02:29 by mpitot           ###   ########.fr        #
+#    Updated: 2024/06/11 14:50:55 by cesar            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,6 @@ SRC_GUI		=	minimap.c				\
 SRC_GHOSTS	=	spawn.c					\
 				create.c				\
 				pathfinding.c			\
-				target_player.c			\
 				spritecasting.c			\
 				sort.c
 
