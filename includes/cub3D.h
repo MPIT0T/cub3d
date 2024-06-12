@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/11 15:36:54 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/12 09:33:48 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,19 +145,22 @@ typedef enum	s_dir
 	WEST,
 } t_dir;
 
+typedef struct	s_d
+{
+	int y[4];
+	int x[4];
+} t_d;
+
 typedef struct	s_ghost
 {
 	double	x;
 	double	y;
 	t_dir	dir;
-	t_dir	new_dir;
 	int		dir_x;
 	int		dir_y;
 	double	move_speed;
 	int		*dirset;
 	double	player_dist;
-	t_dir	opposite;
-	t_dir	last_wall;
 }	t_ghost;
 
 typedef struct	s_img
