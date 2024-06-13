@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/13 10:03:38 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/13 10:38:27 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -356,6 +356,7 @@ int				change_motion_keypress(int key, t_app *app);
 int				change_motion_keyrelease(int key, t_app *app);
 int				mouse_motion(int x, int y, t_app *app);
 int				motion(t_app *app);
+int				rotate(t_app *app);
 
 /* INITIALIZATION */
 int				game_loop(t_app *app);

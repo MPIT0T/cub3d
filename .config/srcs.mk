@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    srcs.mk                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:18:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/06/13 10:02:05 by mpitot           ###   ########.fr        #
+#    Updated: 2024/06/13 10:39:03 by cefuente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,12 +45,12 @@ SRC_PARS	=	parsing.c				\
 
 SRC_RAY		=	horizontal_textures.c	\
 				moove.c					\
+				rotate.c				\
 				raycasting.c			\
 				wall_textures.c
 
 SRC_EXIT	=	exit.c					\
 				free.c
-
 
 DIR_MAIN	=	main/
 DIR_MLXX	=	mlx/
