@@ -47,7 +47,8 @@ SRC_RAY		=	horizontal_textures.c	\
 				moove.c					\
 				rotate.c				\
 				raycasting.c			\
-				wall_textures.c
+				wall_textures.c			\
+				rotation.c
 
 SRC_EXIT	=	exit.c					\
 				free.c
