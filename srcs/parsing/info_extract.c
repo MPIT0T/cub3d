@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   info_extract.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 13:34:33 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/12 15:13:00 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/13 17:50:47 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ static t_color	*__parse_color(t_app *app, char *str)
 	return (color);
 }
 
+void	make_bool_true(bool *boolean)
+{
+	*boolean = true;
+}
+
 unsigned int	get_color(t_app *app, char *str, char *id)
 {
 	size_t			i;
@@ -72,9 +77,9 @@ unsigned int	get_color(t_app *app, char *str, char *id)
 	while (str[i] && str[i] == ' ')
 		i++;
 	color = __parse_color(app, &str[i]);
-	if (!color && ft_strcmp("F ", id) == 0)
+	if (!color && ft_strncmp("F ", id, 2) == 0)
 		return (app->pos->floor_tex = true, 0);
-	if (!color && ft_strcmp("C ", id) == 0)
+	if (!color && ft_strncmp("C ", id, 2) == 0)
 		return (app->pos->roof_tex = true, 0);
 	if (verify_color(color))
 		return (ft_free(color), exit_parsing_error(app, "invalid color"), 1);

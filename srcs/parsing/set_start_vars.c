@@ -69,8 +69,8 @@ int	initiate_positions(t_app *app)
 	app->pos->rotate_right_arrows = false;
 	app->pos->rotate_right_mouse = false;
 	app->pos->rotate_right_mouse = false;
-	app->pos->floor_tex = false;
-	app->pos->roof_tex = false;
+	// app->pos->floor_tex = false;
+	// app->pos->roof_tex = false;
 	app->pause = false;
 	app->pos->pointing_door = none;
 	return (0);
