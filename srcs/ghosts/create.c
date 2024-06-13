@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/12 15:52:02 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/13 09:12:21 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	print_map(t_pos *pos)
 
 	y = -1;
 	x = -1;
-	while (++y < pos->MAP_HEIGHT)
+	while (++y < pos->map_height)
 	{
-		while (++x < pos->MAP_WIDTH)
+		while (++x < pos->map_width)
 			printf("%c", pos->map[y][x]);
 		x = -1;
 		printf("\n");
@@ -33,14 +33,14 @@ int	get_opposite_of_player(t_pos *pos)
 {
 	int	quarter;
 
-	if (pos->p_x < pos->MAP_WIDTH * 0.5
-		&& pos->p_y < pos->MAP_HEIGHT * 0.5)
+	if (pos->p_x < pos->map_width * 0.5
+		&& pos->p_y < pos->map_height * 0.5)
 		quarter = 4;
-	else if (pos->p_x >= pos->MAP_WIDTH * 0.5
-		&& pos->p_y < pos->MAP_HEIGHT * 0.5)
+	else if (pos->p_x >= pos->map_width * 0.5
+		&& pos->p_y < pos->map_height * 0.5)
 		quarter = 3;
-	else if (pos->p_x < pos->MAP_WIDTH * 0.5
-		&& pos->p_y >= pos->MAP_HEIGHT * 0.5)
+	else if (pos->p_x < pos->map_width * 0.5
+		&& pos->p_y >= pos->map_height * 0.5)
 		quarter = 2;
 	else
 		quarter = 1;

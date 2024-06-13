@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 00:07:29 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/12 12:53:01 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/13 10:05:05 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,15 @@ int	top_left(t_pos *pos, t_ghost *ghost)
 	ssize_t	x;
 
 	y = 0;
-	while (y < pos->MAP_HEIGHT / 2)
+	while (y < pos->map_height / 2)
 	{
 		x = 0;
-		while (x < pos->MAP_WIDTH / 2)
+		while (x < pos->map_width / 2)
 		{
 			if (pos->map[y][x] == '0')
 			{
 				ghost->x = x;
 				ghost->y = y;
-				printf("top left at [%f][%f]\n", ghost->y, ghost->x);
-
 				return (1);
 			}
 			x++;
@@ -44,18 +42,15 @@ int	top_right(t_pos *pos, t_ghost *ghost)
 	ssize_t	x;
 
 	y = 0;
-	while (y < pos->MAP_HEIGHT / 2)
+	while (y < pos->map_height / 2)
 	{
-		x = pos->MAP_WIDTH - 1;
-		while (x >= pos->MAP_WIDTH / 2)
+		x = pos->map_width - 1;
+		while (x >= pos->map_width / 2)
 		{
 			if (pos->map[y][x] == '0')
 			{
 				ghost->x = x;
 				ghost->y = y;
-				// pos->map[y][x] = 'G';
-				printf("top right at [%f][%f]\n", ghost->y, ghost->x);
-
 				return (1);
 			}
 			x--;
@@ -70,19 +65,16 @@ int	bottom_left(t_pos *pos, t_ghost *ghost)
 	ssize_t	y;
 	ssize_t	x;
 
-	y = pos->MAP_HEIGHT - 1;
-	while (y >= pos->MAP_HEIGHT / 2)
+	y = pos->map_height - 1;
+	while (y >= pos->map_height / 2)
 	{
 		x = 0;
-		while (x < pos->MAP_WIDTH / 2)
+		while (x < pos->map_width / 2)
 		{
 			if (pos->map[y][x] == '0')
 			{
 				ghost->x = x;
 				ghost->y = y;
-				// pos->map[y][x] = 'G';
-				printf("bottom left at [%f][%f]\n", ghost->y, ghost->x);
-
 				return (1);
 			}
 			x++;
@@ -97,18 +89,16 @@ int	bottom_right(t_pos *pos, t_ghost *ghost)
 	ssize_t	y;
 	ssize_t	x;
 
-	y = pos->MAP_HEIGHT - 1;
-	while (y >= pos->MAP_HEIGHT / 2)
+	y = pos->map_height - 1;
+	while (y >= pos->map_height / 2)
 	{
-		x = pos->MAP_WIDTH - 1;
-		while (x >= pos->MAP_WIDTH / 2)
+		x = pos->map_width - 1;
+		while (x >= pos->map_width / 2)
 		{
 			if (pos->map[y][x] == '0')
 			{
 				ghost->x = x;
 				ghost->y = y;
-				printf("bottom right at [%f][%f]\n", ghost->y, ghost->x);
-				// pos->map[y][x] = 'G';
 				return (1);
 			}
 			x--;
@@ -118,17 +108,15 @@ int	bottom_right(t_pos *pos, t_ghost *ghost)
 	return (0);
 }
 
-typedef int (*spawn_func)(t_pos *, t_ghost *);
-
 int	spawning_point(t_pos *pos, t_ghost *ghost)
 {
-	static ssize_t	j = 0;
-	spawn_func spawn_funcs[] = {top_left, top_right, bottom_left, bottom_right};
+	static ssize_t		j = 0;
+	static t_spawn_func	spawn_funcs[]
+		= {top_left, top_right, bottom_left, bottom_right};
 
 	if (j > 3)
 		j = 0;
 	spawn_funcs[j](pos, ghost);
 	j++;
-    return (0);
+	return (0);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:43:28 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/12 15:52:02 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/13 09:36:50 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static int	yline_textured(t_app *app, t_walltex *walltex, int start, int end)
 
 	while (start < end)
 	{
-		walltex->texY = (TEX_HEIGHT - 1) & (int)walltex->texPos;
-		walltex->texPos += walltex->step;
-		color = walltex->tex_content[TEX_HEIGHT * walltex->texY + walltex->texX];
+		walltex->tex_y = (TEX_HEIGHT - 1) & (int)walltex->tex_pos;
+		walltex->tex_pos += walltex->step;
+		color = walltex->tex_content[TEX_HEIGHT * walltex->tex_y + walltex->tex_x];
 		app->pos->px[start][walltex->x] = color;
 		start++;
 	}
@@ -39,38 +39,38 @@ static int	yline_textured(t_app *app, t_walltex *walltex, int start, int end)
 
 static int	get_wallnum(t_walltex *walltex, t_pos *pos)
 {
-	if (pos->wallDir == 'N')
-		walltex->texNum = 0;
-	else if (pos->wallDir == 'S')
-		walltex->texNum = 1;
-	else if (pos->wallDir == 'E')
-		walltex->texNum = 2;
-	else if (pos->wallDir == 'W')
-		walltex->texNum = 3;
-	else if (pos->wallDir == 'D')
-		walltex->texNum = 6;
+	if (pos->wall_dir == 'N')
+		walltex->tex_num = 0;
+	else if (pos->wall_dir == 'S')
+		walltex->tex_num = 1;
+	else if (pos->wall_dir == 'E')
+		walltex->tex_num = 2;
+	else if (pos->wall_dir == 'W')
+		walltex->tex_num = 3;
+	else if (pos->wall_dir == 'D')
+		walltex->tex_num = 6;
 	return (0);
 }
 
 int	 get_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex)
 {
 	get_wallnum(walltex, pos);
-	walltex->tex_content = (uint32_t *)pos->tex[walltex->texNum].data;
+	walltex->tex_content = (uint32_t *)pos->tex[walltex->tex_num].data;
 	if (pos->side == 0)
-		walltex->wallX = pos->p_y + pos->perpWallDist * pos->ray_ydir;
+		walltex->wall_x = pos->p_y + pos->wall_dist * pos->raydir_y;
 	else
-		walltex->wallX = pos->p_x + pos->perpWallDist * pos->ray_xdir;
-	walltex->wallX -= floor(walltex->wallX);
-	walltex->texX = (int)(walltex->wallX * (double)TEX_WIDTH);
-	if ((pos->side == 0 && pos->ray_xdir > 0) || (pos->side == 1 && pos->ray_ydir < 0))
-		walltex->texX = TEX_WIDTH - walltex->texX - 1;
-	walltex->step = (double) TEX_HEIGHT / pos->lineHeight;
-	walltex->texPos = walltex->step * (pos->drawStart - (SCREEN_HEIGHT * 0.5) + (pos->lineHeight * 0.5));
-	yline_textured(app, walltex, pos->drawStart, pos->drawEnd);
+		walltex->wall_x = pos->p_x + pos->wall_dist * pos->raydir_x;
+	walltex->wall_x -= floor(walltex->wall_x);
+	walltex->tex_x = (int)(walltex->wall_x * (double)TEX_WIDTH);
+	if ((pos->side == 0 && pos->raydir_x > 0) || (pos->side == 1 && pos->raydir_y < 0))
+		walltex->tex_x = TEX_WIDTH - walltex->tex_x - 1;
+	walltex->step = (double) TEX_HEIGHT / pos->line_height;
+	walltex->tex_pos = walltex->step * (pos->draw_start - (SCREEN_HEIGHT * 0.5) + (pos->line_height * 0.5));
+	yline_textured(app, walltex, pos->draw_start, pos->draw_end);
 	if (!pos->roof_tex)
-		yline(app, walltex->x, 0, pos->drawStart, pos->c);
+		yline(app, walltex->x, 0, pos->draw_start, pos->c);
 	if (!pos ->floor_tex)
-		yline(app, walltex->x, pos->drawEnd, SCREEN_HEIGHT, pos->f);
+		yline(app, walltex->x, pos->draw_end, SCREEN_HEIGHT, pos->f);
 	return (0);
 }
 
@@ -78,16 +78,16 @@ void	which_dir(t_pos *pos, char *set, int call)
 {
 	if (call == 1)
 	{
-		if (pos->ray_xdir < 0)
-			pos->wallDir = set[0];
+		if (pos->raydir_x < 0)
+			pos->wall_dir = set[0];
 		else
-			pos->wallDir = set[1];
+			pos->wall_dir = set[1];
 	}
 	else
 	{
-		if (pos->ray_ydir < 0)
-			pos->wallDir = set[0];
+		if (pos->raydir_y < 0)
+			pos->wall_dir = set[0];
 		else
-			pos->wallDir = set[1];
+			pos->wall_dir = set[1];
 	}
 }

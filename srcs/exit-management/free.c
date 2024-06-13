@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:34:59 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/03 13:26:58 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/13 09:12:06 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	free_app(t_app *app)
 			ft_free(app->pos->z_prox);
 			ft_free_tab(app->pos->map);
 		}
-		free_ghosts(&app->ghosts_lst, app->ghosts, app->pos->MAP_WIDTH);
+		free_ghosts(&app->ghosts_lst, app->ghosts, app->pos->map_width);
 		free_tex(app);
 		free_mlx(app);
 	}
