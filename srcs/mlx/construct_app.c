@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 10:58:36 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/13 12:21:54 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/13 13:46:32 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	initiate_textures(t_app *app)
 	if (!app->pos->tex)
 		exit_error(app, EXIT_MALLOC);
 	get_tex_files(app);
-	while (++i < 11)
+	while (++i < 10)
 	{
 		get_images(&app->pos->tex[i], app->img);
 		if (!app->pos->tex[i].data)
@@ -97,14 +97,14 @@ int	construct_app(t_app *app)
 {
 	app->img = NULL;
 	app->img = malloc(sizeof(t_img));
-	if (!app->img)
+	if (app->img == NULL)
 		return (1);
 	app->pos = NULL;
-	app->pos = malloc(sizeof(t_pos));
-	if (!app->pos)
+	app->pos = ft_calloc(sizeof(t_pos), 1);
+	if (app->pos == NULL)
 		return (1);
 	app->pos->z_prox = malloc(SCREEN_WIDTH * sizeof(int));
-	if (!app->pos->z_prox)
+	if (app->pos->z_prox == NULL)
 		return (1);
 	app->pos->no = NULL;
 	app->pos->so = NULL;
