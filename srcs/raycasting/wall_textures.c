@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:43:28 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/13 10:53:47 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/13 12:32:23 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,22 +91,4 @@ int	get_wall_texture(t_app *app, t_pos *pos, t_walltex *walltex)
 	if (!pos ->floor_tex)
 		yline(pos, walltex->x, 'f');
 	return (0);
-}
-
-void	which_dir(t_pos *pos, char *set, int call)
-{
-	if (call == 1)
-	{
-		if (pos->raydir_x < 0)
-			pos->wall_dir = set[0];
-		else
-			pos->wall_dir = set[1];
-	}
-	else
-	{
-		if (pos->raydir_y < 0)
-			pos->wall_dir = set[0];
-		else
-			pos->wall_dir = set[1];
-	}
 }

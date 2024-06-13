@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/13 11:00:18 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/13 12:32:45 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	game_loop(t_app *app)
 {
-	mlx_mouse_move(app->img->mlx, app->img->mlx_win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	mlx_mouse_move(app->img->mlx, app->img->mlx_win,
+		SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	motion(app);
 	clear_px_buffer(app->pos->px);
 	new_image(app);
@@ -24,7 +25,7 @@ int	game_loop(t_app *app)
 	return (0);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_app	app;
 
