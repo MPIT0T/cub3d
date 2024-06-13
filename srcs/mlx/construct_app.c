@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   construct_app.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 10:58:36 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/13 11:03:26 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/13 12:21:54 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	get_tex_files(t_app *app)
 	app->pos->tex[7].file = GHOST_TEX;
 	app->pos->tex[8].file = OPEN_TEX;
 	app->pos->tex[9].file = CLOSE_TEX;
+	// app->pos->tex[10].file = PAUSE_TEX;
 	return (0);
 }
 
@@ -52,11 +53,11 @@ int	initiate_textures(t_app *app)
 		app->pos->px[y] = malloc(SCREEN_WIDTH * sizeof(uint32_t));
 	if (!app->pos->px)
 		exit_error(app, EXIT_MALLOC);
-	app->pos->tex = malloc(10 * sizeof(t_tex));
+	app->pos->tex = malloc(11 * sizeof(t_tex));
 	if (!app->pos->tex)
 		exit_error(app, EXIT_MALLOC);
 	get_tex_files(app);
-	while (++i < 10)
+	while (++i < 11)
 	{
 		get_images(&app->pos->tex[i], app->img);
 		if (!app->pos->tex[i].data)

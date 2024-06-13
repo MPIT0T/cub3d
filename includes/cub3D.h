@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/13 11:02:40 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/13 12:22:28 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define DOOR_TEX "./textures/v2_door.xpm"
 # define OPEN_TEX "./textures/v2_open_door.xpm"
 # define CLOSE_TEX "./textures/v2_close_door.xpm"
+# define PAUSE_TEX "./textures/pause_menu.xpm"
 
 # define GHOSTS_NUMBER 5
 # define GHOSTS_SIZE 0.3
@@ -292,6 +293,7 @@ typedef struct s_pos
 
 typedef struct s_app
 {
+	bool	pause;
 	int		*err;
 	t_pos	*pos;
 	t_img	*img;

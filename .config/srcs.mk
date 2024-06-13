@@ -27,7 +27,8 @@ SRC_MLXX	=	construct_app.c			\
 
 SRC_GUI		=	minimap.c				\
 				minimap_utils.c			\
-				doors.c
+				doors.c					\
+				pause.c
 
 SRC_GHOSTS	=	spawn.c					\
 				create.c				\

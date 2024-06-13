@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 10:56:47 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/13 11:13:06 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/13 12:09:44 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static int	little_red_cross(t_app *app)
 
 int	init_hook(t_app *app)
 {
+	// mlx_hook(app->img->mlx_win, FocusOut, 1L << 21, pause_on, app);
 	mlx_hook(app->img->mlx_win, 17, 0, little_red_cross, app);
 	mlx_hook(app->img->mlx_win, KeyPress, KeyPressMask,
 		change_motion_keypress, app);
