@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/06/13 10:04:14 by mpitot           ###   ########.fr        #
+#    Updated: 2024/06/13 13:12:23 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,6 +102,7 @@ leak: all .internal_separate3
 	@echo "   $(YELLOW)-$(DEFAULT)Read Variable Information"
 	@echo "   $(YELLOW)-$(DEFAULT)Leak check"
 	@echo "   $(YELLOW)-$(DEFAULT)Trace children"
+	@echo "   $(YELLOW)-$(DEFAULT)Track origins"
 	@$(call separator)
 	@valgrind	--show-leak-kinds=all \
 				--track-fds=yes \
@@ -109,6 +110,8 @@ leak: all .internal_separate3
 				--read-var-info=yes \
 				--leak-check=full \
 				--trace-children=yes \
+				--track-origins=yes \
+				--suppressions=.config/mouse_hide_suppress.txt \
 				./$(NAME) $(ARGS)
 
 re		:	fclean .internal_separate1 all

@@ -1,0 +1,5 @@
+{
+    <mlx_mouse_hide>
+    Memcheck:Leak
+    fun:mlx_mouse_hide
+}
