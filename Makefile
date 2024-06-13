@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/06/10 17:11:29 by mpitot           ###   ########.fr        #
+#    Updated: 2024/06/13 10:04:14 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,10 +51,12 @@ ${NAME}	:	${OBJ_D} ${OBJS} libft/libft.a
 ${OBJ_D}:
 	@mkdir -p ${OBJ_D}
 	@mkdir -p ${OBJ_D}main
+	@mkdir -p ${OBJ_D}mlx
 	@mkdir -p ${OBJ_D}ghosts
 	@mkdir -p ${OBJ_D}ghosts/sort
 	@mkdir -p ${OBJ_D}gui
 	@mkdir -p ${OBJ_D}parsing
+	@mkdir -p ${OBJ_D}raycasting
 	@mkdir -p ${OBJ_D}exit-management
 
 mlx		:
