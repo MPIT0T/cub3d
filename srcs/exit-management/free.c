@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:34:59 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/13 09:12:06 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/13 11:10:55 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,6 @@ void	free_tex(t_app *app)
 	ft_free(app->pos);
 }
 
-void	free_ghosts(t_list **lst, t_ghost *ghosts, int map_width)
-{
-	(void) map_width;
-	free(ghosts);
-	lstfree(lst);
-}
-
 void	free_app(t_app *app)
 {
 	if (app)
@@ -73,7 +66,8 @@ void	free_app(t_app *app)
 			ft_free(app->pos->z_prox);
 			ft_free_tab(app->pos->map);
 		}
-		free_ghosts(&app->ghosts_lst, app->ghosts, app->pos->map_width);
+		lstfree(&app->ghosts_lst);
+		free(app->ghosts);
 		free_tex(app);
 		free_mlx(app);
 	}

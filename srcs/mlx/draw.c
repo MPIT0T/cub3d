@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 23:09:19 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/10 12:19:58 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/13 11:05:39 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	px_put(t_img *img, int x, int y, int color)
 
 	if (x >= SCREEN_WIDTH || x <= 0 || y >= SCREEN_HEIGHT || y <= 0)
 		return ;
-	dst = img->addr + (y * img->line_length + x * (int)(img->bits_per_pixel * 0.125));
+	dst = img->addr + (y * img->line_length + x
+			* (int)(img->bits_per_pixel * 0.125));
 	*(unsigned int *)dst = color;
 }
 
@@ -28,7 +29,8 @@ static void	px_put_here(t_img *img, int x, int y, int color)
 
 	if (x >= SCREEN_WIDTH || x <= 0 || y >= SCREEN_HEIGHT || y <= 0)
 		return ;
-	dst = img->addr + (y * img->line_length + x * (int)(img->bits_per_pixel * 0.125));
+	dst = img->addr + (y * img->line_length + x
+			* (int)(img->bits_per_pixel * 0.125));
 	*(unsigned int *)dst = color;
 }
 

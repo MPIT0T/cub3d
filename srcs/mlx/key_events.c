@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:08:19 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/13 09:29:04 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/13 11:06:49 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	clear_px_buffer(int **px)
 	}
 }
 
-int		new_image(t_app *app)
+int	new_image(t_app *app)
 {
 	mlx_destroy_image(app->img->mlx, app->img->img);
 	app->img->img = NULL;
@@ -42,7 +42,7 @@ int		new_image(t_app *app)
 			&app->img->line_length, &app->img->endian);
 	if (!app->img->addr)
 		exit_error(app, EXIT_MLX);
-	return (0);	
+	return (0);
 }
 
 int	change_motion_keypress(int key, t_app *app)
@@ -84,6 +84,5 @@ int	change_motion_keyrelease(int key, t_app *app)
 		app->pos->rotate_left_arrows = false;
 	if (app->pos->rotate_right_arrows == true && key == XK_Right)
 		app->pos->rotate_right_arrows = false;
-	return (0);	
+	return (0);
 }
-
