@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/13 10:38:27 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/13 11:02:40 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -354,10 +354,6 @@ void			which_dir(t_pos *pos, char *set, int asdlfk);
 /* INPUT READING AND MOVEMENT*/
 int				change_motion_keypress(int key, t_app *app);
 int				change_motion_keyrelease(int key, t_app *app);
-int				rotate_right_mouse(t_pos *pos);
-int				rotate_left_mouse(t_pos *pos);
-int				rotate_right_arrows(t_pos *pos);
-int				rotate_left_arrows(t_pos *pos);
 int				mouse_motion(int x, int y, t_app *app);
 int				motion(t_app *app);
 int				rotate(t_app *app);

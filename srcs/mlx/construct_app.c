@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   construct_app.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/10 18:58:41 by mpitot           ###   ########.fr       */
+/*   Created: 2024/06/13 10:58:36 by cefuente          #+#    #+#             */
+/*   Updated: 2024/06/13 11:03:26 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,18 @@
 int	get_images(t_tex *tex, t_img *img)
 {
 	tex->img = mlx_xpm_file_to_image(img->mlx, tex->file,
-		&tex->width, &tex->height);
+			&tex->width, &tex->height);
 	if (!tex->img)
 		return (1);
-	tex->data = mlx_get_data_addr(tex->img, &tex->bits_per_pixel, &tex->line_length, &tex->endian);
+	tex->data = mlx_get_data_addr(tex->img,
+			&tex->bits_per_pixel, &tex->line_length, &tex->endian);
 	if (!tex->data)
 		return (1);
 	return (0);
 }
 
-int	initiate_textures(t_app *app)
+int	get_tex_files(t_app *app)
 {
-	ssize_t	y;
-	y = -1;
-	app->pos->px = malloc(SCREEN_HEIGHT * sizeof(uint32_t *));
-	while (++y < SCREEN_HEIGHT)
-		app->pos->px[y] = malloc(SCREEN_WIDTH * sizeof(uint32_t));
-	if (!app->pos->px)
-		exit_error(app, EXIT_MALLOC);
-	app->pos->tex = malloc(10 * sizeof(t_tex));
-	if (!app->pos->tex)
-		exit_error(app, EXIT_MALLOC);
 	app->pos->tex[0].file = app->pos->no;
 	app->pos->tex[1].file = app->pos->so;
 	app->pos->tex[2].file = app->pos->ea;
@@ -46,7 +37,25 @@ int	initiate_textures(t_app *app)
 	app->pos->tex[7].file = GHOST_TEX;
 	app->pos->tex[8].file = OPEN_TEX;
 	app->pos->tex[9].file = CLOSE_TEX;
-	int i = -1;
+	return (0);
+}
+
+int	initiate_textures(t_app *app)
+{
+	ssize_t	y;
+	int		i;
+
+	y = -1;
+	i = -1;
+	app->pos->px = malloc(SCREEN_HEIGHT * sizeof(uint32_t *));
+	while (++y < SCREEN_HEIGHT)
+		app->pos->px[y] = malloc(SCREEN_WIDTH * sizeof(uint32_t));
+	if (!app->pos->px)
+		exit_error(app, EXIT_MALLOC);
+	app->pos->tex = malloc(10 * sizeof(t_tex));
+	if (!app->pos->tex)
+		exit_error(app, EXIT_MALLOC);
+	get_tex_files(app);
 	while (++i < 10)
 	{
 		get_images(&app->pos->tex[i], app->img);
@@ -78,7 +87,8 @@ int	initiate_mlx(t_app *app)
 	if (!app->img->addr)
 		exit_error(app, EXIT_MALLOC);
 	mlx_mouse_hide(app->img->mlx, app->img->mlx_win);
-	mlx_mouse_move(app->img->mlx, app->img->mlx_win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	mlx_mouse_move(app->img->mlx, app->img->mlx_win,
+		SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	return (0);
 }
 
