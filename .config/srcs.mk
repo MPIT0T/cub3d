@@ -6,7 +6,7 @@
 #    By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:18:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/06/13 10:39:03 by cefuente         ###   ########.fr        #
+#    Updated: 2024/06/13 12:26:57 by cefuente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,8 +49,9 @@ SRC_RAY		=	horizontal_textures.c	\
 				moove.c					\
 				rotate.c				\
 				raycasting.c			\
+				raycasting_utils.c		\
 				wall_textures.c			\
-				rotation.c
+				rotation.c				
 
 SRC_EXIT	=	exit.c					\
 				free.c

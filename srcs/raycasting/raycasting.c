@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/13 09:29:17 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/13 12:30:32 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	get_ray_length(t_pos *pos, int x)
 {
-	pos->cam_x = 2 * x / (double)(SCREEN_WIDTH) - 1; //x-coordinate in camera space
+	pos->cam_x = 2 * x / (double)(SCREEN_WIDTH) - 1;
 	pos->raydir_x = pos->p_dir_x + pos->surf_x * pos->cam_x;
 	pos->raydir_y = pos->p_dir_y + pos->surf_y * pos->cam_x;
 	pos->map_x = (int)pos->p_x;
@@ -56,7 +56,7 @@ static int	get_tile_size(t_pos *pos)
 	return (0);
 }
 
-static int	DDA(t_pos *pos)
+static int	dda(t_pos *pos)
 {
 	pos->found_door = false;
 	while (1)
@@ -75,13 +75,7 @@ static int	DDA(t_pos *pos)
 			pos->side = 1;
 			which_dir(pos, "WE", 2);
 		}
-		if (pos->column == SCREEN_WIDTH / 2)
-		{
-			if (pos->map[pos->map_x][pos->map_y] == '2' || pos->map[pos->map_x][pos->map_y] == '3')
-				door_dir(pos);
-			else if (pos->found_door == false)
-				pos->pointing_door = none;
-		}
+		check_door(pos);
 		if (pos->map[pos->map_x][pos->map_y] == '1')
 			return (0);
 		if (pos->map[pos->map_x][pos->map_y] == '2')
@@ -120,7 +114,7 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 		pos->column = x;
 		get_ray_length(pos, x);
 		get_tile_size(pos);
-		DDA(pos);
+		dda(pos);
 		line_height(pos, x);
 		walltex.x = x;
 		get_wall_texture(app, pos, &walltex);
@@ -131,5 +125,5 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
 		img->img, 0, 0);
 	put_door_button(app);
-	return 0;
+	return (0);
 }

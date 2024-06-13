@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/13 12:22:28 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/13 11:02:40 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -352,6 +352,7 @@ void			free_parsing_exit(t_app *app);
 /* RAYCASTING */
 int				raycasting_loop(t_pos *pos, t_img *img, t_app *app);
 void			which_dir(t_pos *pos, char *set, int asdlfk);
+void			check_door(t_pos *pos);
 
 /* INPUT READING AND MOVEMENT*/
 int				init_hook(t_app *app);
