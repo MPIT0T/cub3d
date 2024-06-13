@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 11:50:13 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/11 09:37:55 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/13 09:12:44 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,19 @@ static void	__make_map_rect(t_app *app)
 {
 	size_t	i;
 
-	app->pos->MAP_WIDTH = __get_longest_line(app->pos->map);
+	app->pos->map_width = __get_longest_line(app->pos->map);
 	i = -1;
 	while (app->pos->map[++i])
 	{
-		if (ft_strlen(app->pos->map[i]) < (size_t) app->pos->MAP_WIDTH)
+		if (ft_strlen(app->pos->map[i]) < (size_t) app->pos->map_width)
 		{
 			app->pos->map[i] = __make_new_map_line(app->pos->map[i],
-					app->pos->MAP_WIDTH);
+					app->pos->map_width);
 			if (!app->pos->map[i])
 				exit_parsing_error(app, "malloc error");
 		}
 	}
-	app->pos->MAP_HEIGHT = i;
+	app->pos->map_height = i;
 }
 
 void	parse_map(t_app *app, char *full_file_string)

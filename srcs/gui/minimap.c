@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:48:23 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/10 17:58:55 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/13 09:35:59 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,19 @@ static void	__put_crosshair(t_app *app)
 
 static void	__set_frame_dimensions(t_app *app, t_minimap *mm)
 {
-	if (app->pos->MAP_WIDTH >= 14)
-		mm->mapSizeX = 14;
-	if (app->pos->MAP_HEIGHT >= 10)
-		mm->mapSizeY = 10;
-	if (mm->mapSizeX == -1)
+	if (app->pos->map_width >= 14)
+		mm->map_size_x = 14;
+	if (app->pos->map_height >= 10)
+		mm->map_size_y = 10;
+	if (mm->map_size_x == -1)
 	{
-		mm->mapSizeX = app->pos->MAP_WIDTH;
-		mm->startX = 0;
+		mm->map_size_x = app->pos->map_width;
+		mm->start_x = 0;
 	}
-	if (mm->mapSizeY == -1)
+	if (mm->map_size_y == -1)
 	{
-		mm->mapSizeY = app->pos->MAP_HEIGHT;
-		mm->startY = 0;
+		mm->map_size_y = app->pos->map_height;
+		mm->start_y = 0;
 	}
 }
 
@@ -76,14 +76,14 @@ void	put_minimap(t_app *app)
 {
 	t_minimap	mm;
 
-	mm.pixX = -1;
-	mm.pixY = -1;
-	mm.startX = -1;
-	mm.startY = -1;
-	mm.intX = -1;
-	mm.intY = -1;
-	mm.mapSizeX = -1;
-	mm.mapSizeY = -1;
+	mm.pix_x = -1;
+	mm.pix_y = -1;
+	mm.start_x = -1;
+	mm.start_y = -1;
+	mm.int_x = -1;
+	mm.int_y = -1;
+	mm.map_size_x = -1;
+	mm.map_size_y = -1;
 	__set_frame_dimensions(app, &mm);
 	get_minimap_pos(app, &mm);
 	put_minimap_on_screen(app, &mm);

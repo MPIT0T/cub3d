@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_start_vars.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:10:44 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/12 15:55:04 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/13 09:29:04 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int	initiate_positions(t_app *app)
 {
 	set_camera_pos_and_dir(app);
 	app->pos->h = 1;
-	app->pos->moveSpeed = 0.05;
-	app->pos->rotSpeedArrows = 0.05;
-	app->pos->rotSpeedMouse = 0.00;
+	app->pos->move_speed = 0.05;
+	app->pos->rot_speed_arrows = 0.05;
+	app->pos->rot_speed_mouse = 0.00;
 	app->pos->motion_up = false;
 	app->pos->motion_down = false;
 	app->pos->rotate_left_arrows = false;

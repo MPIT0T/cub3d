@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doors.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:45:58 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/12 15:52:02 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/13 09:14:52 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void	door_dir(t_pos *pos)
 
 	modf(pos->p_x, &pos_x);
 	modf(pos->p_y, &pos_y);
-	if (pos->mapX == pos_x - 1 && pos->mapY == pos_y)
+	if (pos->map_x == pos_x - 1 && pos->map_y == pos_y)
 		pos->pointing_door = north;
-	else if (pos->mapX == pos_x + 1 && pos->mapY == pos_y)
+	else if (pos->map_x == pos_x + 1 && pos->map_y == pos_y)
 		pos->pointing_door = south;
-	else if (pos->mapY == pos_y - 1 && pos->mapX == pos_x)
+	else if (pos->map_y == pos_y - 1 && pos->map_x == pos_x)
 		pos->pointing_door = west;
-	else if (pos->mapY == pos_y + 1 && pos->mapX == pos_x)
+	else if (pos->map_y == pos_y + 1 && pos->map_x == pos_x)
 		pos->pointing_door = east;
 	pos->found_door = true;
 }

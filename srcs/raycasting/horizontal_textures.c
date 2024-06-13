@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal_textures.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 23:07:41 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/12 15:55:04 by cesar            ###   ########.fr       */
+/*   Updated: 2024/06/13 09:41:35 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ static int	xline_textured(t_pos *pos, t_horiztex *horiztex, int start, int end)
 {
 	while (start < end)
 	{
-		horiztex->cellX = (int) horiztex->floorX;
-		horiztex->cellY = (int) horiztex->floorY;
-		horiztex->tx = (int) (TEX_WIDTH * (horiztex->floorX - horiztex->cellX)) & (TEX_WIDTH - 1);
-		horiztex->ty = (int) (TEX_HEIGHT * (horiztex->floorY - horiztex->cellY)) & (TEX_HEIGHT - 1);
-		horiztex->floorX += horiztex->floorStepX;
-		horiztex->floorY += horiztex->floorStepY;
-		horiztex->floor_tex_px = horiztex->floor_tex_content[TEX_WIDTH * horiztex->ty + horiztex->tx];
-		horiztex->roof_tex_px = horiztex->roof_tex_content[TEX_WIDTH * horiztex->ty + horiztex->tx];
+		horiztex->roof_x = (int) horiztex->floor_x;
+		horiztex->roof_y = (int) horiztex->floor_y;
+		horiztex->t_x = (int) (TEX_WIDTH * (horiztex->floor_x - horiztex->roof_x)) & (TEX_WIDTH - 1);
+		horiztex->t_y = (int) (TEX_HEIGHT * (horiztex->floor_y - horiztex->roof_y)) & (TEX_HEIGHT - 1);
+		horiztex->floor_x += horiztex->floor_step_x;
+		horiztex->floor_y += horiztex->floor_step_y;
+		horiztex->floor_tex_px = horiztex->floor_tex_content[TEX_WIDTH * horiztex->t_y + horiztex->t_x];
+		horiztex->roof_tex_px = horiztex->roof_tex_content[TEX_WIDTH * horiztex->t_y + horiztex->t_x];
 		if (pos->floor_tex)
 			pos->px[horiztex->y][start] = horiztex->floor_tex_px;
 		if (pos->roof_tex)
@@ -43,17 +43,17 @@ int	get_horizontal_texture(t_pos *pos, t_horiztex *horiztex)
 	while (++y < SCREEN_HEIGHT)
 	{
 		horiztex->y = y;
-		horiztex->rayDirX0 = pos->p_dir_x - pos->surf_x;
-		horiztex->rayDirY0 = pos->p_dir_y - pos->surf_y;
-		horiztex->rayDirX1 = pos->p_dir_x + pos->surf_x;
-		horiztex->rayDirY1 = pos->p_dir_y + pos->surf_y;
+		horiztex->raydir_x_start = pos->p_dir_x - pos->surf_x;
+		horiztex->raydir_y_start = pos->p_dir_y - pos->surf_y;
+		horiztex->raydir_x_end = pos->p_dir_x + pos->surf_x;
+		horiztex->raydir_y_end = pos->p_dir_y + pos->surf_y;
 		horiztex->p = y - SCREEN_HEIGHT * 0.5;
-		horiztex->posZ = SCREEN_HEIGHT * 0.5;
-		horiztex->rowDistance = horiztex->posZ / horiztex->p;
-		horiztex->floorStepX = horiztex->rowDistance * (horiztex->rayDirX1 - horiztex->rayDirX0) / SCREEN_WIDTH;
-		horiztex->floorStepY = horiztex->rowDistance * (horiztex->rayDirY1 - horiztex->rayDirY0) / SCREEN_WIDTH;
-		horiztex->floorX = pos->p_x + horiztex->rowDistance * horiztex->rayDirX0;
-		horiztex->floorY = pos->p_y + horiztex->rowDistance * horiztex->rayDirY0;
+		horiztex->pos_z = SCREEN_HEIGHT * 0.5;
+		horiztex->row_dist = horiztex->pos_z / horiztex->p;
+		horiztex->floor_step_x = horiztex->row_dist * (horiztex->raydir_x_end - horiztex->raydir_x_start) / SCREEN_WIDTH;
+		horiztex->floor_step_y = horiztex->row_dist * (horiztex->raydir_y_end - horiztex->raydir_y_start) / SCREEN_WIDTH;
+		horiztex->floor_x = pos->p_x + horiztex->row_dist * horiztex->raydir_x_start;
+		horiztex->floor_y = pos->p_y + horiztex->row_dist * horiztex->raydir_y_start;
 		xline_textured(pos, horiztex, 0, SCREEN_WIDTH);
 	}
 	return (0);
