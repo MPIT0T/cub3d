@@ -352,6 +352,7 @@ int				raycasting_loop(t_pos *pos, t_img *img, t_app *app);
 void			which_dir(t_pos *pos, char *set, int asdlfk);
 
 /* INPUT READING AND MOVEMENT*/
+int				init_hook(t_app *app);
 int				change_motion_keypress(int key, t_app *app);
 int				change_motion_keyrelease(int key, t_app *app);
 int				mouse_motion(int x, int y, t_app *app);

@@ -22,7 +22,8 @@ SRC_MAIN	=	main.c
 
 SRC_MLXX	=	construct_app.c			\
 				draw.c					\
-				key_events.c
+				key_events.c			\
+				mlx_things.c
 
 SRC_GUI		=	minimap.c				\
 				minimap_utils.c			\
