@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/13 11:02:40 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/13 16:47:43 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -372,6 +372,9 @@ void			draw_screen(t_pos *pos, t_img *img);
 int				new_image(t_app *app);
 void			px_put(t_img *img, int x, int y, int color);
 void			clear_px_buffer(int **px);
+int				pause_on(t_app *app);
+int				put_pause_menu(t_app *app);
+int				pause_toggle(t_app *app);
 
 /* TEXTURES */
 int				initiate_textures(t_app *app);

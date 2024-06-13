@@ -41,7 +41,7 @@ static t_color	*__parse_color(t_app *app, char *str)
 	size_t	i;
 	t_color	*color;
 
-	if (ft_strcmp(str, "tex") == 0)
+	if (ft_strncmp(str, "tex", 3) == 0)
 		return (NULL);
 	if (__check_color(str))
 		exit_parsing_error(app, "invalid color format");

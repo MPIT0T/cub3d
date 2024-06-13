@@ -20,7 +20,7 @@ static int	little_red_cross(t_app *app)
 
 int	init_hook(t_app *app)
 {
-	// mlx_hook(app->img->mlx_win, FocusOut, 1L << 21, pause_on, app);
+	mlx_hook(app->img->mlx_win, FocusOut, 1L << 21, pause_on, app);
 	mlx_hook(app->img->mlx_win, 17, 0, little_red_cross, app);
 	mlx_hook(app->img->mlx_win, KeyPress, KeyPressMask,
 		change_motion_keypress, app);

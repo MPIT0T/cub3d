@@ -125,5 +125,6 @@ int	raycasting_loop(t_pos *pos, t_img *img, t_app *app)
 	mlx_put_image_to_window(img->mlx, img->mlx_win,
 		img->img, 0, 0);
 	put_door_button(app);
+	put_pause_menu(app);
 	return (0);
 }

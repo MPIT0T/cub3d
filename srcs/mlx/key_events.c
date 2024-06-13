@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:08:19 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/13 11:06:49 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/13 16:54:29 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,11 @@ int	new_image(t_app *app)
 int	change_motion_keypress(int key, t_app *app)
 {
 	if (key == XK_Escape)
+		pause_toggle(app);
+	if (key == XK_q && app->pause == true)
 		exit_error(app, EXIT_SUCCESS);
+	if (app->pause == true)
+		return (0);
 	if (app->pos->pointing_door != none && key == XK_space)
 		open_door(app);
 	if (app->pos->motion_up == false && key == XK_w)
@@ -70,6 +74,8 @@ int	change_motion_keypress(int key, t_app *app)
 
 int	change_motion_keyrelease(int key, t_app *app)
 {
+	if (app->pause == true)
+		return (0);
 	if (key == XK_w && app->pos->motion_up == true)
 		app->pos->motion_up = false;
 	if (key == XK_s && app->pos->motion_down == true)

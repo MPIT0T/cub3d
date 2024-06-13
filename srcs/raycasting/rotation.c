@@ -79,6 +79,8 @@ int	mouse_motion(int x, int y, t_app *app)
 	int		diff;
 
 	(void) y;
+	if (app->pause == true)
+		return (0);
 	diff = abs(x - (SCREEN_WIDTH / 2));
 	app->pos->rot_speed_mouse = ((double) diff) / 1500;
 	if (x < SCREEN_WIDTH / 2)
