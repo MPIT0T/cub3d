@@ -77,13 +77,12 @@ unsigned int	get_color(t_app *app, char *str, char *id)
 	if (!color && ft_strcmp("C ", id) == 0)
 		return (app->pos->roof_tex = true, 0);
 	if (verify_color(color))
-		exit_parsing_error(app, "invalid color format");
+		return (ft_free(color), exit_parsing_error(app, "invalid color"), 1);
 	result = 0;
 	result |= color->r << 16;
 	result |= color->g << 8;
 	result |= color->b;
-	ft_free(color);
-	return (result);
+	return (ft_free(color), result);
 }
 
 char	*get_texture(t_app *app, char *str, char *id)

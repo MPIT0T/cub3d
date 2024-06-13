@@ -87,30 +87,3 @@ int	change_motion_keyrelease(int key, t_app *app)
 	return (0);	
 }
 
-int	mouse_motion(int x, int y, t_app *app)
-{
-	(void) y;
-	(void) x;
-	(void) app;
-	int		diff;
-
-	diff = abs(x - (SCREEN_WIDTH / 2));
-	app->pos->rot_speed_mouse = ((double) diff) / 1500;
-//	app->pos->rotSpeedSave = app->pos->rotSpeed;
-//	app->pos->rotSpeed = abs(x - (SCREEN_WIDTH / 2));
-	if (x < SCREEN_WIDTH / 2)
-		app->pos->rotate_left_mouse = true;
-	else
-	{
-		app->pos->rotate_left_mouse = false;
-//		app->pos->rotSpeed = app->pos->rotSpeedSave;
-	}
-	if (x > SCREEN_WIDTH / 2)
-		app->pos->rotate_right_mouse = true;
-	else
-	{
-		app->pos->rotate_right_mouse = false;
-//		app->pos->rotSpeed = app->pos->rotSpeedSave;
-	}
-	return (0);
-}

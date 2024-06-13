@@ -55,12 +55,6 @@ void	free_tex(t_app *app)
 void	free_ghosts(t_list **lst, t_ghost *ghosts, int map_width)
 {
 	(void) map_width;
-	// while (++i < GHOSTS_NUMBER)
-	// {
-	// 	free(ghosts[i].y_dirs_pref);
-	// 	if (ghosts[i].memory)
-	// 		freetab((void **)ghosts[i].memory, map_width);
-	// }
 	free(ghosts);
 	lstfree(lst);
 }
