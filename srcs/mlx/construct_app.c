@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 10:58:36 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/13 13:46:32 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/13 13:47:24 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	construct_app(t_app *app)
 	app->pos = ft_calloc(sizeof(t_pos), 1);
 	if (app->pos == NULL)
 		return (1);
-	app->pos->z_prox = malloc(SCREEN_WIDTH * sizeof(int));
+	app->pos->z_prox = ft_calloc(SCREEN_WIDTH, sizeof(int));
 	if (app->pos->z_prox == NULL)
 		return (1);
 	app->pos->no = NULL;

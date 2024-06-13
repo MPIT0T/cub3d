@@ -54,7 +54,7 @@ int	pop_some_ghosts(t_app *app)
 
 	i = -1;
 	app->ghosts_lst = NULL;
-	app->ghosts = malloc(GHOSTS_NUMBER * sizeof(t_ghost));
+	app->ghosts = ft_calloc(GHOSTS_NUMBER, sizeof(t_ghost));
 	if (!app->ghosts)
 		exit_error(app, EXIT_MALLOC);
 	while (++i < GHOSTS_NUMBER)
