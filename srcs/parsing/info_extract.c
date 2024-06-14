@@ -72,11 +72,6 @@ static t_color	*__parse_color(t_app *app, char *str)
 	return (color);
 }
 
-void	make_bool_true(bool *boolean)
-{
-	*boolean = true;
-}
-
 unsigned int	get_color(t_app *app, char *str, char *id)
 {
 	size_t			i;
