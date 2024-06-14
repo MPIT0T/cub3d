@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 10:58:36 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/14 15:31:11 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/14 15:42:01 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,14 @@ int	initiate_textures(t_app *app)
 	y = -1;
 	i = -1;
 	app->pos->px = malloc(SCREEN_HEIGHT * sizeof(uint32_t *));
-	while (++y < SCREEN_HEIGHT)
-		app->pos->px[y] = malloc(SCREEN_WIDTH * sizeof(uint32_t));
 	if (!app->pos->px)
 		exit_error(app, EXIT_MALLOC);
+	while (++y < SCREEN_HEIGHT)
+	{
+		app->pos->px[y] = malloc(SCREEN_WIDTH * sizeof(uint32_t));
+		if (!app->pos->px[y])
+			exit_error(app, EXIT_MALLOC);
+	}
 	app->pos->tex = malloc(11 * sizeof(t_tex));
 	if (!app->pos->tex)
 		exit_error(app, EXIT_MALLOC);

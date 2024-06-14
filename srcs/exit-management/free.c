@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:34:59 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/14 15:25:57 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/14 15:39:54 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,17 @@ void	free_tex(t_app *app)
 	i = -1;
 	if (app->pos->tex)
 	{
-		while (++i < 10)
+		while (++i < 10 && app->pos->tex[i].img)
 			mlx_destroy_image(app->img->mlx, app->pos->tex[i].img);
 	}
+	ft_free(app->pos->tex);
 	i = -1;
-	if (app->pos->tex)
+	if (app->pos->px)
 	{
 		while (++i < SCREEN_HEIGHT)
 			ft_free(app->pos->px[i]);
 	}
 	ft_free(app->pos->px);
-	ft_free(app->pos->tex);
 	ft_free(app->pos);
 }
 
