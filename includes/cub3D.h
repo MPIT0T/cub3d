@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/14 13:48:28 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/14 14:37:11 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@
 
 # define ROOF_TEX "./textures/roof.xpm"
 # define FLOOR_TEX "./textures/v2_floor.xpm"
-# define GHOST_TEX "./textures/ghost.xpm"
+# define GHOST_FACE_TEX "./textures/ghost_face.xpm"
+# define GHOST_BACK_TEX "./textures/floor.xpm"
 # define DOOR_TEX "./textures/v2_door.xpm"
 # define OPEN_TEX "./textures/v2_open_door.xpm"
 # define CLOSE_TEX "./textures/v2_close_door.xpm"
 # define PAUSE_TEX "./textures/pause_menu.xpm"
 
-# define GHOSTS_NUMBER 5
+# define GHOSTS_NUMBER 1
 # define GHOSTS_SIZE 0.3
 
 # define BLUE			0x0000FF
@@ -163,6 +164,9 @@ typedef struct s_ghost
 	int		*dirset;
 	double	player_dist;
 	int		dec;
+	double	dx;
+	double	dy;
+	double	dot_product;
 }	t_ghost;
 
 typedef struct s_img

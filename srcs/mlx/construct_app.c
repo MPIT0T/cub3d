@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   construct_app.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 10:58:36 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/13 13:47:24 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/14 14:17:45 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int	get_tex_files(t_app *app)
 	app->pos->tex[4].file = ROOF_TEX;
 	app->pos->tex[5].file = FLOOR_TEX;
 	app->pos->tex[6].file = DOOR_TEX;
-	app->pos->tex[7].file = GHOST_TEX;
+	app->pos->tex[7].file = GHOST_FACE_TEX;
 	app->pos->tex[8].file = OPEN_TEX;
 	app->pos->tex[9].file = CLOSE_TEX;
-	// app->pos->tex[10].file = PAUSE_TEX;
+	app->pos->tex[10].file = GHOST_BACK_TEX;
 	return (0);
 }
 
@@ -57,7 +57,7 @@ int	initiate_textures(t_app *app)
 	if (!app->pos->tex)
 		exit_error(app, EXIT_MALLOC);
 	get_tex_files(app);
-	while (++i < 10)
+	while (++i < 11)
 	{
 		get_images(&app->pos->tex[i], app->img);
 		if (!app->pos->tex[i].data)

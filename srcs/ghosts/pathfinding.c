@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:39 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/14 13:49:34 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/14 14:34:33 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static void	moove_to(t_ghost *ghost, t_dir dir, t_d d)
 	ghost->dir = dir;
 	ghost->dec += 1;
 	ghost->dec %= 10;
+	ghost->dir_x = d.x[dir];
+	ghost->dir_y = d.y[dir];
 }
 
 static void	wall_following_2(t_ghost *ghost, t_pos *pos, t_d d)
