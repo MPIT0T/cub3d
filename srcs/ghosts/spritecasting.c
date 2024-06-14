@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:42:31 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/13 10:11:03 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/14 14:39:25 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,18 @@ static void	draw_sprite_px(t_sprt *sprt, t_pos *pos, int y, int x)
 		pos->px[y][x] = color;
 }
 
-static void	find_sprites_to_render(t_sprt *sprt, t_pos *pos)
+static void	find_sprites_to_render(t_sprt *sprt, t_pos *pos, t_list *ghosts)
 {
-	sprt->tex_content = (uint32_t *)pos->tex[7].data;
+	t_ghost	*ghost;
+
+	ghost = (t_ghost *)ghosts->content;
+	ghost->dx = ghost->x - pos->p_x;
+	ghost->dy = ghost->y - pos->p_y;
+	ghost->dot_product = ghost->dir_x * ghost->dx + ghost->dir_y * ghost->dy;
+	if (ghost->dot_product > 0)
+		sprt->tex_content = (uint32_t *)pos->tex[10].data;
+	else
+		sprt->tex_content = (uint32_t *)pos->tex[7].data;
 	while (sprt->x_start < sprt->x_end && sprt->x_start < SCREEN_WIDTH)
 	{
 		if (sprt->trans_y > 0 && sprt->trans_y
@@ -103,7 +112,7 @@ int	sort_and_cast_sprites(t_pos *pos, t_list **ghosts_lst)
 	while (tmp)
 	{
 		init_sprite(&sprt, tmp, pos);
-		find_sprites_to_render(&sprt, pos);
+		find_sprites_to_render(&sprt, pos, tmp);
 		tmp = tmp->next;
 	}
 	return (0);
