@@ -17,12 +17,11 @@ int	game_loop(t_app *app)
 	if (app->pause == false)
 	{
 		mlx_mouse_move(app->img->mlx, app->img->mlx_win,
-		   SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+			SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	}
 	motion(app);
 	clear_px_buffer(app->pos->px);
 	new_image(app);
-	// print_map(app->pos);
 	ghosts_are_coming(app);
 	raycasting_loop(app->pos, app->img, app);
 	return (0);

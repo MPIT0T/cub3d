@@ -30,7 +30,7 @@ static int	is_valid(t_ghost *ghost, t_dir dir, t_pos *pos, t_d d)
 		&& (pos->map[(int)y][(int)x] == '0'
 		|| pos->map[(int)y][(int)x] == '3'))
 		{
-			printf("dir %d is valid\n", dir);
+			// printf("dir %d is valid\n", dir);
 			return (1);
 		}
 	return (0);
