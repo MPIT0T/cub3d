@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/13 12:32:45 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/14 11:18:41 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	game_loop(t_app *app)
 	motion(app);
 	clear_px_buffer(app->pos->px);
 	new_image(app);
-	print_map(app->pos);
+	// print_map(app->pos);
 	ghosts_are_coming(app);
 	raycasting_loop(app->pos, app->img, app);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 00:07:29 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/13 10:05:05 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/14 11:50:37 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	top_left(t_pos *pos, t_ghost *ghost)
 		{
 			if (pos->map[y][x] == '0')
 			{
-				ghost->x = x;
-				ghost->y = y;
+				ghost->x = x + 0.5;
+				ghost->y = y + 0.5;
 				return (1);
 			}
 			x++;
@@ -49,8 +49,8 @@ int	top_right(t_pos *pos, t_ghost *ghost)
 		{
 			if (pos->map[y][x] == '0')
 			{
-				ghost->x = x;
-				ghost->y = y;
+				ghost->x = x + 0.5;
+				ghost->y = y + 0.5;
 				return (1);
 			}
 			x--;
@@ -73,8 +73,8 @@ int	bottom_left(t_pos *pos, t_ghost *ghost)
 		{
 			if (pos->map[y][x] == '0')
 			{
-				ghost->x = x;
-				ghost->y = y;
+				ghost->x = x + 0.5;
+				ghost->y = y + 0.5;
 				return (1);
 			}
 			x++;
@@ -97,8 +97,8 @@ int	bottom_right(t_pos *pos, t_ghost *ghost)
 		{
 			if (pos->map[y][x] == '0')
 			{
-				ghost->x = x;
-				ghost->y = y;
+				ghost->x = x + 0.5;
+				ghost->y = y + 0.5;
 				return (1);
 			}
 			x--;
