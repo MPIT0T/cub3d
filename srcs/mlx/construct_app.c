@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 10:58:36 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/14 14:54:28 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/14 15:31:11 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,20 @@ int	initiate_textures(t_app *app)
 int	initiate_mlx(t_app *app)
 {
 	app->img->mlx = NULL;
+	app->img->mlx_win = NULL;
+	app->img->img = NULL;
+	app->img->addr = NULL;
 	app->img->mlx = mlx_init();
 	if (!app->img->mlx)
 		exit_error(app, EXIT_MLX);
-	app->img->mlx_win = NULL;
 	app->img->mlx_win = mlx_new_window(app->img->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT, "Cub3D");
 	if (!app->img->mlx_win)
 		exit_error(app, EXIT_MLX);
-	app->img->img = NULL;
 	app->img->img = mlx_new_image(app->img->mlx,
 			SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!app->img->img)
-		exit_error(app, EXIT_MALLOC);
-	app->img->addr = NULL;
+		exit_error(app, EXIT_MLX);
 	app->img->addr = mlx_get_data_addr(app->img->img, &app->img->bits_per_pixel,
 			&app->img->line_length, &app->img->endian);
 	if (!app->img->addr)
@@ -96,7 +96,7 @@ int	initiate_mlx(t_app *app)
 int	construct_app(t_app *app)
 {
 	app->img = NULL;
-	app->img = malloc(sizeof(t_img));
+	app->img = ft_calloc(sizeof(t_img), 1);
 	if (app->img == NULL)
 		return (1);
 	app->pos = NULL;
@@ -118,5 +118,7 @@ int	construct_app(t_app *app)
 	app->pos->motion_down = false;
 	app->pos->motion_left = false;
 	app->pos->motion_right = false;
+	app->ghosts_lst = NULL;
+	app->ghosts = NULL;
 	return (0);
 }
