@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:39 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/14 15:45:38 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/14 15:46:10 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ static int	is_valid(t_ghost *ghost, t_dir dir, t_pos *pos, t_d d)
 		x = ghost->y + (d.y[dir] * 0.5001);
 	else
 		x = ghost->y + (d.y[dir] * 0.5001);
-
 	if (x > 0 && x < pos->map_width && y > 0 && y < pos->map_height
 		&& (pos->map[(int)y][(int)x] == '0'
 		|| pos->map[(int)y][(int)x] == '3'))
-			return (1);
+		return (1);
 	return (0);
 }
 
