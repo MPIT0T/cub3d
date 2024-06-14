@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:32:10 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/11 09:35:11 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/14 14:59:14 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static char	*__read_entire_file(t_app *app, int fd)
 		if (sz == -1)
 		{
 			ft_free(result_str);
+			close(fd);
 			exit_parsing_error(app, "error reading file");
 		}
 		if (sz == 0 && !result_str)
@@ -33,8 +34,9 @@ static char	*__read_entire_file(t_app *app, int fd)
 		buff[sz] = '\0';
 		result_str = ft_strjoin_free(result_str, buff, 1);
 		if (!result_str)
+			close(fd);
+		if (!result_str)
 			exit_parsing_error(app, "malloc error");
-		ft_bzero(buff, 1025);
 	}
 	return (result_str);
 }

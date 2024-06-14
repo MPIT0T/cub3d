@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:34:59 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/13 11:10:55 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/14 15:39:54 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ void	free_mlx(t_app *app)
 		mlx_destroy_window(app->img->mlx, app->img->mlx_win);
 		mlx_destroy_display(app->img->mlx);
 	}
+	else if (app->img->mlx && app->img->mlx_win)
+	{
+		mlx_destroy_window(app->img->mlx, app->img->mlx_win);
+		mlx_destroy_display(app->img->mlx);
+	}
+	else if (app->img->mlx)
+		mlx_destroy_display(app->img->mlx);
 	if (app->img->mlx)
 		free(app->img->mlx);
 	free(app->img);
@@ -42,13 +49,19 @@ void	free_tex(t_app *app)
 	size_t	i;
 
 	i = -1;
-	while (++i < 10)
-		mlx_destroy_image(app->img->mlx, app->pos->tex[i].img);
-	i = -1;
-	while (++i < SCREEN_HEIGHT)
-		ft_free(app->pos->px[i]);
-	ft_free(app->pos->px);
+	if (app->pos->tex)
+	{
+		while (++i < 10 && app->pos->tex[i].img)
+			mlx_destroy_image(app->img->mlx, app->pos->tex[i].img);
+	}
 	ft_free(app->pos->tex);
+	i = -1;
+	if (app->pos->px)
+	{
+		while (++i < SCREEN_HEIGHT)
+			ft_free(app->pos->px[i]);
+	}
+	ft_free(app->pos->px);
 	ft_free(app->pos);
 }
 

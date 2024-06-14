@@ -12,21 +12,6 @@
 
 #include "../../includes/cub3D.h"
 
-void	lstfree(t_list **lst)
-{
-	t_list	*tmp;
-
-	if (!*lst || !lst)
-		return ;
-	while (*lst != NULL)
-	{
-		tmp = (*lst)->next;
-		free(*lst);
-		*lst = tmp;
-	}
-	*lst = NULL;
-}
-
 void	swap(t_list *a, t_list *b)
 {
 	t_ghost	*tmp;

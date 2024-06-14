@@ -54,7 +54,8 @@ SRC_RAY		=	horizontal_textures.c	\
 				rotation.c				
 
 SRC_EXIT	=	exit.c					\
-				free.c
+				free.c					\
+				free2.c
 
 DIR_MAIN	=	main/
 DIR_MLXX	=	mlx/
