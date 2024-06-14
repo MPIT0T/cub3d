@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 10:08:19 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/13 16:54:29 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/14 15:58:27 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int	new_image(t_app *app)
 
 int	change_motion_keypress(int key, t_app *app)
 {
-	if (key == XK_Escape)
+	if (key == XK_Tab)
 		pause_toggle(app);
-	if (key == XK_q && app->pause == true)
+	if (key == XK_Escape)
 		exit_error(app, EXIT_SUCCESS);
 	if (app->pause == true)
 		return (0);

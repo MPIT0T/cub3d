@@ -378,7 +378,6 @@ int				new_image(t_app *app);
 void			px_put(t_img *img, int x, int y, int color);
 void			clear_px_buffer(int **px);
 int				pause_on(t_app *app);
-int				put_pause_menu(t_app *app);
 int				pause_toggle(t_app *app);
 
 /* TEXTURES */

@@ -51,7 +51,7 @@ void	free_tex(t_app *app)
 	i = -1;
 	if (app->pos->tex)
 	{
-		while (++i < 10 && app->pos->tex[i].img)
+		while (++i < 11 && app->pos->tex[i].img)
 			mlx_destroy_image(app->img->mlx, app->pos->tex[i].img);
 	}
 	ft_free(app->pos->tex);

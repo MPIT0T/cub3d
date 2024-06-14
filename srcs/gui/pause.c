@@ -43,12 +43,3 @@ int	pause_toggle(t_app *app)
 	}
 	return (0);
 }
-
-int	put_pause_menu(t_app *app)
-{
-	if (app->pause == false)
-		return (0);
-	// mlx_put_image_to_window(app->img->mlx, app->img->mlx_win, &app->pos->tex[10], 0, 0);
-	//TODO put pause menu image
-	return (1);
-}
