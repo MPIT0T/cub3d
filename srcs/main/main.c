@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:28:36 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/13 12:32:45 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/14 14:46:47 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int ac, char **av)
 	app.err = 0;
 	ft_check_args(ac, av);
 	if (construct_app(&app))
-		return (EXIT_MALLOC);
+		return (ft_putstr_fd("Error: malloc\n", 2), EXIT_MALLOC);
 	parsing(&app, av[1]);
 	initiate_positions(&app);
 	initiate_mlx(&app);
