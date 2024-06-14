@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/13 11:02:40 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/14 13:48:28 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define CLOSE_TEX "./textures/v2_close_door.xpm"
 # define PAUSE_TEX "./textures/pause_menu.xpm"
 
-# define GHOSTS_NUMBER 1
+# define GHOSTS_NUMBER 5
 # define GHOSTS_SIZE 0.3
 
 # define BLUE			0x0000FF
@@ -162,6 +162,7 @@ typedef struct s_ghost
 	double	move_speed;
 	int		*dirset;
 	double	player_dist;
+	int		dec;
 }	t_ghost;
 
 typedef struct s_img

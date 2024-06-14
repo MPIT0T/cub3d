@@ -6,7 +6,7 @@
 /*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:15:49 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/13 09:12:21 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/14 13:46:54 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	pop_some_ghosts(t_app *app)
 	{
 		app->ghosts[i].move_speed = 0.10;
 		app->ghosts[i].dir = NORTH;
+		app->ghosts[i].dec = 0;
 		new = ft_lstnew(&app->ghosts[i]);
 		if (!new)
 			exit_error(app, EXIT_MALLOC);
