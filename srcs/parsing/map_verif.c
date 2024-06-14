@@ -19,7 +19,7 @@ int	check_double_nl(const char *str)
 	i = -1;
 	while (str[++i])
 	{
-		if (str[i] == '\n' && (str[i + 1] == '\n' || !str[i + 1]))
+		if (str[i] == '\n' && str[i + 1] == '\n')
 			return (1);
 	}
 	return (0);
