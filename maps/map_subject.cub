@@ -2,8 +2,8 @@ NO ./textures/v2_north.xpm
 SO ./textures/v2_south.xpm
 WE ./textures/v2_west.xpm
 EA ./textures/v2_east.xpm
-F tex
-C tex
+F 0,0,0
+C 0,0,0
         1111111111111111111111111
         1000000000110000000000001
         1011000001110000002000001

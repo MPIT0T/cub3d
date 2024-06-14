@@ -6,32 +6,47 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 13:34:33 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/13 17:50:47 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/14 14:19:15 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+static int	__check_color_part(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (ft_isblank(str[i]))
+		i++;
+	while (str[i] && ft_isdigit(str[i]))
+		i++;
+	while (ft_isblank(str[i]))
+		i++;
+	if (i == 0)
+		return (-1);
+	return (i);
+}
+
 static int	__check_color(char *str)
 {
 	size_t	i;
-	int		state;
+	size_t	len;
 
 	i = 0;
-	state = 0;
-	while (str[++i] && ft_isdigit(str[i]))
-		state = 'r';
-	if ((str[i] != ',' && state == 'r') || state != 'r')
+	len = 0;
+	while (str[len] && str[len] != '\n')
+		len++;
+	i += __check_color_part(&str[i]);
+	if (str[i] != ',')
 		return (1);
-	while (str[++i] && ft_isdigit(str[i]))
-		state = 'g';
-	if ((str[i] != ',' && state == 'g') || state != 'g')
+	i++;
+	i += __check_color_part(&str[i]);
+	if (str[i] != ',')
 		return (1);
-	while (str[++i] && ft_isdigit(str[i]))
-		state = 'b';
-	while (str[i] && ft_isblank(str[i]))
-		i++;
-	if ((str[i] && str[i] != '\n') || state != 'b')
+	i++;
+	i += __check_color_part(&str[i]);
+	if (i != len)
 		return (1);
 	return (0);
 }
