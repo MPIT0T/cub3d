@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 10:58:36 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/13 13:47:24 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/17 11:47:47 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	get_tex_files(t_app *app)
 
 int	initiate_textures(t_app *app)
 {
-	ssize_t	y;
-	int		i;
+	size_t	y;
+	size_t	i;
 
 	y = -1;
 	i = -1;
@@ -63,8 +63,7 @@ int	initiate_textures(t_app *app)
 	get_tex_files(app);
 	while (++i < 11)
 	{
-		get_images(&app->pos->tex[i], app->img);
-		if (!app->pos->tex[i].data)
+		if (get_images(&app->pos->tex[i], app->img) == 1)
 			exit_error(app, EXIT_MLX);
 	}
 	return (0);

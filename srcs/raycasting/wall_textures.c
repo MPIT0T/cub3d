@@ -15,8 +15,8 @@
 int	yline(t_pos *pos, int x, char type)
 {
 	unsigned int	color;
-	int				start;
-	int				end;
+	unsigned int	start;
+	unsigned int	end;
 
 	if (type == 'c')
 	{

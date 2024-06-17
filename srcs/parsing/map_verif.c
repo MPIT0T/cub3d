@@ -60,7 +60,7 @@ int	verify_map_border(char **map)
 		j = -1;
 		while (map[i][++j])
 		{
-			if (map[i][j] == '0')
+			if (map[i][j] == '0' || map[i][j] == '2')
 			{
 				if (!map[i + 1] || map [i + 1][j] == ' ')
 					return (1);
