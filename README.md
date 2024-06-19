@@ -40,8 +40,8 @@ Generate a map :
 
 ## Ressources
 
-[MiniLibX](https://github.com/42Paris/minilibx-linux)
-[Raycasting explanation](https://lodev.org/cgtutor/raycasting.html)
+- [MiniLibX](https://github.com/42Paris/minilibx-linux)
+- [Raycasting explanation](https://lodev.org/cgtutor/raycasting.html)
 
 ## Authors
 
