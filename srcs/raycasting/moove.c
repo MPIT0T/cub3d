@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moove.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:26:34 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/19 10:56:19 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/19 11:01:33 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static int	go_forward(t_pos *pos)
 		&& pos->map[(int)(pos->p_x)][(int)(pos->p_y + pos->p_dir_y
 			* pos->move_speed)] != '2')
 		pos->p_y += pos->p_dir_y * pos->move_speed;
+	ft_printf("hello");
 	return (0);
 }
 
