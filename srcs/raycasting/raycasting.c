@@ -91,8 +91,6 @@ static int	line_height(t_pos *pos, size_t x)
 		pos->wall_dist = (pos->raydist_y - pos->raydelta_y);
 	pos->z_prox[x] = pos->wall_dist;
 	pos->line_height = (size_t) SCREEN_HEIGHT / pos->wall_dist;
-	/*if (pos->line_height > 1080)
-		pos->line_height = 1080;*/
 	pos->draw_start = (SCREEN_HEIGHT * 0.5) - (pos->line_height * 0.5);
 	if (pos->draw_start < 0)
 		pos->draw_start = 0;
