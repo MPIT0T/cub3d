@@ -24,6 +24,7 @@ static int	go_forward(t_pos *pos)
 		&& pos->map[(int)(pos->p_x)][(int)(pos->p_y + pos->p_dir_y
 			* pos->move_speed)] != '2')
 		pos->p_y += pos->p_dir_y * pos->move_speed;
+	printf("lskdhlkdsh");
 	return (0);
 }
 
