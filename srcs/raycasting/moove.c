@@ -20,7 +20,7 @@ static int	go_forward(t_pos *pos)
 		* pos->move_speed)][(int)pos->p_y] != '2')
 		pos->p_x += pos->p_dir_x * pos->move_speed;
 	if (pos->map[(int)(pos->p_x)][(int)(pos->p_y + pos->p_dir_y
-			* pos->move_speed)] != '1'fsldhflksdlfh
+			* pos->move_speed)] != '1'
 		&& pos->map[(int)(pos->p_x)][(int)(pos->p_y + pos->p_dir_y
 			* pos->move_speed)] != '2')
 		pos->p_y += pos->p_dir_y * pos->move_speed;
