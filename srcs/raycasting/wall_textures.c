@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 10:43:28 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/19 10:38:32 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/19 10:56:43 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	yline(t_pos *pos, int x, char type)
 		start = pos->draw_end;
 		end = SCREEN_HEIGHT;
 	}
-	// printf("%zu, %zu\n", start, end);
 	while (start < end)
 	{
 		if (start < 1080 && x < 1920)

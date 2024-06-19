@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/19 09:45:50 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/19 10:57:01 by cefuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,8 +256,8 @@ typedef struct s_pos
 	double			cam_x;
 	double			raydir_x;
 	double			raydir_y;
-	size_t				map_x;
-	size_t				map_y;
+	size_t			map_x;
+	size_t			map_y;
 	double			raydist_x;
 	double			raydist_y;
 	double			raydelta_x;
@@ -268,9 +268,9 @@ typedef struct s_pos
 	int				hit;
 	int				side;
 	int				h;
-	size_t				line_height;
-	ssize_t				draw_start;
-	ssize_t				draw_end;
+	size_t			line_height;
+	ssize_t			draw_start;
+	ssize_t			draw_end;
 	int				color;
 	double			prev_p_dir_x;
 	double			prev_surf_x;
