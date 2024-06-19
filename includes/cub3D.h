@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:10:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/06/14 15:44:21 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/19 09:45:50 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,8 +245,8 @@ typedef struct s_pos
 	char			*ea;
 	unsigned int	c;
 	unsigned int	f;
-	ssize_t			map_width;
-	ssize_t			map_height;
+	size_t			map_width;
+	size_t			map_height;
 	double			p_x;
 	double			p_y;
 	double			p_dir_x;
@@ -256,21 +256,21 @@ typedef struct s_pos
 	double			cam_x;
 	double			raydir_x;
 	double			raydir_y;
-	int				map_x;
-	int				map_y;
+	size_t				map_x;
+	size_t				map_y;
 	double			raydist_x;
 	double			raydist_y;
 	double			raydelta_x;
 	double			raydelta_y;
 	double			wall_dist;
-	int				step_x;
-	int				step_y;
+	ssize_t			step_x;
+	ssize_t			step_y;
 	int				hit;
 	int				side;
 	int				h;
-	int				line_height;
-	int				draw_start;
-	int				draw_end;
+	size_t				line_height;
+	ssize_t				draw_start;
+	ssize_t				draw_end;
 	int				color;
 	double			prev_p_dir_x;
 	double			prev_surf_x;

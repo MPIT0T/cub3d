@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spawn.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cefuente <cefuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 00:07:29 by cesar             #+#    #+#             */
-/*   Updated: 2024/06/14 11:50:37 by cefuente         ###   ########.fr       */
+/*   Updated: 2024/06/19 09:42:03 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	top_left(t_pos *pos, t_ghost *ghost)
 {
-	ssize_t	y;
-	ssize_t	x;
+	size_t	y;
+	size_t	x;
 
 	y = 0;
 	while (y < pos->map_height / 2)
@@ -38,8 +38,8 @@ int	top_left(t_pos *pos, t_ghost *ghost)
 
 int	top_right(t_pos *pos, t_ghost *ghost)
 {
-	ssize_t	y;
-	ssize_t	x;
+	size_t	y;
+	size_t	x;
 
 	y = 0;
 	while (y < pos->map_height / 2)
@@ -62,8 +62,8 @@ int	top_right(t_pos *pos, t_ghost *ghost)
 
 int	bottom_left(t_pos *pos, t_ghost *ghost)
 {
-	ssize_t	y;
-	ssize_t	x;
+	size_t	y;
+	size_t	x;
 
 	y = pos->map_height - 1;
 	while (y >= pos->map_height / 2)
@@ -86,8 +86,8 @@ int	bottom_left(t_pos *pos, t_ghost *ghost)
 
 int	bottom_right(t_pos *pos, t_ghost *ghost)
 {
-	ssize_t	y;
-	ssize_t	x;
+	size_t	y;
+	size_t	x;
 
 	y = pos->map_height - 1;
 	while (y >= pos->map_height / 2)

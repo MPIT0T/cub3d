@@ -14,8 +14,8 @@
 
 void	print_map(t_pos *pos)
 {
-	ssize_t	y;
-	ssize_t	x;
+	size_t	y;
+	size_t	x;
 
 	y = -1;
 	x = -1;
@@ -49,7 +49,7 @@ int	get_opposite_of_player(t_pos *pos)
 
 int	pop_some_ghosts(t_app *app)
 {
-	ssize_t	i;
+	size_t	i;
 	t_list	*new;
 
 	i = -1;

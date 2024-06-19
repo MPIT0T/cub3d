@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:42:53 by cefuente          #+#    #+#             */
-/*   Updated: 2024/06/13 17:50:17 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/06/19 10:41:10 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,15 @@ static int	line_height(t_pos *pos, size_t x)
 	else
 		pos->wall_dist = (pos->raydist_y - pos->raydelta_y);
 	pos->z_prox[x] = pos->wall_dist;
-	pos->line_height = (int)(SCREEN_HEIGHT / pos->wall_dist);
-	pos->draw_start = (-pos->line_height * 0.5) + (SCREEN_HEIGHT * 0.5);
+	pos->line_height = (size_t) SCREEN_HEIGHT / pos->wall_dist;
+	/*if (pos->line_height > 1080)
+		pos->line_height = 1080;*/
+	pos->draw_start = (SCREEN_HEIGHT * 0.5) - (pos->line_height * 0.5);
 	if (pos->draw_start < 0)
 		pos->draw_start = 0;
-	pos->draw_end = (pos->line_height * 0.5) + (SCREEN_HEIGHT * 0.5);
-	if (pos->draw_end >= SCREEN_HEIGHT)
-		pos->draw_end = SCREEN_HEIGHT - 1;
+	pos->draw_end = (SCREEN_HEIGHT * 0.5) + (pos->line_height * 0.5);
+	if (pos->draw_end > SCREEN_HEIGHT)
+		pos->draw_end = SCREEN_HEIGHT;
 	return (0);
 }
 
