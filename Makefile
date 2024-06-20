@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/06/13 13:12:23 by mpitot           ###   ########.fr        #
+#    Updated: 2024/06/20 11:39:59 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ ${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/cub3D.h mlx_linux/mlx.h mlx
 	@${CC} ${FLAGS} -I${HEAD} -I${MLX_DIR} -I${USRLIB_DIR} -c $< -o $@
 	@$(call update_progress,$<)
 
-${NAME}	:	${OBJ_D} ${OBJS} libft/libft.a
+${NAME}	:	${OBJ_D} ${OBJS} libft/libft.a mlx_linux/libmlx.a mlx_linux/libmlx_Linux.a
 	@$(call print_progress,$(NAME))
 	@${CC} ${FLAGS} ${OBJS} -L./libft -lft -I${HEAD} -L${MLX_DIR} -l${MLX_LINKS} -I${USRLIB_DIR} ${USRLIB_LINKS} -o ${NAME}
 	@$(eval CHANGED=1)
