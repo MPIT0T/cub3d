@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 14:24:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/03/13 18:01:09 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/06/20 11:38:49 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,12 +117,12 @@ endef
 
 all		:	${NAME}
 
-${OBJS}	:	${OBJ_D}%.o	:	${SRC_D}%.c ${HEADER}
+${OBJS}	:	${OBJ_D}%.o	:	${SRC_D}%.c Makefile incs/libft.h
 	@$(call print_progress,$<)
 	@${CC} ${FLAGS} -c $< -o $@
 	@$(call update_progress,$<)
 
-${NAME}	:	${OBJ_D} ${OBJS} Makefile
+${NAME}	:	${OBJ_D} ${OBJS}
 	@echo "$(YELLOW)Compiling $(WHITE)[$(BLUE)$(NAME)$(WHITE)]...$(DEFAULT)"
 	@${AR} ${NAME} ${OBJS}
 	@$(eval CHANGED=1)

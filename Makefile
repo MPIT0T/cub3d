@@ -25,7 +25,7 @@ NAME	=	cub3D
 
 CC		=	cc
 
-FLAGS	=	-Wall -Wextra -Werror -g3
+FLAGS	=	-Wall -Wextra -Werror #-g3
 
 MLX				= 	mlx_linux/libmlx_Linux.a
 MLX_DIR			=	mlx_linux/
@@ -53,7 +53,6 @@ ${OBJ_D}:
 	@mkdir -p ${OBJ_D}main
 	@mkdir -p ${OBJ_D}mlx
 	@mkdir -p ${OBJ_D}ghosts
-	@mkdir -p ${OBJ_D}ghosts/sort
 	@mkdir -p ${OBJ_D}gui
 	@mkdir -p ${OBJ_D}parsing
 	@mkdir -p ${OBJ_D}raycasting
